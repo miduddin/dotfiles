@@ -1,0 +1,48 @@
+\set QUIET 1
+
+\set PROMPT1 '%[%033[1;31m%]%[%033[32m%]psql:%[%033[36m%]//%n%[%033[34m%]@%[%033[36m%]%M:%>%[%033[33m%]/%/ %[%033[K%]%[%033[0m%]\n%[%033[1;33m%]%#%[%033[0m%] '
+\set PROMPT2 ''
+
+\pset border 2
+\pset columns 0
+\x auto
+
+-- Values: ascii, old-ascii, unicode
+\pset linestyle unicode
+
+-- nulls: how to display null values.
+-- Values: string
+\pset null 'Ø'
+
+-- Values: on, off, always, name_of_pager. Without value, will toggle.
+\pset pager off
+
+-- ECHO_HIDDEN: show executed query for meta commands
+-- Values: on, off, noexec
+\set ECHO_HIDDEN off
+
+-- HISTCONTROL: what to do with empty or duplicate lines in the history.
+-- Values: ignorespace, ignoredups, ignoreboth, none
+\set HISTCONTROL ignoreboth
+
+-- SHOW_CONTEXT: display context fields in messages from the server.
+-- Values: never, errors, always
+\set SHOW_CONTEXT errors
+
+\set bloat 'SELECT tablename as table_name, ROUND(CASE WHEN otta=0 THEN 0.0 ELSE sml.relpages/otta::numeric END,1) AS table_bloat, CASE WHEN relpages < otta THEN ''0'' ELSE pg_size_pretty((bs*(sml.relpages-otta)::bigint)::bigint) END AS table_waste, iname as index_name, ROUND(CASE WHEN iotta=0 OR ipages=0 THEN 0.0 ELSE ipages/iotta::numeric END,1) AS index_bloat, CASE WHEN ipages < iotta THEN ''0'' ELSE pg_size_pretty((bs*(ipages-iotta))::bigint) END AS index_waste FROM ( SELECT schemaname, tablename, cc.reltuples, cc.relpages, bs, CEIL((cc.reltuples*((datahdr+ma- (CASE WHEN datahdr%ma=0 THEN ma ELSE datahdr%ma END))+nullhdr2+4))/(bs-20::float)) AS otta, COALESCE(c2.relname,''?'') AS iname, COALESCE(c2.reltuples,0) AS ituples, COALESCE(c2.relpages,0) AS ipages, COALESCE(CEIL((c2.reltuples*(datahdr-12))/(bs-20::float)),0) AS iotta FROM ( SELECT ma,bs,schemaname,tablename, (datawidth+(hdr+ma-(case when hdr%ma=0 THEN ma ELSE hdr%ma END)))::numeric AS datahdr, (maxfracsum*(nullhdr+ma-(case when nullhdr%ma=0 THEN ma ELSE nullhdr%ma END))) AS nullhdr2 FROM ( SELECT schemaname, tablename, hdr, ma, bs, SUM((1-null_frac)*avg_width) AS datawidth, MAX(null_frac) AS maxfracsum, hdr+( SELECT 1+count(*)/8 FROM pg_stats s2 WHERE null_frac<>0 AND s2.schemaname = s.schemaname AND s2.tablename = s.tablename) AS nullhdr FROM pg_stats s, ( SELECT (SELECT current_setting(''block_size'')::numeric) AS bs, CASE WHEN substring(v,12,3) IN (''8.0'',''8.1'',''8.2'') THEN 27 ELSE 23 END AS hdr, CASE WHEN v ~ ''mingw32'' THEN 8 ELSE 4 END AS ma FROM (SELECT version() AS v) AS foo) AS constants GROUP BY 1,2,3,4,5) AS foo) AS rs JOIN pg_class cc ON cc.relname = rs.tablename JOIN pg_namespace nn ON cc.relnamespace = nn.oid AND nn.nspname = rs.schemaname AND nn.nspname <> ''information_schema'' LEFT JOIN pg_index i ON indrelid = cc.oid LEFT JOIN pg_class c2 ON c2.oid = i.indexrelid) AS sml ORDER BY CASE WHEN relpages < otta THEN 0 ELSE bs*(sml.relpages-otta)::bigint END DESC;'
+\set blocking 'select kl.pid as blocking_pid, ka.query as blocking_statement, now() - ka.query_start as blocking_duration, bl.pid as blocked_pid, a.query as blocked_statement, now() - a.query_start as blocked_duration from pg_catalog.pg_locks bl join pg_catalog.pg_stat_activity a on bl.pid = a.pid join pg_catalog.pg_locks kl join pg_catalog.pg_stat_activity ka on kl.pid = ka.pid on ((bl.transactionid = kl.transactionid or (bl.relation = kl.relation and kl.fastpath is false )) and bl.pid != kl.pid) where not bl.granted;'
+\set buffers 'SELECT c.relname, pg_size_pretty(count(*) * current_setting(''block_size'')::bigint) as buffered, round(100.0 * count(*) / (SELECT setting FROM pg_settings WHERE name=''shared_buffers'')::integer,1) AS buffers_percent, round(100.0 * count(*) * current_setting(''block_size'')::bigint / pg_relation_size(c.oid),1) AS percent_of_relation FROM pg_class c INNER JOIN pg_buffercache b ON b.relfilenode = c.relfilenode INNER JOIN pg_database d ON (b.reldatabase = d.oid AND d.datname = current_database()) GROUP BY c.oid, c.relname ORDER BY 3 DESC LIMIT 20;'
+\set buffers_ideal 'SELECT pg_size_pretty(count(*) * current_setting(''block_size'')::bigint) as ideal_shared_buffers FROM pg_buffercache b WHERE usagecount >= 3;'
+\set cache_hit 'SELECT ''index hit rate'' as name, (sum(idx_blks_hit)) / sum(idx_blks_hit + idx_blks_read) as ratio FROM pg_statio_user_indexes union all SELECT ''cache hit rate'' as name, sum(heap_blks_hit) / (sum(heap_blks_hit) + sum(heap_blks_read)) as ratio FROM pg_statio_user_tables;'
+\set du 'WITH RECURSIVE pg_inherit(inhrelid, inhparent) AS (select inhrelid, inhparent FROM pg_inherits UNION SELECT child.inhrelid, parent.inhparent FROM pg_inherit child, pg_inherits parent WHERE child.inhparent = parent.inhrelid), pg_inherit_short AS (SELECT * FROM pg_inherit WHERE inhparent NOT IN (SELECT inhrelid FROM pg_inherit)) SELECT table_schema , TABLE_NAME , row_estimate , pg_size_pretty(total_bytes) AS total , pg_size_pretty(index_bytes) AS INDEX , pg_size_pretty(toast_bytes) AS toast , pg_size_pretty(table_bytes) AS TABLE , total_bytes::float8 / sum(total_bytes) OVER () AS total_size_share FROM ( SELECT *, total_bytes-index_bytes-COALESCE(toast_bytes,0) AS table_bytes FROM ( SELECT c.oid , nspname AS table_schema , relname AS TABLE_NAME , SUM(c.reltuples) OVER (partition BY parent) AS row_estimate , SUM(pg_total_relation_size(c.oid)) OVER (partition BY parent) AS total_bytes , SUM(pg_indexes_size(c.oid)) OVER (partition BY parent) AS index_bytes , SUM(pg_total_relation_size(reltoastrelid)) OVER (partition BY parent) AS toast_bytes , parent FROM ( SELECT pg_class.oid , reltuples , relname , relnamespace , pg_class.reltoastrelid , COALESCE(inhparent, pg_class.oid) parent FROM pg_class LEFT JOIN pg_inherit_short ON inhrelid = oid WHERE relkind IN (\'r\', \'p\')) c LEFT JOIN pg_namespace n ON n.oid = c.relnamespace) a WHERE oid = parent) a ORDER BY total_bytes DESC;'
+\set index_size 'SELECT relname AS name, pg_size_pretty(sum(relpages::bigint*current_setting(''block_size'')::bigint)::bigint) AS size FROM pg_class WHERE reltype=0 GROUP BY relname ORDER BY sum(relpages) DESC;'
+\set index_usage 'SELECT relname, CASE idx_scan WHEN 0 THEN ''Insufficient data'' ELSE (100 * idx_scan / (seq_scan + idx_scan))::text END percent_of_times_index_used, n_live_tup rows_in_table FROM pg_stat_user_tables ORDER BY n_live_tup DESC;'
+\set locks 'select pg_stat_activity.pid, pg_class.relname, pg_locks.transactionid, pg_locks.granted, substr(pg_stat_activity.query,1,30) as query_snippet, age(now(),pg_stat_activity.query_start) as "age" from pg_stat_activity,pg_locks left outer join pg_class on (pg_locks.relation = pg_class.oid) where pg_stat_activity.query <> ''<insufficient privilege>'' and pg_locks.pid=pg_stat_activity.pid and pg_locks.mode = ''ExclusiveLock'' order by query_start;'
+\set long_running_queries 'SELECT pid, now() - pg_stat_activity.query_start AS duration, query AS query FROM pg_stat_activity WHERE pg_stat_activity.query <> ''''::text AND now() - pg_stat_activity.query_start > interval ''5 minutes'' ORDER BY now() - pg_stat_activity.query_start DESC;'
+\set ps 'select pid, usename as username, application_name as source, wait_event, wait_event_type, state, age(now(),query_start) as running_for, query as query from pg_stat_activity where query <> ''<insufficient privilege>'' AND state <> ''idle'' and pid <> pg_backend_pid() order by 3 desc;'
+\set seq_scans 'SELECT relname AS name, seq_scan as count FROM pg_stat_user_tables ORDER BY seq_scan DESC;'
+\set total_index_size 'SELECT pg_size_pretty(sum(relpages::bigint*current_setting(''block_size'')::bigint)::bigint) AS size FROM pg_class WHERE reltype=0;'
+\set unused_indexes 'select schemaname || ''.'' || relname as table, indexrelname as index, pg_size_pretty(pg_relation_size(i.indexrelid)) as index_size, idx_scan as index_scans from pg_stat_user_indexes ui join pg_index i on ui.indexrelid = i.indexrelid where not indisunique and idx_scan = 0 order by pg_relation_size(i.indexrelid) / nullif(idx_scan, 0) desc nulls first, pg_relation_size(i.indexrelid) desc;'
+\set vacuum_stats 'WITH table_opts AS ( SELECT pg_class.oid, relname, nspname, array_to_string(reloptions, '''') AS relopts FROM pg_class INNER JOIN pg_namespace ns ON relnamespace = ns.oid), vacuum_settings AS ( SELECT oid, relname, nspname, CASE WHEN relopts LIKE ''%autovacuum_vacuum_threshold%'' THEN regexp_replace(relopts, ''.*autovacuum_vacuum_threshold=([0-9.]+).*'', E''\\\\\\1'')::integer ELSE current_setting(''autovacuum_vacuum_threshold'')::integer END AS autovacuum_vacuum_threshold, CASE WHEN relopts LIKE ''%autovacuum_vacuum_scale_factor%'' THEN regexp_replace(relopts, ''.*autovacuum_vacuum_scale_factor=([0-9.]+).*'', E''\\\\\\1'')::real ELSE current_setting(''autovacuum_vacuum_scale_factor'')::real END AS autovacuum_vacuum_scale_factor FROM table_opts) SELECT vacuum_settings.nspname AS schema, vacuum_settings.relname AS table, to_char(psut.last_vacuum, ''YYYY-MM-DD HH24:MI'') AS last_vacuum, to_char(psut.last_autovacuum, ''YYYY-MM-DD HH24:MI'') AS last_autovacuum, to_char(pg_class.reltuples, ''9G999G999G999'') AS rowcount, to_char(psut.n_dead_tup, ''9G999G999G999'') AS dead_rowcount, to_char(autovacuum_vacuum_threshold + (autovacuum_vacuum_scale_factor::numeric * pg_class.reltuples), ''9G999G999G999'') AS autovacuum_threshold, CASE WHEN autovacuum_vacuum_threshold + (autovacuum_vacuum_scale_factor::numeric * pg_class.reltuples) < psut.n_dead_tup THEN ''yes'' END AS expect_autovacuum FROM pg_stat_user_tables psut INNER JOIN pg_class ON psut.relid = pg_class.oid INNER JOIN vacuum_settings ON pg_class.oid = vacuum_settings.oid ORDER BY 1, 2;'
+
+\set QUIET 0

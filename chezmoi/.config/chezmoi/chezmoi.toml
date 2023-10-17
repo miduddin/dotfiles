@@ -1,0 +1,12 @@
+encryption = "age"
+[age]
+        identity = "~/age_key"
+        recipient = "age1ucwtzuqltptntn2flpc4uygc69ecwdktg20hey5y2ex3cqzs9v9qy5ke5e"
+
+[merge]
+        command = "nvim"
+        args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]
+
+[diff]
+        command = "delta"
+        args = ["--dark", "--tabs=4"]

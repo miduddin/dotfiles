@@ -1,0 +1,5 @@
+chezmoi/.config/chezmoi/chezmoistate.boltdb
+git/.config/git/config_work
+k9s/.config/k9s/config.yml
+lazygit/.config/lazygit/state.yml
+tmux/.config/tmux/plugins/
