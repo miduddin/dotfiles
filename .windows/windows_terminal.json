@@ -34,7 +34,7 @@
         "size": 10.5
       },
       "opacity": 94,
-      "padding": "0",
+      "padding": "10,0,10,0",
       "scrollbarState": "hidden",
       "useAcrylic": false,
       "useAtlasEngine": true
@@ -48,7 +48,7 @@
         "name": "Windows PowerShell"
       },
       {
-        "commandline": "C:\\Windows\\system32\\wsl.exe -d Debian -- tmux new -A",
+        "commandline": "C:\\Windows\\system32\\wsl.exe -d Debian --cd ~ -- zellij a -c default",
         "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
         "hidden": false,
         "intenseTextStyle": "bold",
