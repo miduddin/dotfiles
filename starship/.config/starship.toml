@@ -8,8 +8,8 @@ $git_metrics\
 $git_status\
 $env_var\
 $sudo\
-$cmd_duration\
 $time\
+$cmd_duration\
 $jobs\
 $os\
 $container\
