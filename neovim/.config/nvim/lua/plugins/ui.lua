@@ -18,14 +18,17 @@ return {
 						TelescopePreviewTitle = {
 							fg = c.base,
 							bg = c.green,
+							style = { "bold" },
 						},
 						TelescopePromptTitle = {
 							fg = c.base,
 							bg = c.red,
+							style = { "bold" },
 						},
 						TelescopeResultsTitle = {
 							fg = c.mantle,
 							bg = c.lavender,
+							style = { "bold" },
 						},
 					}
 				end,

@@ -20,8 +20,6 @@ map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", noremap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to below window", noremap = true })
 map("n", "<C-k>", "<C-w>k", { desc = "Go to above window", noremap = true })
 map("n", "<C-l>", "<C-w>l", { desc = "Go to right window", noremap = true })
-map("n", "<C-o>", "<C-o>zz", { noremap = true })
-map("n", "<C-i>", "<C-i>zz", { noremap = true })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close tab" })
 map("n", "<leader>w", "<cmd>set wrap!<cr>", { desc = "Toggle word wrap" })
 map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
@@ -51,6 +49,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = ev.buf })
 		map("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
 		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", buffer = ev.buf })
-		map("n", "<leader>ci", "<cmd>lua vim.lsp.inlay_hint(0, nil)<cr>", { desc = "Toggle inlay hint", buffer = ev.buf })
+		map(
+			"n",
+			"<leader>ci",
+			"<cmd>lua vim.lsp.inlay_hint(0, nil)<cr>",
+			{ desc = "Toggle inlay hint", buffer = ev.buf }
+		)
 	end,
 })
