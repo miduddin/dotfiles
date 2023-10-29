@@ -56,7 +56,6 @@ return {
 			lspconfig.gopls.setup(default_handler({
 				settings = {
 					gopls = {
-						gofumpt = true,
 						hints = {
 							assignVariableTypes = true,
 							compositeLiteralFields = true,
@@ -70,6 +69,7 @@ return {
 							fieldalignment = true,
 							nilness = true,
 							unusedparams = true,
+							unusedvariable = true,
 							unusedwrite = true,
 							useany = true,
 						},
@@ -176,5 +176,22 @@ return {
 				},
 			},
 		},
+	},
+	{
+		"mfussenegger/nvim-lint",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			local lint = require("lint")
+
+			lint.linters_by_ft = {
+				go = { "golangcilint" },
+			}
+
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					lint.try_lint()
+				end,
+			})
+		end,
 	},
 }

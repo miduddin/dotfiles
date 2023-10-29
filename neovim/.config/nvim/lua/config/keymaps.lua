@@ -29,7 +29,7 @@ map({ "i", "t" }, "<M-BS>", "<C-w>", { desc = "Delete word" })
 map("n", "<S-h>", "<cmd>bp<cr>", { desc = "Prev buffer" })
 map("n", "<S-l>", "<cmd>bn<cr>", { desc = "Next buffer" })
 map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Close current buffer" })
-map("n", "<leader>bD", "<cmd>bufdo bd<cr>", { desc = "Close all buffer" })
+map("n", "<leader>bD", "<cmd>kT|%bd|e#|bd#|'T<cr>", { desc = "Close all other buffers" })
 
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 
