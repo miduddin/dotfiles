@@ -1,0 +1,17 @@
+/*
+ * 1. about:config, enable toolkit.legacyUserProfileCustomizations.stylesheets.
+ * 2. about:support, open profile folder, put this in chrome/userChrome.css.
+ */
+
+/* Remove top-left blank space */
+.titlebar-spacer {
+	width: 2px !important;
+}
+
+/* Remove mute button on tabs */
+.tab-icon-overlay {
+	display: none;
+}
+.tab-icon-image {
+	opacity: 1 !important;
+}
