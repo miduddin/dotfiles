@@ -79,6 +79,9 @@ return {
 					git_bcommits = {
 						git_command = { "git", "log", "--pretty=reference", "--follow" },
 					},
+					git_commits = {
+						git_command = { "git", "log", "--pretty=reference", "--follow", "--", "." },
+					},
 					git_branches = {
 						mappings = {
 							i = {
