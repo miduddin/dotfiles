@@ -34,10 +34,6 @@ return {
 			local default_handler = function(extra)
 				extra = extra or {}
 				return vim.tbl_deep_extend("force", {
-					on_init = function(client)
-						client.server_capabilities.documentFormattingProvider = false
-						client.server_capabilities.documentFormattingRangeProvider = false
-					end,
 					capabilities = capabilities,
 					on_attach = function(client, bufnr)
 						navic.attach(client, bufnr)
