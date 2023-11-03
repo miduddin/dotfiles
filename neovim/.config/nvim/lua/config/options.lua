@@ -17,6 +17,7 @@ vim.opt.list = true
 vim.opt.listchars:append({ space = "·", tab = "→  " })
 vim.opt.mousemodel = "extend"
 vim.opt.number = true
+vim.opt.scrolloff = 5
 vim.opt.sessionoptions:append("globals")
 vim.opt.shiftwidth = 4
 vim.opt.shortmess:append("I")
