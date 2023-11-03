@@ -3,12 +3,12 @@
 \set PROMPT1 '%[%033[1;31m%]%[%033[32m%]psql:%[%033[36m%]//%n%[%033[34m%]@%[%033[36m%]%M:%>%[%033[33m%]/%/ %[%033[K%]%[%033[0m%]\n%[%033[1;33m%]%#%[%033[0m%] '
 \set PROMPT2 ''
 
-\pset border 2
-\pset columns 0
+-- \pset border 2
+-- \pset columns 0
 \x auto
 
 -- Values: ascii, old-ascii, unicode
-\pset linestyle unicode
+-- \pset linestyle unicode
 
 -- nulls: how to display null values.
 -- Values: string
