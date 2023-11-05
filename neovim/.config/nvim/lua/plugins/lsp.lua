@@ -148,7 +148,8 @@ return {
 		opts = {
 			formatters_by_ft = {
 				go = { "goimports", "gofumpt" },
-				javascript = { { "prettierd", "prettier" } },
+				html = { { "prettierd" } },
+				javascript = { { "prettierd" } },
 				json = { "jq" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
