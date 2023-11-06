@@ -144,47 +144,6 @@ return {
 		end,
 	},
 	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		keys = {
-			{ "<C-_>", "<cmd>ToggleTerm<cr>", desc = "Terminal", mode = { "n", "t" } },
-			{ "<leader>/g", "<cmd>lua LAZYGIT_TOGGLE()<cr>", desc = "Lazygit", mode = "n" },
-			{ "<leader>/d", "<cmd>lua LAZYDOCKER_TOGGLE()<cr>", desc = "Lazydocker", mode = "n" },
-		},
-		opts = {
-			highlights = {
-				NormalFloat = {
-					link = "NormalFloat",
-				},
-				FloatBorder = {
-					link = "FloatBorder",
-				},
-			},
-			direction = "float",
-			float_opts = {
-				border = "rounded",
-				height = function()
-					return math.ceil(math.min(vim.o.lines, math.max(20, vim.o.lines - 6)))
-				end,
-				width = function()
-					return math.ceil(math.min(vim.o.columns, math.max(80, vim.o.columns - 10)))
-				end,
-			},
-		},
-		config = function(_, opts)
-			local Terminal = require("toggleterm.terminal").Terminal
-			local lazygit = Terminal:new(vim.tbl_extend("force", opts, { cmd = "lazygit" }))
-			local lazydocker = Terminal:new(vim.tbl_extend("force", opts, { cmd = "lazydocker" }))
-			function LAZYGIT_TOGGLE()
-				lazygit:toggle()
-			end
-			function LAZYDOCKER_TOGGLE()
-				lazydocker:toggle()
-			end
-			require("toggleterm").setup(opts)
-		end,
-	},
-	{
 		"folke/persistence.nvim",
 		keys = {
 			{ "<leader>sl", [[<cmd>lua require("persistence").load()<cr>]], desc = "Load session" },
