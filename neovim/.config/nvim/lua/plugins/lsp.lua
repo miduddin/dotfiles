@@ -50,6 +50,7 @@ return {
 			lspconfig.terraformls.setup(default_handler())
 			lspconfig.taplo.setup(default_handler())
 			lspconfig.jsonls.setup(default_handler())
+			lspconfig.rust_analyzer.setup(default_handler())
 			lspconfig.gopls.setup(default_handler({
 				settings = {
 					gopls = {
@@ -153,6 +154,7 @@ return {
 				javascript = { { "prettierd" } },
 				json = { "jq" },
 				lua = { "stylua" },
+				rust = { "rustfmt" },
 				php = { "php_cs_fixer" },
 				sql = { "sqlfmt" },
 				terraform = { "terraform_fmt" },
