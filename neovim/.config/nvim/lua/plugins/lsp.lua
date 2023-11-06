@@ -24,21 +24,22 @@ return {
 		dependencies = {
 			-- { "folke/neodev.nvim", opts = {} },
 			"hrsh7th/cmp-nvim-lsp",
-			"SmiteshP/nvim-navic",
 			"williamboman/mason.nvim",
 		},
 		config = function()
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local navic = require("nvim-navic")
+			local handlers = {
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+			}
+			local default_setup = {
+				capabilities = capabilities,
+				handlers = handlers,
+			}
 
 			local default_handler = function(extra)
 				extra = extra or {}
-				return vim.tbl_deep_extend("force", {
-					capabilities = capabilities,
-					on_attach = function(client, bufnr)
-						navic.attach(client, bufnr)
-					end,
-				}, extra)
+				return vim.tbl_deep_extend("force", default_setup, extra)
 			end
 
 			local lspconfig = require("lspconfig")

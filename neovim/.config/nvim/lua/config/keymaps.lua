@@ -43,6 +43,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- map("n", "gr", vim.lsp.buf.references, { desc = "References", buffer = ev.buf })
 		-- map("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Type definition", buffer = ev.buf })
 		map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = ev.buf })
+		map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = ev.buf })
 		map("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
 		map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
 		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", buffer = ev.buf })

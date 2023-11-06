@@ -8,7 +8,6 @@ return {
 				transparent_background = true,
 				integrations = {
 					dap = { enabled = true, enable_ui = true },
-					navic = { enabled = true, custom_bg = "NONE" },
 					neotest = true,
 					neotree = true,
 					telescope = { enabled = true },
@@ -38,163 +37,80 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			"SmiteshP/nvim-navic",
-			"folke/noice.nvim",
-		},
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		config = function()
-			local dir = vim.loop.cwd():gsub(".*/", "")
+			local theme = require("lualine.themes.auto")
+			theme.normal.c.bg = "#11111b"
+			theme.inactive.c.bg = "#11111b"
 
 			require("lualine").setup({
 				options = {
-					globalstatus = true,
+					theme = theme,
+					globalstatus = false,
 					section_separators = "",
 					component_separators = "|",
-					disabled_filetypes = {
-						winbar = {
-							"neo-tree",
-							"dap-repl",
-						},
-					},
 				},
-				winbar = {
-					lualine_c = {
+				sections = {
+					lualine_a = {
 						{
-							"navic",
-							color_correction = "static",
-							navic_opts = { highlight = true, separator = " ▶ ", depth_limit = 5 },
+							"filename",
+							path = 1,
+							file_status = false,
+							color = { bg = "#22223e", fg = "#f5e0dc" },
 						},
 					},
-					lualine_x = {
+					lualine_b = {},
+					lualine_c = {
 						{
 							"diagnostics",
 							symbols = { error = " ", warn = " ", hint = " ", info = " " },
 						},
-						{
-							"filename",
-							path = 1,
-							file_status = false,
-							color = { fg = string.format("#%x", vim.api.nvim_get_hl(0, { name = "WinBar" }).fg) },
-						},
-					},
-				},
-				inactive_winbar = {
-					lualine_c = {
-						{
-							"navic",
-							navic_opts = { highlight = false, separator = " ▶ ", depth_limit = 5 },
-						},
 					},
 					lualine_x = {
 						{
-							"filename",
-							path = 1,
-							file_status = false,
-							color = { fg = string.format("#%x", vim.api.nvim_get_hl(0, { name = "Comment" }).fg) },
+							"buffers",
+							cond = function()
+								return vim.fn.buflisted(vim.fn.bufnr()) == 1
+							end,
 						},
-					},
-				},
-				sections = {
-					lualine_b = {
 						{
 							"tabs",
 							cond = function()
-								return #vim.api.nvim_list_tabpages() > 1
+								return #vim.api.nvim_list_tabpages() > 1 and vim.fn.buflisted(vim.fn.bufnr()) == 1
 							end,
-						},
-						{ "buffers" },
-					},
-					lualine_c = {},
-					lualine_x = {
-						{
-							require("noice").api.status.command.get,
-							cond = require("noice").api.status.command.has,
-							color = { fg = "#ff9e64" },
-						},
-						{
-							require("noice").api.status.mode.get,
-							cond = require("noice").api.status.mode.has,
-							color = { fg = "#ff9e64" },
-						},
-						{
-							require("noice").api.status.search.get,
-							cond = require("noice").api.status.search.has,
-							color = { fg = "#ff9e64" },
 						},
 					},
 					lualine_y = {
 						{
 							"branch",
 							icon = "",
-							color = { bg = "None", fg = "#f5c2e7", gui = "bold" },
+							color = { bg = "#22223e", fg = "#f5c2e7", gui = "bold" },
+							cond = function()
+								return vim.fn.buflisted(vim.fn.bufnr()) == 1
+							end,
 						},
 					},
 					lualine_z = {
 						{
-							function()
-								return dir
+							"location",
+							cond = function()
+								return vim.fn.buflisted(vim.fn.bufnr()) == 1
 							end,
-							icon = "󰝰",
-							color = { bg = "None", fg = "#94e2d5", gui = "bold" },
 						},
-						{ "location" },
+					},
+				},
+				inactive_sections = {
+					lualine_c = { { "filename", file_status = false } },
+					lualine_x = {
+						{
+							"location",
+							cond = function()
+								return vim.fn.buflisted(vim.fn.bufnr()) == 1
+							end,
+						},
 					},
 				},
 			})
-		end,
-	},
-	{
-		"stevearc/dressing.nvim",
-		opts = { input = { win_options = { winblend = 0 } } },
-	},
-	{
-		"folke/noice.nvim",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-		event = "VeryLazy",
-		opts = {
-			routes = {
-				{
-					filter = {
-						event = "msg_show",
-						kind = "search_count",
-					},
-					opts = { skip = true },
-				},
-			},
-			lsp = {
-				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
-				},
-			},
-			presets = {
-				bottom_search = true,
-				long_message_to_split = true,
-				inc_rename = false,
-				lsp_doc_border = true,
-			},
-			cmdline = {
-				view = "cmdline",
-				format = {
-					cmdline = { pattern = "^:", icon = ":", lang = "vim" },
-				},
-			},
-			views = {
-				mini = {
-					win_options = {
-						winblend = 0,
-					},
-				},
-			},
-		},
-		config = function(_, opts)
-			vim.opt.showmode = false
-			require("noice").setup(opts)
 		end,
 	},
 	{
