@@ -1,6 +1,7 @@
 return {
 	{
 		"rest-nvim/rest.nvim",
+		commit = "8b62563",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		ft = { "http" },
 		keys = {
