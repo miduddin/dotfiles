@@ -54,8 +54,13 @@ local function query_last()
 	query_paragraph(last_params.pg_service, last_params.timeout_s)
 end
 
-vim.api.nvim_create_user_command("Psql", function(opts)
-	query_paragraph(opts.fargs[1], opts.fargs[2])
-end, { nargs = "*" })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "sql" },
+	callback = function(ev)
+		vim.api.nvim_buf_create_user_command(ev.buf, "Psql", function(opts)
+			query_paragraph(opts.fargs[1], opts.fargs[2])
+		end, { nargs = "*" })
 
-vim.keymap.set("n", "<leader>ql", query_last, { desc = "Run query with last params", noremap = true })
+		vim.keymap.set("n", "<leader>ql", query_last, { desc = "Run query with last params", buffer = ev.buf })
+	end,
+})
