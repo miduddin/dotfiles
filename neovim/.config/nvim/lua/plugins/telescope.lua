@@ -133,5 +133,8 @@ return {
 			{ "gD", "<cmd>Trouble lsp_type_definitions<cr>", desc = "LSP type definitions" },
 			{ "gi", "<cmd>Trouble lsp_implementations<cr>", desc = "LSP implementations" },
 		},
+		opts = {
+			include_declaration = {},
+		},
 	},
 }
