@@ -1,5 +1,3 @@
-theme = "catppuccin_mocha"
-
 [editor]
 cursorline = true
 color-modes = true

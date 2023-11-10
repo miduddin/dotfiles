@@ -1,9 +1,4 @@
-local function map(mode, lhs, rhs, opts)
-	local keys = require("lazy.core.handler").handlers.keys
-	if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-		vim.keymap.set(mode, lhs, rhs, opts)
-	end
-end
+local map = vim.keymap.set
 
 map({ "n", "t" }, "<esc>", "<cmd>noh<cr><esc>")
 map("n", "<C-s>", "<cmd>w<cr>", { desc = "Save file" })
