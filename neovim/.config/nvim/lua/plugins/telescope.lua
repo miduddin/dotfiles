@@ -112,11 +112,6 @@ return {
 			})
 
 			require("telescope").load_extension("fzf")
-
-			vim.api.nvim_create_autocmd({ "User" }, {
-				pattern = { "TelescopePreviewerLoaded" },
-				command = [[setlocal number]],
-			})
 		end,
 	},
 	{
