@@ -39,6 +39,7 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
+		event = "VeryLazy",
 		config = function()
 			local theme = require("lualine.themes.auto")
 			theme.normal.c.bg = "#11111b"
@@ -147,5 +148,10 @@ return {
 				},
 			},
 		},
+	},
+	{
+		"stevearc/dressing.nvim",
+		event = "VeryLazy",
+		opts = {},
 	},
 }

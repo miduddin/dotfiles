@@ -116,7 +116,7 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
-		lazy = false,
+		event = "VeryLazy",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Diagnostics (workspace)" },

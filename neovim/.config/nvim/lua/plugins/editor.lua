@@ -11,7 +11,7 @@ return {
 	},
 	{
 		"mg979/vim-visual-multi",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile" },
 		init = function()
 			vim.g.VM_maps = {
 				["Find Under"] = "<C-x>",
@@ -21,7 +21,7 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {},
 	},
 }

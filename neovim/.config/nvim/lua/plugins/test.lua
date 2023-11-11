@@ -98,10 +98,6 @@ return {
 				end,
 			},
 			{
-				"theHamsta/nvim-dap-virtual-text",
-				opts = {},
-			},
-			{
 				"leoluz/nvim-dap-go",
 				dependencies = { "williamboman/mason.nvim" },
 				ft = { "go" },
