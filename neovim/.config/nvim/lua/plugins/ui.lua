@@ -71,6 +71,9 @@ return {
 					lualine_x = {
 						{
 							"buffers",
+							symbols = {
+								alternate_file = "",
+							},
 							cond = function()
 								return vim.fn.buflisted(vim.fn.bufnr()) == 1
 							end,
