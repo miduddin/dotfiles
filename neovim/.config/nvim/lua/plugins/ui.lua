@@ -42,8 +42,8 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local theme = require("lualine.themes.auto")
-			theme.normal.c.bg = "#11111b"
-			theme.inactive.c.bg = "#11111b"
+			theme.normal.c.bg = "#22223e"
+			theme.inactive.c.bg = "#22223e"
 
 			require("lualine").setup({
 				options = {

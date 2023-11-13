@@ -5,6 +5,7 @@ vim.opt.breakindent = true
 vim.opt.conceallevel = 0
 vim.opt.confirm = true
 vim.opt.cursorline = true
+vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append({ "algorithm:patience", "linematch:70" })
 vim.opt.expandtab = false
 vim.opt.fillchars = { eob = " " }
