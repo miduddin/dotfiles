@@ -42,7 +42,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
 		map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
 		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", buffer = ev.buf })
-		map("n", "<leader>ci", "<cmd>lua vim.lsp.inlay_hint(0)<cr>", { desc = "Toggle inlay hint", buffer = ev.buf })
+		map("n", "<leader>ci", function()
+			if vim.lsp.inlay_hint.is_enabled() then
+				vim.lsp.inlay_hint.enable(0, false)
+			else
+				vim.lsp.inlay_hint.enable(0, true)
+			end
+		end, { desc = "Toggle inlay hint", buffer = ev.buf })
 	end,
 })
 
