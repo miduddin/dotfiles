@@ -23,6 +23,7 @@ vim.opt.sessionoptions:append("globals")
 vim.opt.shiftwidth = 4
 vim.opt.shortmess:append("I")
 vim.opt.showtabline = 0
+vim.opt.sidescrolloff = 10
 vim.opt.signcolumn = "yes:1"
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
