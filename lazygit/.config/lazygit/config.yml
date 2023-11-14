@@ -22,3 +22,5 @@ customCommands:
     description: Cleanup local git files.
     loadingText: Cleaning up
     stream: true
+
+promptToReturnFromSubprocess: false
