@@ -88,7 +88,7 @@ return {
 	},
 	{
 		"hrsh7th/nvim-cmp",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "InsertEnter" },
 		dependencies = {
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
@@ -163,7 +163,7 @@ return {
 			},
 			format_on_save = {
 				lsp_fallback = true,
-				timeout_ms = 5000,
+				timeout_ms = 500,
 			},
 			formatters = {
 				yamlfmt = {
