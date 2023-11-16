@@ -1,39 +1,33 @@
 return {
 	{
-		"catppuccin/nvim",
-		name = "catppuccin",
+		"rebelot/kanagawa.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("catppuccin").setup({
-				transparent_background = true,
-				integrations = {
-					dap = { enabled = true, enable_ui = true },
-					neotest = true,
-					neotree = true,
-					telescope = { enabled = true },
+			require("kanagawa").setup({
+				compile = true,
+				background = {
+					dark = "wave",
 				},
-				custom_highlights = function(c)
+				transparent = true,
+				colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
+				overrides = function(colors)
+					local theme = colors.theme
 					return {
-						TelescopePreviewTitle = {
-							fg = c.base,
-							bg = c.green,
-							style = { "bold" },
-						},
-						TelescopePromptTitle = {
-							fg = c.base,
-							bg = c.red,
-							style = { "bold" },
-						},
-						TelescopeResultsTitle = {
-							fg = c.mantle,
-							bg = c.lavender,
-							style = { "bold" },
-						},
+						FloatBorder = { bg = "none" },
+						FloatTitle = { bg = "none" },
+						Folded = { bg = "none" },
+						NormalFloat = { bg = "none" },
+						TelescopeBorder = { bg = "none" },
+						TelescopePreviewTitle = { fg = theme.ui.bg_dim, bg = theme.diag.ok, bold = true },
+						TelescopePromptTitle = { fg = theme.ui.bg_dim, bg = theme.diag.warning, bold = true },
+						TelescopeResultsTitle = { fg = theme.ui.bg_dim, bg = theme.diag.info, bold = true },
+						Whitespace = { fg = "#30304a" },
+						WinSeparator = { fg = "#54546d" },
 					}
 				end,
 			})
-			vim.cmd([[colorscheme catppuccin]])
+			vim.cmd([[colorscheme kanagawa]])
 		end,
 	},
 	{
@@ -42,8 +36,8 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local theme = require("lualine.themes.auto")
-			theme.normal.c.bg = "#22223e"
-			theme.inactive.c.bg = "#22223e"
+			theme.normal.c.bg = "#282727"
+			theme.inactive.c.bg = "#282727"
 
 			require("lualine").setup({
 				options = {
@@ -55,24 +49,13 @@ return {
 				sections = {
 					lualine_a = {
 						{
-							"filename",
-							path = 1,
-							file_status = false,
-							color = { bg = "#22223e", fg = "#f5e0dc" },
-						},
-					},
-					lualine_b = {},
-					lualine_c = {
-						{
-							"diagnostics",
-							symbols = { error = " ", warn = " ", hint = " ", info = " " },
-						},
-					},
-					lualine_x = {
-						{
 							"buffers",
 							symbols = {
 								alternate_file = "",
+							},
+							use_mode_colors = true,
+							buffers_color = {
+								active = { gui = "bold" },
 							},
 							cond = function()
 								return vim.fn.buflisted(vim.fn.bufnr()) == 1
@@ -85,11 +68,25 @@ return {
 							end,
 						},
 					},
+					lualine_b = {},
+					lualine_c = {
+						{
+							"filename",
+							path = 1,
+							file_status = false,
+						},
+					},
+					lualine_x = {
+						{
+							"diagnostics",
+							symbols = { error = " ", warn = " ", hint = " ", info = " " },
+						},
+					},
 					lualine_y = {
 						{
 							"branch",
 							icon = "",
-							color = { bg = "#22223e", fg = "#f5c2e7", gui = "bold" },
+							color = { gui = "bold" },
 							cond = function()
 								return vim.fn.buflisted(vim.fn.bufnr()) == 1
 							end,
@@ -98,6 +95,7 @@ return {
 					lualine_z = {
 						{
 							"location",
+							color = { gui = "bold" },
 							cond = function()
 								return vim.fn.buflisted(vim.fn.bufnr()) == 1
 							end,
