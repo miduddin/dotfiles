@@ -3,12 +3,6 @@ require("vim.lsp._watchfiles")._watchfunc = function(_, _, _)
 	return true
 end
 
-local signs = { Error = "", Warn = "", Hint = "", Info = "" }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 return {
 	{
 		"williamboman/mason.nvim",
@@ -22,7 +16,6 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			-- { "folke/neodev.nvim", opts = {} },
 			"hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason.nvim",
 		},
@@ -37,21 +30,15 @@ return {
 				handlers = handlers,
 			}
 
-			local default_handler = function(extra)
-				extra = extra or {}
+			local default_with = function(extra)
 				return vim.tbl_deep_extend("force", default_setup, extra)
 			end
 
 			local lspconfig = require("lspconfig")
 
-			lspconfig.lua_ls.setup(default_handler())
-			lspconfig.intelephense.setup(default_handler())
-			lspconfig.tsserver.setup(default_handler())
-			lspconfig.terraformls.setup(default_handler())
-			lspconfig.taplo.setup(default_handler())
-			lspconfig.jsonls.setup(default_handler())
-			lspconfig.rust_analyzer.setup(default_handler())
-			lspconfig.gopls.setup(default_handler({
+			lspconfig.lua_ls.setup(default_setup)
+			lspconfig.intelephense.setup(default_setup)
+			lspconfig.gopls.setup(default_with({
 				settings = {
 					gopls = {
 						hints = {
