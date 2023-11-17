@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
 			"nvim-neotest/neotest-go",
 		},
@@ -25,7 +26,7 @@ return {
 				end,
 			},
 			adapters = {
-				["neotest-go"] = { args = { "-count=1", "-race" } },
+				["neotest-go"] = { args = { "-count=1", "-race", "-timeout=10s" } },
 			},
 		},
 		config = function(_, opts)
