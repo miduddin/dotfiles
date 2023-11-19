@@ -1,7 +1,4 @@
 vim.diagnostic.config({ float = { border = "rounded" } })
-require("vim.lsp._watchfiles")._watchfunc = function(_, _, _)
-	return true
-end
 
 return {
 	{
