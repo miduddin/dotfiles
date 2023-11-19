@@ -117,36 +117,21 @@ return {
 		end,
 	},
 	{
-		"nvim-neo-tree/neo-tree.nvim",
+		"stevearc/oil.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
-			{ "<leader>e", "<cmd>Neotree toggle<cr>", desc = "File browser" },
-		},
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"MunifTanjim/nui.nvim",
+			{ "<leader>e", "<cmd>Oil<cr>", desc = "File explorer" },
 		},
 		opts = {
-			window = {
-				width = 30,
+			keymaps = {
+				["q"] = "actions.close",
+				["<C-c>"] = false,
+				["<C-s>"] = false,
+				["`"] = false,
+				["~"] = false,
 			},
-			filesystem = {
-				filtered_items = {
-					hide_dotfiles = false,
-					hide_gitignored = false,
-					hide_hidden = false,
-				},
-				follow_current_file = {
-					enabled = true,
-				},
-			},
-			event_handlers = {
-				{
-					event = "file_opened",
-					handler = function(_)
-						require("neo-tree.command").execute({ action = "close" })
-					end,
-				},
+			view_options = {
+				show_hidden = true,
 			},
 		},
 	},
