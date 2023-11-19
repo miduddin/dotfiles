@@ -7,7 +7,10 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		opts = {},
+		opts = {
+			toggler = { line = "<C-_>" },
+			opleader = { line = "<C-_>" },
+		},
 	},
 	{
 		"mg979/vim-visual-multi",
