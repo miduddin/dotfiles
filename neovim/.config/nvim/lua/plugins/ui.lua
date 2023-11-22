@@ -36,8 +36,10 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local theme = require("lualine.themes.auto")
-			theme.normal.c.bg = "#282727"
-			theme.inactive.c.bg = "#282727"
+			theme.inactive.c.bg = theme.normal.c.bg
+			local listed_buffer = function()
+				return vim.fn.buflisted(vim.fn.bufnr()) == 1
+			end
 
 			require("lualine").setup({
 				options = {
@@ -47,71 +49,16 @@ return {
 					component_separators = "|",
 				},
 				sections = {
-					lualine_a = {
-						{
-							"buffers",
-							symbols = {
-								alternate_file = "",
-							},
-							use_mode_colors = true,
-							buffers_color = {
-								active = { gui = "bold" },
-							},
-							cond = function()
-								return vim.fn.buflisted(vim.fn.bufnr()) == 1
-							end,
-						},
-						{
-							"tabs",
-							cond = function()
-								return #vim.api.nvim_list_tabpages() > 1 and vim.fn.buflisted(vim.fn.bufnr()) == 1
-							end,
-						},
-					},
+					lualine_a = { { "filename", file_status = false, path = 1, color = { gui = "bold" } } },
 					lualine_b = {},
-					lualine_c = {
-						{
-							"filename",
-							path = 1,
-							file_status = false,
-						},
-					},
-					lualine_x = {
-						{
-							"diagnostics",
-							symbols = { error = " ", warn = " ", hint = " ", info = " " },
-						},
-					},
-					lualine_y = {
-						{
-							"branch",
-							icon = "",
-							color = { gui = "bold" },
-							cond = function()
-								return vim.fn.buflisted(vim.fn.bufnr()) == 1
-							end,
-						},
-					},
-					lualine_z = {
-						{
-							"location",
-							color = { gui = "bold" },
-							cond = function()
-								return vim.fn.buflisted(vim.fn.bufnr()) == 1
-							end,
-						},
-					},
+					lualine_c = { "diagnostics" },
+					lualine_x = {},
+					lualine_y = { { "branch", icon = "", color = { gui = "bold" }, cond = listed_buffer } },
+					lualine_z = { { "location", color = { gui = "bold" }, cond = listed_buffer } },
 				},
 				inactive_sections = {
 					lualine_c = { { "filename", file_status = false } },
-					lualine_x = {
-						{
-							"location",
-							cond = function()
-								return vim.fn.buflisted(vim.fn.bufnr()) == 1
-							end,
-						},
-					},
+					lualine_x = { { "location", cond = listed_buffer } },
 				},
 			})
 		end,
@@ -130,9 +77,7 @@ return {
 				["`"] = false,
 				["~"] = false,
 			},
-			view_options = {
-				show_hidden = true,
-			},
+			view_options = { show_hidden = true },
 		},
 	},
 	{
@@ -146,9 +91,7 @@ return {
 		opts = {
 			notification = {
 				override_vim_notify = true,
-				window = {
-					winblend = 0,
-				},
+				window = { winblend = 0 },
 			},
 		},
 	},

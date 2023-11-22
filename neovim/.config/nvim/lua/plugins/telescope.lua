@@ -11,6 +11,7 @@ return {
 		},
 		keys = {
 			{ "<leader><space>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+			{ "<M-b>", "<cmd>Telescope buffers<cr>", desc = "Open buffers" },
 			{ "<leader>fb", "<cmd>Telescope git_branches<cr>", desc = "Git branches" },
 			{ "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current buffer fuzzy find" },
 			{ "<leader>ff", "<cmd>Telescope git_bcommits<cr>", desc = "File history" },
@@ -66,6 +67,14 @@ return {
 					},
 				},
 				pickers = {
+					buffers = {
+						initial_mode = "normal",
+						sort_mru = true,
+						mappings = {
+							i = { ["<C-d>"] = actions.delete_buffer },
+							n = { ["<C-d>"] = actions.delete_buffer },
+						},
+					},
 					find_files = {
 						hidden = true,
 						no_ignore = true,
