@@ -14,11 +14,7 @@
     "defaults": {
       "colorScheme": "KanagawaWave",
       "font": {
-        "face": "JetBrainsMono Nerd Font",
-        "features": {
-          "calt": 0,
-          "liga": 0
-        },
+        "face": "JetBrainsMonoNL NF",
         "size": 10.5
       },
       "intenseTextStyle": "bold",
