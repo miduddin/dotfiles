@@ -25,8 +25,9 @@ map({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
 
 map("n", "<S-h>", "<cmd>bp<cr>", { desc = "Prev buffer" })
 map("n", "<S-l>", "<cmd>bn<cr>", { desc = "Next buffer" })
-map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Close current buffer" })
-map("n", "<leader>bD", "<cmd>kT|%bd|e#|bd#|'T<cr>", { desc = "Close all other buffers" })
+-- Handle with nvim-bufdel:
+-- map("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Close current buffer" })
+-- map("n", "<leader>bD", "<cmd>kT|%bd|e#|bd#|'T<cr>", { desc = "Close all other buffers" })
 
 map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 

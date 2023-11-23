@@ -95,4 +95,13 @@ return {
 			},
 		},
 	},
+	{
+		"ojroques/nvim-bufdel",
+		event = "VeryLazy",
+		keys = {
+			{ "<leader>bd", "<cmd>BufDel<cr>", { desc = "Close current buffer" } },
+			{ "<leader>bD", "<cmd>BufDelOthers<cr>", { desc = "Close all other buffers" } },
+		},
+		opts = { quit = false },
+	},
 }
