@@ -57,7 +57,7 @@ return {
 					lualine_z = { { "location", color = { gui = "bold" }, cond = listed_buffer } },
 				},
 				inactive_sections = {
-					lualine_c = { { "filename", file_status = false } },
+					lualine_c = { { "filename", file_status = false, path = 1 } },
 					lualine_x = { { "location", cond = listed_buffer } },
 				},
 			})
