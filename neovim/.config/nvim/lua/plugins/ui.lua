@@ -49,7 +49,7 @@ return {
 					component_separators = "|",
 				},
 				sections = {
-					lualine_a = { { "filename", file_status = false, path = 1, color = { gui = "bold" } } },
+					lualine_a = { { "filename", path = 1, color = { gui = "bold" } } },
 					lualine_b = {},
 					lualine_c = { "diagnostics" },
 					lualine_x = {},
@@ -57,7 +57,7 @@ return {
 					lualine_z = { { "location", color = { gui = "bold" }, cond = listed_buffer } },
 				},
 				inactive_sections = {
-					lualine_c = { { "filename", file_status = false, path = 1 } },
+					lualine_c = { { "filename", path = 1 } },
 					lualine_x = { { "location", cond = listed_buffer } },
 				},
 			})
