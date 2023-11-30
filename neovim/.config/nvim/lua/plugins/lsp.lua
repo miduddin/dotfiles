@@ -129,7 +129,7 @@ return {
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
-			{ "<leader>cf", [[<cmd>lua require("conform").format()<cr>]], desc = "Format buffer" },
+			{ "<leader>cf", [[<cmd>lua require("conform").format({timeout_ms = 5000})<cr>]], desc = "Format buffer" },
 		},
 		opts = {
 			formatters_by_ft = {
@@ -147,7 +147,7 @@ return {
 			},
 			format_on_save = {
 				lsp_fallback = true,
-				timeout_ms = 500,
+				timeout_ms = 200,
 			},
 			formatters = {
 				yamlfmt = {
