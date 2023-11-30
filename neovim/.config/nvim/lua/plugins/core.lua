@@ -81,6 +81,7 @@ return {
 					"markdown",
 					"markdown_inline",
 					"php",
+					"rust",
 					"sql",
 					"terraform",
 					"toml",

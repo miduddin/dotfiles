@@ -30,7 +30,7 @@ return {
 
 			telescope.setup({
 				defaults = {
-					file_ignore_patterns = { "%.git/", "node_modules/", "vendor/" },
+					file_ignore_patterns = { "%.git/", "node_modules/", "vendor/", "target/" },
 					results_title = false,
 					layout_strategy = "center",
 					layout_config = {

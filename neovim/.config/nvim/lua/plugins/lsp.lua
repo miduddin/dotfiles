@@ -35,6 +35,7 @@ return {
 
 			lspconfig.lua_ls.setup(default_setup)
 			lspconfig.intelephense.setup(default_setup)
+			lspconfig.rust_analyzer.setup(default_setup)
 			lspconfig.gopls.setup(default_with({
 				settings = {
 					gopls = {
@@ -138,8 +139,8 @@ return {
 				javascript = { { "prettierd" } },
 				json = { "jq" },
 				lua = { "stylua" },
-				rust = { "rustfmt" },
 				php = { "php_cs_fixer" },
+				rust = { "rustfmt" },
 				sql = { "sqlfmt" },
 				terraform = { "terraform_fmt" },
 				yaml = { "yamlfmt" },
