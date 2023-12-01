@@ -140,6 +140,15 @@ return {
 							["[F"] = { query = "@function.outer", desc = "Prev function end" },
 						},
 					},
+					swap = {
+						enable = true,
+						swap_next = {
+							["<leader>a"] = "@parameter.inner",
+						},
+						swap_previous = {
+							["<leader>A"] = "@parameter.inner",
+						},
+					},
 				},
 			})
 		end,
