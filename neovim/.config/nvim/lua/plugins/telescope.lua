@@ -18,6 +18,7 @@ return {
 			{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help pages" },
 			{ "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+			{ "<leader>fr", "<cmd>Telescope resume<cr>", desc = "Resume last search" },
 			{ "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Symbols (document)" },
 			{ "<leader>fS", "<cmd>Telescope lsp_workspace_symbols<cr>", desc = "Symbols (workspace)" },
 			{ "<leader>ft", "<cmd>Telescope git_status<cr>", desc = "Git status" },
@@ -55,12 +56,12 @@ return {
 					sorting_strategy = "ascending",
 					mappings = {
 						i = {
-							["<c-t>"] = trouble.open_with_trouble,
+							["<c-t>"] = trouble.smart_open_with_trouble,
 							["<C-j>"] = actions.cycle_history_next,
 							["<C-k>"] = actions.cycle_history_prev,
 						},
 						n = {
-							["<c-t>"] = trouble.open_with_trouble,
+							["<c-t>"] = trouble.smart_open_with_trouble,
 							["<C-j>"] = actions.cycle_history_next,
 							["<C-k>"] = actions.cycle_history_prev,
 						},
