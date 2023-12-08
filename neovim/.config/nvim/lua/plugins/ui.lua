@@ -14,6 +14,11 @@ return {
 				overrides = function(colors)
 					local theme = colors.theme
 					return {
+						DiagnosticFloatingOk = { bg = "none" },
+						DiagnosticFloatingHint = { bg = "none" },
+						DiagnosticFloatingInfo = { bg = "none" },
+						DiagnosticFloatingWarn = { bg = "none" },
+						DiagnosticFloatingError = { bg = "none" },
 						FloatBorder = { bg = "none" },
 						FloatTitle = { bg = "none" },
 						Folded = { bg = "none" },
@@ -22,7 +27,7 @@ return {
 						TelescopePreviewTitle = { fg = theme.ui.bg_dim, bg = theme.diag.ok, bold = true },
 						TelescopePromptTitle = { fg = theme.ui.bg_dim, bg = theme.diag.warning, bold = true },
 						TelescopeResultsTitle = { fg = theme.ui.bg_dim, bg = theme.diag.info, bold = true },
-						Whitespace = { fg = "#30304a" },
+						Whitespace = { fg = "#40405a" },
 						WinSeparator = { fg = "#54546d" },
 					}
 				end,
