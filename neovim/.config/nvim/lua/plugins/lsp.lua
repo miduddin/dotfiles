@@ -33,6 +33,7 @@ return {
 
 			local lspconfig = require("lspconfig")
 
+			lspconfig.biome.setup(default_setup)
 			lspconfig.lua_ls.setup(default_setup)
 			lspconfig.intelephense.setup(default_setup)
 			lspconfig.rust_analyzer.setup(default_setup)
@@ -136,11 +137,8 @@ return {
 			formatters_by_ft = {
 				go = { "goimports", "gofumpt" },
 				html = { { "prettierd" } },
-				javascript = { { "prettierd" } },
-				json = { "jq" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
-				rust = { "rustfmt" },
 				sql = { "sqlfmt" },
 				terraform = { "terraform_fmt" },
 				yaml = { "yamlfmt" },
