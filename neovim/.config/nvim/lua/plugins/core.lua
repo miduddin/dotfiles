@@ -74,6 +74,7 @@ return {
 				},
 				ensure_installed = {
 					"bash",
+					"c",
 					"dockerfile",
 					"go",
 					"html",
@@ -84,10 +85,13 @@ return {
 					"markdown",
 					"markdown_inline",
 					"php",
+					"query",
 					"rust",
 					"sql",
 					"terraform",
 					"toml",
+					"vim",
+					"vimdoc",
 					"yaml",
 				},
 				incremental_selection = {
