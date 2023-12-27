@@ -53,6 +53,12 @@ return {
 					section_separators = "",
 					component_separators = "|",
 				},
+				extensions = {
+					"nvim-dap-ui",
+					"oil",
+					"quickfix",
+					"trouble",
+				},
 				sections = {
 					lualine_a = { { "filename", path = 1, color = { gui = "bold" } } },
 					lualine_b = {},
