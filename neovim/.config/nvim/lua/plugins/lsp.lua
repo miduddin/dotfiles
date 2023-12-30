@@ -33,7 +33,7 @@ return {
 
 			local lspconfig = require("lspconfig")
 
-			lspconfig.biome.setup(default_setup)
+			lspconfig.jsonls.setup(default_setup)
 			lspconfig.lua_ls.setup(default_setup)
 			lspconfig.intelephense.setup(default_setup)
 			lspconfig.rust_analyzer.setup(default_setup)
