@@ -77,19 +77,22 @@ return {
 		event = { "InsertEnter" },
 		dependencies = {
 			"L3MON4D3/LuaSnip",
-			"rafamadriz/friendly-snippets",
-			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-buffer",
 		},
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			require("luasnip.loaders.from_vscode").lazy_load()
 
 			cmp.setup({
 				snippet = {
 					expand = function(args)
 						require("luasnip").lsp_expand(args.body)
+					end,
+				},
+				formatting = {
+					format = function(entry, vim_item)
+						vim_item.menu = ""
+						return vim_item
 					end,
 				},
 				window = {
@@ -120,7 +123,6 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
 				}, {
 					{ name = "buffer" },
 				}),
