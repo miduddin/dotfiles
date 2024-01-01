@@ -137,9 +137,24 @@ return {
 			{ "gd", "<cmd>Trouble lsp_definitions<cr>", desc = "LSP definitions" },
 			{ "gD", "<cmd>Trouble lsp_type_definitions<cr>", desc = "LSP type definitions" },
 			{ "gi", "<cmd>Trouble lsp_implementations<cr>", desc = "LSP implementations" },
+			{
+				"]t",
+				[[<cmd>lua require("trouble").next({skip_groups = true, jump = true})<cr>]],
+				desc = "Next trouble item",
+			},
+			{
+				"[t",
+				[[<cmd>lua require("trouble").previous({skip_groups = true, jump = true})<cr>]],
+				desc = "Previous trouble item",
+			},
 		},
-		opts = {
-			include_declaration = {},
-		},
+		config = function()
+			require("trouble").setup({ include_declaration = {} })
+
+			vim.api.nvim_create_autocmd({ "FileType" }, {
+				pattern = { "Trouble" },
+				command = [[setlocal cursorlineopt=line]],
+			})
+		end,
 	},
 }
