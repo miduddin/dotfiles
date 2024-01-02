@@ -23,10 +23,6 @@ return {
 						FloatTitle = { bg = "none" },
 						Folded = { bg = "none" },
 						NormalFloat = { bg = "none" },
-						TelescopeBorder = { bg = "none" },
-						TelescopePreviewTitle = { fg = theme.ui.bg_dim, bg = theme.diag.ok, bold = true },
-						TelescopePromptTitle = { fg = theme.ui.bg_dim, bg = theme.diag.warning, bold = true },
-						TelescopeResultsTitle = { fg = theme.ui.bg_dim, bg = theme.diag.info, bold = true },
 						Whitespace = { fg = "#40405a" },
 						WinSeparator = { fg = "#54546d" },
 					}
