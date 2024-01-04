@@ -50,9 +50,11 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-		event = { "BufReadPost", "BufNewFile" },
+		event = "VeryLazy",
 		config = function()
 			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query" },
+				auto_install = true,
 				indent = {
 					enable = true,
 				},
@@ -66,28 +68,6 @@ return {
 						end
 					end,
 					additional_vim_regex_highlighting = false,
-				},
-				ensure_installed = {
-					"bash",
-					"c",
-					"dockerfile",
-					"go",
-					"html",
-					"http",
-					"javascript",
-					"json",
-					"lua",
-					"markdown",
-					"markdown_inline",
-					"php",
-					"query",
-					"rust",
-					"sql",
-					"terraform",
-					"toml",
-					"vim",
-					"vimdoc",
-					"yaml",
 				},
 				incremental_selection = {
 					enable = true,
