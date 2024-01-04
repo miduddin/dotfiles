@@ -12,7 +12,6 @@ return {
 				transparent = true,
 				colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
 				overrides = function(colors)
-					local theme = colors.theme
 					return {
 						DiagnosticFloatingOk = { bg = "none" },
 						DiagnosticFloatingHint = { bg = "none" },
