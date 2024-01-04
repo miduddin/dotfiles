@@ -47,15 +47,10 @@ return {
 		end,
 	},
 	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		dependencies = {
-			{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
-		},
+		"nvim-treesitter/nvim-treesitter",
+		build = ":TSUpdate",
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		event = { "BufReadPost", "BufNewFile" },
-		keys = {
-			{ "<c-space>", desc = "Increment selection" },
-			{ "<bs>", desc = "Decrement selection", mode = "x" },
-		},
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				indent = {
@@ -64,9 +59,9 @@ return {
 				highlight = {
 					enable = true,
 					disable = function(_, buf)
-						local max_filesize = 100 * 1024 -- in bytes
+						local max_filesize_bytes = 100 * 1024
 						local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-						if ok and stats and stats.size > max_filesize then
+						if ok and stats and stats.size > max_filesize_bytes then
 							return true
 						end
 					end,
