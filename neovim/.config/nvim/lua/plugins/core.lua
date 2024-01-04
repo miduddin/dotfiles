@@ -50,9 +50,10 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-		event = { "BufReadPost", "BufNewFile" },
+		event = "VeryLazy",
 		config = function()
 			require("nvim-treesitter.configs").setup({
+				auto_install = true,
 				indent = {
 					enable = true,
 				},
@@ -80,6 +81,7 @@ return {
 					"markdown",
 					"markdown_inline",
 					"php",
+					"printf",
 					"query",
 					"rust",
 					"sql",
