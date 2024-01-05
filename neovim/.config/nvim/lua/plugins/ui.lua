@@ -92,14 +92,17 @@ return {
 		opts = {},
 	},
 	{
-		"j-hui/fidget.nvim",
+		"echasnovski/mini.notify",
 		event = "VeryLazy",
-		opts = {
-			notification = {
-				override_vim_notify = true,
+		config = function()
+			local notify = require("mini.notify")
+
+			notify.setup({
 				window = { winblend = 0 },
-			},
-		},
+			})
+
+			vim.notify = notify.make_notify()
+		end,
 	},
 	{
 		"ojroques/nvim-bufdel",
