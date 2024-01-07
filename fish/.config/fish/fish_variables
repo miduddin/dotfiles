@@ -62,4 +62,4 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dreverse
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/miduddin/\x2elocal/share/cargo/bin\x1e/home/miduddin/\x2elocal/share/pyenv/bin\x1e/home/miduddin/\x2elocal/bin\x1e/opt/mssql\x2dtools18/bin\x1e/home/miduddin/bin\x1e/usr/local/go/bin
+SETUVAR fish_user_paths:/home/miduddin/\x2elocal/share/go/bin\x1e/home/miduddin/\x2elocal/share/cargo/bin\x1e/home/miduddin/\x2elocal/share/pyenv/bin\x1e/home/miduddin/\x2elocal/bin\x1e/opt/mssql\x2dtools18/bin\x1e/home/miduddin/bin\x1e/usr/local/go/bin
