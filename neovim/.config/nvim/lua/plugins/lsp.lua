@@ -34,6 +34,7 @@ return {
 			local lspconfig = require("lspconfig")
 
 			lspconfig.jsonls.setup(default_setup)
+			lspconfig.html.setup(default_setup)
 			lspconfig.lua_ls.setup(default_setup)
 			lspconfig.intelephense.setup(default_setup)
 			lspconfig.rust_analyzer.setup(default_setup)
@@ -138,7 +139,6 @@ return {
 		opts = {
 			formatters_by_ft = {
 				go = { "goimports", "gofumpt" },
-				html = { { "prettierd" } },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
 				sql = { "sqlfmt" },
