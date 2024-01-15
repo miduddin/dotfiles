@@ -1,113 +1,67 @@
 {
-  "$help": "https://aka.ms/terminal-documentation",
-  "$schema": "https://aka.ms/terminal-profiles-schema-preview",
-  "actions": [],
-  "alwaysShowTabs": true,
-  "copyFormatting": "none",
-  "copyOnSelect": false,
-  "defaultProfile": "{89912b0a-f6d1-5e6c-8845-09213757191e}",
-  "disableAnimations": false,
-  "initialCols": 140,
-  "initialRows": 40,
-  "launchMode": "focus",
-  "profiles": {
-    "defaults": {
-      "colorScheme": "KanagawaWave",
-      "font": {
-        "face": "JetBrainsMonoNL NF",
-        "size": 10.5
-      },
-      "intenseTextStyle": "bold",
-      "opacity": 95,
-      "padding": "3,0,3,0",
-      "scrollbarState": "hidden"
-    },
-    "list": [
-      {
-        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-        "hidden": false,
-        "name": "Windows PowerShell"
-      },
-      {
-        "commandline": "C:\\Windows\\system32\\wsl.exe -d opensuse --cd ~ -- zellij a -c default",
-        "guid": "{89912b0a-f6d1-5e6c-8845-09213757191e}",
-        "hidden": false,
-        "name": "opensuse",
-        "source": "Windows.Terminal.Wsl"
-      }
-    ]
-  },
-  "schemes": [
-    {
-      "background": "#181825",
-      "black": "#45475A",
-      "blue": "#89B4FA",
-      "brightBlack": "#585B70",
-      "brightBlue": "#89B4FA",
-      "brightCyan": "#94E2D5",
-      "brightGreen": "#A6E3A1",
-      "brightPurple": "#F5C2E7",
-      "brightRed": "#F38BA8",
-      "brightWhite": "#A6ADC8",
-      "brightYellow": "#F9E2AF",
-      "cursorColor": "#F5E0DC",
-      "cyan": "#94E2D5",
-      "foreground": "#CDD6F4",
-      "green": "#A6E3A1",
-      "name": "CatppuccinMocha",
-      "purple": "#F5C2E7",
-      "red": "#F38BA8",
-      "selectionBackground": "#585B70",
-      "white": "#BAC2DE",
-      "yellow": "#F9E2AF"
-    },
-    {
-      "background": "#181616",
-      "black": "#090618",
-      "blue": "#7E9CD8",
-      "brightBlack": "#727169",
-      "brightBlue": "#7FB4CA",
-      "brightCyan": "#7AA89F",
-      "brightGreen": "#98BB6C",
-      "brightPurple": "#938AA9",
-      "brightRed": "#E82424",
-      "brightWhite": "#DCD7BA",
-      "brightYellow": "#E6C384",
-      "cursorColor": "#C8C093",
-      "cyan": "#6A9589",
-      "foreground": "#DCD7BA",
-      "green": "#76946A",
-      "name": "KanagawaWave",
-      "purple": "#957FB8",
-      "red": "#C34043",
-      "selectionBackground": "#2D4F67",
-      "white": "#C8C093",
-      "yellow": "#C0A36E"
-    },
-    {
-      "background": "#181616",
-      "black": "#0d0c0c",
-      "brightBlack": "#a6a69c",
-      "blue": "#8ba4b0",
-      "brightBlue": "#7FB4CA",
-      "green": "#8a9a7b",
-      "brightGreen": "#87a987",
-      "purple": "#a292a3",
-      "brightPurple": "#8992a7",
-      "brightRed": "#E46876",
-      "red": "#c4746e",
-      "brightWhite": "#c5c9c5",
-      "white": "#C8C093",
-      "brightYellow": "#E6C384",
-      "yellow": "#c4b28a",
-      "brightCyan": "#7AA89F",
-      "cyan": "#8ea4a2",
-      "cursorColor": "#c5c9c5",
-      "foreground": "#C8C093",
-      "name": "KanagawaDragon",
-      "selectionBackground": "#223249"
-    }
-  ],
-  "showTabsInTitlebar": true
+	"$help": "https://aka.ms/terminal-documentation",
+	"$schema": "https://aka.ms/terminal-profiles-schema-preview",
+	"actions": [],
+	"alwaysShowTabs": false,
+	"copyFormatting": "none",
+	"copyOnSelect": false,
+	"defaultProfile": "{89912b0a-f6d1-5e6c-8845-09213757191e}",
+	"initialCols": 130,
+	"initialRows": 40,
+	"launchMode": "focus",
+	"profiles": {
+		"defaults": {
+			"colorScheme": "KanagawaWave",
+			"font": {
+				"face": "JetBrainsMonoNL Nerd Font",
+				"size": 11
+			},
+			"intenseTextStyle": "bold",
+			"opacity": 98,
+			"padding": "1",
+			"scrollbarState": "hidden",
+			"suppressApplicationTitle": true
+		},
+		"list": [
+			{
+				"commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+				"guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+				"hidden": false,
+				"name": "Windows PowerShell"
+			},
+			{
+				"commandline": "C:\\Windows\\system32\\wsl.exe -d opensuse --cd ~ -- zellij a -c default",
+				"guid": "{89912b0a-f6d1-5e6c-8845-09213757191e}",
+				"hidden": false,
+				"name": "opensuse",
+				"source": "Windows.Terminal.Wsl"
+			}
+		]
+	},
+	"schemes": [
+		{
+			"background": "#181616",
+			"black": "#090618",
+			"blue": "#7E9CD8",
+			"brightBlack": "#727169",
+			"brightBlue": "#7FB4CA",
+			"brightCyan": "#7AA89F",
+			"brightGreen": "#98BB6C",
+			"brightPurple": "#938AA9",
+			"brightRed": "#E82424",
+			"brightWhite": "#DCD7BA",
+			"brightYellow": "#E6C384",
+			"cursorColor": "#C8C093",
+			"cyan": "#6A9589",
+			"foreground": "#DCD7BA",
+			"green": "#76946A",
+			"name": "KanagawaWave",
+			"purple": "#957FB8",
+			"red": "#C34043",
+			"selectionBackground": "#2D4F67",
+			"white": "#C8C093",
+			"yellow": "#C0A36E"
+		}
+	],
+	"showTabsInTitlebar": true
 }
