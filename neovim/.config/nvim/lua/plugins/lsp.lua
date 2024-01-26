@@ -39,6 +39,7 @@ return {
 			lspconfig.intelephense.setup(default_setup)
 			lspconfig.rust_analyzer.setup(default_setup)
 			lspconfig.tailwindcss.setup(default_setup)
+			lspconfig.taplo.setup(default_setup)
 			lspconfig.gopls.setup(default_with({
 				settings = {
 					gopls = {
