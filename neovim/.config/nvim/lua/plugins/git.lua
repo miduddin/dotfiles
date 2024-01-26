@@ -26,6 +26,11 @@ return {
 				file_panel = { { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } } },
 				view = { { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } } },
 			},
+			use_icons = false,
+			signs = {
+				fold_open = "- ",
+				fold_closed = "+ ",
+			},
 		},
 	},
 	{

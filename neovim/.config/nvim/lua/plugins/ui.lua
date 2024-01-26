@@ -32,7 +32,6 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		config = function()
 			local theme = require("lualine.themes.auto")
@@ -57,9 +56,11 @@ return {
 				sections = {
 					lualine_a = { { "filename", path = 1, color = { gui = "bold" } } },
 					lualine_b = {},
-					lualine_c = { "diagnostics" },
+					lualine_c = {
+						{ "diagnostics", symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" } },
+					},
 					lualine_x = {},
-					lualine_y = { { "branch", icon = "", color = { gui = "bold" }, cond = listed_buffer } },
+					lualine_y = { { "branch", color = { gui = "bold" }, cond = listed_buffer } },
 					lualine_z = { { "location", color = { gui = "bold" }, cond = listed_buffer } },
 				},
 				inactive_sections = {
@@ -71,7 +72,6 @@ return {
 	},
 	{
 		"stevearc/oil.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<leader>e", "<cmd>Oil<cr>", desc = "File explorer" },
 		},

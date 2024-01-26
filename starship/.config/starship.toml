@@ -28,9 +28,6 @@ tag_disabled = false
 [time]
 disabled = false
 
-[git_branch]
-symbol = " "
-
 [status]
 disabled = false
 map_symbol = true

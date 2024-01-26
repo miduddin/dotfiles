@@ -82,7 +82,22 @@ return {
 					{ "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
 					-- stylua: ignore end
 				},
-				opts = {},
+				opts = {
+					icons = { expanded = "🞃", collapsed = "🞂", current_frame = "→" },
+					controls = {
+						icons = {
+							pause = "⏸",
+							play = "⯈",
+							step_into = "↴",
+							step_over = "↷",
+							step_out = "↑",
+							step_back = "↶",
+							run_last = "🗘",
+							terminate = "🕱",
+							disconnect = "⏻",
+						},
+					},
+				},
 				config = function(_, opts)
 					local dap = require("dap")
 					local dapui = require("dapui")
@@ -149,23 +164,6 @@ return {
 					},
 				},
 			}
-
-			local icons = {
-				Stopped = { "󰁕 ", "DiagnosticWarn", "DapStoppedLine" },
-				Breakpoint = { " ", "DiagnosticError" },
-				BreakpointCondition = " ",
-				BreakpointRejected = { " ", "DiagnosticError" },
-				LogPoint = ".>",
-			}
-			vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
-
-			for name, sign in pairs(icons) do
-				sign = type(sign) == "table" and sign or { sign }
-				vim.fn.sign_define(
-					"Dap" .. name,
-					{ text = sign[1], texthl = sign[2] or "DiagnosticInfo", linehl = sign[3], numhl = sign[3] }
-				)
-			end
 		end,
 	},
 }
