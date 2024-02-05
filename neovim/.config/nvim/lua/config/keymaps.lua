@@ -12,6 +12,8 @@ map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
 map("n", "*", "*``")
 map("n", "<leader><tab>d", "<Cmd>tabclose<CR>", { desc = "Close tab" })
+map("n", "<leader><tab>n", "<Cmd>tabn<CR>", { desc = "Next tab" })
+map("n", "<leader><tab>p", "<Cmd>tabp<CR>", { desc = "Previous tab" })
 map("n", "<leader>w", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
 
 map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })

@@ -14,6 +14,7 @@ return {
 			{ "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Symbols (document)" },
 			{ "<leader>fw", "<cmd>FzfLua grep_cword<cr>", desc = "Find word under cursor" },
 			{ "<leader>fw", "<cmd>FzfLua grep_visual<cr>", desc = "Find selected text", mode = { "v" } },
+			{ "<leader>f<tab>", "<cmd>FzfLua tabs<cr>", desc = "List tabs" },
 		},
 		opts = {
 			winopts = {
