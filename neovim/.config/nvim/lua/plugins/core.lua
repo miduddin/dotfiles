@@ -128,19 +128,19 @@ return {
 						enable = true,
 						set_jumps = true,
 						goto_next_start = {
-							["]a"] = { query = "@parameter.outer", desc = "Next arg start" },
+							["]a"] = { query = "@parameter.inner", desc = "Next arg start" },
 							["]f"] = { query = "@function.outer", desc = "Next function start" },
 						},
 						goto_next_end = {
-							["]A"] = { query = "@parameter.outer", desc = "Next arg end" },
+							["]A"] = { query = "@parameter.inner", desc = "Next arg end" },
 							["]F"] = { query = "@function.outer", desc = "Next function end" },
 						},
 						goto_previous_start = {
-							["[a"] = { query = "@parameter.outer", desc = "Prev arg start" },
+							["[a"] = { query = "@parameter.inner", desc = "Prev arg start" },
 							["[f"] = { query = "@function.outer", desc = "Prev function start" },
 						},
 						goto_previous_end = {
-							["[a"] = { query = "@parameter.outer", desc = "Prev arg end" },
+							["[A"] = { query = "@parameter.inner", desc = "Prev arg end" },
 							["[F"] = { query = "@function.outer", desc = "Prev function end" },
 						},
 					},
