@@ -38,7 +38,9 @@ return {
 			lspconfig.lua_ls.setup(default_setup)
 			lspconfig.intelephense.setup(default_setup)
 			lspconfig.rust_analyzer.setup(default_setup)
-			lspconfig.tailwindcss.setup(default_setup)
+			lspconfig.tailwindcss.setup(default_with({
+				filetypes = { "html" },
+			}))
 			lspconfig.taplo.setup(default_setup)
 			lspconfig.gopls.setup(default_with({
 				settings = {
