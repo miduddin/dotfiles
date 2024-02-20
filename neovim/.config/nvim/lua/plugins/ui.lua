@@ -108,8 +108,9 @@ return {
 		"ojroques/nvim-bufdel",
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>bd", "<cmd>BufDel<cr>", { desc = "Close current buffer" } },
-			{ "<leader>bD", "<cmd>BufDelAll<cr>", { desc = "Close all other buffers" } },
+			{ "<leader>ba", "<cmd>BufDelAll<cr>", desc = "Close all buffers" },
+			{ "<leader>bd", "<cmd>BufDel<cr>", desc = "Close current buffer" },
+			{ "<leader>bo", "<cmd>BufDelOthers<cr>", desc = "Close other buffers" },
 		},
 		opts = { quit = false },
 	},
