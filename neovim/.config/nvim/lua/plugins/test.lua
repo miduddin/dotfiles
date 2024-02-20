@@ -5,9 +5,11 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
 			"nvim-neotest/neotest-go",
+			"olimorris/neotest-phpunit",
 		},
 		keys = {
 			-- stylua: ignore start
+			{ "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Debug Nearest" },
 			{ "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
 			{ "<leader>tT", function() require("neotest").run.run(vim.loop.cwd()) end, desc = "Run All Test Files" },
 			{ "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest" },
@@ -17,58 +19,40 @@ return {
 			{ "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
 			-- stylua: ignore end
 		},
-		opts = {
-			status = { virtual_text = true },
-			output = { open_on_run = true },
-			quickfix = {
-				open = function()
-					vim.cmd("Trouble quickfix")
-				end,
-			},
-			adapters = {
-				["neotest-go"] = { args = { "-count=1", "-race", "-timeout=10s" } },
-			},
-		},
-		config = function(_, opts)
-			local neotest_ns = vim.api.nvim_create_namespace("neotest")
-			vim.diagnostic.config({
-				virtual_text = {
-					format = function(diagnostic)
-						-- Replace newline and tab characters with space for more compact diagnostics
-						local message =
-							diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
-						return message
-					end,
+		config = function()
+			require("neotest").setup({
+				adapters = {
+					require("neotest-go")({
+						args = { "-count=1", "-race", "-timeout=10s" },
+					}),
+					require("neotest-phpunit")({
+						env = {
+							XDEBUG_CONFIG = "idekey=neotest",
+						},
+						filter_dirs = { ".git", "node_modules", "vendor" },
+						dap = {
+							type = "php",
+							request = "launch",
+							name = "Listen for Xdebug",
+							port = 9003,
+						},
+					}),
 				},
-			}, neotest_ns)
-
-			if opts.adapters then
-				local adapters = {}
-				for name, config in pairs(opts.adapters or {}) do
-					if type(name) == "number" then
-						if type(config) == "string" then
-							config = require(config)
-						end
-						adapters[#adapters + 1] = config
-					elseif config ~= false then
-						local adapter = require(name)
-						if type(config) == "table" and not vim.tbl_isempty(config) then
-							local meta = getmetatable(adapter)
-							if adapter.setup then
-								adapter.setup(config)
-							elseif meta and meta.__call then
-								adapter(config)
-							else
-								error("Adapter " .. name .. " does not support setup")
-							end
-						end
-						adapters[#adapters + 1] = adapter
-					end
-				end
-				opts.adapters = adapters
-			end
-
-			require("neotest").setup(opts)
+				icons = {
+					failed = "x",
+					passed = "o",
+					running = "%",
+					skipped = "-",
+					unknown = "?",
+					watching = "w",
+				},
+				summary = {
+					mappings = {
+						jumpto = "o",
+						output = "O",
+					},
+				},
+			})
 		end,
 	},
 	{
@@ -97,6 +81,25 @@ return {
 							disconnect = "⏻",
 						},
 					},
+					layouts = {
+						{
+							elements = {
+								{ id = "scopes", size = 0.25 },
+								{ id = "breakpoints", size = 0.25 },
+								{ id = "watches", size = 0.25 },
+								{ id = "stacks", size = 0.25 },
+							},
+							position = "left",
+							size = 40,
+						},
+						{
+							elements = {
+								{ id = "repl", size = 1 },
+							},
+							position = "bottom",
+							size = 10,
+						},
+					},
 				},
 				config = function(_, opts)
 					local dap = require("dap")
@@ -117,10 +120,21 @@ return {
 				"leoluz/nvim-dap-go",
 				dependencies = { "williamboman/mason.nvim" },
 				ft = { "go" },
-				keys = {
-					{ "<leader>td", "<cmd>lua require('dap-go').debug_test()<CR>", desc = "Debug nearest (go)" },
-				},
-				opts = {},
+				config = function()
+					require("dap-go").setup({})
+
+					vim.api.nvim_create_autocmd("FileType", {
+						pattern = { "go" },
+						callback = function(ev)
+							vim.keymap.set(
+								"n",
+								"<leader>td",
+								"<cmd>lua require('dap-go').debug_test()<CR>",
+								{ desc = "Debug nearest (go)", buffer = ev.buf }
+							)
+						end,
+					})
+				end,
 			},
 		},
 		keys = {
@@ -135,12 +149,18 @@ return {
 			{ "<leader>dk", function() require("dap").up() end, desc = "Up" },
 			{ "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
 			{ "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-			{ "<leader>dO", function() require("dap").step_over() end, desc = "Step Over" },
+			{ "<leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
 			{ "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
 			{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
 			{ "<leader>ds", function() require("dap").session() end, desc = "Session" },
 			{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Widgets" },
+			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Inspect Value", mode = {"n", "v"} },
+
+			-- Alternative keymaps:
+			{ "<F5>", function() require("dap").continue() end, desc = "Continue" },
+			{ "<F10>", function() require("dap").step_over() end, desc = "Step Over" },
+			{ "<F11>", function() require("dap").step_into() end, desc = "Step Into" },
+			{ "<F12>", function() require("dap").step_out() end, desc = "Step Out" },
 			-- stylua: ignore end
 		},
 		config = function()
@@ -154,16 +174,29 @@ return {
 					type = "php",
 					request = "launch",
 					name = "Listen for Xdebug",
-					pathMappings = {
-						["/app"] = "${workspaceFolder}",
-					},
-					xdebugSettings = {
-						max_children = 999,
-						max_depth = 10,
-						max_data = 10240,
-					},
+					port = 9003,
+					-- xdebugSettings = {
+					-- 	max_children = 999,
+					-- 	max_depth = 10,
+					-- 	max_data = 10240,
+					-- },
+					-- pathMappings = {
+					-- 	["/app"] = "${workspaceFolder}",
+					-- },
 				},
 			}
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "dap-float" },
+				callback = function(ev)
+					vim.keymap.set("n", "q", "<cmd>q<CR>", { buffer = ev.buf })
+
+					vim.api.nvim_create_autocmd({ "WinLeave" }, {
+						buffer = ev.buf,
+						command = "q",
+					})
+				end,
+			})
 		end,
 	},
 }
