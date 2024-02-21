@@ -1,26 +1,33 @@
 {
 	"$help": "https://aka.ms/terminal-documentation",
 	"$schema": "https://aka.ms/terminal-profiles-schema-preview",
-	"actions": [],
+	"actions": [
+		{
+			"keys": "f11",
+			"command": null
+		}
+	],
 	"alwaysShowTabs": false,
 	"copyFormatting": "none",
 	"copyOnSelect": false,
 	"defaultProfile": "{89912b0a-f6d1-5e6c-8845-09213757191e}",
 	"initialCols": 130,
 	"initialRows": 40,
-	"launchMode": "focus",
 	"profiles": {
 		"defaults": {
 			"colorScheme": "KanagawaWave",
 			"font": {
-				"face": "JetBrainsMonoNL Nerd Font",
+				"face": "JetBrains Mono",
+				"features": {
+					"calt": 0
+				},
 				"size": 11
 			},
 			"intenseTextStyle": "bold",
-			"opacity": 98,
+			"opacity": 97,
 			"padding": "1",
 			"scrollbarState": "hidden",
-			"suppressApplicationTitle": true
+			"suppressApplicationTitle": false
 		},
 		"list": [
 			{
@@ -40,7 +47,7 @@
 	},
 	"schemes": [
 		{
-			"background": "#181616",
+			"background": "#101010",
 			"black": "#090618",
 			"blue": "#7E9CD8",
 			"brightBlack": "#727169",
@@ -63,5 +70,5 @@
 			"yellow": "#C0A36E"
 		}
 	],
-	"showTabsInTitlebar": true
+	"showTabsInTitlebar": false
 }
