@@ -36,6 +36,9 @@ return {
 		config = function()
 			local theme = require("lualine.themes.auto")
 			theme.inactive.c.bg = theme.normal.c.bg
+			theme.inactive.a.bg = theme.normal.c.bg
+			theme.normal.a.gui = "bold"
+
 			local listed_buffer = function()
 				return vim.fn.buflisted(vim.fn.bufnr()) == 1
 			end
