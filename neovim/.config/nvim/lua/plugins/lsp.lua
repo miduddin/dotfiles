@@ -158,11 +158,6 @@ return {
 				yamlfmt = {
 					args = { "-formatter", "line_ending=lf,scan_folded_as_literal=true", "-" },
 				},
-				sqlfmt = {
-					command = "sqlfmt",
-					args = { "-" },
-					stdin = true,
-				},
 			},
 		},
 	},
