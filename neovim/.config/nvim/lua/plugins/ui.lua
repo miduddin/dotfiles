@@ -34,19 +34,9 @@ return {
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
 		config = function()
-			local theme = require("lualine.themes.auto")
-			theme.inactive.c.bg = theme.normal.c.bg
-			theme.inactive.a.bg = theme.normal.c.bg
-			theme.normal.a.gui = "bold"
-
-			local listed_buffer = function()
-				return vim.fn.buflisted(vim.fn.bufnr()) == 1
-			end
-
 			require("lualine").setup({
 				options = {
-					theme = theme,
-					globalstatus = false,
+					globalstatus = true,
 					section_separators = "",
 					component_separators = "|",
 				},
@@ -63,15 +53,43 @@ return {
 						{ "diagnostics", symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" } },
 					},
 					lualine_x = {},
-					lualine_y = { { "branch", color = { gui = "bold" }, cond = listed_buffer } },
-					lualine_z = { { "location", color = { gui = "bold" }, cond = listed_buffer } },
-				},
-				inactive_sections = {
-					lualine_c = { { "filename", path = 1 } },
-					lualine_x = { { "location", cond = listed_buffer } },
+					lualine_y = { { "branch", color = { gui = "bold" } } },
+					lualine_z = { { "location", color = { gui = "bold" } } },
 				},
 			})
 		end,
+	},
+	{
+		"b0o/incline.nvim",
+		event = "VeryLazy",
+		opts = {
+			render = function(props)
+				local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+				local modified = vim.bo[props.buf].modified
+				return {
+					" ",
+					filename,
+					modified and { " *", guifg = "#888888", gui = "bold" } or "",
+					" ",
+				}
+			end,
+			window = {
+				margin = { horizontal = 0, vertical = 0 },
+				padding = 0,
+			},
+			highlight = {
+				groups = {
+					InclineNormal = {
+						default = true,
+						group = "lualine_a_filename_normal",
+					},
+					InclineNormalNC = {
+						default = true,
+						group = "lualine_a_filename_normal",
+					},
+				},
+			},
+		},
 	},
 	{
 		"stevearc/oil.nvim",
