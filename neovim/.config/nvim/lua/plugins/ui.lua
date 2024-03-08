@@ -89,6 +89,15 @@ return {
 					},
 				},
 			},
+			ignore = {
+				unlisted_buffers = false,
+				buftypes = {},
+				wintypes = {},
+				filetypes = {
+					"oil",
+					"DiffviewFiles",
+				},
+			},
 		},
 	},
 	{
