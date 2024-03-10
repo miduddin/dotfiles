@@ -49,7 +49,6 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
-		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		event = "VeryLazy",
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -172,6 +171,11 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		event = "VeryLazy",
 	},
 	{
 		"folke/persistence.nvim",
