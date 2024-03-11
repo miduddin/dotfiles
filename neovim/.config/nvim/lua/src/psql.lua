@@ -9,6 +9,7 @@ local function run_query(query, pg_service, timeout_s)
 
 	vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "# Running..." })
 	vim.api.nvim_buf_set_option(buf, "modifiable", false)
+	vim.api.nvim_buf_set_name(buf, vim.fn.strftime("Query result - %T"))
 	vim.cmd("redraw")
 
 	local input = {
@@ -26,6 +27,7 @@ local function run_query(query, pg_service, timeout_s)
 	vim.api.nvim_buf_set_option(buf, "modifiable", true)
 	vim.api.nvim_buf_set_lines(buf, 0, -1, true, vim.fn.split(result, "\n"))
 	vim.api.nvim_buf_set_option(buf, "modifiable", false)
+	vim.api.nvim_buf_set_option(buf, "winfixbuf", true)
 end
 
 local last_params = {
