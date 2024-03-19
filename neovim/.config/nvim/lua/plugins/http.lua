@@ -2,7 +2,10 @@ return {
 	{
 		"rest-nvim/rest.nvim",
 		commit = "8b62563",
-		dependencies = { "nvim-lua/plenary.nvim" },
+		dependencies = {
+			"nvim-neotest/nvim-nio",
+			"nvim-lua/plenary.nvim",
+		},
 		ft = { "http" },
 		keys = {
 			{ "<leader>hr", '<cmd>lua require("rest-nvim").run()<cr>', desc = "Do HTTP request" },

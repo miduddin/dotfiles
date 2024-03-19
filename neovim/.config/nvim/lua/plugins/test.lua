@@ -2,8 +2,10 @@ return {
 	{
 		"nvim-neotest/neotest",
 		dependencies = {
+			"nvim-neotest/nvim-nio",
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
+			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-go",
 			"olimorris/neotest-phpunit",
 			"rcarriga/nvim-dap-ui",
@@ -77,7 +79,10 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		dependencies = { "mfussenegger/nvim-dap" },
+		dependencies = {
+			"mfussenegger/nvim-dap",
+			"nvim-neotest/nvim-nio",
+		},
 		keys = {
 			-- stylua: ignore start
 			{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
