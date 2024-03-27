@@ -38,6 +38,11 @@ return {
 			lspconfig.lua_ls.setup(default_setup)
 			lspconfig.intelephense.setup(default_setup)
 			lspconfig.rust_analyzer.setup(default_setup)
+			lspconfig.spectral.setup(default_with({
+				settings = {
+					rulesetFile = ".spectral.yaml",
+				},
+			}))
 			lspconfig.tailwindcss.setup(default_with({
 				filetypes = { "html" },
 			}))
