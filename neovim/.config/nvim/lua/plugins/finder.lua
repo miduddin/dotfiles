@@ -47,11 +47,6 @@ return {
 					symbol_style = 3,
 				},
 			},
-			previewers = {
-				builtin = {
-					syntax_limit_b = 1024 * 1024 * 10,
-				},
-			},
 		},
 	},
 	{
