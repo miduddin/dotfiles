@@ -38,6 +38,11 @@ return {
 							request = "launch",
 							name = "Listen for Xdebug",
 							port = 9003,
+							xdebugSettings = {
+								max_children = 512,
+								max_data = 10240,
+								max_depth = 4,
+							},
 						},
 					}),
 				},
@@ -73,6 +78,11 @@ return {
 					request = "launch",
 					name = "Listen for Xdebug",
 					port = 9003,
+					xdebugSettings = {
+						max_children = 512,
+						max_data = 10240,
+						max_depth = 4,
+					},
 				},
 			}
 		end,
