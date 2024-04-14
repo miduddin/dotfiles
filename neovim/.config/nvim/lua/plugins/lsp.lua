@@ -155,9 +155,8 @@ return {
 				yaml = { "yamlfmt" },
 				["*"] = { "trim_whitespace", "trim_newlines" },
 			},
-			format_on_save = {
+			format_after_save = {
 				lsp_fallback = true,
-				timeout_ms = 200,
 			},
 			formatters = {
 				yamlfmt = {
