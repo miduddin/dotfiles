@@ -2,3 +2,4 @@ formatter:
   type: basic
   line_ending: lf
   retain_line_breaks: true
+  drop_merge_tag: true
