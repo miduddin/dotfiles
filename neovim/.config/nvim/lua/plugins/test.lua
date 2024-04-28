@@ -7,7 +7,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
 			"nvim-neotest/neotest-go",
-			"olimorris/neotest-phpunit",
+			{ "miduddin/neotest-phpunit", branch = "dev" },
 			"rcarriga/nvim-dap-ui",
 		},
 		keys = {
