@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = { { import = "plugins" } },
+	dev = { path = "~/code" },
 	ui = {
 		border = "rounded",
 		icons = {
