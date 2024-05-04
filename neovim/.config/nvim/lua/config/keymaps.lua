@@ -49,11 +49,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
 		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", buffer = ev.buf })
 		map("n", "<leader>ci", function()
-			if vim.lsp.inlay_hint.is_enabled() then
-				vim.lsp.inlay_hint.enable(0, false)
-			else
-				vim.lsp.inlay_hint.enable(0, true)
-			end
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 		end, { desc = "Toggle inlay hint", buffer = ev.buf })
 	end,
 })
