@@ -24,6 +24,9 @@ return {
 					vertical = "down:75%",
 				},
 			},
+			defaults = {
+				formatter = "path.filename_first",
+			},
 			files = {
 				fd_opts = "--color=never --type f --hidden --follow "
 					.. "--exclude .git/ --exclude node_modules/ --exclude vendor/",
