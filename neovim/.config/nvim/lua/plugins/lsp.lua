@@ -1,5 +1,11 @@
 vim.diagnostic.config({ float = { border = "rounded" } })
 
+local signs = { Error = "", Warn = "", Hint = "", Info = "" }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 return {
 	{
 		"williamboman/mason.nvim",
@@ -93,6 +99,34 @@ return {
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
 
+			local kind_icons = {
+				Class = "󰠱",
+				Color = "󰏘",
+				Constant = "󰏿",
+				Constructor = "",
+				Enum = "",
+				EnumMember = "",
+				Event = "",
+				Field = "󰜢",
+				File = "󰈙",
+				Folder = "󰉋",
+				Function = "󰊕",
+				Interface = "",
+				Keyword = "󰌋",
+				Method = "󰆧",
+				Module = "",
+				Operator = "󰆕",
+				Property = "󰜢",
+				Reference = "󰈇",
+				Snippet = "",
+				Struct = "󰙅",
+				Text = "󰉿",
+				TypeParameter = "",
+				Unit = "󰑭",
+				Value = "󰎠",
+				Variable = "󰀫",
+			}
+
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -101,6 +135,7 @@ return {
 				},
 				formatting = {
 					format = function(entry, vim_item)
+						vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 						vim_item.menu = ""
 						return vim_item
 					end,

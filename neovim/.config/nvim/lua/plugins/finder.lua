@@ -1,6 +1,7 @@
 return {
 	{
 		"ibhagwan/fzf-lua",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
 			{ "<leader><space>", "<cmd>FzfLua files<cr>", desc = "Find files" },
 			{ "<M-b>", "<cmd>FzfLua buffers<cr>", desc = "Open buffers" },
@@ -27,6 +28,7 @@ return {
 			defaults = {
 				formatter = "path.filename_first",
 			},
+			file_icon_padding = " ",
 			files = {
 				fd_opts = "--color=never --type f --hidden --follow "
 					.. "--exclude .git/ --exclude node_modules/ --exclude vendor/",
@@ -45,15 +47,11 @@ return {
 					},
 				},
 			},
-			lsp = {
-				symbols = {
-					symbol_style = 3,
-				},
-			},
 		},
 	},
 	{
 		"folke/trouble.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		keys = {
 			{ "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Diagnostics (workspace)" },
@@ -76,20 +74,7 @@ return {
 			},
 		},
 		config = function()
-			require("trouble").setup({
-				icons = false,
-				include_declaration = {},
-				fold_open = "-",
-				fold_closed = "+",
-				indent_lines = false,
-				signs = {
-					error = "E",
-					warning = "W",
-					hint = "H",
-					information = "I",
-				},
-				use_diagnostic_signs = false,
-			})
+			require("trouble").setup({ include_declaration = {} })
 
 			vim.api.nvim_create_autocmd({ "FileType" }, {
 				pattern = { "Trouble" },
