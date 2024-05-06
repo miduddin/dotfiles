@@ -6,6 +6,11 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 	command = "wincmd =",
 })
 
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	pattern = { "json" },
+	command = "setlocal expandtab",
+})
+
 vim.api.nvim_create_user_command("Q", "q", {})
 vim.api.nvim_create_user_command("Qa", "qa", {})
 vim.api.nvim_create_user_command("W", "w", {})
