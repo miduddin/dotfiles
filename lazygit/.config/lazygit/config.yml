@@ -6,6 +6,7 @@ git:
     colorArg: always
     pager: delta --dark --paging=never --tabs=4
 gui:
+  nerdFontsVersion: '3'
   showBottomLine: false
   theme:
     selectedLineBgColor:
