@@ -35,11 +35,32 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		config = function()
+			local colors = require("config.colors")
+
+			local conds = {
+				hide_in_width = function()
+					return vim.fn.winwidth(0) > 80
+				end,
+				listed_buffer = function()
+					return vim.fn.buflisted(vim.fn.bufnr()) == 1
+				end,
+			}
+
 			require("lualine").setup({
 				options = {
 					globalstatus = true,
 					section_separators = "",
-					component_separators = "|",
+					component_separators = "",
+					theme = {
+						normal = {
+							a = { fg = colors.black, bg = colors.blue, gui = "bold" },
+							c = { fg = colors.fg, bg = colors.bg },
+						},
+						inactive = {
+							a = { fg = colors.black, bg = colors.blue, gui = "bold" },
+							c = { fg = colors.fg, bg = colors.bg },
+						},
+					},
 				},
 				extensions = {
 					"nvim-dap-ui",
@@ -48,56 +69,96 @@ return {
 					"trouble",
 				},
 				sections = {
-					lualine_a = { { "filename", path = 1, color = { gui = "bold" } } },
+					lualine_a = { { "filename", path = 1 } },
 					lualine_b = {},
-					lualine_c = { "diagnostics" },
-					lualine_x = {},
-					lualine_y = { { "branch", color = { gui = "bold" } } },
-					lualine_z = { { "location", color = { gui = "bold" } } },
+					lualine_c = { { "diagnostics" } },
+					lualine_x = {
+						{
+							"diff",
+							symbols = { added = " ", modified = " ", removed = " " },
+							cond = conds.hide_in_width,
+						},
+						{ "branch", color = { fg = colors.magenta, gui = "bold" } },
+						{
+							"filetype",
+							cond = conds.listed_buffer,
+						},
+						{ "progress" },
+						{ "location" },
+						{
+							function()
+								return "▊"
+							end,
+							color = { fg = colors.blue },
+							padding = { left = 1 },
+						},
+					},
+					lualine_y = {},
+					lualine_z = {},
 				},
 			})
 		end,
 	},
 	{
 		"b0o/incline.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
-		opts = {
-			render = function(props)
-				local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-				local modified = vim.bo[props.buf].modified
-				return {
-					" ",
-					filename,
-					modified and { " *", guifg = "#888888", gui = "bold" } or "",
-					" ",
-				}
-			end,
-			window = {
-				margin = { horizontal = 0, vertical = 0 },
-				padding = 0,
-			},
-			highlight = {
-				groups = {
-					InclineNormal = {
-						default = true,
-						group = "lualine_a_filename_normal",
-					},
-					InclineNormalNC = {
-						default = true,
-						group = "lualine_a_filename_normal",
+		config = function()
+			local colors = require("config.colors")
+			local icons = require("nvim-web-devicons")
+			local helpers = require("incline.helpers")
+			local ignore_types = {
+				"DiffviewFiles",
+				"Trouble",
+			}
+			local type_name = {
+				oil = "File Explorer",
+			}
+
+			require("incline").setup({
+				render = function(props)
+					local filetype = vim.bo[props.buf].filetype
+					local filename = type_name[filetype]
+						or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+
+					if vim.list_contains(ignore_types, filetype) or filename == "" then
+						return {}
+					end
+
+					local ft_icon, ft_color = icons.get_icon_color(filename)
+
+					local modified = vim.bo[props.buf].modified
+					return {
+						ft_icon and {
+							" ",
+							ft_icon,
+							" ",
+							guibg = ft_color,
+							guifg = helpers.contrast_color(ft_color),
+						} or "",
+						" ",
+						filename,
+						modified and " [+]" or "",
+						" ",
+					}
+				end,
+				window = {
+					margin = { horizontal = 0, vertical = 0 },
+					padding = 0,
+				},
+				highlight = {
+					groups = {
+						InclineNormal = { guibg = colors.blue, guifg = colors.black, gui = "bold" },
+						InclineNormalNC = { guibg = colors.blue, guifg = colors.black, gui = "bold" },
 					},
 				},
-			},
-			ignore = {
-				unlisted_buffers = false,
-				buftypes = {},
-				wintypes = {},
-				filetypes = {
-					"oil",
-					"DiffviewFiles",
+				ignore = {
+					unlisted_buffers = false,
+					buftypes = { "help", "quickfix" },
+					wintypes = {},
 				},
-			},
-		},
+			})
+		end,
 	},
 	{
 		"stevearc/oil.nvim",
