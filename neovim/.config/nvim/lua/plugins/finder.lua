@@ -34,7 +34,7 @@ return {
 					.. "--exclude .git/ --exclude node_modules/ --exclude vendor/",
 			},
 			grep = {
-				rg_opts = "--column --line-number --no-heading --hidden "
+				rg_opts = "--column --line-number --no-heading --hidden --multiline "
 					.. "--color=always --smart-case --max-columns=4096 "
 					.. "-g '!.git/' -g '!node_modules/' -g '!vendor/' -e",
 			},
