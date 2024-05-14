@@ -51,35 +51,21 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
+		branch = "dev",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		keys = {
-			{ "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", desc = "Diagnostics (workspace)" },
-			{ "<leader>xx", "<cmd>Trouble document_diagnostics<cr>", desc = "Diagnostics (document)" },
-			{ "<leader>xq", "<cmd>cclose|Trouble quickfix<cr>", desc = "Quickfix" },
-			{ "<leader>xl", "<cmd>Trouble loclist<cr>", desc = "Loclist" },
-			{ "gr", "<cmd>Trouble lsp_references<cr>", desc = "LSP references" },
-			{ "gd", "<cmd>Trouble lsp_definitions<cr>", desc = "LSP definitions" },
-			{ "gD", "<cmd>Trouble lsp_type_definitions<cr>", desc = "LSP type definitions" },
-			{ "gi", "<cmd>Trouble lsp_implementations<cr>", desc = "LSP implementations" },
-			{
-				"]t",
-				[[<cmd>lua require("trouble").next({skip_groups = true, jump = true})<cr>]],
-				desc = "Next trouble item",
-			},
-			{
-				"[t",
-				[[<cmd>lua require("trouble").previous({skip_groups = true, jump = true})<cr>]],
-				desc = "Previous trouble item",
-			},
+			{ "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (project)" },
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagnostics (buffer)" },
+			{ "<leader>xq", "<cmd>cclose|Trouble qflist toggle<cr>", desc = "Quickfix" },
+			{ "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Loclist" },
+			{ "gr", "<cmd>Trouble lsp_references toggle<cr>", desc = "LSP references" },
+			{ "gd", "<cmd>Trouble lsp_definitions toggle<cr>", desc = "LSP definitions" },
+			{ "gD", "<cmd>Trouble lsp_type_definitions toggle<cr>", desc = "LSP type definitions" },
+			{ "gi", "<cmd>Trouble lsp_implementations toggle<cr>", desc = "LSP implementations" },
+			{ "]t", [[<cmd>lua require("trouble").next()<cr>]], desc = "Next trouble item" },
+			{ "[t", [[<cmd>lua require("trouble").prev()<cr>]], desc = "Previous trouble item" },
 		},
-		config = function()
-			require("trouble").setup({ include_declaration = {} })
-
-			vim.api.nvim_create_autocmd({ "FileType" }, {
-				pattern = { "Trouble" },
-				command = [[setlocal cursorlineopt=line]],
-			})
-		end,
+		opts = { focus = true },
 	},
 }
