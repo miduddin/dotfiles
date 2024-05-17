@@ -185,7 +185,7 @@ return {
 				go = { "goimports", "gofumpt" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
-				sql = { "sqlfmt" },
+				sql = { "sqlfmt", "sqlfluff" },
 				terraform = { "terraform_fmt" },
 				yaml = { "yamlfmt" },
 				["*"] = { "trim_whitespace", "trim_newlines" },
@@ -194,9 +194,8 @@ return {
 				lsp_fallback = true,
 			},
 			formatters = {
-				yamlfmt = {
-					args = { "-formatter", "line_ending=lf,scan_folded_as_literal=true", "-" },
-				},
+				yamlfmt = { args = { "-formatter", "line_ending=lf,scan_folded_as_literal=true", "-" } },
+				sqlfluff = { args = { "fix", "-" } },
 			},
 		},
 	},
