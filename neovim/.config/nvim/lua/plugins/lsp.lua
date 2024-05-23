@@ -96,12 +96,10 @@ return {
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter" },
 		dependencies = {
-			"L3MON4D3/LuaSnip",
 			"hrsh7th/cmp-buffer",
 		},
 		config = function()
 			local cmp = require("cmp")
-			local luasnip = require("luasnip")
 
 			local kind_icons = {
 				Class = "󰠱",
@@ -131,10 +129,56 @@ return {
 				Variable = "󰀫",
 			}
 
+			local global_snippets = {
+				-- { trigger = "lorem", body = '"lorem ipsum dolor sit amet"' },
+			}
+
+			local ft_snippets = {
+				go = {
+					{ trigger = "func", body = "func ${1:name}(${2:args}) {\n\t$0\n}" },
+					{ trigger = "meth", body = "func (${1:recv}) ${2:name}(${3:args}) {\n\t$0\n}" },
+				},
+			}
+
+			local function get_buf_snips()
+				local ft = vim.bo.filetype
+				local snips = vim.list_slice(global_snippets)
+
+				if ft and ft_snippets[ft] then
+					vim.list_extend(snips, ft_snippets[ft])
+				end
+
+				return snips
+			end
+
+			local cmp_source = {}
+			local cache = {}
+			function cmp_source.complete(_, _, callback)
+				local bufnr = vim.api.nvim_get_current_buf()
+				if not cache[bufnr] then
+					local completion_items = vim.tbl_map(function(s)
+						local item = {
+							word = s.trigger,
+							label = s.trigger,
+							kind = vim.lsp.protocol.CompletionItemKind.Snippet,
+							insertText = s.body,
+							insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet,
+						}
+						return item
+					end, get_buf_snips())
+
+					cache[bufnr] = completion_items
+				end
+
+				callback(cache[bufnr])
+			end
+
+			cmp.register_source("custom_snippets", cmp_source)
+
 			cmp.setup({
 				snippet = {
 					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
+						vim.snippet.expand(args.body)
 					end,
 				},
 				formatting = {
@@ -155,16 +199,16 @@ return {
 					["<C-e>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.locally_jumpable(1) then
-							luasnip.jump(1)
+						if vim.snippet.active({ direction = 1 }) then
+							vim.snippet.jump(1)
 						else
 							fallback()
 						end
 					end, { "i", "s" }),
 
 					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
+						if vim.snippet.active({ direction = -1 }) then
+							vim.snippet.jump(-1)
 						else
 							fallback()
 						end
@@ -172,6 +216,7 @@ return {
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "custom_snippets" },
 				}, {
 					{ name = "buffer" },
 				}),
