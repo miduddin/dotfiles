@@ -5,7 +5,7 @@ SETUVAR --export CARGO_HOME:/home/miduddin/\x2elocal/share/cargo
 SETUVAR --export CARGO_NET_GIT_FETCH_WITH_CLI:true
 SETUVAR --export DOCKER_CONFIG:/home/miduddin/\x2econfig/docker
 SETUVAR --export EDITOR:nvim
-SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dreverse
+SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dreverse\x20\x2d\x2dheight\x3d10\x20\x2d\x2dno\x2dseparator
 SETUVAR --export GOPATH:/home/miduddin/\x2elocal/share/go
 SETUVAR --export HISTFILE:/home/miduddin/\x2elocal/state/bash/history
 SETUVAR --export PGPASSFILE:/home/miduddin/\x2econfig/pg/pgpass

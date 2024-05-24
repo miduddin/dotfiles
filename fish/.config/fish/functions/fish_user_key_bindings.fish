@@ -12,7 +12,7 @@ end
 
 function __fzf_history -d "Show command history"
 	history -z |
-		fzf --height 10 --scheme=history --header "Command history:" --read0 --print0 |
+		fzf --scheme=history --header "Command history:" --read0 --print0 |
 		read -lz result
 	and commandline -- $result
 	commandline -f repaint
@@ -21,7 +21,7 @@ end
 function __fzf_fd_nvim -d "Change directory and open neovim"
 	fd -d 4 -t d -I --prune --hidden '\.git$' "$HOME" -x echo {//} |
 		sort |
-		fzf --height 10 --scheme=path --header 'Git projects:' |
+		fzf --scheme=path --header 'Git projects:' |
 		read -l result
 	and cd $result
 	and commandline -- nvim
