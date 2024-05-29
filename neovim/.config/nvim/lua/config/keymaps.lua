@@ -29,10 +29,6 @@ map("n", "<S-l>", "<Cmd>bn<CR>", { desc = "Next buffer" })
 map("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Lazy" })
 
 map("n", "<leader>ce", vim.diagnostic.open_float, { desc = "Diagnostics (floating)" })
-map("n", "[d", vim.diagnostic.goto_prev, { desc = "Prev diagnostics item" })
-map("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostics item" })
-map("n", "[q", "<Cmd>cp<CR>", { desc = "Prev diagnostics item" })
-map("n", "]q", "<Cmd>cn<CR>", { desc = "Next diagnostics item" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
