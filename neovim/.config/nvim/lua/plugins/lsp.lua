@@ -1,14 +1,6 @@
 vim.diagnostic.config({
 	float = { border = "rounded" },
 	jump = { float = true },
-	signs = {
-		text = {
-			[vim.diagnostic.severity.HINT] = "",
-			[vim.diagnostic.severity.INFO] = "",
-			[vim.diagnostic.severity.WARN] = "",
-			[vim.diagnostic.severity.ERROR] = "",
-		},
-	},
 })
 
 return {
@@ -27,39 +19,17 @@ return {
 			"hrsh7th/cmp-nvim-lsp",
 			"williamboman/mason.nvim",
 		},
-		config = function()
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local handlers = {
-				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-			}
-			local default_setup = {
-				capabilities = capabilities,
-				handlers = handlers,
-			}
-
-			local default_with = function(extra)
-				return vim.tbl_deep_extend("force", default_setup, extra)
-			end
-
-			local lspconfig = require("lspconfig")
-
-			lspconfig.jsonls.setup(default_setup)
-			lspconfig.html.setup(default_setup)
-			lspconfig.lua_ls.setup(default_setup)
-			lspconfig.intelephense.setup(default_setup)
-			lspconfig.rust_analyzer.setup(default_setup)
-			lspconfig.spectral.setup(default_with({
-				settings = {
-					rulesetFile = ".spectral.yaml",
-				},
-			}))
-			lspconfig.tailwindcss.setup(default_with({
-				filetypes = { "html" },
-			}))
-			lspconfig.taplo.setup(default_setup)
-			lspconfig.golangci_lint_ls.setup(default_setup)
-			lspconfig.gopls.setup(default_with({
+		opts = {
+			jsonls = {},
+			html = {},
+			lua_ls = {},
+			intelephense = {},
+			rust_analyzer = {},
+			spectral = { settings = { rulesetFile = ".spectral.yaml" } },
+			tailwindcss = { filetypes = { "html" } },
+			taplo = {},
+			golangci_lint_ls = {},
+			gopls = {
 				settings = {
 					gopls = {
 						hints = {
@@ -91,7 +61,22 @@ return {
 						},
 					},
 				},
-			}))
+			},
+		},
+		config = function(_, opts)
+			local lspconfig = require("lspconfig")
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local handlers = {
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+			}
+
+			for k, v in pairs(opts) do
+				lspconfig[k].setup(vim.tbl_deep_extend("force", {
+					capabilities = capabilities,
+					handlers = handlers,
+				}, v))
+			end
 		end,
 	},
 	{
@@ -199,7 +184,7 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm(),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
