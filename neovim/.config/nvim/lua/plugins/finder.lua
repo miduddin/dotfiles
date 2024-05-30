@@ -51,7 +51,6 @@ return {
 	},
 	{
 		"folke/trouble.nvim",
-		branch = "dev",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		event = "VeryLazy",
 		keys = {
@@ -66,6 +65,9 @@ return {
 			{ "]t", [[<cmd>lua require("trouble").next()<cr>]], desc = "Next trouble item" },
 			{ "[t", [[<cmd>lua require("trouble").prev()<cr>]], desc = "Previous trouble item" },
 		},
-		opts = { focus = true },
+		opts = {
+			focus = true,
+			throttle = { preview = { ms = 0 } },
+		},
 	},
 }

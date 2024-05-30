@@ -71,7 +71,7 @@ return {
 				sections = {
 					lualine_a = { { "filename", path = 1 } },
 					lualine_b = {},
-					lualine_c = { { "diagnostics" } },
+					lualine_c = { { "diagnostics", symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" } } },
 					lualine_x = {
 						{
 							"diff",
