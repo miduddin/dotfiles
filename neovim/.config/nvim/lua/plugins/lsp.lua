@@ -21,6 +21,17 @@ return {
 		},
 		opts = {
 			jsonls = {},
+			yamlls = {
+				settings = {
+					yaml = {
+						validate = true,
+						schemaStore = {
+							enable = false,
+							url = "",
+						},
+					},
+				},
+			},
 			html = {},
 			lua_ls = {},
 			intelephense = {},
