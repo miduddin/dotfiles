@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+
 git:
   autoFetch: false
   autoRefresh: false
@@ -11,11 +13,8 @@ gui:
   theme:
     selectedLineBgColor:
       - '#393836'
-    selectedRangeBgColor:
-      - '#393836'
 os:
   editPreset: nvim
-
 customCommands:
   - key: X
     context: global
@@ -23,5 +22,4 @@ customCommands:
     description: Cleanup local git files.
     loadingText: Cleaning up
     stream: true
-
 promptToReturnFromSubprocess: false
