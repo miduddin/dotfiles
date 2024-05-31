@@ -1,0 +1,11 @@
+import = ["/home/miduddin/.config/alacritty/themes/kanagawa-wave.toml"]
+
+[font]
+normal = { family = "JetBrainsMonoNL Nerd Font" }
+
+[shell]
+args = ["-i", "-l", "-c", "zellij a -c default"]
+program = "fish"
+
+[window]
+opacity = 0.94
