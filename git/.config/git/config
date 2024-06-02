@@ -3,6 +3,9 @@
 	name = Muhammad Imaduddin
 	signingkey = /home/miduddin/.ssh/id_ed25519.pub
 
+[credential]
+	helper = store
+
 [core]
 	pager = delta
 
