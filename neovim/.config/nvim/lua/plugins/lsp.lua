@@ -76,6 +76,8 @@ return {
 			},
 		},
 		config = function(_, opts)
+			require("lspconfig.ui.windows").default_options.border = "single"
+
 			local lspconfig = require("lspconfig")
 			for k, v in pairs(opts) do
 				lspconfig[k].setup(vim.tbl_deep_extend("force", {
