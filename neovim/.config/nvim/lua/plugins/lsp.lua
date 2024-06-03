@@ -40,6 +40,7 @@ return {
 			tailwindcss = { filetypes = { "html" } },
 			taplo = {},
 			golangci_lint_ls = {},
+			tsserver = {},
 			gopls = {
 				settings = {
 					gopls = {
