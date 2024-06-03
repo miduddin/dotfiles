@@ -7,17 +7,20 @@
             "keys": "f11"
         }
     ],
-    "alwaysShowTabs": false,
+    "alwaysShowTabs": true,
     "copyFormatting": "none",
     "copyOnSelect": false,
-    "defaultProfile": "{89912b0a-f6d1-5e6c-8845-09213757191e}",
-    "initialCols": 130,
-    "initialRows": 40,
+    "defaultProfile": "{ece9aa19-68f6-5c2f-8d4a-720d0fe69c4a}",
+    "newTabMenu": [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": {
         "defaults": {
             "colorScheme": "KanagawaWave",
             "font": {
-                "face": "JetBrains Mono, JetBrainsMono Nerd Font",
+                "face": "JetBrains Mono, Symbols Nerd Font",
                 "features": {
                     "calt": 0
                 },
@@ -37,10 +40,10 @@
                 "name": "Windows PowerShell"
             },
             {
-                "commandline": "C:\\Windows\\system32\\wsl.exe -d opensuse --cd ~ -- zellij a -c default",
-                "guid": "{89912b0a-f6d1-5e6c-8845-09213757191e}",
+                "commandline": "C:\\Windows\\system32\\wsl.exe -d arch --cd ~ -- zellij a -c default",
+                "guid": "{ece9aa19-68f6-5c2f-8d4a-720d0fe69c4a}",
                 "hidden": false,
-                "name": "opensuse",
+                "name": "arch",
                 "source": "Windows.Terminal.Wsl"
             }
         ]
@@ -70,5 +73,5 @@
             "yellow": "#C0A36E"
         }
     ],
-    "showTabsInTitlebar": false
+    "showTabsInTitlebar": true
 }
