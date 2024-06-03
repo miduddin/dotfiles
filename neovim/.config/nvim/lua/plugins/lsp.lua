@@ -76,6 +76,8 @@ return {
 			},
 		},
 		config = function(_, opts)
+			require("lspconfig.ui.windows").default_options.border = "single"
+
 			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local handlers = {
