@@ -68,6 +68,18 @@ return {
 		opts = {
 			focus = true,
 			throttle = { preview = { ms = 0 } },
+			modes = {
+				lsp_references = {
+					params = {
+						include_declaration = false,
+					},
+				},
+				lsp_base = {
+					params = {
+						include_current = true,
+					},
+				},
+			},
 		},
 	},
 }
