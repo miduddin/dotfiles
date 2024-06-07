@@ -30,6 +30,11 @@ map("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Lazy" })
 
 map("n", "<leader>ce", vim.diagnostic.open_float, { desc = "Diagnostics (floating)" })
 
+-- Disable default LSP keymaps:
+vim.cmd("unmap gra")
+vim.cmd("unmap grn")
+vim.cmd("unmap grr")
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
