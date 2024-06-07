@@ -23,7 +23,8 @@ return {
 			-- stylua: ignore end
 		},
 		config = function()
-			require("neotest").setup({
+			local neotest = require("neotest")
+			neotest.setup({
 				adapters = {
 					require("neotest-go")({
 						args = { "-count=1", "-race", "-timeout=10s" },
@@ -53,6 +54,13 @@ return {
 						output = "O",
 					},
 				},
+			})
+
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "neotest-summary" },
+				callback = function(ev)
+					vim.keymap.set("n", "q", neotest.summary.close, { buffer = ev.buf })
+				end,
 			})
 		end,
 	},
