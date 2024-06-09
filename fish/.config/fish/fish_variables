@@ -8,6 +8,7 @@ SETUVAR --export EDITOR:nvim
 SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dreverse\x20\x2d\x2dheight\x3d10\x20\x2d\x2dno\x2dseparator
 SETUVAR --export GOPATH:/home/miduddin/\x2elocal/share/go
 SETUVAR --export HISTFILE:/home/miduddin/\x2elocal/state/bash/history
+SETUVAR --export NVIM_LOG_FILE:/tmp/nvim\x2elog
 SETUVAR --export PGPASSFILE:/home/miduddin/\x2econfig/pg/pgpass
 SETUVAR --export PGSERVICEFILE:/home/miduddin/\x2econfig/pg/pg_service\x2econf
 SETUVAR --export PSQLRC:/home/miduddin/\x2econfig/psqlrc
