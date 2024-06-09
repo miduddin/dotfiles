@@ -2,6 +2,7 @@ vim.diagnostic.config({
 	float = { border = "rounded" },
 	jump = { float = true },
 })
+vim.lsp.set_log_level(vim.g.log_level)
 
 return {
 	{
@@ -10,7 +11,10 @@ return {
 		keys = {
 			{ "<leader>m", "<cmd>Mason<cr>", desc = "Mason" },
 		},
-		opts = { ui = { border = "rounded" } },
+		opts = {
+			log_level = vim.g.log_level,
+			ui = { border = "rounded" },
+		},
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -105,6 +109,7 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
+			luasnip.log.set_loglevel("error")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
 			local kind_icons = {
@@ -206,6 +211,7 @@ return {
 				yamlfmt = { args = { "-formatter", "line_ending=lf,scan_folded_as_literal=true", "-" } },
 				sqlfluff = { args = { "fix", "-" } },
 			},
+			log_level = vim.g.log_level,
 		},
 	},
 }
