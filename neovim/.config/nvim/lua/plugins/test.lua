@@ -48,6 +48,7 @@ return {
 					}),
 				},
 				icons = { unknown = "?" },
+				log_level = vim.g.log_level,
 				summary = {
 					mappings = {
 						jumpto = "o",
@@ -69,6 +70,8 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local dap = require("dap")
+			dap.set_log_level("ERROR")
+
 			dap.adapters.php = {
 				type = "executable",
 				command = "php-debug-adapter",
@@ -163,6 +166,7 @@ return {
 		config = function(_, opts)
 			local dap, dapui = require("dap"), require("dapui")
 			dapui.setup(opts)
+			require("dapui.logging")._level = vim.g.log_level
 
 			dap.listeners.before.attach.dapui_config = function()
 				dapui.open()
