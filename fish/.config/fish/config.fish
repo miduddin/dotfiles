@@ -3,5 +3,6 @@ if status is-interactive
 end
 
 source ~/.phpbrew/phpbrew.fish
+direnv hook fish | source
 
 starship init fish | source
