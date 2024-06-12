@@ -68,6 +68,32 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		event = "VeryLazy",
+		keys = {
+			-- stylua: ignore start
+			{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
+			{ "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+			{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+			{ "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
+			{ "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+			{ "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+			{ "<leader>dj", function() require("dap").down() end, desc = "Down" },
+			{ "<leader>dk", function() require("dap").up() end, desc = "Up" },
+			{ "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+			{ "<leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
+			{ "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
+			{ "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
+			{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+			{ "<leader>ds", function() require("dap").session() end, desc = "Session" },
+			{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Inspect Value", mode = {"n", "v"} },
+
+			-- Alternative keymaps:
+			{ "<F5>", function() require("dap").continue() end, desc = "Continue" },
+			{ "<F10>", function() require("dap").step_over() end, desc = "Step Over" },
+			{ "<F11>", function() require("dap").step_into() end, desc = "Step Into" },
+			{ "<F12>", function() require("dap").step_out() end, desc = "Step Out" },
+			-- stylua: ignore end
+		},
 		config = function()
 			local dap = require("dap")
 			dap.set_log_level("ERROR")
@@ -116,30 +142,8 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
-			{ "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-			{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-			{ "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
 			{ "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
-			{ "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
-			{ "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-			{ "<leader>dj", function() require("dap").down() end, desc = "Down" },
-			{ "<leader>dk", function() require("dap").up() end, desc = "Up" },
-			{ "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-			{ "<leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
-			{ "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-			{ "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-			{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-			{ "<leader>ds", function() require("dap").session() end, desc = "Session" },
-			{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
 			{ "<leader>du", function() require("dapui").toggle({ reset = true }) end, desc = "Dap UI" },
-			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Inspect Value", mode = {"n", "v"} },
-
-			-- Alternative keymaps:
-			{ "<F5>", function() require("dap").continue() end, desc = "Continue" },
-			{ "<F10>", function() require("dap").step_over() end, desc = "Step Over" },
-			{ "<F11>", function() require("dap").step_into() end, desc = "Step Into" },
-			{ "<F12>", function() require("dap").step_out() end, desc = "Step Out" },
 			-- stylua: ignore end
 		},
 		opts = {
