@@ -73,6 +73,8 @@ return {
 					"c",
 					"dockerfile",
 					"go",
+					"gomod",
+					"gosum",
 					"html",
 					"http",
 					"javascript",
