@@ -30,6 +30,9 @@ map("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Lazy" })
 
 map("n", "<leader>ce", vim.diagnostic.open_float, { desc = "Diagnostics (floating)" })
 
+map("n", "<C-_>", "gcc", { desc = "Toggle comment", remap = true })
+map("v", "<C-_>", "gc", { desc = "Toggle comment", remap = true })
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
