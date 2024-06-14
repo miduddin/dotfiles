@@ -15,3 +15,8 @@
 .tab-icon-image {
 	opacity: 1 !important;
 }
+
+/* Remove shield icon on address bar */
+#tracking-protection-icon-container {
+	display:none !important;
+}
