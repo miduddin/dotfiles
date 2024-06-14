@@ -1,73 +1,58 @@
-local map = vim.keymap.set
+-- reorder arguments just so it looks better when sorted.
+local map = function(rhs, lhs, mode, opts)
+	vim.keymap.set(mode, lhs, rhs, opts)
+end
 
-map({ "n", "t" }, "<esc>", "<Cmd>noh<CR><esc>")
-
-map("n", "<C-a>", "ggVG", { desc = "Select all" })
-map("n", "<C-s>", "<Cmd>w<CR>", { desc = "Save file" })
-
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to below window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to above window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
-
-map("n", "*", "*``")
-map("n", "<leader><tab>d", "<Cmd>tabclose<CR>", { desc = "Close tab" })
-map("n", "<leader><tab>n", "<Cmd>tabn<CR>", { desc = "Next tab" })
-map("n", "<leader><tab>p", "<Cmd>tabp<CR>", { desc = "Previous tab" })
-map("n", "<leader>w", "<Cmd>set wrap!<CR>", { desc = "Toggle word wrap" })
-
-map({ "n", "v" }, "<leader>y", '"+y', { desc = "Yank to clipboard" })
-map({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
-map({ "n", "v" }, "<leader>P", '"+P', { desc = "Paste from clipboard" })
-
-map("n", "<S-h>", "<Cmd>bp<CR>", { desc = "Prev buffer" })
-map("n", "<S-l>", "<Cmd>bn<CR>", { desc = "Next buffer" })
--- Handle with nvim-bufdel:
--- map("n", "<leader>bd", "<Cmd>bd<CR>", { desc = "Close current buffer" })
--- map("n", "<leader>bD", "<Cmd>kT|%bd|e#|bd#|'T<CR>", { desc = "Close all other buffers" })
-
-map("n", "<leader>l", "<Cmd>Lazy<CR>", { desc = "Lazy" })
-
-map("n", "<leader>ce", vim.diagnostic.open_float, { desc = "Diagnostics (floating)" })
-
-map("n", "<C-_>", "gcc", { desc = "Toggle comment", remap = true })
-map("v", "<C-_>", "gc", { desc = "Toggle comment", remap = true })
+map("*``", "*", "n", { desc = "Search current word without going next" })
+map("<C-w>h", "<C-h>", "n", { desc = "Go to left window" })
+map("<C-w>j", "<C-j>", "n", { desc = "Go to below window" })
+map("<C-w>k", "<C-k>", "n", { desc = "Go to above window" })
+map("<C-w>l", "<C-l>", "n", { desc = "Go to right window" })
+map("<Cmd>Lazy<CR>", "<leader>l", "n", { desc = "Lazy" })
+map("<Cmd>bn<CR>", "<S-l>", "n", { desc = "Next buffer" })
+map("<Cmd>bp<CR>", "<S-h>", "n", { desc = "Prev buffer" })
+map("<Cmd>noh<CR><esc>", "<esc>", { "n", "t" }, { desc = "Esc + clear search highlight" })
+map("<Cmd>set wrap!<CR>", "<leader>w", "n", { desc = "Toggle word wrap" })
+map("<Cmd>tabclose<CR>", "<leader><tab>d", "n", { desc = "Close tab" })
+map("<Cmd>tabn<CR>", "<leader><tab>n", "n", { desc = "Next tab" })
+map("<Cmd>tabp<CR>", "<leader><tab>p", "n", { desc = "Previous tab" })
+map("<Cmd>w<CR>", "<C-s>", "n", { desc = "Save file" })
+map("gc", "<C-_>", "v", { desc = "Toggle comment", remap = true })
+map("gcc", "<C-_>", "n", { desc = "Toggle comment", remap = true })
+map("ggVG", "<C-a>", "n", { desc = "Select all" })
+map('"+P', "<leader>P", { "n", "v" }, { desc = "Paste from clipboard" })
+map('"+p', "<leader>p", { "n", "v" }, { desc = "Paste from clipboard" })
+map('"+y', "<leader>y", { "n", "v" }, { desc = "Yank to clipboard" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
-		-- Handle these with trouble.nvim
-		-- map("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", buffer = ev.buf })
-		-- map("n", "gd", vim.lsp.buf.definition, { desc = "Definition", buffer = ev.buf })
-		-- map("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation", buffer = ev.buf })
-		-- map("n", "gr", vim.lsp.buf.references, { desc = "References", buffer = ev.buf })
-		-- map("n", "<leader>D", vim.lsp.buf.type_definition, { desc = "Type definition", buffer = ev.buf })
-		map("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = ev.buf })
-		map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = ev.buf })
-		map("n", "<F2>", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
-		map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename", buffer = ev.buf })
-		map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code action", buffer = ev.buf })
-		map("n", "<leader>ci", function()
+		map(vim.diagnostic.open_float, "<leader>ce", "n", { desc = "Diagnostics (floating)", buffer = ev.buf })
+		map(vim.lsp.buf.code_action, "<leader>ca", { "n", "v" }, { desc = "Code action", buffer = ev.buf })
+		map(vim.lsp.buf.hover, "K", "n", { desc = "Hover", buffer = ev.buf })
+		map(vim.lsp.buf.rename, "<F2>", "n", { desc = "Rename", buffer = ev.buf })
+		map(vim.lsp.buf.rename, "<leader>cr", "n", { desc = "Rename", buffer = ev.buf })
+		map(function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-		end, { desc = "Toggle inlay hint", buffer = ev.buf })
+		end, "<leader>ci", "n", { desc = "Toggle inlay hint", buffer = ev.buf })
 	end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "help" },
 	callback = function(ev)
-		map("n", "q", "<Cmd>helpc<CR>", { buffer = ev.buf })
+		map("<Cmd>helpc<CR>", "q", "n", { buffer = ev.buf })
 	end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "qf" },
 	callback = function(ev)
-		map("n", "q", "<Cmd>cclose<CR>", { buffer = ev.buf })
+		map("<Cmd>cclose<CR>", "q", "n", { buffer = ev.buf })
 	end,
 })
 
 -- stylua: ignore start
-map("n", "<leader>/g", function() os.execute("zellij run -c -i -- lazygit") end)
-map("n", "<leader>/d", function() os.execute("zellij run -c -i -- lazydocker") end)
+map(function() os.execute("zellij run -c -i -- lazydocker") end, "<leader>/d", "n")
+map(function() os.execute("zellij run -c -i -- lazygit") end, "<leader>/g", "n")
 -- stylua: ignore end
