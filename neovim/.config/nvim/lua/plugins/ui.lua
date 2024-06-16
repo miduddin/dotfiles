@@ -69,7 +69,7 @@ return {
 					"trouble",
 				},
 				sections = {
-					lualine_a = { { "filename", path = 1 } },
+					lualine_a = { { "filename", path = 1, shorting_target = 80 } },
 					lualine_b = {},
 					lualine_c = { { "diagnostics", symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" } } },
 					lualine_x = {
