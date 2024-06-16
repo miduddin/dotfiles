@@ -20,7 +20,7 @@ return {
 		opts = {
 			winopts = {
 				preview = {
-					delay = 50,
+					delay = 0,
 					layout = "vertical",
 					vertical = "down:75%",
 				},
