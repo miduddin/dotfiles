@@ -19,7 +19,7 @@ function __fzf_history -d "Show command history"
 end
 
 function __fzf_fd_nvim -d "Change directory and open neovim"
-	fd -d 4 -E '/\.cache/' -t d -I --prune --hidden '\.git$' "$HOME" -x echo {//} |
+	fd -d 4 -t d -I --prune --hidden '\.git$' "$HOME/.local" "$HOME/code" "$HOME/dotfiles" -x echo {//} |
 		sort |
 		fzf --scheme=path --header 'Git projects:' |
 		read -l result
