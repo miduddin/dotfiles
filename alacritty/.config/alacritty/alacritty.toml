@@ -1,11 +1,12 @@
-import = ["/home/miduddin/.config/alacritty/themes/kanagawa-wave.toml"]
+import = ["/Users/miduddin/.config/alacritty/themes/kanagawa-wave.toml"]
 
 [font]
 normal = { family = "JetBrainsMonoNL Nerd Font" }
 
 [shell]
 args = ["-i", "-l", "-c", "zellij a -c default"]
-program = "fish"
+program = "/opt/homebrew/bin/fish"
 
 [window]
 opacity = 0.94
+option_as_alt = "Both"
