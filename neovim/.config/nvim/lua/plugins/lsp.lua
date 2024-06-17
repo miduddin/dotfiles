@@ -208,7 +208,7 @@ return {
 				["*"] = { "trim_whitespace", "trim_newlines" },
 			},
 			format_after_save = {
-				lsp_fallback = true,
+				lsp_format = "fallback",
 			},
 			formatters = {
 				yamlfmt = { args = { "-formatter", "line_ending=lf,scan_folded_as_literal=true", "-" } },
