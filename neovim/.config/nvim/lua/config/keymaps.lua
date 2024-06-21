@@ -38,20 +38,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "help" },
-	callback = function(ev)
-		map("<Cmd>helpc<CR>", "q", "n", { buffer = ev.buf })
-	end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "qf" },
-	callback = function(ev)
-		map("<Cmd>cclose<CR>", "q", "n", { buffer = ev.buf })
-	end,
-})
-
 -- stylua: ignore start
 map(function() os.execute("zellij run -c -i -- lazydocker") end, "<leader>/d", "n")
 map(function() os.execute("zellij run -c -i -- lazygit") end, "<leader>/g", "n")
