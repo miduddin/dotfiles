@@ -24,6 +24,14 @@ map('"+P', "<leader>P", { "n", "v" }, { desc = "Paste from clipboard" })
 map('"+p', "<leader>p", { "n", "v" }, { desc = "Paste from clipboard" })
 map('"+y', "<leader>y", { "n", "v" }, { desc = "Yank to clipboard" })
 
+map(function()
+	if vim.o.diffopt:find("iwhiteall") then
+		vim.opt.diffopt:remove("iwhiteall")
+	else
+		vim.opt.diffopt:append("iwhiteall")
+	end
+end, "<leader>W", "n", { desc = "Toggle whitespace diff" })
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
