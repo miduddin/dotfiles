@@ -26,6 +26,11 @@ return {
 				file_panel = { { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } } },
 				view = { { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close Diffview" } } },
 			},
+			hooks = {
+				diff_buf_read = function(bufnr)
+					vim.opt_local.foldtext = "foldtext()"
+				end,
+			},
 		},
 	},
 	{
