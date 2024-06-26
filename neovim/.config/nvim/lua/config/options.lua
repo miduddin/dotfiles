@@ -23,10 +23,8 @@ vim.opt.diffopt:append({ "algorithm:patience", "linematch:70" })
 vim.opt.expandtab = false
 vim.opt.fillchars = { eob = " ", diff = " " }
 vim.opt.foldenable = false
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
-vim.opt.foldmethod = "expr"
-vim.opt.foldtext = ""
+vim.opt.foldmethod = "indent"
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3
 vim.opt.list = true
