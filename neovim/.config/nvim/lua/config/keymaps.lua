@@ -45,8 +45,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end, "<leader>ci", "n", { desc = "Toggle inlay hint", buffer = ev.buf })
 	end,
 })
-
--- stylua: ignore start
-map(function() os.execute("zellij run -c -i -- lazydocker") end, "<leader>/d", "n")
-map(function() os.execute("zellij run -c -i -- lazygit") end, "<leader>/g", "n")
--- stylua: ignore end
