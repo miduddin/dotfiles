@@ -1,16 +1,65 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://raw.githubusercontent.com/microsoft/terminal/main/doc/cascadia/profiles.schema.json",
-    "actions": [
-        {
-            "command": "unbound",
-            "keys": "f11"
-        }
-    ],
-    "alwaysShowTabs": true,
+    "actions": [],
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{ece9aa19-68f6-5c2f-8d4a-720d0fe69c4a}",
+    "disableAnimations": true,
+    "keybindings": [
+        {
+            "id": null,
+            "keys": "f11"
+        },
+        {
+            "id": "Terminal.ClosePane",
+            "keys": "alt+q"
+        },
+        {
+            "id": "Terminal.MoveFocusRight",
+            "keys": "alt+l"
+        },
+        {
+            "id": "splitPane.right",
+            "keys": "alt+n"
+        },
+        {
+            "id": "Terminal.ResizePaneLeft",
+            "keys": "alt+shift+h"
+        },
+        {
+            "id": "Terminal.ResizePaneDown",
+            "keys": "alt+shift+j"
+        },
+        {
+            "id": "Terminal.ResizePaneUp",
+            "keys": "alt+shift+k"
+        },
+        {
+            "id": "Terminal.ResizePaneRight",
+            "keys": "alt+shift+l"
+        },
+        {
+            "id": "Terminal.MoveFocusLeft",
+            "keys": "alt+h"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "alt+j"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "alt+k"
+        },
+        {
+            "id": "Terminal.DuplicatePaneDown",
+            "keys": "alt+d"
+        },
+        {
+            "id": "Terminal.DuplicatePaneRight",
+            "keys": "alt+n"
+        }
+    ],
     "newTabMenu": [
         {
             "type": "remainingProfiles"
@@ -27,7 +76,7 @@
                 "size": 11
             },
             "intenseTextStyle": "bold",
-            "opacity": 93,
+            "opacity": 98,
             "padding": "1",
             "scrollbarState": "hidden",
             "suppressApplicationTitle": false
@@ -40,17 +89,17 @@
                 "name": "Windows PowerShell"
             },
             {
-                "commandline": "C:\\Windows\\system32\\wsl.exe -d arch --cd ~ -- zellij a -c default",
                 "guid": "{ece9aa19-68f6-5c2f-8d4a-720d0fe69c4a}",
                 "hidden": false,
                 "name": "arch",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Windows.Terminal.Wsl",
+                "tabColor": "#16161D"
             }
         ]
     },
     "schemes": [
         {
-            "background": "#101010",
+            "background": "#16161D",
             "black": "#090618",
             "blue": "#7E9CD8",
             "brightBlack": "#727169",
@@ -73,5 +122,5 @@
             "yellow": "#C0A36E"
         }
     ],
-    "showTabsInTitlebar": true
+    "themes": []
 }
