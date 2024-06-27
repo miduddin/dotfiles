@@ -154,7 +154,7 @@ return {
 				},
 				ignore = {
 					unlisted_buffers = false,
-					buftypes = { "help", "quickfix" },
+					buftypes = { "help", "quickfix", "terminal" },
 					wintypes = {},
 				},
 			})
