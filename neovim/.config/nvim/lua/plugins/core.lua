@@ -84,6 +84,7 @@ return {
 					"markdown_inline",
 					"php",
 					"printf",
+					"python",
 					"query",
 					"rust",
 					"sql",

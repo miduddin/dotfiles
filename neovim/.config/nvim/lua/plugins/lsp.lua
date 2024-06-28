@@ -24,6 +24,7 @@ return {
 			"williamboman/mason.nvim",
 		},
 		opts = {
+			basedpyright = {},
 			jsonls = {},
 			yamlls = {
 				settings = {
@@ -199,6 +200,7 @@ return {
 		},
 		opts = {
 			formatters_by_ft = {
+				python = { "black", "isort" },
 				go = { "goimports", "gofumpt" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
