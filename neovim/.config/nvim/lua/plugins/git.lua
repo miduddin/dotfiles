@@ -29,17 +29,10 @@ return {
 		},
 	},
 	{
-		"f-person/git-blame.nvim",
-		cmd = {
-			"GitBlameOpenCommitURL",
-			"GitBlameOpenFileURL",
-		},
+		"miduddin/openingh.nvim",
+		branch = "dev",
 		keys = {
-			{ "<leader>goc", "<cmd>GitBlameOpenCommitURL<cr>", desc = "Open commit in browser", mode = "n" },
-			{ "<leader>gof", "<cmd>GitBlameOpenFileURL<cr>", desc = "Open file in browser", mode = "n" },
-		},
-		opts = {
-			enabled = false,
+			{ "<leader>gof", "<cmd>OpenInGHFileLines<cr>", desc = "Open file in browser", mode = { "n", "v" } },
 		},
 	},
 	{
