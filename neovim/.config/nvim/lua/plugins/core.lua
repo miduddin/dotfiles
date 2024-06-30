@@ -190,6 +190,17 @@ return {
 		event = "VeryLazy",
 	},
 	{
+		"nvim-treesitter/nvim-treesitter-context",
+		event = "VeryLazy",
+		config = function()
+			require("treesitter-context").setup({
+				max_lines = 2,
+			})
+
+			vim.api.nvim_set_hl(0, "TreesitterContext", { bg = "#1F1F28" })
+		end,
+	},
+	{
 		"folke/persistence.nvim",
 		keys = {
 			{ "<leader>sl", [[<cmd>lua require("persistence").load()<cr>]], desc = "Load session" },
