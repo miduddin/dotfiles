@@ -28,6 +28,7 @@ return {
 				end,
 			})
 			vim.cmd([[colorscheme kanagawa]])
+			vim.api.nvim_set_hl(0, "@string.special.url", { undercurl = false, fg = "#7fb4ca" })
 		end,
 	},
 	{
