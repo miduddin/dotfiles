@@ -20,5 +20,6 @@ return {
 	orange = theme.term[17],
 	peach = theme.term[18],
 	bg = theme.ui.bg,
+	bg_p1 = theme.ui.bg_p1,
 	fg = theme.ui.fg,
 }
