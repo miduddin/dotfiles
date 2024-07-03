@@ -6,24 +6,18 @@ return {
 		config = function()
 			require("kanagawa").setup({
 				compile = true,
-				background = {
-					dark = "wave",
-				},
 				transparent = true,
 				colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
 				overrides = function(colors)
+					local theme = colors.theme
 					return {
-						DiagnosticFloatingOk = { bg = "none" },
-						DiagnosticFloatingHint = { bg = "none" },
-						DiagnosticFloatingInfo = { bg = "none" },
-						DiagnosticFloatingWarn = { bg = "none" },
-						DiagnosticFloatingError = { bg = "none" },
-						FloatBorder = { bg = "none" },
-						FloatTitle = { bg = "none" },
 						Folded = { bg = "none" },
-						NormalFloat = { bg = "none" },
-						Whitespace = { fg = "#40405a" },
-						WinSeparator = { fg = "#54546d" },
+						Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+						PmenuSbar = { bg = theme.ui.bg_m1 },
+						PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+						PmenuThumb = { bg = theme.ui.bg_p2 },
+						Whitespace = { fg = theme.ui.bg_p2 },
+						WinSeparator = { fg = theme.ui.float.fg_border },
 					}
 				end,
 			})
@@ -34,9 +28,17 @@ return {
 	{
 		"nvim-lualine/lualine.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "VeryLazy",
+		lazy = false,
 		config = function()
 			local colors = require("config.colors")
+
+			local theme = require("lualine.themes.auto")
+			theme.normal.a.gui = "bold"
+			theme.insert.a.gui = "bold"
+			theme.visual.a.gui = "bold"
+			theme.command.a.gui = "bold"
+			theme.replace.a.gui = "bold"
+			theme.normal.c.bg = "none"
 
 			local conds = {
 				hide_in_width = function()
@@ -45,23 +47,20 @@ return {
 				listed_buffer = function()
 					return vim.fn.buflisted(vim.fn.bufnr()) == 1
 				end,
+				recording = function()
+					return vim.fn.reg_recording() ~= ""
+				end,
+				searching = function()
+					return vim.api.nvim_get_vvar("hlsearch") == 1
+				end,
 			}
 
 			require("lualine").setup({
 				options = {
 					globalstatus = true,
-					section_separators = "",
+					section_separators = { left = "" },
 					component_separators = "",
-					theme = {
-						normal = {
-							a = { fg = colors.black, bg = colors.blue, gui = "bold" },
-							c = { fg = colors.fg, bg = colors.bg },
-						},
-						inactive = {
-							a = { fg = colors.black, bg = colors.blue, gui = "bold" },
-							c = { fg = colors.fg, bg = colors.bg },
-						},
-					},
+					theme = theme,
 				},
 				extensions = {
 					"nvim-dap-ui",
@@ -72,30 +71,42 @@ return {
 				sections = {
 					lualine_a = { { "filename", path = 1, shorting_target = 80 } },
 					lualine_b = {},
-					lualine_c = { { "diagnostics", symbols = { error = "E:", warn = "W:", info = "I:", hint = "H:" } } },
+					lualine_c = { "diagnostics" },
 					lualine_x = {
+						{
+							function()
+								return "recording @" .. vim.fn.reg_recording()
+							end,
+							cond = conds.recording,
+							color = { fg = colors.orange, gui = "bold" },
+						},
+						{
+							function()
+								local count = vim.fn.searchcount()
+								return string.format("[%d/%d]", count.current, count.total)
+							end,
+							cond = conds.searching,
+							color = { fg = colors.orange, gui = "bold" },
+						},
 						{
 							"diff",
 							symbols = { added = " ", modified = " ", removed = " " },
 							cond = conds.hide_in_width,
 						},
 						{ "branch", color = { fg = colors.magenta, gui = "bold" } },
-						{
-							"filetype",
-							cond = conds.listed_buffer,
-						},
+						{ "filetype", cond = conds.listed_buffer },
 						{ "progress" },
 						{ "location" },
-						{
-							function()
-								return "▊"
-							end,
-							color = { fg = colors.blue },
-							padding = { left = 1 },
-						},
 					},
 					lualine_y = {},
-					lualine_z = {},
+					lualine_z = {
+						{
+							function()
+								return " "
+							end,
+							padding = 0,
+						},
+					},
 				},
 			})
 		end,
@@ -106,14 +117,13 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local colors = require("config.colors")
-			local icons = require("nvim-web-devicons")
-			local helpers = require("incline.helpers")
 			local ignore_types = {
 				"DiffviewFiles",
 				"Trouble",
 			}
 			local type_name = {
 				oil = "File Explorer",
+				["neotest-summary"] = "Test Summary",
 			}
 
 			require("incline").setup({
@@ -126,21 +136,10 @@ return {
 						return {}
 					end
 
-					local ft_icon, ft_color = icons.get_icon_color(filename)
-
 					local modified = vim.bo[props.buf].modified
 					return {
-						ft_icon and {
-							" ",
-							ft_icon,
-							" ",
-							guibg = ft_color,
-							guifg = helpers.contrast_color(ft_color),
-						} or "",
-						" ",
-						filename,
-						modified and " [+]" or "",
-						" ",
+						{ "", guifg = colors.blue, guibg = "none" },
+						{ " ", filename, modified and " [+]" or "", " ", guibg = colors.blue },
 					}
 				end,
 				window = {
@@ -149,8 +148,8 @@ return {
 				},
 				highlight = {
 					groups = {
-						InclineNormal = { guibg = colors.blue, guifg = colors.black, gui = "bold" },
-						InclineNormalNC = { guibg = colors.blue, guifg = colors.black, gui = "bold" },
+						InclineNormal = { guifg = colors.black, gui = "bold" },
+						InclineNormalNC = { guifg = colors.black, gui = "bold" },
 					},
 				},
 				ignore = {
@@ -188,11 +187,7 @@ return {
 		event = "VeryLazy",
 		config = function()
 			local notify = require("mini.notify")
-
-			notify.setup({
-				window = { winblend = 0 },
-			})
-
+			notify.setup({ window = { winblend = 0 } })
 			vim.notify = notify.make_notify()
 		end,
 	},
