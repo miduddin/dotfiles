@@ -17,6 +17,7 @@ vim.g.clipboard = {
 vim.opt.breakindent = true
 vim.opt.conceallevel = 0
 vim.opt.confirm = true
+vim.opt.cmdheight = 0
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append({ "algorithm:patience", "linematch:70" })
@@ -28,7 +29,7 @@ vim.opt.foldmethod = "indent"
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3
 vim.opt.list = true
-vim.opt.listchars:append({ space = "·", tab = "→  " })
+vim.opt.listchars:append({ space = "·", tab = "  " })
 vim.opt.mousemodel = "extend"
 vim.opt.number = true
 vim.opt.scrolloff = 5
