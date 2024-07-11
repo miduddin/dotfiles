@@ -17,7 +17,6 @@ vim.g.clipboard = {
 vim.opt.breakindent = true
 vim.opt.conceallevel = 0
 vim.opt.confirm = true
-vim.opt.cmdheight = 0
 vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append({ "algorithm:patience", "linematch:70" })

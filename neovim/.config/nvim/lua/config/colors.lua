@@ -2,6 +2,7 @@ local theme = require("kanagawa.colors").setup().theme
 
 return {
 	black = theme.term[1],
+	grey = theme.syn.comment,
 	red = theme.term[2],
 	green = theme.term[3],
 	yellow = theme.term[4],
@@ -21,5 +22,6 @@ return {
 	peach = theme.term[18],
 	bg = theme.ui.bg,
 	bg_p1 = theme.ui.bg_p1,
+	bg_p2 = theme.ui.bg_p2,
 	fg = theme.ui.fg,
 }
