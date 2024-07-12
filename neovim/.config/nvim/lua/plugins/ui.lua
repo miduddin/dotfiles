@@ -26,55 +26,6 @@ return {
 		end,
 	},
 	{
-		"b0o/incline.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "VeryLazy",
-		config = function()
-			local colors = require("config.colors")
-			local ignore_types = {
-				"DiffviewFiles",
-				"Trouble",
-			}
-			local type_name = {
-				oil = "File Explorer",
-				["neotest-summary"] = "Test Summary",
-			}
-
-			require("incline").setup({
-				render = function(props)
-					local filetype = vim.bo[props.buf].filetype
-					local filename = type_name[filetype]
-						or vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
-
-					if vim.list_contains(ignore_types, filetype) or filename == "" then
-						return {}
-					end
-
-					local modified = vim.bo[props.buf].modified
-					return {
-						{ "", guifg = colors.blue, guibg = "none" },
-						{ " ", filename, modified and " [+]" or "", " ", guibg = colors.blue },
-					}
-				end,
-				window = {
-					margin = { horizontal = 0, vertical = 0 },
-					padding = 0,
-				},
-				highlight = {
-					groups = {
-						InclineNormal = { guifg = colors.black, gui = "bold" },
-						InclineNormalNC = { guifg = colors.black, gui = "bold" },
-					},
-				},
-				ignore = {
-					unlisted_buffers = false,
-					buftypes = { "help", "quickfix", "terminal" },
-					wintypes = {},
-				},
-			})
-		end,
-	},
-	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
