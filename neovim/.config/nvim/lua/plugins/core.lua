@@ -147,12 +147,4 @@ return {
 		event = "VeryLazy",
 		opts = { max_lines = 2 },
 	},
-	{
-		"folke/persistence.nvim",
-		keys = {
-			{ "<leader>sl", [[<cmd>lua require("persistence").load()<cr>]], desc = "Load session" },
-		},
-		event = "BufReadPre",
-		opts = {},
-	},
 }
