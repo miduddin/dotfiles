@@ -25,6 +25,14 @@ map('"+p', "<leader>p", { "n", "v" }, { desc = "Paste from clipboard" })
 map('"+y', "<leader>y", { "n", "v" }, { desc = "Yank to clipboard" })
 
 map(function()
+	local topline = vim.fn.winsaveview().topline
+	vim.cmd("norm zcV")
+	vim.cmd("foldc!")
+	vim.cmd("norm zvzc")
+	vim.fn.winrestview({ topline = topline })
+end, "zC", "n", { desc = "Fold all children" })
+
+map(function()
 	if vim.o.diffopt:find("iwhiteall") then
 		vim.opt.diffopt:remove("iwhiteall")
 	else
