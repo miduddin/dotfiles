@@ -49,7 +49,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map(vim.lsp.buf.rename, "<F2>", "n", { desc = "Rename", buffer = ev.buf })
 		map(vim.lsp.buf.rename, "<leader>cr", "n", { desc = "Rename", buffer = ev.buf })
 		map(function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
 		end, "<leader>ci", "n", { desc = "Toggle inlay hint", buffer = ev.buf })
+		map(function()
+			vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
+		end, "<leader>cd", "n", { desc = "Toggle diagnostics", buffer = ev.buf })
 	end,
 })
