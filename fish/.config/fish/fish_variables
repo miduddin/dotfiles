@@ -17,6 +17,9 @@ SETUVAR --export PSQL_HISTORY:/home/miduddin/\x2elocal/share/psql_history
 SETUVAR --export PYENV_ROOT:/home/miduddin/\x2elocal/share/pyenv
 SETUVAR --export REDISCLI_HISTFILE:/home/miduddin/\x2elocal/share/redis/rediscli_history
 SETUVAR --export RUSTUP_HOME:/home/miduddin/\x2elocal/share/rustup
+SETUVAR --export USQLPASS:/home/miduddin/\x2econfig/usql/pass
+SETUVAR --export USQLRC:/home/miduddin/\x2econfig/usql/rc
+SETUVAR --export USQL_HISTORY:/home/miduddin/\x2econfig/usql/history
 SETUVAR --export XDG_CACHE_HOME:/home/miduddin/\x2ecache
 SETUVAR --export XDG_CONFIG_HOME:/home/miduddin/\x2econfig
 SETUVAR --export XDG_DATA_HOME:/home/miduddin/\x2elocal/share
