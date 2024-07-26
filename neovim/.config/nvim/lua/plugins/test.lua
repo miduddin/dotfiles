@@ -69,8 +69,18 @@ return {
 		"mfussenegger/nvim-dap",
 		event = "VeryLazy",
 		keys = {
+			{
+				"<leader>dB",
+				function()
+					vim.ui.input({ prompt = "Breakpoint condition" }, function(input)
+						if input ~= nil then
+							require("dap").set_breakpoint(input)
+						end
+					end)
+				end,
+				desc = "Breakpoint Condition",
+			},
 			-- stylua: ignore start
-			{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
 			{ "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
 			{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
 			{ "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
