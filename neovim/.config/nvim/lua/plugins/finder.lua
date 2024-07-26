@@ -87,5 +87,10 @@ return {
 				},
 			},
 		},
+		config = function(_, opts)
+			require("trouble").setup(opts)
+			vim.api.nvim_set_hl(0, "TroubleNormal", { link = "Normal" })
+			vim.api.nvim_set_hl(0, "TroubleNormalNC", { link = "NormalNC" })
+		end,
 	},
 }
