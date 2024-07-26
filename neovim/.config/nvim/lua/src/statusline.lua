@@ -13,8 +13,7 @@ vim.api.nvim_set_hl(0, "StFilename", { bg = colors.blue, fg = colors.black, bold
 vim.api.nvim_set_hl(0, "StFilenameInv", { fg = colors.blue })
 vim.api.nvim_set_hl(0, "StNormal", { fg = colors.fg })
 vim.api.nvim_set_hl(0, "StBranch", { fg = colors.magenta, bold = true })
-vim.api.nvim_set_hl(0, "StFiletype", { bg = colors.bg_p1, fg = colors.fg })
-vim.api.nvim_set_hl(0, "StFiletypeInv", { fg = colors.bg_p1 })
+vim.api.nvim_set_hl(0, "StFiletype", { fg = colors.fg })
 vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
 
 local statusline = {
@@ -182,10 +181,7 @@ local function update_filetype()
 		end
 	end
 
-	filetype = f("", "StFiletypeInv")
-		.. f(" " .. icon .. " ", iconhl)
-		.. f(ext .. " ", "StFiletype")
-		.. f("", "StFiletypeInv")
+	filetype = f(icon .. " ", iconhl) .. f(ext, "StFiletype")
 
 	statusline[6] = filetype
 	update_statusline()

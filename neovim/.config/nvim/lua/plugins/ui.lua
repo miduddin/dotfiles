@@ -6,7 +6,6 @@ return {
 		config = function()
 			require("kanagawa").setup({
 				compile = true,
-				transparent = true,
 				colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
 				overrides = function(colors)
 					local theme = colors.theme
@@ -58,7 +57,6 @@ return {
 	},
 	{
 		"ojroques/nvim-bufdel",
-		event = "VeryLazy",
 		keys = {
 			{ "<leader>ba", "<cmd>BufDelAll<cr>", desc = "Close all buffers" },
 			{ "<leader>bd", "<cmd>BufDel<cr>", desc = "Close current buffer" },
