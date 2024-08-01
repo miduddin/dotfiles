@@ -18,4 +18,4 @@ local function load_session()
 	vim.cmd("so " .. session_file())
 end
 
-vim.keymap.set("n", "<leader>sl", load_session, { desc = "Load last session" })
+vim.keymap.set("n", "<Leader>sl", load_session, { desc = "Load last session" })
