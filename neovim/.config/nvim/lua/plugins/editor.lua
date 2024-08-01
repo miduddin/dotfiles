@@ -9,8 +9,8 @@ return {
 		event = { "BufReadPost", "BufNewFile" },
 		init = function()
 			vim.g.VM_maps = {
-				["Find Under"] = "<C-x>",
-				["Find Subword Under"] = "<C-x>",
+				["Find Under"] = "<C-X>",
+				["Find Subword Under"] = "<C-X>",
 			}
 		end,
 	},

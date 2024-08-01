@@ -7,7 +7,7 @@ function M.write_cmd_output_to_split(obj, bufname)
 	local win = vim.api.nvim_get_current_win()
 	local buf = vim.api.nvim_create_buf(false, true)
 	vim.api.nvim_win_set_buf(win, buf)
-	vim.keymap.set("n", "q", "<cmd>bd<cr>", { desc = "Close buffer", buffer = buf })
+	vim.keymap.set("n", "q", "<Cmd>bd<CR>", { desc = "Close buffer", buffer = buf })
 
 	vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "Running..." })
 	vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
