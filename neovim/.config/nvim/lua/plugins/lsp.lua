@@ -19,7 +19,7 @@ return {
 		"williamboman/mason.nvim",
 		cmd = { "Mason" },
 		keys = {
-			{ "<leader>m", "<cmd>Mason<cr>", desc = "Mason" },
+			{ "<Leader>m", "<Cmd>Mason<CR>", desc = "Mason" },
 		},
 		opts = {
 			log_level = vim.g.log_level,
@@ -168,10 +168,10 @@ return {
 					disallow_partial_fuzzy_matching = false,
 				},
 				mapping = cmp.mapping.preset.insert({
-					["<C-d>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
+					["<C-D>"] = cmp.mapping.scroll_docs(-4),
+					["<C-F>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-e>"] = cmp.mapping.abort(),
+					["<C-E>"] = cmp.mapping.abort(),
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						if luasnip.locally_jumpable(1) then
@@ -202,7 +202,7 @@ return {
 		"stevearc/conform.nvim",
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
-			{ "<leader>cf", [[<cmd>lua require("conform").format({timeout_ms = 5000})<cr>]], desc = "Format buffer" },
+			{ "<Leader>cf", [[<Cmd>lua require("conform").format({timeout_ms = 5000})<CR>]], desc = "Format buffer" },
 		},
 		opts = {
 			formatters_by_ft = {

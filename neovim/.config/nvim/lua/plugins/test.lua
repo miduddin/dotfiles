@@ -12,14 +12,14 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Debug Nearest" },
-			{ "<leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
-			{ "<leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files" },
-			{ "<leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest" },
-			{ "<leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
-			{ "<leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
-			{ "<leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
-			{ "<leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
+			{ "<Leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, desc = "Debug Nearest" },
+			{ "<Leader>tt", function() require("neotest").run.run(vim.fn.expand("%")) end, desc = "Run File" },
+			{ "<Leader>tT", function() require("neotest").run.run(vim.uv.cwd()) end, desc = "Run All Test Files" },
+			{ "<Leader>tr", function() require("neotest").run.run() end, desc = "Run Nearest" },
+			{ "<Leader>ts", function() require("neotest").summary.toggle() end, desc = "Toggle Summary" },
+			{ "<Leader>to", function() require("neotest").output.open({ enter = true, auto_close = true }) end, desc = "Show Output" },
+			{ "<Leader>tO", function() require("neotest").output_panel.toggle() end, desc = "Toggle Output Panel" },
+			{ "<Leader>tS", function() require("neotest").run.stop() end, desc = "Stop" },
 			-- stylua: ignore end
 		},
 		config = function()
@@ -70,7 +70,7 @@ return {
 		event = "VeryLazy",
 		keys = {
 			{
-				"<leader>dB",
+				"<Leader>dB",
 				function()
 					vim.ui.input({ prompt = "Breakpoint condition" }, function(input)
 						if input ~= nil then
@@ -81,21 +81,21 @@ return {
 				desc = "Breakpoint Condition",
 			},
 			-- stylua: ignore start
-			{ "<leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
-			{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-			{ "<leader>dc", function() require("dap").continue() end, desc = "Continue" },
-			{ "<leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
-			{ "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-			{ "<leader>dj", function() require("dap").down() end, desc = "Down" },
-			{ "<leader>dk", function() require("dap").up() end, desc = "Up" },
-			{ "<leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
-			{ "<leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
-			{ "<leader>do", function() require("dap").step_out() end, desc = "Step Out" },
-			{ "<leader>dp", function() require("dap").pause() end, desc = "Pause" },
-			{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-			{ "<leader>ds", function() require("dap").session() end, desc = "Session" },
-			{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-			{ "<leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Inspect Value", mode = {"n", "v"} },
+			{ "<Leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
+			{ "<Leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
+			{ "<Leader>dc", function() require("dap").continue() end, desc = "Continue" },
+			{ "<Leader>dg", function() require("dap").goto_() end, desc = "Go to line (no execute)" },
+			{ "<Leader>di", function() require("dap").step_into() end, desc = "Step Into" },
+			{ "<Leader>dj", function() require("dap").down() end, desc = "Down" },
+			{ "<Leader>dk", function() require("dap").up() end, desc = "Up" },
+			{ "<Leader>dl", function() require("dap").run_last() end, desc = "Run Last" },
+			{ "<Leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
+			{ "<Leader>do", function() require("dap").step_out() end, desc = "Step Out" },
+			{ "<Leader>dp", function() require("dap").pause() end, desc = "Pause" },
+			{ "<Leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
+			{ "<Leader>ds", function() require("dap").session() end, desc = "Session" },
+			{ "<Leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
+			{ "<Leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Inspect Value", mode = {"n", "v"} },
 
 			-- Alternative keymaps:
 			{ "<F5>", function() require("dap").continue() end, desc = "Continue" },
@@ -135,8 +135,8 @@ return {
 		},
 		keys = {
 			-- stylua: ignore start
-			{ "<leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
-			{ "<leader>du", function() require("dapui").toggle({ reset = true }) end, desc = "Dap UI" },
+			{ "<Leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
+			{ "<Leader>du", function() require("dapui").toggle({ reset = true }) end, desc = "Dap UI" },
 			-- stylua: ignore end
 		},
 		opts = {
@@ -167,7 +167,7 @@ return {
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "dap-float" },
 				callback = function(ev)
-					vim.keymap.set("n", "q", "<cmd>q<CR>", { buffer = ev.buf })
+					vim.keymap.set("n", "q", "<Cmd>q<CR>", { buffer = ev.buf })
 
 					vim.api.nvim_create_autocmd({ "WinLeave" }, {
 						buffer = ev.buf,
@@ -206,8 +206,8 @@ return {
 				callback = function(ev)
 					vim.keymap.set(
 						"n",
-						"<leader>td",
-						"<cmd>lua require('dap-go').debug_test()<CR>",
+						"<Leader>td",
+						"<Cmd>lua require('dap-go').debug_test()<CR>",
 						{ desc = "Debug nearest (go)", buffer = ev.buf }
 					)
 				end,

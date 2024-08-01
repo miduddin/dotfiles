@@ -28,7 +28,7 @@ return {
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
-			{ "<leader>e", "<cmd>Oil<cr>", desc = "File explorer" },
+			{ "<Leader>e", "<Cmd>Oil<CR>", desc = "File explorer" },
 		},
 		opts = {
 			keymaps = {
@@ -58,9 +58,9 @@ return {
 	{
 		"ojroques/nvim-bufdel",
 		keys = {
-			{ "<leader>ba", "<cmd>BufDelAll<cr>", desc = "Close all buffers" },
-			{ "<leader>bd", "<cmd>BufDel<cr>", desc = "Close current buffer" },
-			{ "<leader>bo", "<cmd>BufDelOthers<cr>", desc = "Close other buffers" },
+			{ "<Leader>ba", "<Cmd>BufDelAll<CR>", desc = "Close all buffers" },
+			{ "<Leader>bd", "<Cmd>BufDel<CR>", desc = "Close current buffer" },
+			{ "<Leader>bo", "<Cmd>BufDelOthers<CR>", desc = "Close other buffers" },
 		},
 		opts = { quit = false },
 	},
