@@ -39,16 +39,20 @@ end
 
 local function update_filename()
 	local filename = vim.api.nvim_buf_get_name(0)
-	filename = vim.fn.fnamemodify(filename, ":.")
-	if filename == "" then
-		filename = "[No Name]"
-	end
+	if vim.bo.filetype == "qf" then
+		filename = "Quickfix list"
+	else
+		filename = vim.fn.fnamemodify(filename, ":.")
+		if filename == "" then
+			filename = "[No Name]"
+		end
 
-	for i = 4, 1, -1 do
-		if vim.bo.filetype ~= "oil" and filename:len() / vim.o.columns > 0.42 then
-			filename = vim.fn.pathshorten(filename, i)
-		else
-			break
+		for i = 4, 1, -1 do
+			if vim.bo.filetype ~= "oil" and filename:len() / vim.o.columns > 0.42 then
+				filename = vim.fn.pathshorten(filename, i)
+			else
+				break
+			end
 		end
 	end
 
