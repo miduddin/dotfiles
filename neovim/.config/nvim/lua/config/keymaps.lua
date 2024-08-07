@@ -33,6 +33,16 @@ map(function()
 end, "zC", "n", { desc = "Fold all children" })
 
 map(function()
+	for _, win in pairs(vim.fn.getwininfo()) do
+		if win["quickfix"] == 1 then
+			vim.cmd("cclose")
+			return
+		end
+	end
+	vim.cmd("copen")
+end, "<Leader>q", "n", { desc = "Toggle quickfix list" })
+
+map(function()
 	if vim.o.diffopt:find("iwhiteall") then
 		vim.opt.diffopt:remove("iwhiteall")
 	else
@@ -44,11 +54,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		map(vim.diagnostic.open_float, "<Leader>ce", "n", { desc = "Diagnostics (floating)", buffer = ev.buf })
+		map(vim.diagnostic.setqflist, "<Leader>x", "n", { desc = "Diagnostics (quickfix list)" })
 		map(vim.lsp.buf.code_action, "<Leader>ca", { "n", "v" }, { desc = "Code action", buffer = ev.buf })
+		map(vim.lsp.buf.definition, "gd", { "n" }, { desc = "LSP definition" })
 		map(vim.lsp.buf.hover, "K", "n", { desc = "Hover", buffer = ev.buf })
+		map(vim.lsp.buf.implementation, "gi", { "n" }, { desc = "LSP implementations" })
+		map(vim.lsp.buf.references, "gr", { "n" }, { desc = "LSP references" })
 		map(vim.lsp.buf.rename, "<F2>", "n", { desc = "Rename", buffer = ev.buf })
 		map(vim.lsp.buf.rename, "<Leader>cr", "n", { desc = "Rename", buffer = ev.buf })
 		map(vim.lsp.buf.signature_help, "<C-S>", "i", { desc = "LSP signature help", buffer = ev.buf })
+		map(vim.lsp.buf.type_definition, "gD", { "n" }, { desc = "LSP type definition" })
 		map(function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
 		end, "<Leader>ci", "n", { desc = "Toggle inlay hint", buffer = ev.buf })

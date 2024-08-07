@@ -56,41 +56,17 @@ return {
 		end,
 	},
 	{
-		"folke/trouble.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "VeryLazy",
-		keys = {
-			{ "<Leader>xw", "<Cmd>Trouble diagnostics toggle<CR>", desc = "Diagnostics (project)" },
-			{ "<Leader>xx", "<Cmd>Trouble diagnostics toggle filter.buf=0<CR>", desc = "Diagnostics (buffer)" },
-			{ "<Leader>xq", "<Cmd>cclose|Trouble qflist toggle<CR>", desc = "Quickfix" },
-			{ "<Leader>xl", "<Cmd>Trouble loclist toggle<CR>", desc = "Loclist" },
-			{ "gr", "<Cmd>Trouble lsp_references toggle<CR>", desc = "LSP references" },
-			{ "gd", "<Cmd>Trouble lsp_definitions toggle<CR>", desc = "LSP definitions" },
-			{ "gD", "<Cmd>Trouble lsp_type_definitions toggle<CR>", desc = "LSP type definitions" },
-			{ "gi", "<Cmd>Trouble lsp_implementations toggle<CR>", desc = "LSP implementations" },
-			{ "]t", [[<Cmd>lua require("trouble").next()<CR>]], desc = "Next trouble item" },
-			{ "[t", [[<Cmd>lua require("trouble").prev()<CR>]], desc = "Previous trouble item" },
-		},
+		"kevinhwang91/nvim-bqf",
+		ft = "qf",
 		opts = {
-			focus = true,
-			throttle = { preview = { ms = 0 } },
-			modes = {
-				lsp_references = {
-					params = {
-						include_declaration = false,
-					},
-				},
-				lsp_base = {
-					params = {
-						include_current = true,
-					},
-				},
+			preview = {
+				winblend = 0,
 			},
 		},
 		config = function(_, opts)
-			require("trouble").setup(opts)
-			vim.api.nvim_set_hl(0, "TroubleNormal", { link = "Normal" })
-			vim.api.nvim_set_hl(0, "TroubleNormalNC", { link = "NormalNC" })
+			require("bqf").setup(opts)
+			vim.api.nvim_set_hl(0, "BqfPreviewFloat", { link = "NormalFloat" })
+			vim.api.nvim_set_hl(0, "BqfPreviewTitle", { link = "FloatTitle" })
 		end,
 	},
 }
