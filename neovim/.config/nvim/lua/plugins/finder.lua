@@ -53,6 +53,7 @@ return {
 			vim.api.nvim_set_hl(0, "FzfLuaBorder", { link = "FloatBorder" })
 			vim.api.nvim_set_hl(0, "FzfLuaNormal", { link = "NormalFloat" })
 			vim.api.nvim_set_hl(0, "FzfLuaTitle", { link = "FloatTitle" })
+			vim.api.nvim_set_hl(0, "FzfLuaPreviewNormal", { link = "Normal" })
 		end,
 	},
 	{

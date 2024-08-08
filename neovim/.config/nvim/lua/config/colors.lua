@@ -24,4 +24,5 @@ return {
 	bg_p1 = theme.ui.bg_p1,
 	bg_p2 = theme.ui.bg_p2,
 	fg = theme.ui.fg,
+	fg_border = theme.ui.float.fg_border,
 }
