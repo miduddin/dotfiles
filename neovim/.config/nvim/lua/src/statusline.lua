@@ -11,7 +11,6 @@ end
 local colors = require("config.colors")
 vim.api.nvim_set_hl(0, "StFilename", { bg = colors.blue, fg = colors.black, bold = true })
 vim.api.nvim_set_hl(0, "StFilenameInv", { fg = colors.blue })
-vim.api.nvim_set_hl(0, "StNormal", { fg = colors.fg })
 vim.api.nvim_set_hl(0, "StBranch", { fg = colors.magenta, bold = true })
 vim.api.nvim_set_hl(0, "StFiletype", { fg = colors.fg })
 vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
@@ -23,8 +22,7 @@ local statusline = {
 	"diff",
 	"branch",
 	"filetype",
-	f("%3l:%-3c %P", "StPosition"),
-	"%#StFilename# ",
+	"position",
 }
 
 local space = "%#StNormal#  "
@@ -34,7 +32,12 @@ local function update_statusline()
 		return v ~= ""
 	end, statusline)
 
-	vim.o.statusline = table.concat(s, space)
+	vim.wo.statusline = table.concat(s, space)
+end
+
+---@return boolean
+local function is_file_buffer()
+	return vim.bo.buftype == ""
 end
 
 local function update_filename()
@@ -48,7 +51,7 @@ local function update_filename()
 		end
 
 		for i = 4, 1, -1 do
-			if vim.bo.filetype ~= "oil" and filename:len() / vim.o.columns > 0.42 then
+			if vim.bo.filetype ~= "oil" and filename:len() / vim.fn.winwidth(0) > 0.42 then
 				filename = vim.fn.pathshorten(filename, i)
 			else
 				break
@@ -56,12 +59,18 @@ local function update_filename()
 		end
 	end
 
-	statusline[1] = f(" " .. filename .. " ", "StFilename") .. f("", "StFilenameInv")
+	statusline[1] = f(" " .. filename .. " ", "StFilename") .. f("", "StFilenameInv")
 	update_statusline()
 end
 vim.api.nvim_create_autocmd({ "BufEnter", "WinResized" }, { callback = update_filename })
 
 local function update_diagnostics()
+	if not is_file_buffer() then
+		statusline[2] = ""
+		update_statusline()
+		return
+	end
+
 	local diagnostics = vim.diagnostic.get(0)
 	local count = { 0, 0, 0, 0 }
 	for _, diagnostic in ipairs(diagnostics) do
@@ -93,6 +102,12 @@ vim.api.nvim_create_autocmd({ "BufEnter", "DiagnosticChanged" }, { callback = up
 
 -- Reference: https://github.com/nvim-lualine/lualine.nvim/blob/6a40b530539d2209f7dc0492f3681c8c126647ad/lua/lualine/components/diff/git_diff.lua#L59
 local function update_git_diff()
+	if not is_file_buffer() then
+		statusline[4] = ""
+		update_statusline()
+		return
+	end
+
 	local output = vim.system({
 		"git",
 		"-C",
@@ -153,6 +168,12 @@ end
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, { callback = update_git_diff })
 
 local function update_git_branch()
+	if not is_file_buffer() then
+		statusline[5] = ""
+		update_statusline()
+		return
+	end
+
 	local branch = vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, { text = true }):wait().stdout
 	if not branch or branch == "" then
 		branch = ""
@@ -163,9 +184,15 @@ local function update_git_branch()
 	statusline[5] = f(branch, "StBranch")
 	update_statusline()
 end
-vim.api.nvim_create_autocmd({ "TermLeave", "FocusGained", "VimEnter" }, { callback = update_git_branch })
+vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = update_git_branch })
 
 local function update_filetype()
+	if not is_file_buffer() then
+		statusline[6] = ""
+		update_statusline()
+		return
+	end
+
 	local filetype, icon, iconhl, ext = "", "", "", ""
 
 	if vim.bo.buftype == "terminal" then
@@ -191,3 +218,15 @@ local function update_filetype()
 	update_statusline()
 end
 vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, { callback = update_filetype })
+
+local function update_position()
+	if not is_file_buffer() then
+		statusline[7] = ""
+		update_statusline()
+		return
+	end
+
+	statusline[7] = f("%3l:%-3c %3p%% ", "StPosition")
+	update_statusline()
+end
+vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = update_position })
