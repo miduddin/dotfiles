@@ -15,6 +15,8 @@ return {
 						PmenuSbar = { bg = theme.ui.bg_m1 },
 						PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
 						PmenuThumb = { bg = theme.ui.bg_p2 },
+						StatusLine = { fg = theme.ui.float.fg_border, bg = theme.ui.bg },
+						StatusLineNC = { fg = theme.ui.float.fg_border, bg = theme.ui.bg },
 						Whitespace = { fg = theme.ui.bg_p2 },
 						WinSeparator = { fg = theme.ui.float.fg_border },
 					}

@@ -21,12 +21,11 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append({ "algorithm:patience", "linematch:70" })
 vim.opt.expandtab = false
-vim.opt.fillchars = { eob = " ", diff = " " }
+vim.opt.fillchars = { eob = " ", diff = " ", stl = "─", stlnc = "─" }
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "indent"
 vim.opt.ignorecase = true
-vim.opt.laststatus = 3
 vim.opt.list = true
 vim.opt.listchars:append({ space = "·", tab = "  " })
 vim.opt.mousemodel = "extend"
