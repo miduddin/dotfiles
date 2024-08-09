@@ -40,22 +40,46 @@ local function is_file_buffer()
 	return vim.bo.buftype == ""
 end
 
+---@param filepath string
+---@return string
+local function shorten_filepath(filepath)
+	for i = 4, 1, -1 do
+		if vim.bo.filetype ~= "oil" and filepath:len() / vim.fn.winwidth(0) > 0.42 then
+			filepath = vim.fn.pathshorten(filepath, i)
+		else
+			break
+		end
+	end
+	return filepath
+end
+
 local function update_filename()
-	local filename = vim.api.nvim_buf_get_name(0)
-	if vim.bo.filetype == "qf" then
-		filename = "Quickfix list"
+	local filename
+	local filetype = vim.bo.filetype
+
+	if filetype == "qf" then
+		filename = "Quickfix List"
+	elseif filetype == "DiffviewFiles" then
+		filename = "Changed Files"
+	elseif filetype == "DiffviewFileHistory" then
+		filename = "Commit History"
 	else
-		filename = vim.fn.fnamemodify(filename, ":.")
+		filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
 		if filename == "" then
 			filename = "[No Name]"
-		end
-
-		for i = 4, 1, -1 do
-			if vim.bo.filetype ~= "oil" and filename:len() / vim.fn.winwidth(0) > 0.42 then
-				filename = vim.fn.pathshorten(filename, i)
+		elseif vim.startswith(filename, "term:") then
+			filename = vim.split(filename, ":")[3]
+		elseif vim.startswith(filename, "diffview:") then
+			if filename == "diffview://null" then
+				filename = "(no file)"
 			else
-				break
+				filename = vim.split(filename, "/.git/", { plain = true })[2]
+				local sha, file = filename:match("^(%w+)%/(.+)")
+
+				filename = sha:sub(1, 8) .. ": " .. shorten_filepath(file)
 			end
+		else
+			filename = shorten_filepath(filename)
 		end
 	end
 
@@ -184,7 +208,7 @@ local function update_git_branch()
 	statusline[5] = f(branch, "StBranch")
 	update_statusline()
 end
-vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = update_git_branch })
+vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, { callback = update_git_branch })
 
 local function update_filetype()
 	if not is_file_buffer() then
@@ -208,7 +232,7 @@ local function update_filetype()
 		ext = vim.bo.filetype
 		icon, iconhl = require("nvim-web-devicons").get_icon(filename, nil, { default = true })
 		if ext == "" then
-			ext = "(unknown type)"
+			ext = "file"
 		end
 	end
 
@@ -229,4 +253,4 @@ local function update_position()
 	statusline[7] = f("%3l:%-3c %3p%% ", "StPosition")
 	update_statusline()
 end
-vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = update_position })
+vim.api.nvim_create_autocmd({ "BufEnter", "TermEnter" }, { callback = update_position })
