@@ -1,6 +1,6 @@
 vim.api.nvim_create_autocmd({ "TermOpen" }, {
 	pattern = "term://*lazydocker",
-	command = "startinsert | setlocal nonumber signcolumn=no",
+	command = "startinsert | setlocal nonu nornu signcolumn=no",
 })
 
 vim.api.nvim_create_autocmd({ "TermClose" }, {
