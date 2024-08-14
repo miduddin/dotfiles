@@ -26,10 +26,12 @@ vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "indent"
 vim.opt.ignorecase = true
+vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars:append({ space = "·", tab = "  " })
 vim.opt.mousemodel = "extend"
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.scrolloff = 5
 vim.opt.sessionoptions:append("globals")
 vim.opt.shiftwidth = 4
