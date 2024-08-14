@@ -41,7 +41,7 @@ return {
 			git = {
 				branches = {
 					actions = {
-						["default"] = function(selected)
+						["enter"] = function(selected)
 							vim.cmd("DiffviewOpen " .. selected[1])
 						end,
 					},
