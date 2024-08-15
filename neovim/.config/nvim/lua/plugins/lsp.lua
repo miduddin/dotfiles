@@ -88,8 +88,11 @@ return {
 			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local handlers = {
-				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-				["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
+				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", max_width = 80 }),
+				["textDocument/signatureHelp"] = vim.lsp.with(
+					vim.lsp.handlers.signature_help,
+					{ border = "rounded", max_width = 80 }
+				),
 			}
 
 			for k, v in pairs(opts) do
