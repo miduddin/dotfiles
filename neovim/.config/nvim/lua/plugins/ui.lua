@@ -10,10 +10,12 @@ return {
 				overrides = function(colors)
 					local theme = colors.theme
 					return {
+						DiffDelete = { fg = "none", bg = theme.diff.delete },
+						DiffviewDiffDeleteDim = { fg = theme.ui.bg_p2 },
 						Folded = { bg = "none" },
 						Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
 						PmenuSbar = { bg = theme.ui.bg_m1 },
-						PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+						PmenuSel = { fg = "none", bg = theme.ui.bg_p2 },
 						PmenuThumb = { bg = theme.ui.bg_p2 },
 						StatusLine = { fg = theme.ui.float.fg_border, bg = theme.ui.bg },
 						StatusLineNC = { fg = theme.ui.float.fg_border, bg = theme.ui.bg },
@@ -46,7 +48,7 @@ return {
 	{
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
-		opts = {},
+		opts = { input = { start_in_insert = false } },
 	},
 	{
 		"echasnovski/mini.notify",
@@ -65,5 +67,17 @@ return {
 			{ "<Leader>bo", "<Cmd>BufDelOthers<CR>", desc = "Close other buffers" },
 		},
 		opts = { quit = false },
+	},
+	{
+		"echasnovski/mini.tabline",
+		lazy = false,
+		opts = {},
+		config = function(_, opts)
+			require("mini.tabline").setup(opts)
+			vim.api.nvim_set_hl(0, "MiniTablineCurrent", { link = "StFilename" })
+			vim.api.nvim_set_hl(0, "MiniTablineModifiedCurrent", { link = "MiniTablineCurrent" })
+			vim.api.nvim_set_hl(0, "MiniTablineModifiedVisible", { link = "MiniTablineVisible" })
+			vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { link = "MiniTablineHidden" })
+		end,
 	},
 }
