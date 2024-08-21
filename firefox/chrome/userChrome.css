@@ -1,0 +1,22 @@
+/* Remove top-left blank space */
+.titlebar-spacer {
+  width: 2px !important;
+}
+
+/* Alternatively, hide titlebar (for use with vertical tabs) */
+/* #titlebar { */
+/* 	display: none; */
+/* } */
+
+/* Remove mute button on tabs */
+.tab-icon-overlay {
+  display: none;
+}
+.tab-icon-image {
+  opacity: 1 !important;
+}
+
+/* Remove shield icon on address bar */
+#tracking-protection-icon-container {
+  display: none !important;
+}
