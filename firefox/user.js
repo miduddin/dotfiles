@@ -112,8 +112,6 @@ user_pref("security.pki.crlite_mode", 2);
 user_pref("security.remote_settings.crlite_filters.enabled", true);
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 user_pref("security.tls.enable_0rtt_data", false);
-user_pref("sidebar.revamp", true);
-user_pref("sidebar.verticalTabs", true);
 user_pref("signon.formlessCapture.enabled", false);
 user_pref("signon.privateBrowsingCapture.enabled", false);
 user_pref("toolkit.coverage.endpoint.base", "");

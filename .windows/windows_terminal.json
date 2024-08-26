@@ -41,7 +41,7 @@
     "disableAnimations": true,
     "keybindings": [
         {
-            "id": null,
+            "id": "",
             "keys": "f11"
         },
         {
@@ -121,7 +121,7 @@
                 "size": 11
             },
             "intenseTextStyle": "bold",
-            "opacity": 99,
+            "opacity": 100,
             "padding": "3,3,0,0",
             "scrollbarState": "hidden",
             "suppressApplicationTitle": false
@@ -138,13 +138,13 @@
                 "hidden": false,
                 "name": "arch",
                 "source": "Windows.Terminal.Wsl",
-                "tabColor": "#1A1A22"
+                "tabColor": "#1F1F28"
             }
         ]
     },
     "schemes": [
         {
-            "background": "#1A1A22",
+            "background": "#1F1F28",
             "black": "#090618",
             "blue": "#7E9CD8",
             "brightBlack": "#727169",
