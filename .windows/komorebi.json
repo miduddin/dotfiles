@@ -1,0 +1,35 @@
+{
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/master/schema.json",
+    "animation": {
+        "duration": 150,
+        "enabled": false,
+        "fps": 141,
+        "style": "EaseInOutExpo"
+    },
+    "app_specific_configuration_path": "$Env:USERPROFILE/applications.yaml",
+    "border": true,
+    "border_implementation": "Windows",
+    "border_width": 0,
+    "cross_monitor_move_behaviour": "Insert",
+    "default_container_padding": 7,
+    "default_workspace_padding": 7,
+    "float_rules": [
+        {
+            "id": "MozillaDialogClass",
+            "kind": "Class",
+            "matching_strategy": "Equals"
+        }
+    ],
+    "monitors": [
+        {
+            "workspaces": [
+                {
+                    "name": "I",
+                    "layout": "BSP"
+                }
+            ]
+        }
+    ],
+    "mouse_follows_focus": false,
+    "window_hiding_behaviour": "Hide"
+}
