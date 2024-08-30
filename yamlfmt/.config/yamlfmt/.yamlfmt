@@ -1,5 +1,7 @@
 formatter:
-  type: basic
+  drop_merge_tag: true
   line_ending: lf
   retain_line_breaks: true
-  drop_merge_tag: true
+  scan_folded_as_literal: true
+  trim_trailing_whitespace: true
+  type: basic

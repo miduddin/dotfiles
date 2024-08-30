@@ -28,7 +28,7 @@ vim.opt.foldmethod = "indent"
 vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
-vim.opt.listchars:append({ space = "·", tab = "  " })
+vim.opt.listchars:append({ space = "·", tab = "  ", trail = "█" })
 vim.opt.mousemodel = "extend"
 vim.opt.number = true
 vim.opt.relativenumber = true
