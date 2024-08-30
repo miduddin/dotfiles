@@ -222,7 +222,6 @@ return {
 				lsp_format = "fallback",
 			},
 			formatters = {
-				yamlfmt = { args = { "-formatter", "line_ending=lf,scan_folded_as_literal=true", "-" } },
 				sqlfluff = { args = { "fix", "-" } },
 			},
 			log_level = vim.g.log_level,
