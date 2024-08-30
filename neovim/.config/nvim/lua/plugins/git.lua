@@ -22,6 +22,13 @@ return {
 				DiffviewOpen = { "--imply-local" },
 			},
 			enhanced_diff_hl = true,
+			hooks = {
+				diff_buf_win_enter = function(_, _, ctx)
+					if ctx.layout_name:match("^diff3") then
+						vim.opt_local.winhl = "DiffDelete:DiffviewDiffDeleteDim"
+					end
+				end,
+			},
 			keymaps = {
 				file_history_panel = { { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close Diffview" } } },
 				file_panel = { { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close Diffview" } } },
