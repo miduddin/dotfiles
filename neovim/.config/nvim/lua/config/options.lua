@@ -1,3 +1,4 @@
+vim.g.border = "rounded"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.log_level = vim.log.levels.OFF
@@ -31,7 +32,6 @@ vim.opt.list = true
 vim.opt.listchars:append({ space = "·", tab = "  ", trail = "█" })
 vim.opt.mousemodel = "extend"
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.scrolloff = 5
 vim.opt.sessionoptions:append("globals")
 vim.opt.shiftwidth = 4
