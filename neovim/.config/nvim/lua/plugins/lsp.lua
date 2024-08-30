@@ -1,5 +1,5 @@
 vim.diagnostic.config({
-	float = { border = "rounded" },
+	float = { border = vim.g.border },
 	jump = { float = true },
 })
 vim.lsp.set_log_level(vim.g.log_level)
@@ -23,7 +23,7 @@ return {
 		},
 		opts = {
 			log_level = vim.g.log_level,
-			ui = { border = "rounded" },
+			ui = { border = vim.g.border },
 		},
 	},
 	{
@@ -83,15 +83,18 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("lspconfig.ui.windows").default_options.border = "single"
+			require("lspconfig.ui.windows").default_options.border = vim.g.border
 
 			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local handlers = {
-				["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", max_width = 80 }),
+				["textDocument/hover"] = vim.lsp.with(
+					vim.lsp.handlers.hover,
+					{ border = vim.g.border, max_width = 80 }
+				),
 				["textDocument/signatureHelp"] = vim.lsp.with(
 					vim.lsp.handlers.signature_help,
-					{ border = "rounded", max_width = 80 }
+					{ border = vim.g.border, max_width = 80 }
 				),
 			}
 
