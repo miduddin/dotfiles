@@ -28,29 +28,15 @@ local function run_query(query, pg_service, timeout_s)
 	utils.write_cmd_output_to_split(obj, string.format("[%s] Query result - %s", pg_service, os.date("%T")))
 end
 
-local last_params = {
-	pg_service = nil,
-	timeout_s = nil,
-}
-
 ---@param pg_service string
 ---@param timeout_s integer?
 function M.query_paragraph(pg_service, timeout_s)
-	last_params = {
-		pg_service = pg_service,
-		timeout_s = timeout_s,
-	}
 	local query_begin = vim.api.nvim_buf_get_mark(0, "(")[1]
 	local query_end = vim.api.nvim_buf_get_mark(0, ")")[1]
 
 	local query = vim.api.nvim_buf_get_lines(0, query_begin - 1, query_end, false)
 
 	run_query(query, pg_service, timeout_s)
-end
-
-function M.query_last()
-	assert(last_params.pg_service ~= nil and last_params.pg_service ~= "")
-	M.query_paragraph(last_params.pg_service, last_params.timeout_s)
 end
 
 return M
