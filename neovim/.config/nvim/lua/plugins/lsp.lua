@@ -212,10 +212,11 @@ return {
 		},
 		opts = {
 			formatters_by_ft = {
-				python = { "black", "isort" },
+				css = { "prettier" },
 				go = { "goimports", "gofumpt" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
+				python = { "black", "isort" },
 				sql = { "sqlfmt", "sqlfluff" },
 				terraform = { "terraform_fmt" },
 				yaml = { "yamlfmt" },
@@ -225,7 +226,7 @@ return {
 				lsp_format = "fallback",
 			},
 			formatters = {
-				sqlfluff = { args = { "fix", "-" } },
+				sqlfluff = { require_cwd = false },
 			},
 			log_level = vim.g.log_level,
 		},
