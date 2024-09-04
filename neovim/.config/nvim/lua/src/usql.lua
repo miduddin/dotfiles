@@ -23,7 +23,7 @@ local function run_query(query, connection_name, timeout_s)
 		timeout = timeout_ms,
 	})
 
-	utils.write_cmd_output_to_split(obj, vim.fn.strftime("Query result - %T"))
+	utils.write_cmd_output_to_split(obj, string.format("[%s] Query result - %s", connection_name, os.date("%T")))
 end
 
 local last_params = {
