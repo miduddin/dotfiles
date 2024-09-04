@@ -25,7 +25,7 @@ local function run_query(query, pg_service, timeout_s)
 		timeout = timeout_ms,
 	})
 
-	utils.write_cmd_output_to_split(obj, vim.fn.strftime("Query result - %T"))
+	utils.write_cmd_output_to_split(obj, string.format("[%s] Query result - %s", pg_service, os.date("%T")))
 end
 
 local last_params = {
