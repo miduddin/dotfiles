@@ -55,7 +55,7 @@ return {
 			tailwindcss = { filetypes = { "html" } },
 			taplo = {},
 			golangci_lint_ls = {},
-			tsserver = {},
+			ts_ls = {},
 			gopls = {
 				settings = {
 					gopls = {
