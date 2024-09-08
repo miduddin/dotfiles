@@ -1,22 +1,45 @@
-/* Remove top-left blank space */
-.titlebar-spacer {
-  width: 2px !important;
-}
-
-/* Alternatively, hide titlebar (for use with vertical tabs) */
-/* #titlebar { */
-/* 	display: none; */
-/* } */
-
-/* Remove mute button on tabs */
+/* Remove unused icons */
+#alltabs-button,
+#identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon-box,
+#identity-box[pageproxystate="valid"].mixedActiveBlocked
+  #identity-permission-box:not([hasSharingIcon]),
+#identity-box[pageproxystate="valid"].verifiedDomain #identity-icon-box,
+#identity-box[pageproxystate="valid"].verifiedDomain
+  #identity-permission-box:not([hasSharingIcon]),
+#pageAction-urlbar-_testpilot-containers,
+#reader-mode-button,
+#star-button-box,
+#tracking-protection-icon-container,
+#unified-extensions-button,
+#userContext-icons,
+.tab-close-button,
 .tab-icon-overlay {
-  display: none;
+  display: none !important;
 }
+
+/* Remove blank space left of tab bar */
+.titlebar-spacer {
+  width: 0px !important;
+}
+
+/* Hide mute button on tab */
 .tab-icon-image {
   opacity: 1 !important;
 }
 
-/* Remove shield icon on address bar */
-#tracking-protection-icon-container {
-  display: none !important;
+/* One line header */
+/* Source: https://github.com/crambaud/waterfall */
+:root {
+  --uc-urlbar-width: 480px;
+}
+#TabsToolbar {
+  margin-left: var(--uc-urlbar-width) !important;
+}
+#nav-bar {
+  margin: calc((var(--urlbar-min-height) * -1) - 8px)
+    calc(100vw - var(--uc-urlbar-width)) 0 0 !important;
+}
+#navigator-toolbox,
+#nav-bar {
+  background: #1f2122 !important;
 }
