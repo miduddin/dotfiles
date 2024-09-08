@@ -1,22 +1,47 @@
-/* Remove top-left blank space */
-.titlebar-spacer {
-  width: 2px !important;
-}
-
-/* Alternatively, hide titlebar (for use with vertical tabs) */
-/* #titlebar { */
-/* 	display: none; */
-/* } */
-
-/* Remove mute button on tabs */
+/* Hide unused elements */
+#alltabs-button,
+#identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon-box,
+#identity-box[pageproxystate="valid"].verifiedDomain #identity-icon-box,
+#pageAction-urlbar-_testpilot-containers,
+#reader-mode-button,
+#star-button-box,
+#tracking-protection-icon-container,
+#translations-button,
+#unified-extensions-button,
+#userContext-icons,
+.tab-close-button,
 .tab-icon-overlay {
-  display: none;
+  display: none !important;
 }
+
+/* Remove blank space left of tab bar */
+.titlebar-spacer {
+  width: 0px !important;
+}
+
+/* Hide mute button on tab */
 .tab-icon-image {
   opacity: 1 !important;
 }
 
-/* Remove shield icon on address bar */
-#tracking-protection-icon-container {
-  display: none !important;
+/* One line header */
+:root {
+  --nav-bar-width: clamp(0px, 50vw, 480px);
+}
+#TabsToolbar {
+  margin-left: var(--nav-bar-width) !important;
+}
+#nav-bar {
+  margin-top: calc((var(--urlbar-min-height) * -1) - 10px) !important;
+  margin-right: calc(100vw - var(--nav-bar-width)) !important;
+}
+#urlbar-container {
+  width: calc(2 * var(--toolbarbutton-inner-padding)) !important;
+}
+#navigator-toolbox {
+  background: #1f2122 !important;
+  border-bottom: none !important;
+}
+#nav-bar {
+  background: #1f2122 !important;
 }
