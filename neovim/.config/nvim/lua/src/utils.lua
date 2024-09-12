@@ -30,7 +30,6 @@ function M.write_cmd_output_to_split(obj, bufname)
 	vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
 	vim.api.nvim_buf_set_lines(buf, 0, -1, true, text)
 	vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
-	vim.api.nvim_set_option_value("winfixbuf", true, { win = win })
 end
 
 return M
