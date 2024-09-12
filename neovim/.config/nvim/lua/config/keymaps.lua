@@ -52,6 +52,22 @@ map(function()
 	end
 end, "<Leader>W", "n", { desc = "Toggle whitespace diff" })
 
+map(function()
+	if vim.o.diffopt:find("icase") then
+		vim.opt.diffopt:remove("icase")
+	else
+		vim.opt.diffopt:append("icase")
+	end
+end, "<Leader>C", "n", { desc = "Toggle case-sensitive diff" })
+
+map(function()
+	if vim.api.nvim_get_option_value("diff", { scope = "local" }) then
+		vim.cmd("windo diffo")
+	else
+		vim.cmd("windo difft")
+	end
+end, "<Leader>gw", "n", { desc = "Diff visible windows" })
+
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
