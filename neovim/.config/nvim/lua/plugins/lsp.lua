@@ -164,10 +164,12 @@ return {
 				},
 				window = {
 					completion = cmp.config.window.bordered({
-						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+						border = vim.g.border,
+						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
 					}),
 					documentation = cmp.config.window.bordered({
-						winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+						border = vim.g.border,
+						winhighlight = "FloatBorder:NormalFloat",
 					}),
 				},
 				matching = {
