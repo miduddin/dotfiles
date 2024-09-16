@@ -10,7 +10,6 @@ local function run_query(query, pg_service, timeout_s)
 	local input = {
 		"\\set QUIET 1",
 		"\\pset columns " .. (vim.api.nvim_win_get_width(0) - vim.fn.getwininfo(vim.fn.win_getid())[1].textoff),
-		"set statement_timeout to " .. timeout_ms .. ";",
 		"\\timing on",
 		"\\set QUIET 0",
 	}
@@ -19,7 +18,6 @@ local function run_query(query, pg_service, timeout_s)
 	end
 
 	local obj = vim.system({ "psql", "service=" .. pg_service }, {
-		env = { PGCONNECT_TIMEOUT = timeout_ms },
 		stdin = table.concat(input, "\n"),
 		text = true,
 		timeout = timeout_ms,
