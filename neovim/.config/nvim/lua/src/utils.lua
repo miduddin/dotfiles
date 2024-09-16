@@ -21,9 +21,13 @@ function M.write_cmd_output_to_split(obj, bufname)
 		table.insert(text, line)
 	end
 	if result.stderr then
-		table.insert(text, "")
-		for _, line in pairs(vim.fn.split(result.stderr, "\n")) do
-			table.insert(text, line)
+		if result.code == 124 then
+			table.insert(text, "Error: command timed out.")
+		else
+			table.insert(text, "")
+			for _, line in pairs(vim.fn.split(result.stderr, "\n")) do
+				table.insert(text, line)
+			end
 		end
 	end
 

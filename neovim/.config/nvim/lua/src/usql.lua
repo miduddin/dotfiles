@@ -17,7 +17,7 @@ local function run_query(query, connection_name, timeout_s)
 		table.insert(input, v)
 	end
 
-	local obj = vim.system({ "sh", "-c", "unset PGSERVICEFILE && usql " .. connection_name }, {
+	local obj = vim.system({ "usql", connection_name }, {
 		stdin = table.concat(input, "\n"),
 		text = true,
 		timeout = timeout_ms,
