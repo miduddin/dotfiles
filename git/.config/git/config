@@ -1,7 +1,7 @@
 [user]
 	email = im@dudd.in
 	name = Muhammad Imaduddin
-	signingkey = /home/miduddin/.ssh/id_ed25519.pub
+	signingkey = /Users/miduddin/.ssh/id_ed25519.pub
 
 [credential]
 	helper = store
@@ -14,6 +14,7 @@
 
 [delta]
 	dark = true
+	hyperlinks = true
 	line-numbers = true
 	navigate = true
 	tabs = 4
