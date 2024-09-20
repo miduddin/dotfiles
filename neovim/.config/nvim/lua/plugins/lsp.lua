@@ -50,6 +50,7 @@ return {
 			html = {},
 			lua_ls = {},
 			intelephense = {},
+			ruff = {},
 			rust_analyzer = {},
 			spectral = { settings = { rulesetFile = ".spectral.yaml" } },
 			tailwindcss = { filetypes = { "html" } },
@@ -59,6 +60,7 @@ return {
 			gopls = {
 				settings = {
 					gopls = {
+						gofumpt = true,
 						hints = {
 							assignVariableTypes = true,
 							compositeLiteralFields = true,
@@ -69,10 +71,14 @@ return {
 							rangeVariableTypes = true,
 						},
 						analyses = {
-							unusedvariable = true,
+							fieldalignment = true,
+							nilness = true,
+							unusedparams = true,
+							unusedwrite = true,
 							useany = true,
 						},
 						usePlaceholders = true,
+						completeUnimported = true,
 						staticcheck = true,
 						directoryFilters = {
 							"-.git",
@@ -113,7 +119,6 @@ return {
 		opts = {
 			ensure_installed = {
 				"basedpyright",
-				"black",
 				"delve",
 				"gofumpt",
 				"goimports",
@@ -122,11 +127,11 @@ return {
 				"gopls",
 				"html-lsp",
 				"intelephense",
-				"isort",
 				"json-lsp",
 				"lua-language-server",
 				"php-cs-fixer",
 				"php-debug-adapter",
+				"ruff",
 				"rust-analyzer",
 				"spectral-language-server",
 				"sqlfluff",
@@ -218,7 +223,7 @@ return {
 				go = { "goimports", "gofumpt" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
-				python = { "black", "isort" },
+				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 				sql = { "sqlfmt", "sqlfluff" },
 				terraform = { "terraform_fmt" },
 				yaml = { "yamlfmt" },
