@@ -6,7 +6,6 @@ return {
 		config = function()
 			require("kanagawa").setup({
 				compile = true,
-				colors = { theme = { all = { ui = { bg_gutter = "none" } } } },
 				overrides = function(colors)
 					local theme = colors.theme
 					return {
@@ -19,7 +18,7 @@ return {
 						PmenuThumb = { bg = theme.ui.bg_p2 },
 						StatusLine = { fg = theme.ui.float.fg_border, bg = theme.ui.bg },
 						StatusLineNC = { fg = theme.ui.float.fg_border, bg = theme.ui.bg },
-						Whitespace = { fg = theme.ui.bg_p2 },
+						Whitespace = { fg = "#454559" },
 						WinSeparator = { fg = theme.ui.float.fg_border },
 					}
 				end,
