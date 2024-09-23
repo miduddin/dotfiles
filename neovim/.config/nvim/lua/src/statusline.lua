@@ -10,7 +10,6 @@ end
 
 local colors = require("config.colors")
 vim.api.nvim_set_hl(0, "StFilename", { bg = colors.blue, fg = colors.black, bold = true })
-vim.api.nvim_set_hl(0, "StFilenameInv", { fg = colors.blue })
 vim.api.nvim_set_hl(0, "StBranch", { fg = colors.magenta, bold = true })
 vim.api.nvim_set_hl(0, "StFiletype", { fg = colors.fg })
 vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
@@ -54,7 +53,7 @@ end
 ---@param filename string
 ---@return string
 local function format_filename(filename)
-	return f(" " .. filename .. " ", "StFilename") .. f("", "StFilenameInv")
+	return f(" " .. filename .. " %*", "StFilename")
 end
 
 local function update_filename()
@@ -250,7 +249,7 @@ local function update_position()
 		return
 	end
 
-	vim.b.st_position = f("%3l:%-3c %3p%% ", "StPosition")
+	vim.b.st_position = f(" %3l:%-3c %3p%% ", "StPosition")
 	update_statusline()
 end
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = update_position })
