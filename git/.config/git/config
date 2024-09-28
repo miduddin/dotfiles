@@ -18,6 +18,23 @@
 	navigate = true
 	tabs = 4
 
+[maintenance.gc]
+	enabled = true
+[maintenance.commit-graph]
+	enabled = true
+[maintenance.loose-object]
+	enabled = true
+[maintenance.incremental-repack]
+	enabled = true
+[maintenance.pack-refs]
+	enabled = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
 [merge]
 	conflictstyle = diff3
 
