@@ -8,11 +8,17 @@ local function f(content, hl)
 	return string.format("%%#%s#%s", hl, content)
 end
 
-local colors = require("config.colors")
-vim.api.nvim_set_hl(0, "StFilename", { bg = colors.blue, fg = colors.black, bold = true })
-vim.api.nvim_set_hl(0, "StBranch", { fg = colors.magenta, bold = true })
-vim.api.nvim_set_hl(0, "StFiletype", { fg = colors.fg })
+local hl_function = vim.api.nvim_get_hl(0, { name = "Function" })
+local hl_keyword = vim.api.nvim_get_hl(0, { name = "Keyword" })
+local hl_variable = vim.api.nvim_get_hl(0, { name = "@variable" })
+
+vim.api.nvim_set_hl(0, "StFilename", { bg = hl_function.fg, fg = "#000000", bold = true })
+vim.api.nvim_set_hl(0, "StBranch", { fg = hl_keyword.fg, bold = true })
+vim.api.nvim_set_hl(0, "StFiletype", { fg = hl_variable.fg })
 vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
+
+vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })
+vim.api.nvim_set_hl(0, "StatusLineNC", { link = "WinSeparator" })
 
 local space = "%*  "
 
