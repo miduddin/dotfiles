@@ -3,12 +3,12 @@
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [
         {
-            "command": "togglePaneZoom",
-            "keys": "alt+m"
+            "command": "toggleFocusMode",
+            "keys": "f11"
         },
         {
-            "command": null,
-            "keys": "f11"
+            "command": "togglePaneZoom",
+            "keys": "alt+m"
         },
         {
             "command": {
