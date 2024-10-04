@@ -19,6 +19,7 @@ alt + shift + 7        : komorebic move-to-workspace 6
 alt + shift + 8        : komorebic move-to-workspace 7
 alt + shift + f        : komorebic toggle-monocle
 alt + shift + m        : komorebic cycle-move-to-monitor next
+alt + shift + oem_3    : komorebic cycle-move-to-monitor next
 alt + shift + o        : komorebic reload-configuration
 alt + shift + r        : komorebic stop; komorebic start
 alt + shift + return   : komorebic promote
