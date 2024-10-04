@@ -1,5 +1,5 @@
 {
-    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/master/schema.json",
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.29/schema.json",
     "animation": {
         "duration": 150,
         "enabled": false,
@@ -31,5 +31,5 @@
         }
     ],
     "mouse_follows_focus": false,
-    "window_hiding_behaviour": "Hide"
+    "window_hiding_behaviour": "Cloak"
 }
