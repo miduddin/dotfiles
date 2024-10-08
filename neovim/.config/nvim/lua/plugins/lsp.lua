@@ -147,7 +147,8 @@ return {
 		},
 	},
 	{
-		"hrsh7th/nvim-cmp",
+		"iguanacucumber/magazine.nvim",
+		name = "nvim-cmp",
 		event = { "InsertEnter" },
 		dependencies = {
 			"L3MON4D3/LuaSnip",
@@ -161,6 +162,10 @@ return {
 			luasnip.log.set_loglevel("error")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
+			local hl_pmenu = vim.api.nvim_get_hl(0, { name = "Pmenu" })
+			local hl_border = vim.api.nvim_get_hl(0, { name = "FloatBorder" })
+			vim.api.nvim_set_hl(0, "CmpCompletionBorder", { fg = hl_border.fg, bg = hl_pmenu.bg })
+
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -170,12 +175,21 @@ return {
 				window = {
 					completion = cmp.config.window.bordered({
 						border = vim.g.border,
-						winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None",
+						winhighlight = "Normal:Pmenu,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None",
 					}),
 					documentation = cmp.config.window.bordered({
 						border = vim.g.border,
-						winhighlight = "FloatBorder:NormalFloat",
+						winhighlight = "FloatBorder:FloatBorder",
+						max_width = 80,
 					}),
+				},
+				formatting = {
+					format = function(entry, vim_item)
+						if vim_item.menu and #vim_item.menu > 20 then
+							vim_item.menu = string.sub(vim_item.menu, 1, 20) .. "…"
+						end
+						return vim_item
+					end,
 				},
 				matching = {
 					disallow_partial_fuzzy_matching = false,
