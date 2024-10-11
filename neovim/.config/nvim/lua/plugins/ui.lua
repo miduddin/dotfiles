@@ -5,7 +5,6 @@ return {
 		priority = 1000,
 		config = function()
 			require("kanagawa").setup({
-				compile = true,
 				overrides = function(colors)
 					local theme = colors.theme
 					return {
@@ -22,7 +21,6 @@ return {
 				end,
 			})
 			vim.cmd([[colorscheme kanagawa]])
-			vim.api.nvim_set_hl(0, "@string.special.url", { undercurl = false, fg = "#7fb4ca" })
 		end,
 	},
 	{
@@ -45,16 +43,15 @@ return {
 	{
 		"stevearc/dressing.nvim",
 		event = "VeryLazy",
-		opts = { input = { start_in_insert = false } },
+		opts = {
+			input = { start_in_insert = false },
+			select = { backend = { "builtin" } },
+		},
 	},
 	{
-		"echasnovski/mini.notify",
+		"j-hui/fidget.nvim",
 		event = "VeryLazy",
-		config = function()
-			local notify = require("mini.notify")
-			notify.setup({ window = { winblend = 0 } })
-			vim.notify = notify.make_notify()
-		end,
+		opts = { notification = { override_vim_notify = true } },
 	},
 	{
 		"ojroques/nvim-bufdel",
