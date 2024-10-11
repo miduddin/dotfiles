@@ -7,7 +7,7 @@
             "keys": "alt+m"
         },
         {
-            "command": null,
+            "command": "unbound",
             "keys": "f11"
         },
         {
@@ -70,9 +70,25 @@
             "command": {
                 "action": "splitPane",
                 "split": "down",
+                "profile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}"
+            },
+            "keys": "alt+shift+d"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "down",
                 "splitMode": "duplicate"
             },
             "keys": "alt+d"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "split": "right",
+                "profile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}"
+            },
+            "keys": "alt+shift+n"
         },
         {
             "command": {
@@ -123,9 +139,10 @@
         "defaults": {
             "colorScheme": "KanagawaWave",
             "font": {
-                "face": "JetBrains Mono, Symbols Nerd Font",
+                "face": "Maple Mono, Symbols Nerd Font",
                 "features": {
-                    "calt": 0
+                    "ss01": 1,
+                    "ss02": 1
                 },
                 "size": 11
             },
