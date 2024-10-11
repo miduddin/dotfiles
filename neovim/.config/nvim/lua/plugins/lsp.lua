@@ -160,10 +160,6 @@ return {
 			luasnip.log.set_loglevel("error")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
-			local hl_pmenu = vim.api.nvim_get_hl(0, { name = "Pmenu" })
-			local hl_border = vim.api.nvim_get_hl(0, { name = "FloatBorder" })
-			vim.api.nvim_set_hl(0, "CmpCompletionBorder", { fg = hl_border.fg, bg = hl_pmenu.bg })
-
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -173,7 +169,7 @@ return {
 				window = {
 					completion = cmp.config.window.bordered({
 						border = vim.g.border,
-						winhighlight = "Normal:Pmenu,FloatBorder:CmpCompletionBorder,CursorLine:PmenuSel,Search:None",
+						winhighlight = "FloatBorder:FloatBorder",
 					}),
 					documentation = cmp.config.window.bordered({
 						border = vim.g.border,
