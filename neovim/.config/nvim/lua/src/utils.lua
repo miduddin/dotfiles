@@ -11,7 +11,6 @@ function M.write_cmd_output_to_split(obj, bufname)
 	vim.keymap.set("n", "q", "<Cmd>bd<CR>", { desc = "Close buffer", buffer = buf })
 
 	vim.api.nvim_buf_set_lines(buf, 0, -1, true, { "Running..." })
-	vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
 	vim.cmd("redraw")
 
 	local result = obj:wait()
@@ -31,9 +30,7 @@ function M.write_cmd_output_to_split(obj, bufname)
 		end
 	end
 
-	vim.api.nvim_set_option_value("modifiable", true, { buf = buf })
 	vim.api.nvim_buf_set_lines(buf, 0, -1, true, text)
-	vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
 end
 
 return M
