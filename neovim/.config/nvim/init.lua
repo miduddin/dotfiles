@@ -1,4 +1,5 @@
 require("config.options")
+require("src")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
@@ -32,6 +33,5 @@ require("lazy").setup({
 	rocks = { enabled = false },
 })
 
-require("src")
 require("config.keymaps")
 require("config.autocmds")

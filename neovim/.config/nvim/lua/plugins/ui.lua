@@ -1,29 +1,5 @@
 return {
 	{
-		"rebelot/kanagawa.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("kanagawa").setup({
-				overrides = function(colors)
-					local theme = colors.theme
-					return {
-						DiffDelete = { fg = "none", bg = theme.diff.delete },
-						DiffviewDiffDeleteDim = { fg = theme.ui.bg_p2 },
-						Folded = { bg = "none" },
-						Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
-						PmenuSbar = { bg = theme.ui.bg_m1 },
-						PmenuSel = { fg = "none", bg = theme.ui.bg_p2 },
-						PmenuThumb = { bg = theme.ui.bg_p2 },
-						Whitespace = { fg = "#454559" },
-						WinSeparator = { fg = theme.ui.float.fg_border },
-					}
-				end,
-			})
-			vim.cmd([[colorscheme kanagawa]])
-		end,
-	},
-	{
 		"stevearc/oil.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		keys = {
