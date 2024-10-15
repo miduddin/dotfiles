@@ -26,7 +26,7 @@ return {
 			neotest.setup({
 				adapters = {
 					require("neotest-golang")({
-						go_test_args = { "-count=1", "-race", "-timeout=10s" },
+						go_test_args = { "-count=1", "-timeout=10s" },
 					}),
 					require("neotest-phpunit")({
 						env = {
