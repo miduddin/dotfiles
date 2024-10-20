@@ -6,16 +6,6 @@ vim.lsp.set_log_level(vim.g.log_level)
 
 return {
 	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-			},
-		},
-	},
-	{ "Bilal2453/luvit-meta", lazy = true },
-	{
 		"williamboman/mason.nvim",
 		cmd = { "Mason" },
 		keys = {
@@ -130,6 +120,7 @@ return {
 				"lua-language-server",
 				"php-cs-fixer",
 				"php-debug-adapter",
+				"prettier",
 				"ruff",
 				"rust-analyzer",
 				"sqlfluff",
