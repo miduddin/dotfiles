@@ -11,8 +11,8 @@
     "border_implementation": "Windows",
     "border_width": 0,
     "cross_monitor_move_behaviour": "Insert",
-    "default_container_padding": 7,
-    "default_workspace_padding": 7,
+    "default_container_padding": 4,
+    "default_workspace_padding": 4,
     "float_rules": [
         {
             "id": "MozillaDialogClass",
