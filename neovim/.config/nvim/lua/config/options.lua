@@ -1,4 +1,4 @@
-vim.g.border = { " ", " ", " ", " ", " ", " ", " ", " " }
+vim.g.border = "rounded"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.log_level = vim.log.levels.OFF
