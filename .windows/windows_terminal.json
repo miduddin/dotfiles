@@ -69,10 +69,18 @@
         {
             "command": {
                 "action": "splitPane",
-                "split": "down",
-                "profile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}"
+                "profile": "Windows PowerShell",
+                "split": "down"
             },
             "keys": "alt+shift+d"
+        },
+        {
+            "command": {
+                "action": "splitPane",
+                "profile": "Windows PowerShell",
+                "split": "right"
+            },
+            "keys": "alt+shift+n"
         },
         {
             "command": {
@@ -81,14 +89,6 @@
                 "splitMode": "duplicate"
             },
             "keys": "alt+d"
-        },
-        {
-            "command": {
-                "action": "splitPane",
-                "split": "right",
-                "profile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}"
-            },
-            "keys": "alt+shift+n"
         },
         {
             "command": {
@@ -128,13 +128,8 @@
         }
     ],
     "copyFormatting": "none",
-    "defaultProfile": "{ece9aa19-68f6-5c2f-8d4a-720d0fe69c4a}",
+    "defaultProfile": "arch",
     "disableAnimations": true,
-    "newTabMenu": [
-        {
-            "type": "remainingProfiles"
-        }
-    ],
     "profiles": {
         "defaults": {
             "colorScheme": "KanagawaWave",
@@ -189,6 +184,5 @@
             "white": "#C8C093",
             "yellow": "#C0A36E"
         }
-    ],
-    "themes": []
+    ]
 }
