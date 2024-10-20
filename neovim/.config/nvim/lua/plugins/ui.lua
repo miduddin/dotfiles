@@ -50,4 +50,5 @@ return {
 			vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { link = "MiniTablineHidden" })
 		end,
 	},
+	-- { "norcalli/nvim-colorizer.lua", cmd = { "ColorizerToggle" } },
 }

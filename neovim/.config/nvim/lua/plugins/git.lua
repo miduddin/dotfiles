@@ -34,6 +34,11 @@ return {
 				file_panel = { { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close Diffview" } } },
 				view = { { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close Diffview" } } },
 			},
+			view = {
+				merge_tool = {
+					layout = "diff3_mixed",
+				},
+			},
 		},
 	},
 	{
