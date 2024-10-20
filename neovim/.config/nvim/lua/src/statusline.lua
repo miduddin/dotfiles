@@ -8,13 +8,11 @@ local function f(content, hl)
 	return string.format("%%#%s#%s", hl, content)
 end
 
-local hl_function = vim.api.nvim_get_hl(0, { name = "Function" })
-local hl_keyword = vim.api.nvim_get_hl(0, { name = "Keyword" })
-local hl_variable = vim.api.nvim_get_hl(0, { name = "@variable" })
+local theme = require("src.highlights")
 
-vim.api.nvim_set_hl(0, "StFilename", { bg = hl_function.fg, fg = "#000000", bold = true })
-vim.api.nvim_set_hl(0, "StBranch", { fg = hl_keyword.fg, bold = true })
-vim.api.nvim_set_hl(0, "StFiletype", { fg = hl_variable.fg })
+vim.api.nvim_set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
+vim.api.nvim_set_hl(0, "StBranch", { fg = theme.syn.keyword, bold = true })
+vim.api.nvim_set_hl(0, "StFiletype", { fg = theme.ui.fg })
 vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
 
 vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })
@@ -218,7 +216,7 @@ local function update_git_branch()
 	if not branch or branch == "" then
 		branch = ""
 	else
-		branch = " " .. branch:gsub("[%c%s]", "")
+		branch = "󰘬 " .. branch:gsub("[%c%s]", "")
 	end
 
 	vim.b.st_branch = f(branch, "StBranch")

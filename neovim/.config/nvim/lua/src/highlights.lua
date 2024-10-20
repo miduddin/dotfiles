@@ -1,5 +1,4 @@
 -- Based on https://github.com/rebelot/kanagawa.nvim
--- Simplified for faster load time.
 
 local config = {
 	undercurl = true,
@@ -10,158 +9,118 @@ local config = {
 	typeStyle = {},
 }
 
-local palette = {
-	-- Bg Shades
-	sumiInk0 = "#16161D",
-	sumiInk1 = "#181820",
-	sumiInk2 = "#1a1a22",
-	sumiInk3 = "#1F1F28",
-	sumiInk4 = "#2A2A37",
-	sumiInk5 = "#363646",
-	sumiInk6 = "#54546D", --fg
-	sumiInk7 = "#454559",
-
-	-- Popup and Floats
-	waveBlue1 = "#223249",
-	waveBlue2 = "#2D4F67",
-
-	-- Diff and Git
-	winterGreen = "#2B3328",
-	winterYellow = "#49443C",
-	winterRed = "#43242B",
-	winterBlue = "#252535",
-	autumnGreen = "#76946A",
-	autumnRed = "#C34043",
-	autumnYellow = "#DCA561",
-
-	-- Diag
-	samuraiRed = "#E82424",
-	roninYellow = "#FF9E3B",
-	waveAqua1 = "#6A9589",
-	dragonBlue = "#658594",
-
-	-- Fg and Comments
-	oldWhite = "#C8C093",
-	fujiWhite = "#DCD7BA",
-	fujiGray = "#727169",
-
-	oniViolet = "#957FB8",
-	oniViolet2 = "#b8b4d0",
-	crystalBlue = "#7E9CD8",
-	springViolet1 = "#938AA9",
-	springViolet2 = "#9CABCA",
-	springBlue = "#7FB4CA",
-	lightBlue = "#A3D4D5", -- unused yet
-	waveAqua2 = "#7AA89F", -- improve lightness: desaturated greenish Aqua
-
-	springGreen = "#98BB6C",
-	boatYellow1 = "#938056",
-	boatYellow2 = "#C0A36E",
-	carpYellow = "#E6C384",
-
-	sakuraPink = "#D27E99",
-	waveRed = "#E46876",
-	peachRed = "#FF5D62",
-	surimiOrange = "#FFA066",
-	katanaGray = "#717C7C",
+local colors = {
+	bg = "#1F1F28",
+	bg_cursorline = "#3A3A4B",
+	bg_float = "#16161D",
+	bg_gutter = "#2A2A37",
+	bg_visual = "#2D4F67",
+	comment = "#727169",
+	diag_error = "#E82424",
+	diag_hint = "#6A9589",
+	diag_info = "#658594",
+	diag_warn = "#FF9E3B",
+	diff_bg_add = "#2B3328",
+	diff_bg_change = "#29293B",
+	diff_bg_delete = "#43242B",
+	diff_bg_text = "#49443C",
+	diff_add = "#76946A",
+	diff_change = "#DCA561",
+	diff_delete = "#C34043",
+	fg = "#DCD7BA",
+	fg_border = "#54546D",
+	func = "#7E9CD8",
+	identifier = "#E6C384",
+	keyword = "#957FB8",
+	number = "#D27E99",
+	operator = "#C0A36E",
+	parameter = "#b8b4d0",
+	ret = "#E46876",
+	special = "#938AA9",
+	special1 = "#7FB4CA",
+	string = "#98BB6C",
+	type = "#7AA89F",
 }
 
-local theme = {
+local M = {
 	ui = {
-		fg = palette.fujiWhite,
-		fg_dim = palette.oldWhite,
-		fg_reverse = palette.waveBlue1,
-
-		bg_dim = palette.sumiInk1,
-		bg_gutter = palette.sumiInk4,
-
-		bg_m3 = palette.sumiInk0,
-		bg_m2 = palette.sumiInk1,
-		bg_m1 = palette.sumiInk2,
-		bg = palette.sumiInk3,
-		bg_p1 = palette.sumiInk4,
-		bg_p2 = palette.sumiInk5,
-
-		special = palette.springViolet1,
-		nontext = palette.sumiInk6,
-		whitespace = palette.sumiInk7,
-
-		bg_search = palette.waveBlue2,
-		bg_visual = palette.waveBlue1,
+		bg = colors.bg,
+		bg_cursorline = colors.bg_cursorline,
+		bg_float = colors.bg_float,
+		bg_gutter = colors.bg_gutter,
+		bg_visual = colors.bg_visual,
+		fg = colors.fg,
+		nontext = colors.fg_border,
+		special = colors.special,
 
 		pmenu = {
-			fg = palette.fujiWhite,
-			fg_sel = "none", -- This is important to make highlights pass-through
-			bg = palette.waveBlue1,
-			bg_sel = palette.waveBlue2,
-			bg_sbar = palette.waveBlue1,
-			bg_thumb = palette.waveBlue2,
+			bg = colors.bg_visual,
+			bg_sbar = colors.bg_visual,
+			bg_sel = colors.bg_visual,
+			bg_thumb = colors.bg_visual,
+			fg = colors.fg,
 		},
 		float = {
-			fg = palette.oldWhite,
-			bg = palette.sumiInk0,
-			fg_border = palette.sumiInk6,
-			bg_border = palette.sumiInk0,
+			bg = colors.bg_float,
+			bg_border = colors.bg_float,
+			fg = colors.fg,
+			fg_border = colors.fg_border,
 		},
 	},
 	syn = {
-		string = palette.springGreen,
-		variable = "none",
-		number = palette.sakuraPink,
-		constant = palette.surimiOrange,
-		identifier = palette.carpYellow,
-		parameter = palette.oniViolet2,
-		fun = palette.crystalBlue,
-		statement = palette.oniViolet,
-		keyword = palette.oniViolet,
-		operator = palette.boatYellow2,
-		preproc = palette.waveRed,
-		type = palette.waveAqua2,
-		regex = palette.boatYellow2,
-		deprecated = palette.katanaGray,
-		comment = palette.fujiGray,
-		punct = palette.springViolet2,
-		special1 = palette.springBlue,
-		special2 = palette.waveRed,
-		special3 = palette.peachRed,
-	},
-	vcs = {
-		added = palette.autumnGreen,
-		removed = palette.autumnRed,
-		changed = palette.autumnYellow,
+		comment = colors.comment,
+		constant = colors.diag_warn,
+		fun = colors.func,
+		identifier = colors.identifier,
+		keyword = colors.keyword,
+		number = colors.number,
+		operator = colors.operator,
+		parameter = colors.parameter,
+		preproc = colors.ret,
+		punct = colors.parameter,
+		regex = colors.operator,
+		ret = colors.ret,
+		special = colors.special1,
+		statement = colors.keyword,
+		string = colors.string,
+		type = colors.type,
 	},
 	diff = {
-		add = palette.winterGreen,
-		delete = palette.winterRed,
-		change = palette.winterBlue,
-		text = palette.winterYellow,
+		bg_add = colors.diff_bg_add,
+		bg_delete = colors.diff_bg_delete,
+		bg_change = colors.diff_bg_change,
+		bg_text = colors.diff_bg_text,
+
+		add = colors.diff_add,
+		delete = colors.diff_delete,
+		change = colors.diff_change,
 	},
 	diag = {
-		ok = palette.springGreen,
-		error = palette.samuraiRed,
-		warning = palette.roninYellow,
-		info = palette.dragonBlue,
-		hint = palette.waveAqua1,
+		ok = colors.string,
+		error = colors.diag_error,
+		warning = colors.diag_warn,
+		info = colors.diag_info,
+		hint = colors.diag_hint,
 	},
 	term = {
-		palette.sumiInk0, -- black
-		palette.autumnRed, -- red
-		palette.autumnGreen, -- green
-		palette.boatYellow2, -- yellow
-		palette.crystalBlue, -- blue
-		palette.oniViolet, -- magenta
-		palette.waveAqua1, -- cyan
-		palette.oldWhite, -- white
-		palette.fujiGray, -- bright black
-		palette.samuraiRed, -- bright red
-		palette.springGreen, -- bright green
-		palette.carpYellow, -- bright yellow
-		palette.springBlue, -- bright blue
-		palette.springViolet1, -- bright magenta
-		palette.waveAqua2, -- bright cyan
-		palette.fujiWhite, -- bright white
-		palette.surimiOrange, -- extended color 1
-		palette.peachRed, -- extended color 2
+		colors.bg_float, -- black
+		colors.diff_delete, -- red
+		colors.diff_add, -- green
+		colors.operator, -- yellow
+		colors.func, -- blue
+		colors.keyword, -- magenta
+		colors.diag_hint, -- cyan
+		colors.fg, -- white
+		colors.comment, -- bright black
+		colors.diag_error, -- bright red
+		colors.string, -- bright green
+		colors.identifier, -- bright yellow
+		colors.special1, -- bright blue
+		colors.special, -- bright magenta
+		colors.type, -- bright cyan
+		colors.fg, -- bright white
+		colors.diag_warn, -- extended color 1
+		colors.ret, -- extended color 2
 	},
 }
 
@@ -169,19 +128,19 @@ local set = vim.api.nvim_set_hl
 
 -- Built in
 set(0, "@attribute", { link = "Constant" })
-set(0, "@comment.error", { fg = theme.ui.fg, bg = theme.diag.error, bold = true })
-set(0, "@comment.note", { fg = theme.ui.fg_reverse, bg = theme.diag.hint, bold = true })
-set(0, "@comment.warning", { fg = theme.ui.fg_reverse, bg = theme.diag.warning, bold = true })
-set(0, "@constructor", { fg = theme.syn.special1 })
-set(0, "@constructor.lua", { fg = theme.syn.keyword })
-set(0, "@diff.delta", { fg = theme.vcs.changed })
-set(0, "@diff.minus", { fg = theme.vcs.removed })
-set(0, "@diff.plus", { fg = theme.vcs.added })
-set(0, "@keyword.exception", vim.tbl_extend("force", { fg = theme.syn.special3 }, config.statementStyle))
+set(0, "@comment.error", { fg = M.ui.fg, bg = M.diag.error, bold = true })
+set(0, "@comment.note", { fg = M.ui.bg, bg = M.diag.hint, bold = true })
+set(0, "@comment.warning", { fg = M.ui.bg, bg = M.diag.warning, bold = true })
+set(0, "@constructor", { fg = M.syn.special })
+set(0, "@constructor.lua", { fg = M.syn.keyword })
+set(0, "@diff.delta", { fg = M.diff.change })
+set(0, "@diff.minus", { fg = M.diff.delete })
+set(0, "@diff.plus", { fg = M.diff.add })
+set(0, "@keyword.exception", vim.tbl_extend("force", { fg = M.syn.ret }, config.statementStyle))
 set(0, "@keyword.import", { link = "PreProc" })
 set(0, "@keyword.luap", { link = "@string.regex" })
-set(0, "@keyword.operator", { fg = theme.syn.operator, bold = true })
-set(0, "@keyword.return", vim.tbl_extend("force", { fg = theme.syn.special3 }, config.keywordStyle))
+set(0, "@keyword.operator", { fg = M.syn.operator, bold = true })
+set(0, "@keyword.return", vim.tbl_extend("force", { fg = M.syn.ret }, config.keywordStyle))
 set(0, "@lsp.mod.readonly", { link = "Constant" })
 set(0, "@lsp.mod.typeHint", { link = "Type" })
 set(0, "@lsp.type.builtinConstant", { link = "@constant.builtin" })
@@ -195,7 +154,7 @@ set(0, "@lsp.type.selfParameter", { link = "@variable.builtin" })
 set(0, "@lsp.type.variable", { fg = "none" })
 set(0, "@lsp.typemod.function.builtin", { link = "@function.builtin" })
 set(0, "@lsp.typemod.function.defaultLibrary", { link = "@function.builtin" })
-set(0, "@lsp.typemod.function.readonly", { fg = theme.syn.fun, bold = true })
+set(0, "@lsp.typemod.function.readonly", { fg = M.syn.fun, bold = true })
 set(0, "@lsp.typemod.keyword.documentation", { link = "Special" })
 set(0, "@lsp.typemod.method.defaultLibrary", { link = "@function.builtin" })
 set(0, "@lsp.typemod.operator.controlFlow", { link = "@keyword.exception" })
@@ -216,166 +175,159 @@ set(0, "@markup.strikethrough", { strikethrough = true })
 set(0, "@markup.strong", { bold = true })
 set(0, "@markup.underline", { underline = true })
 set(0, "@operator", { link = "Operator" })
-set(0, "@punctuation.bracket", { fg = theme.syn.punct })
-set(0, "@punctuation.delimiter", { fg = theme.syn.punct })
-set(0, "@punctuation.special", { fg = theme.syn.special1 })
-set(0, "@string.escape", { fg = theme.syn.regex, bold = true })
-set(0, "@string.regexp", { fg = theme.syn.regex })
-set(0, "@string.special.symbol", { fg = theme.syn.identifier })
-set(0, "@string.special.url", { fg = theme.syn.special1, undercurl = true })
-set(0, "@tag.attribute", { fg = theme.syn.identifier })
-set(0, "@tag.delimiter", { fg = theme.syn.punct })
-set(0, "@variable", { fg = theme.ui.fg })
-set(0, "@variable.builtin", { fg = theme.syn.special2, italic = true })
-set(0, "@variable.member", { fg = theme.syn.identifier })
-set(0, "@variable.parameter", { fg = theme.syn.parameter })
+set(0, "@punctuation.bracket", { fg = M.syn.punct })
+set(0, "@punctuation.delimiter", { fg = M.syn.punct })
+set(0, "@punctuation.special", { fg = M.syn.special })
+set(0, "@string.escape", { fg = M.syn.regex, bold = true })
+set(0, "@string.regexp", { fg = M.syn.regex })
+set(0, "@string.special.symbol", { fg = M.syn.identifier })
+set(0, "@string.special.url", { fg = M.syn.special })
+set(0, "@tag.attribute", { fg = M.syn.identifier })
+set(0, "@tag.delimiter", { fg = M.syn.punct })
+set(0, "@variable", { fg = M.ui.fg })
+set(0, "@variable.builtin", { fg = M.syn.ret, italic = true })
+set(0, "@variable.member", { fg = M.syn.identifier })
+set(0, "@variable.parameter", { fg = M.syn.parameter })
 set(0, "Bold", { bold = true })
-set(0, "Boolean", { fg = theme.syn.constant, bold = true })
+set(0, "Boolean", { fg = M.syn.constant })
 set(0, "Character", { link = "String" })
-set(0, "ColorColumn", { bg = theme.ui.bg_p1 })
-set(0, "Comment", vim.tbl_extend("force", { fg = theme.syn.comment }, config.commentStyle))
-set(0, "Conceal", { fg = theme.ui.special, bold = true })
-set(0, "Constant", { fg = theme.syn.constant })
-set(0, "CurSearch", { fg = theme.ui.fg, bg = theme.ui.bg_search, bold = true })
-set(0, "Cursor", { fg = theme.ui.bg, bg = theme.ui.fg })
+set(0, "ColorColumn", { bg = M.ui.bg_gutter })
+set(0, "Comment", vim.tbl_extend("force", { fg = M.syn.comment }, config.commentStyle))
+set(0, "Conceal", { fg = M.ui.special, bold = true })
+set(0, "Constant", { fg = M.syn.constant })
+set(0, "CurSearch", { fg = M.ui.fg, bg = M.ui.bg_visual, bold = true })
+set(0, "Cursor", { fg = M.ui.bg, bg = M.ui.fg })
 set(0, "CursorColumn", { link = "CursorLine" })
 set(0, "CursorIM", { link = "Cursor" })
-set(0, "CursorLine", { bg = theme.ui.bg_p2 })
-set(0, "CursorLineNr", { fg = theme.diag.warning, bg = theme.ui.bg_gutter, bold = true })
-set(0, "Delimiter", { fg = theme.syn.punct })
-set(0, "DiagnosticError", { fg = theme.diag.error })
-set(0, "DiagnosticFloatingError", { fg = theme.diag.error })
-set(0, "DiagnosticFloatingHint", { fg = theme.diag.hint })
-set(0, "DiagnosticFloatingInfo", { fg = theme.diag.info })
-set(0, "DiagnosticFloatingOk", { fg = theme.diag.ok })
-set(0, "DiagnosticFloatingWarn", { fg = theme.diag.warning })
-set(0, "DiagnosticHint", { fg = theme.diag.hint })
-set(0, "DiagnosticInfo", { fg = theme.diag.info })
-set(0, "DiagnosticOk", { fg = theme.diag.ok })
-set(0, "DiagnosticSignError", { fg = theme.diag.error, bg = theme.ui.bg_gutter })
-set(0, "DiagnosticSignHint", { fg = theme.diag.hint, bg = theme.ui.bg_gutter })
-set(0, "DiagnosticSignInfo", { fg = theme.diag.info, bg = theme.ui.bg_gutter })
-set(0, "DiagnosticSignWarn", { fg = theme.diag.warning, bg = theme.ui.bg_gutter })
-set(0, "DiagnosticUnderlineError", { undercurl = config.undercurl, sp = theme.diag.error })
-set(0, "DiagnosticUnderlineHint", { undercurl = config.undercurl, sp = theme.diag.hint })
-set(0, "DiagnosticUnderlineInfo", { undercurl = config.undercurl, sp = theme.diag.info })
-set(0, "DiagnosticUnderlineWarn", { undercurl = config.undercurl, sp = theme.diag.warning })
+set(0, "CursorLine", { bg = M.ui.bg_cursorline })
+set(0, "CursorLineNr", { fg = M.diag.warning, bg = M.ui.bg_gutter, bold = true })
+set(0, "Delimiter", { fg = M.syn.punct })
+set(0, "DiagnosticError", { fg = M.diag.error })
+set(0, "DiagnosticFloatingError", { fg = M.diag.error })
+set(0, "DiagnosticFloatingHint", { fg = M.diag.hint })
+set(0, "DiagnosticFloatingInfo", { fg = M.diag.info })
+set(0, "DiagnosticFloatingOk", { fg = M.diag.ok })
+set(0, "DiagnosticFloatingWarn", { fg = M.diag.warning })
+set(0, "DiagnosticHint", { fg = M.diag.hint })
+set(0, "DiagnosticInfo", { fg = M.diag.info })
+set(0, "DiagnosticOk", { fg = M.diag.ok })
+set(0, "DiagnosticSignError", { fg = M.diag.error, bg = M.ui.bg_gutter })
+set(0, "DiagnosticSignHint", { fg = M.diag.hint, bg = M.ui.bg_gutter })
+set(0, "DiagnosticSignInfo", { fg = M.diag.info, bg = M.ui.bg_gutter })
+set(0, "DiagnosticSignWarn", { fg = M.diag.warning, bg = M.ui.bg_gutter })
+set(0, "DiagnosticUnderlineError", { undercurl = config.undercurl, sp = M.diag.error })
+set(0, "DiagnosticUnderlineHint", { undercurl = config.undercurl, sp = M.diag.hint })
+set(0, "DiagnosticUnderlineInfo", { undercurl = config.undercurl, sp = M.diag.info })
+set(0, "DiagnosticUnderlineWarn", { undercurl = config.undercurl, sp = M.diag.warning })
 set(0, "DiagnosticVirtualTextError", { link = "DiagnosticError" })
 set(0, "DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
 set(0, "DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
 set(0, "DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
-set(0, "DiagnosticWarn", { fg = theme.diag.warning })
-set(0, "DiffAdd", { bg = theme.diff.add })
-set(0, "DiffChange", { bg = theme.diff.change })
-set(0, "DiffDelete", { fg = "NONE", bg = theme.diff.delete })
-set(0, "DiffText", { bg = theme.diff.text })
-set(0, "Directory", { fg = theme.syn.fun })
-set(0, "EndOfBuffer", { fg = theme.ui.bg })
-set(0, "Error", { fg = theme.diag.error })
-set(0, "ErrorMsg", { fg = theme.diag.error })
-set(0, "Exception", { fg = theme.syn.special2 })
+set(0, "DiagnosticWarn", { fg = M.diag.warning })
+set(0, "DiffAdd", { bg = M.diff.bg_add })
+set(0, "DiffChange", { bg = M.diff.bg_change })
+set(0, "DiffDelete", { fg = "NONE", bg = M.diff.bg_delete })
+set(0, "DiffText", { bg = M.diff.bg_text })
+set(0, "Directory", { fg = M.syn.fun })
+set(0, "EndOfBuffer", { fg = M.ui.bg })
+set(0, "Error", { fg = M.diag.error })
+set(0, "ErrorMsg", { fg = M.diag.error })
+set(0, "Exception", { fg = M.syn.ret })
 set(0, "Float", { link = "Number" })
-set(0, "FloatBorder", { fg = theme.ui.float.fg_border, bg = theme.ui.float.bg_border })
-set(0, "FloatFooter", { fg = theme.ui.nontext, bg = theme.ui.float.bg_border })
-set(0, "FloatTitle", { fg = theme.ui.special, bg = theme.ui.float.bg_border, bold = true })
-set(0, "FoldColumn", { fg = theme.ui.nontext, bg = theme.ui.bg_gutter })
-set(0, "Folded", { fg = theme.ui.special, bg = "NONE" })
-set(0, "Function", vim.tbl_extend("force", { fg = theme.syn.fun }, config.functionStyle))
-set(0, "Identifier", { fg = theme.syn.identifier })
+set(0, "FloatBorder", { fg = M.ui.float.fg_border, bg = M.ui.float.bg_border })
+set(0, "FloatFooter", { fg = M.ui.nontext, bg = M.ui.float.bg_border })
+set(0, "FloatTitle", { fg = M.ui.special, bg = M.ui.float.bg_border, bold = true })
+set(0, "FoldColumn", { fg = M.ui.nontext, bg = M.ui.bg_gutter })
+set(0, "Folded", { fg = M.ui.special, bg = "NONE" })
+set(0, "Function", vim.tbl_extend("force", { fg = M.syn.fun }, config.functionStyle))
+set(0, "Identifier", { fg = M.syn.identifier })
 set(0, "Ignore", { link = "NonText" })
-set(0, "IncSearch", { fg = theme.ui.fg_reverse, bg = theme.diag.warning })
+set(0, "IncSearch", { fg = M.ui.bg, bg = M.diag.warning })
 set(0, "Italic", { italic = true })
-set(0, "Keyword", vim.tbl_extend("force", { fg = theme.syn.keyword }, config.keywordStyle))
-set(0, "LineNr", { fg = theme.ui.nontext, bg = theme.ui.bg_gutter })
-set(0, "LspCodeLens", { fg = theme.syn.comment })
+set(0, "Keyword", vim.tbl_extend("force", { fg = M.syn.keyword }, config.keywordStyle))
+set(0, "LineNr", { fg = M.ui.nontext, bg = M.ui.bg_gutter })
+set(0, "LspCodeLens", { fg = M.syn.comment })
 set(0, "LspReferenceRead", { link = "LspReferenceText" })
-set(0, "LspReferenceText", { bg = theme.diff.text })
-set(0, "LspReferenceWrite", { bg = theme.diff.text, underline = true })
-set(0, "LspSignatureActiveParameter", { fg = theme.diag.warning })
-set(0, "MatchParen", { fg = theme.diag.warning, bold = true })
-set(0, "ModeMsg", { fg = theme.diag.warning, bold = true })
-set(0, "MoreMsg", { fg = theme.diag.info })
-set(0, "MsgArea", vim.o.cmdheight == 0 and { link = "StatusLine" } or { fg = theme.ui.fg_dim })
-set(0, "MsgSeparator", { bg = vim.o.cmdheight == 0 and theme.ui.bg or theme.ui.bg_m3 })
-set(0, "NonText", { fg = theme.ui.nontext })
-set(0, "Normal", { fg = theme.ui.fg, bg = theme.ui.bg })
-set(0, "NormalFloat", { fg = theme.ui.float.fg, bg = theme.ui.float.bg })
+set(0, "LspReferenceText", { bg = M.diff.bg_text })
+set(0, "LspReferenceWrite", { bg = M.diff.bg_text, underline = true })
+set(0, "LspSignatureActiveParameter", { fg = M.diag.warning })
+set(0, "MatchParen", { fg = M.diag.warning, bold = true })
+set(0, "ModeMsg", { fg = M.diag.warning, bold = true })
+set(0, "MoreMsg", { fg = M.diag.info })
+set(0, "MsgArea", vim.o.cmdheight == 0 and { link = "StatusLine" } or { fg = M.ui.fg })
+set(0, "MsgSeparator", { bg = vim.o.cmdheight == 0 and M.ui.bg or M.ui.bg_float })
+set(0, "NonText", { fg = M.ui.nontext })
+set(0, "Normal", { fg = M.ui.fg, bg = M.ui.bg })
+set(0, "NormalFloat", { fg = M.ui.float.fg, bg = M.ui.float.bg })
 set(0, "NormalNC", { link = "Normal" })
-set(0, "Number", { fg = theme.syn.number })
-set(0, "Operator", { fg = theme.syn.operator })
-set(0, "Pmenu", { fg = theme.ui.shade0, bg = theme.ui.bg_p1 })
-set(0, "PmenuExtra", { fg = theme.ui.special, bg = theme.ui.pmenu.bg })
-set(0, "PmenuExtraSel", { fg = theme.ui.special, bg = theme.ui.pmenu.bg_sel })
-set(0, "PmenuKind", { fg = theme.ui.fg_dim, bg = theme.ui.pmenu.bg })
-set(0, "PmenuKindSel", { fg = theme.ui.fg_dim, bg = theme.ui.pmenu.bg_sel })
-set(0, "PmenuSbar", { bg = theme.ui.bg_m1 })
-set(0, "PmenuSel", { fg = "NONE", bg = theme.ui.bg_p2 })
-set(0, "PmenuThumb", { bg = theme.ui.bg_p2 })
-set(0, "PreProc", { fg = theme.syn.preproc })
+set(0, "Number", { fg = M.syn.number })
+set(0, "Operator", { fg = M.syn.operator })
+set(0, "Pmenu", { fg = M.ui.shade0, bg = M.ui.bg_gutter })
+set(0, "PmenuExtra", { fg = M.ui.special, bg = M.ui.pmenu.bg })
+set(0, "PmenuExtraSel", { fg = M.ui.special, bg = M.ui.pmenu.bg_sel })
+set(0, "PmenuKind", { fg = M.ui.fg, bg = M.ui.pmenu.bg })
+set(0, "PmenuKindSel", { fg = M.ui.fg, bg = M.ui.pmenu.bg_sel })
+set(0, "PmenuSbar", { bg = M.ui.bg_float })
+set(0, "PmenuSel", { fg = "NONE", bg = M.ui.bg_cursorline })
+set(0, "PmenuThumb", { bg = M.ui.bg_cursorline })
+set(0, "PreProc", { fg = M.syn.preproc })
 set(0, "Question", { link = "MoreMsg" })
-set(0, "QuickFixLine", { bg = theme.ui.bg_p1 })
-set(0, "Search", { fg = theme.ui.fg, bg = theme.ui.bg_search })
-set(0, "SignColumn", { fg = theme.ui.special, bg = theme.ui.bg_gutter })
-set(0, "Special", { fg = theme.syn.special1 })
-set(0, "SpecialKey", { fg = theme.ui.special })
-set(0, "SpellBad", { undercurl = config.undercurl, underline = not config.undercurl, sp = theme.diag.error })
-set(0, "SpellCap", { undercurl = config.undercurl, underline = not config.undercurl, sp = theme.diag.warning })
-set(0, "SpellLocal", { undercurl = config.undercurl, underline = not config.undercurl, sp = theme.diag.warning })
-set(0, "SpellRare", { undercurl = config.undercurl, underline = not config.undercurl, sp = theme.diag.warning })
-set(0, "Statement", vim.tbl_extend("force", { fg = theme.syn.statement }, config.statementStyle))
-set(0, "StatusLine", { fg = theme.ui.fg_dim, bg = theme.ui.bg_m3 })
-set(0, "StatusLineNC", { fg = theme.ui.nontext, bg = theme.ui.bg_m3 })
-set(0, "String", { fg = theme.syn.string })
-set(0, "Substitute", { fg = theme.ui.fg, bg = theme.vcs.removed })
-set(0, "TabLine", { bg = theme.ui.bg_m3, fg = theme.ui.special })
-set(0, "TabLineFill", { bg = theme.ui.bg })
-set(0, "TabLineSel", { fg = theme.ui.fg_dim, bg = theme.ui.bg_p1 })
-set(0, "Title", { fg = theme.syn.fun, bold = true })
-set(0, "Todo", { fg = theme.ui.fg_reverse, bg = theme.diag.info, bold = true })
-set(0, "Type", vim.tbl_extend("force", { fg = theme.syn.type }, config.typeStyle))
-set(0, "Underlined", { fg = theme.syn.special1, underline = true })
+set(0, "QuickFixLine", { bg = M.ui.bg_gutter })
+set(0, "Search", { fg = M.ui.fg, bg = M.ui.bg_visual })
+set(0, "SignColumn", { fg = M.ui.special, bg = M.ui.bg_gutter })
+set(0, "Special", { fg = M.syn.special })
+set(0, "SpecialKey", { fg = M.ui.special })
+set(0, "SpellBad", { undercurl = config.undercurl, underline = not config.undercurl, sp = M.diag.error })
+set(0, "SpellCap", { undercurl = config.undercurl, underline = not config.undercurl, sp = M.diag.warning })
+set(0, "SpellLocal", { undercurl = config.undercurl, underline = not config.undercurl, sp = M.diag.warning })
+set(0, "SpellRare", { undercurl = config.undercurl, underline = not config.undercurl, sp = M.diag.warning })
+set(0, "Statement", vim.tbl_extend("force", { fg = M.syn.statement }, config.statementStyle))
+set(0, "StatusLine", { fg = M.ui.fg, bg = M.ui.bg_float })
+set(0, "StatusLineNC", { fg = M.ui.nontext, bg = M.ui.bg_float })
+set(0, "String", { fg = M.syn.string })
+set(0, "Substitute", { fg = M.ui.fg, bg = M.diff.delete })
+set(0, "TabLine", { bg = M.ui.bg_float, fg = M.ui.special })
+set(0, "TabLineFill", { bg = M.ui.bg })
+set(0, "TabLineSel", { fg = M.ui.fg, bg = M.ui.bg_gutter })
+set(0, "Title", { fg = M.syn.fun, bold = true })
+set(0, "Todo", { fg = M.ui.bg, bg = M.diag.info, bold = true })
+set(0, "Type", vim.tbl_extend("force", { fg = M.syn.type }, config.typeStyle))
+set(0, "Underlined", { fg = M.syn.special, underline = true })
 set(0, "VertSplit", { link = "WinSeparator" })
-set(0, "Visual", { bg = theme.ui.bg_visual })
+set(0, "Visual", { bg = M.ui.bg_visual })
 set(0, "VisualNOS", { link = "Visual" })
-set(0, "WarningMsg", { fg = theme.diag.warning })
-set(0, "Whitespace", { fg = theme.ui.whitespace })
+set(0, "WarningMsg", { fg = M.diag.warning })
+set(0, "Whitespace", { fg = M.ui.bg_cursorline })
 set(0, "WildMenu", { link = "Pmenu" })
-set(0, "WinBar", { fg = theme.ui.fg_dim, bg = "NONE" })
-set(0, "WinBarNC", { fg = theme.ui.fg_dim, bg = "NONE" })
-set(0, "WinSeparator", { fg = theme.ui.float.fg_border, bg = "NONE" })
-set(0, "debugBreakpoint", { fg = theme.syn.special1, bg = theme.ui.bg_gutter })
-set(0, "debugPC", { bg = theme.diff.delete })
-set(0, "diffAdded", { fg = theme.vcs.added })
-set(0, "diffChanged", { fg = theme.vcs.changed })
-set(0, "diffDeleted", { fg = theme.vcs.removed })
-set(0, "diffNewFile", { fg = theme.vcs.added })
-set(0, "diffOldFile", { fg = theme.vcs.removed })
-set(0, "diffRemoved", { fg = theme.vcs.removed })
+set(0, "WinBar", { fg = M.ui.fg, bg = "NONE" })
+set(0, "WinBarNC", { fg = M.ui.fg, bg = "NONE" })
+set(0, "WinSeparator", { fg = M.ui.float.fg_border, bg = "NONE" })
+set(0, "debugBreakpoint", { fg = M.syn.special, bg = M.ui.bg_gutter })
+set(0, "debugPC", { bg = M.diff.bg_delete })
+set(0, "diffAdded", { fg = M.diff.add })
+set(0, "diffChanged", { fg = M.diff.change })
+set(0, "diffDeleted", { fg = M.diff.delete })
+set(0, "diffNewFile", { fg = M.diff.add })
+set(0, "diffOldFile", { fg = M.diff.delete })
+set(0, "diffRemoved", { fg = M.diff.delete })
 set(0, "lCursor", { link = "Cursor" })
-set(0, "markdownCode", { fg = theme.syn.string })
-set(0, "markdownCodeBlock", { fg = theme.syn.string })
+set(0, "markdownCode", { fg = M.syn.string })
+set(0, "markdownCodeBlock", { fg = M.syn.string })
 set(0, "markdownEscape", { fg = "NONE" })
 set(0, "qfFileName", { link = "Directory" })
 set(0, "qfLineNr", { link = "lineNr" })
 
 -- Plugins
-set(0, "CmpCompletion", { link = "Pmenu" })
-set(0, "CmpCompletionBorder", { fg = theme.ui.bg_search, bg = theme.ui.pmenu.bg })
-set(0, "CmpCompletionSbar", { link = "PmenuSbar" })
-set(0, "CmpCompletionSel", { fg = "NONE", bg = theme.ui.pmenu.bg_sel })
-set(0, "CmpCompletionThumb", { link = "PmenuThumb" })
-set(0, "CmpDocumentation", { link = "NormalFloat" })
-set(0, "CmpDocumentationBorder", { link = "FloatBorder" })
-set(0, "CmpItemAbbr", { fg = theme.ui.pmenu.fg })
-set(0, "CmpItemAbbrDeprecated", { fg = theme.syn.comment, strikethrough = true })
-set(0, "CmpItemAbbrMatch", { fg = theme.syn.fun })
+set(0, "CmpItemAbbr", { fg = M.ui.pmenu.fg })
+set(0, "CmpItemAbbrDeprecated", { fg = M.syn.comment, strikethrough = true })
+set(0, "CmpItemAbbrMatch", { fg = M.syn.fun })
 set(0, "CmpItemAbbrMatchFuzzy", { link = "CmpItemAbbrMatch" })
 set(0, "CmpItemKindClass", { link = "Type" })
 set(0, "CmpItemKindColor", { link = "Special" })
 set(0, "CmpItemKindConstant", { link = "Constant" })
 set(0, "CmpItemKindConstructor", { link = "@constructor" })
 set(0, "CmpItemKindCopilot", { link = "String" })
-set(0, "CmpItemKindDefault", { fg = theme.ui.fg_dim })
+set(0, "CmpItemKindDefault", { fg = M.ui.fg })
 set(0, "CmpItemKindEnum", { link = "Type" })
 set(0, "CmpItemKindEnumMember", { link = "Constant" })
 set(0, "CmpItemKindEvent", { link = "Type" })
@@ -392,76 +344,78 @@ set(0, "CmpItemKindProperty", { link = "@property" })
 set(0, "CmpItemKindReference", { link = "Special" })
 set(0, "CmpItemKindSnippet", { link = "Special" })
 set(0, "CmpItemKindStruct", { link = "Type" })
-set(0, "CmpItemKindText", { fg = theme.ui.fg })
+set(0, "CmpItemKindText", { fg = M.ui.fg })
 set(0, "CmpItemKindTypeParameter", { link = "Type" })
 set(0, "CmpItemKindUnit", { link = "Number" })
 set(0, "CmpItemKindValue", { link = "String" })
-set(0, "CmpItemKindVariable", { fg = theme.ui.fg_dim })
-set(0, "CmpItemMenu", { fg = theme.ui.fg_dim })
-set(0, "DapUIBreakpointsCurrentLine", { fg = theme.syn.identifier, bold = true })
+set(0, "CmpItemKindVariable", { fg = M.ui.fg })
+set(0, "CmpItemMenu", { fg = M.ui.fg })
+set(0, "DapUIBreakpointsCurrentLine", { fg = M.syn.identifier, bold = true })
 set(0, "DapUIBreakpointsDisabledLine", { link = "Comment" })
-set(0, "DapUIBreakpointsInfo", { fg = theme.diag.info })
+set(0, "DapUIBreakpointsInfo", { fg = M.diag.info })
 set(0, "DapUIBreakpointsPath", { link = "Directory" })
-set(0, "DapUIDecoration", { fg = theme.ui.float.fg_border })
-set(0, "DapUIFloatBorder", { fg = theme.ui.float.fg_border })
-set(0, "DapUILineNumber", { fg = theme.syn.special1 })
-set(0, "DapUIModifiedValue", { fg = theme.syn.special1, bold = true })
-set(0, "DapUIPlayPause", { fg = theme.syn.string })
-set(0, "DapUIRestart", { fg = theme.syn.string })
+set(0, "DapUIDecoration", { fg = M.ui.float.fg_border })
+set(0, "DapUIFloatBorder", { fg = M.ui.float.fg_border })
+set(0, "DapUILineNumber", { fg = M.syn.special })
+set(0, "DapUIModifiedValue", { fg = M.syn.special, bold = true })
+set(0, "DapUIPlayPause", { fg = M.syn.string })
+set(0, "DapUIRestart", { fg = M.syn.string })
 set(0, "DapUIScope", { link = "Special" })
-set(0, "DapUISource", { fg = theme.syn.special2 })
-set(0, "DapUIStepBack", { fg = theme.syn.special1 })
-set(0, "DapUIStepInto", { fg = theme.syn.special1 })
-set(0, "DapUIStepOut", { fg = theme.syn.special1 })
-set(0, "DapUIStepOver", { fg = theme.syn.special1 })
-set(0, "DapUIStop", { fg = theme.diag.error })
-set(0, "DapUIStoppedThread", { fg = theme.syn.special1 })
-set(0, "DapUIThread", { fg = theme.syn.identifier })
+set(0, "DapUISource", { fg = M.syn.ret })
+set(0, "DapUIStepBack", { fg = M.syn.special })
+set(0, "DapUIStepInto", { fg = M.syn.special })
+set(0, "DapUIStepOut", { fg = M.syn.special })
+set(0, "DapUIStepOver", { fg = M.syn.special })
+set(0, "DapUIStop", { fg = M.diag.error })
+set(0, "DapUIStoppedThread", { fg = M.syn.special })
+set(0, "DapUIThread", { fg = M.syn.identifier })
 set(0, "DapUIType", { link = "Type" })
-set(0, "DapUIUnavailable", { fg = theme.syn.comment })
-set(0, "DapUIWatchesEmpty", { fg = theme.diag.error })
-set(0, "DapUIWatchesError", { fg = theme.diag.error })
-set(0, "DapUIWatchesValue", { fg = theme.syn.identifier })
-set(0, "DiffviewDiffDeleteDim", { fg = theme.ui.bg_p2 })
-set(0, "LazyProgressTodo", { fg = theme.ui.nontext })
+set(0, "DapUIUnavailable", { fg = M.syn.comment })
+set(0, "DapUIWatchesEmpty", { fg = M.diag.error })
+set(0, "DapUIWatchesError", { fg = M.diag.error })
+set(0, "DapUIWatchesValue", { fg = M.syn.identifier })
+set(0, "DiffviewDiffDeleteDim", { fg = M.ui.bg_cursorline })
+set(0, "LazyProgressTodo", { fg = M.ui.nontext })
 set(0, "MiniDiffOverAdd", { link = "DiffAdd" })
 set(0, "MiniDiffOverChange", { link = "DiffText" })
 set(0, "MiniDiffOverContext", { link = "DiffChange" })
 set(0, "MiniDiffOverDelete", { link = "DiffDelete" })
-set(0, "MiniDiffSignAdd", { fg = theme.vcs.added, bg = theme.ui.bg_gutter })
-set(0, "MiniDiffSignChange", { fg = theme.vcs.changed, bg = theme.ui.bg_gutter })
-set(0, "MiniDiffSignDelete", { fg = theme.vcs.removed, bg = theme.ui.bg_gutter })
-set(0, "MiniTablineCurrent", { fg = theme.ui.fg_dim, bg = theme.ui.bg_p1, bold = true })
+set(0, "MiniDiffSignAdd", { fg = M.diff.add, bg = M.ui.bg_gutter })
+set(0, "MiniDiffSignChange", { fg = M.diff.change, bg = M.ui.bg_gutter })
+set(0, "MiniDiffSignDelete", { fg = M.diff.delete, bg = M.ui.bg_gutter })
+set(0, "MiniTablineCurrent", { fg = M.ui.fg, bg = M.ui.bg_gutter, bold = true })
 set(0, "MiniTablineFill", { link = "TabLineFill" })
-set(0, "MiniTablineHidden", { fg = theme.ui.special, bg = theme.ui.bg_m3 })
-set(0, "MiniTablineModifiedCurrent", { fg = theme.ui.bg_p1, bg = theme.ui.fg_dim, bold = true })
-set(0, "MiniTablineModifiedHidden", { fg = theme.ui.bg_m3, bg = theme.ui.special })
-set(0, "MiniTablineModifiedVisible", { fg = theme.ui.bg_m3, bg = theme.ui.special, bold = true })
-set(0, "MiniTablineTabpagesection", { fg = theme.ui.fg, bg = theme.ui.bg_search, bold = true })
-set(0, "MiniTablineVisible", { fg = theme.ui.special, bg = theme.ui.bg_m3, bold = true })
-set(0, "NeotestAdapterName", { fg = theme.syn.special3 })
-set(0, "NeotestDir", { fg = theme.syn.fun })
-set(0, "NeotestExpandMarker", { fg = theme.syn.punct, bold = true })
-set(0, "NeotestFailed", { fg = theme.diag.error })
-set(0, "NeotestFile", { fg = theme.syn.fun })
+set(0, "MiniTablineHidden", { fg = M.ui.special, bg = M.ui.bg_float })
+set(0, "MiniTablineModifiedCurrent", { fg = M.ui.bg_gutter, bg = M.ui.fg, bold = true })
+set(0, "MiniTablineModifiedHidden", { fg = M.ui.bg_float, bg = M.ui.special })
+set(0, "MiniTablineModifiedVisible", { fg = M.ui.bg_float, bg = M.ui.special, bold = true })
+set(0, "MiniTablineTabpagesection", { fg = M.ui.fg, bg = M.ui.bg_visual, bold = true })
+set(0, "MiniTablineVisible", { fg = M.ui.special, bg = M.ui.bg_float, bold = true })
+set(0, "NeotestAdapterName", { fg = M.syn.ret })
+set(0, "NeotestDir", { fg = M.syn.fun })
+set(0, "NeotestExpandMarker", { fg = M.syn.punct, bold = true })
+set(0, "NeotestFailed", { fg = M.diag.error })
+set(0, "NeotestFile", { fg = M.syn.fun })
 set(0, "NeotestFocused", { bold = true, underline = true })
-set(0, "NeotestIndent", { fg = theme.ui.special, bold = true })
-set(0, "NeotestMarked", { fg = theme.diag.warning, italic = true })
-set(0, "NeotestNamespace", { fg = theme.syn.fun })
-set(0, "NeotestPassed", { fg = theme.diag.ok })
-set(0, "NeotestRunning", { fg = theme.vcs.changed })
-set(0, "NeotestSkipped", { fg = theme.syn.special1 })
-set(0, "NeotestTarget", { fg = theme.syn.special3 })
-set(0, "NeotestTest", { fg = theme.ui.float.fg })
-set(0, "NeotestUnknown", { fg = theme.syn.deprecated })
-set(0, "NeotestWatching", { fg = theme.vcs.changed })
-set(0, "NeotestWinSelect", { fg = theme.diag.hint })
+set(0, "NeotestIndent", { fg = M.ui.special, bold = true })
+set(0, "NeotestMarked", { fg = M.diag.warning, italic = true })
+set(0, "NeotestNamespace", { fg = M.syn.fun })
+set(0, "NeotestPassed", { fg = M.diag.ok })
+set(0, "NeotestRunning", { fg = M.diff.change })
+set(0, "NeotestSkipped", { fg = M.syn.special })
+set(0, "NeotestTarget", { fg = M.syn.ret })
+set(0, "NeotestTest", { fg = M.ui.float.fg })
+set(0, "NeotestUnknown", { fg = M.syn.comment })
+set(0, "NeotestWatching", { fg = M.diff.change })
+set(0, "NeotestWinSelect", { fg = M.diag.hint })
 set(0, "TreesitterContext", { link = "Folded" })
-set(0, "TreesitterContextLineNumber", { fg = theme.ui.special, bg = theme.ui.bg_gutter })
-set(0, "healthError", { fg = theme.diag.error })
-set(0, "healthSuccess", { fg = theme.diag.ok })
-set(0, "healthWarning", { fg = theme.diag.warning })
+set(0, "TreesitterContextLineNumber", { fg = M.ui.special, bg = M.ui.bg_gutter })
+set(0, "healthError", { fg = M.diag.error })
+set(0, "healthSuccess", { fg = M.diag.ok })
+set(0, "healthWarning", { fg = M.diag.warning })
 
-for i, tcolor in ipairs(theme.term) do
+for i, tcolor in ipairs(M.term) do
 	vim.g["terminal_color_" .. i - 1] = tcolor
 end
+
+return M

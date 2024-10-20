@@ -38,7 +38,7 @@ return {
 				},
 			},
 			html = {},
-			lua_ls = {},
+			lua_ls = { settings = { Lua = { semantic = { enable = false } } } },
 			intelephense = {},
 			ruff = {},
 			rust_analyzer = {},

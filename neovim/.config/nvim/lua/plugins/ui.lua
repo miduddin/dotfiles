@@ -50,4 +50,12 @@ return {
 			vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { link = "MiniTablineHidden" })
 		end,
 	},
+	-- {
+	-- 	"NStefan002/screenkey.nvim",
+	-- 	cmd = { "Screenkey" },
+	-- 	opts = {
+	-- 		win_opts = { title = "Input" },
+	-- 	},
+	-- },
+	-- { "norcalli/nvim-colorizer.lua", cmd = { "ColorizerToggle" } },
 }
