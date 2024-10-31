@@ -4,10 +4,8 @@ local map = function(rhs, lhs, mode, opts)
 end
 
 map("*``", "*", "n", { desc = "Search current word without going next" })
-map("<C-W>h", "<C-H>", "n", { desc = "Go to left window" })
-map("<C-W>j", "<C-J>", "n", { desc = "Go to below window" })
-map("<C-W>k", "<C-K>", "n", { desc = "Go to above window" })
-map("<C-W>l", "<C-L>", "n", { desc = "Go to right window" })
+map("5j", "<C-J>", { "n", "v" }, { desc = "5 line down" })
+map("5k", "<C-K>", { "n", "v" }, { desc = "5 line up " })
 map("<Cmd>Lazy<CR>", "<Leader>l", "n", { desc = "Lazy" })
 map("<Cmd>bn<CR>", "<S-L>", "n", { desc = "Next buffer" })
 map("<Cmd>bp<CR>", "<S-H>", "n", { desc = "Prev buffer" })
