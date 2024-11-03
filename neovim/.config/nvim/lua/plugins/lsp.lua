@@ -20,7 +20,7 @@ return {
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
+			"saghen/blink.cmp",
 			"williamboman/mason.nvim",
 		},
 		opts = {
@@ -81,7 +81,6 @@ return {
 			require("lspconfig.ui.windows").default_options.border = vim.g.border
 
 			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local handlers = {
 				["textDocument/hover"] = vim.lsp.with(
 					vim.lsp.handlers.hover,
@@ -94,10 +93,10 @@ return {
 			}
 
 			for k, v in pairs(opts) do
-				lspconfig[k].setup(vim.tbl_deep_extend("force", {
-					capabilities = capabilities,
+				lspconfig[k].setup({
+					capabilities = require("blink.cmp").get_lsp_capabilities(v),
 					handlers = handlers,
-				}, v))
+				})
 			end
 		end,
 	},
@@ -136,74 +135,32 @@ return {
 		},
 	},
 	{
-		"iguanacucumber/magazine.nvim",
-		name = "nvim-cmp",
+		"saghen/blink.cmp",
+		dependencies = "rafamadriz/friendly-snippets",
 		event = { "InsertEnter" },
-		dependencies = {
-			"L3MON4D3/LuaSnip",
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
-			"hrsh7th/cmp-buffer",
+		version = "v0.*",
+		opts = {
+			highlight = { use_nvim_cmp_as_default = true },
+			keymap = {
+				preset = "default",
+				["<CR>"] = { "select_and_accept", "fallback" },
+				["<C-K>"] = { "select_prev", "fallback" },
+				["<C-J>"] = { "select_next", "fallback" },
+			},
+			trigger = { signature_help = { enabled = true } },
+			windows = {
+				autocomplete = {
+					border = vim.g.border,
+				},
+				documentation = {
+					auto_show = true,
+					border = vim.g.border,
+				},
+				signature_help = {
+					border = vim.g.border,
+				},
+			},
 		},
-		config = function()
-			local cmp = require("cmp")
-			local luasnip = require("luasnip")
-			luasnip.log.set_loglevel("error")
-			require("luasnip.loaders.from_vscode").lazy_load()
-
-			cmp.setup({
-				snippet = {
-					expand = function(args)
-						require("luasnip").lsp_expand(args.body)
-					end,
-				},
-				window = {
-					completion = cmp.config.window.bordered({ border = vim.g.border }),
-					documentation = cmp.config.window.bordered({ border = vim.g.border, max_width = 80 }),
-				},
-				formatting = {
-					format = function(entry, vim_item)
-						if vim_item.menu and #vim_item.menu > 20 then
-							vim_item.menu = string.sub(vim_item.menu, 1, 20) .. "…"
-						end
-						return vim_item
-					end,
-				},
-				matching = {
-					disallow_partial_fuzzy_matching = false,
-				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-D>"] = cmp.mapping.scroll_docs(-4),
-					["<C-F>"] = cmp.mapping.scroll_docs(4),
-					["<C-J>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-					["<C-K>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<C-E>"] = cmp.mapping.abort(),
-					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.locally_jumpable(1) then
-							luasnip.jump(1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if luasnip.locally_jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" },
-				}, {
-					{ name = "buffer" },
-				}),
-			})
-		end,
 	},
 	{
 		"stevearc/conform.nvim",
