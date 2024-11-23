@@ -1,3 +1,5 @@
+vim.opt.fillchars:append({ stl = "─", stlnc = "─" })
+
 ---@param content string
 ---@param hl string
 ---@return string
@@ -12,8 +14,8 @@ local theme = require("src.highlights")
 
 vim.api.nvim_set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
 vim.api.nvim_set_hl(0, "StBranch", { fg = theme.syn.keyword, bold = true })
-vim.api.nvim_set_hl(0, "StFiletype", { fg = theme.ui.fg })
 vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
+vim.api.nvim_set_hl(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
 
 vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })
 vim.api.nvim_set_hl(0, "StatusLineNC", { link = "WinSeparator" })
@@ -44,12 +46,11 @@ local function update_statusline()
 	local diagnostics = vim.b.st_diagnostics or ""
 	local diff = vim.b.st_diff or ""
 	local branch = vim.b.st_branch or ""
-	local filetype = vim.b.st_filetype or ""
 	local position = vim.b.st_position or ""
 
 	local s = vim.tbl_filter(function(v)
 		return v ~= ""
-	end, { filename, diagnostics, "%=", diff, branch, filetype, position })
+	end, { filename, diagnostics, "%=", diff, branch, position })
 
 	update_windows_statusline(vim.fn.bufnr(), table.concat(s, space))
 end
@@ -224,36 +225,12 @@ local function update_git_branch()
 end
 vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = update_git_branch })
 
-local function update_filetype()
-	if not is_file_buffer() then
-		return
-	end
-
-	local filename = vim.fn.expand("%:t")
-	if filename == "" or filename == "." then
-		vim.b.st_filetype = ""
-		return update_statusline()
-	end
-
-	local filetype = vim.bo.filetype
-	if filetype == "" then
-		filetype = "file"
-	end
-
-	local icon, iconhl = require("nvim-web-devicons").get_icon(filename, nil, { default = true })
-	filetype = f(icon .. " ", iconhl) .. f(filetype, "StFiletype")
-
-	vim.b.st_filetype = filetype
-	update_statusline()
-end
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = update_filetype })
-
 local function update_position()
 	if not is_file_buffer() then
 		return
 	end
 
-	vim.b.st_position = f(" %3l:%-3c %3p%% ", "StPosition")
+	vim.b.st_position = "%#StPosition# %3l,%-7(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
 	update_statusline()
 end
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = update_position })
