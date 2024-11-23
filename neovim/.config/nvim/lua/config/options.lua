@@ -11,7 +11,7 @@ vim.opt.cursorline = true
 vim.opt.cursorlineopt = "number"
 vim.opt.diffopt:append({ "algorithm:patience", "linematch:70" })
 vim.opt.expandtab = false
-vim.opt.fillchars = { eob = " ", diff = "╱", stl = "─", stlnc = "─" }
+vim.opt.fillchars:append({ eob = " ", diff = "╱" })
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "indent"
