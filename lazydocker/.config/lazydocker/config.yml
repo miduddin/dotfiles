@@ -1,7 +1,5 @@
 # yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
 
-commandTemplates:
-  dockerCompose: docker compose
 gui:
   returnImmediately: true
   showBottomLine: false
