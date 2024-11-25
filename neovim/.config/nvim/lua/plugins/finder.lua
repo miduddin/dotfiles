@@ -6,7 +6,7 @@ return {
 			{ "<Leader><Space>", "<Cmd>FzfLua files<CR>", desc = "Find files" },
 			{ "<M-b>", "<Cmd>FzfLua buffers<CR>", desc = "Open buffers" },
 			{ "<Leader>fb", "<Cmd>FzfLua git_branches<CR>", desc = "Git branches" },
-			{ "<Leader>fc", "<Cmd>FzfLua blines<CR>", desc = "Current buffer fuzzy find" },
+			{ "<Leader>fc", "<Cmd>FzfLua git_commits<CR>", desc = "Git commits" },
 			{ "<Leader>ff", "<Cmd>FzfLua git_bcommits<CR>", desc = "File history" },
 			{ "<Leader>fg", "<Cmd>FzfLua live_grep<CR>", desc = "Live grep" },
 			{ "<Leader>fh", "<Cmd>FzfLua help_tags<CR>", desc = "Help pages" },
@@ -45,6 +45,24 @@ return {
 						["enter"] = function(selected)
 							vim.cmd("DiffviewOpen " .. selected[1])
 						end,
+					},
+				},
+				bcommits = {
+					fzf_opts = {
+						["--exact"] = true,
+						["--no-sort"] = true,
+					},
+				},
+				commits = {
+					actions = {
+						["enter"] = function(selected)
+							local sha = selected[1]:match("[^ ]+")
+							vim.cmd("DiffviewOpen " .. sha .. "^.." .. sha)
+						end,
+					},
+					fzf_opts = {
+						["--exact"] = true,
+						["--no-sort"] = true,
 					},
 				},
 			},
