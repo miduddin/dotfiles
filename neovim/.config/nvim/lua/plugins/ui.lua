@@ -15,6 +15,16 @@ return {
 			},
 			view_options = { show_hidden = true },
 		},
+		config = function(_, opts)
+			require("oil").setup(opts)
+			vim.api.nvim_set_hl(0, "OilDirHidden", { link = "OilDir" })
+			vim.api.nvim_set_hl(0, "OilSocketHidden", { link = "OilSocket" })
+			vim.api.nvim_set_hl(0, "OilLinkHidden", { link = "OilLink" })
+			vim.api.nvim_set_hl(0, "OilOrphanLinkHidden", { link = "OilOrphanLink" })
+			vim.api.nvim_set_hl(0, "OilLinkTargetHidden", { link = "OilLinkTarget" })
+			vim.api.nvim_set_hl(0, "OilOrphanLinkTargetHidden", { link = "OilOrphanLinkTarget" })
+			vim.api.nvim_set_hl(0, "OilFileHidden", { link = "OilFile" })
+		end,
 	},
 	{
 		"stevearc/dressing.nvim",
