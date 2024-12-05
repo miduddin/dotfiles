@@ -21,7 +21,7 @@ alt + shift + f        : komorebic toggle-monocle
 alt + shift + m        : komorebic cycle-move-to-monitor next
 alt + shift + oem_3    : komorebic cycle-move-to-monitor next
 alt + shift + o        : komorebic reload-configuration
-alt + shift + r        : komorebic stop; komorebic start
+alt + shift + r        : komorebic stop --whkd; komorebic start --whkd
 alt + shift + return   : komorebic promote
 alt + shift + t        : komorebic retile
 alt + x                : komorebic flip-layout horizontal
