@@ -150,6 +150,34 @@ return {
 			luasnip.log.set_loglevel("error")
 			require("luasnip.loaders.from_vscode").lazy_load()
 
+			local kinds = {
+				Text = "󰉿 ",
+				Method = "󰊕 ",
+				Function = "󰊕 ",
+				Constructor = "󰒓 ",
+				Field = "󰜢 ",
+				Variable = "󰆦 ",
+				Property = "󰖷 ",
+				Class = "󱡠 ",
+				Interface = "󱡠 ",
+				Struct = "󱡠 ",
+				Module = "󰅩 ",
+				Unit = "󰪚 ",
+				Value = "󰦨 ",
+				Enum = "󰦨 ",
+				EnumMember = "󰦨 ",
+				Keyword = "󰻾 ",
+				Constant = "󰏿 ",
+				Snippet = "󱄽 ",
+				Color = "󰏘 ",
+				File = "󰈔 ",
+				Reference = "󰬲 ",
+				Folder = "󰉋 ",
+				Event = "󱐋 ",
+				Operator = "󰪚 ",
+				TypeParameter = "󰬛 ",
+			}
+
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -168,10 +196,12 @@ return {
 					}),
 				},
 				formatting = {
-					format = function(entry, vim_item)
+					fields = { "kind", "abbr" },
+					format = function(_, vim_item)
 						if vim_item.menu and #vim_item.menu > 20 then
 							vim_item.menu = string.sub(vim_item.menu, 1, 20) .. "…"
 						end
+						vim_item.kind = kinds[vim_item.kind] or ""
 						return vim_item
 					end,
 				},
