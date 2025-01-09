@@ -60,6 +60,25 @@ return {
 			vim.api.nvim_set_hl(0, "MiniTablineModifiedHidden", { link = "MiniTablineHidden" })
 		end,
 	},
+	{
+		"stevearc/quicker.nvim",
+		ft = "qf",
+		opts = { opts = { number = true } },
+	},
+	{
+		"kevinhwang91/nvim-bqf",
+		ft = "qf",
+		opts = {
+			preview = {
+				winblend = 0,
+			},
+		},
+		config = function(_, opts)
+			require("bqf").setup(opts)
+			vim.api.nvim_set_hl(0, "BqfPreviewFloat", { link = "NormalFloat" })
+			vim.api.nvim_set_hl(0, "BqfPreviewTitle", { link = "FloatTitle" })
+		end,
+	},
 	-- {
 	-- 	"NStefan002/screenkey.nvim",
 	-- 	cmd = { "Screenkey" },
