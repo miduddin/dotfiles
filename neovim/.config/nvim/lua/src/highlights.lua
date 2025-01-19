@@ -69,7 +69,7 @@ local M = {
 	},
 	syn = {
 		comment = colors.comment,
-		constant = colors.diag_warn,
+		constant = colors.fg,
 		fun = colors.func,
 		identifier = colors.identifier,
 		keyword = colors.keyword,
@@ -189,7 +189,7 @@ set(0, "@variable.builtin", { fg = M.syn.ret, italic = true })
 set(0, "@variable.member", { fg = M.syn.identifier })
 set(0, "@variable.parameter", { fg = M.syn.parameter })
 set(0, "Bold", { bold = true })
-set(0, "Boolean", { fg = M.syn.constant })
+set(0, "Boolean", { fg = M.syn.number })
 set(0, "Character", { link = "String" })
 set(0, "ColorColumn", { bg = M.ui.bg_gutter })
 set(0, "Comment", vim.tbl_extend("force", { fg = M.syn.comment }, config.commentStyle))
