@@ -1,5 +1,6 @@
 /* Hide unused elements */
 #alltabs-button,
+#forward-button[disabled="true"],
 #identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon-box,
 #identity-box[pageproxystate="valid"].verifiedDomain #identity-icon-box,
 #pageAction-urlbar-_testpilot-containers,
@@ -10,13 +11,9 @@
 #unified-extensions-button,
 #userContext-icons,
 .tab-close-button,
-.tab-icon-overlay {
-  display: none !important;
-}
-
-/* Remove blank space left of tab bar */
+.tab-icon-overlay,
 .titlebar-spacer {
-  width: 0px !important;
+  display: none !important;
 }
 
 /* Hide mute button on tab */
@@ -26,7 +23,7 @@
 
 /* One line header */
 :root {
-  --nav-bar-width: clamp(0px, 50vw, 480px);
+  --nav-bar-width: clamp(0px, 50vw, 450px);
 }
 #TabsToolbar {
   margin-left: var(--nav-bar-width) !important;
