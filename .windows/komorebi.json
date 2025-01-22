@@ -1,8 +1,7 @@
 {
-    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.30/schema.json",
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.33/schema.json",
     "app_specific_configuration_path": "$Env:USERPROFILE/applications.json",
-    "border": true,
-    "border_implementation": "Windows",
+    "border": false,
     "border_width": 0,
     "cross_monitor_move_behaviour": "Insert",
     "default_container_padding": 4,
@@ -11,6 +10,11 @@
         {
             "id": "MozillaDialogClass",
             "kind": "Class",
+            "matching_strategy": "Equals"
+        },
+        {
+            "id": "noita.exe",
+            "kind": "Exe",
             "matching_strategy": "Equals"
         }
     ],
