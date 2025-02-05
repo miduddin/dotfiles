@@ -42,6 +42,13 @@ return {
 			intelephense = {},
 			ruff = {},
 			rust_analyzer = {},
+			spectral = {
+				filetypes = { "yaml.openapi", "json.openapi" },
+				settings = {
+					rulesetFile = ".spectral.yaml",
+					validateLanguages = { "yaml.openapi", "json.openapi" },
+				},
+			},
 			tailwindcss = { filetypes = { "html" } },
 			taplo = {},
 			golangci_lint_ls = {},
@@ -122,6 +129,7 @@ return {
 				"prettier",
 				"ruff",
 				"rust-analyzer",
+				"spectral-language-server",
 				"sqlfluff",
 				"sqlfmt",
 				"stylua",
