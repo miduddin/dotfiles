@@ -37,13 +37,6 @@ return {
 		},
 	},
 	{
-		"miduddin/openingh.nvim",
-		branch = "dev",
-		keys = {
-			{ "<Leader>gof", "<Cmd>OpenInGHFileLines<CR>", desc = "Open file in browser", mode = { "n", "v" } },
-		},
-	},
-	{
 		"echasnovski/mini.diff",
 		event = { "BufReadPre", "BufNewFile" },
 		config = function()
