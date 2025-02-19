@@ -27,28 +27,6 @@ return {
 		end,
 	},
 	{
-		"stevearc/dressing.nvim",
-		event = "VeryLazy",
-		opts = {
-			input = { start_in_insert = false },
-			select = { backend = { "builtin" } },
-		},
-	},
-	{
-		"j-hui/fidget.nvim",
-		event = "VeryLazy",
-		opts = { notification = { override_vim_notify = true } },
-	},
-	{
-		"ojroques/nvim-bufdel",
-		keys = {
-			{ "<Leader>ba", "<Cmd>BufDelAll<CR>", desc = "Close all buffers" },
-			{ "<Leader>bd", "<Cmd>BufDel<CR>", desc = "Close current buffer" },
-			{ "<Leader>bo", "<Cmd>BufDelOthers<CR>", desc = "Close other buffers" },
-		},
-		opts = { quit = false },
-	},
-	{
 		"echasnovski/mini.tabline",
 		lazy = false,
 		opts = {},
@@ -78,6 +56,34 @@ return {
 			vim.api.nvim_set_hl(0, "BqfPreviewFloat", { link = "NormalFloat" })
 			vim.api.nvim_set_hl(0, "BqfPreviewTitle", { link = "FloatTitle" })
 		end,
+	},
+	{
+		"folke/snacks.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<Leader>ba", "<Cmd>lua Snacks.bufdelete.all()<CR>", desc = "Close all buffers" },
+			{ "<Leader>bd", "<Cmd>lua Snacks.bufdelete.delete()<CR>", desc = "Close current buffer" },
+			{ "<Leader>bo", "<Cmd>lua Snacks.bufdelete.other()<CR>", desc = "Close other buffers" },
+			{ "<Leader>gof", "<Cmd>lua Snacks.gitbrowse.open()<CR>", desc = "Open in git web", mode = { "n", "v" } },
+		},
+		opts = {
+			gitbrowse = { enabled = true },
+			input = { enabled = true },
+			notifier = { enabled = true },
+			picker = { enabled = true },
+
+			styles = {
+				input = {
+					relative = "cursor",
+					row = -3,
+					col = 0,
+					width = 30,
+					keys = {
+						i_esc = false,
+					},
+				},
+			},
+		},
 	},
 	-- {
 	-- 	"NStefan002/screenkey.nvim",
