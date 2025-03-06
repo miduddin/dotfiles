@@ -10,15 +10,11 @@
 #translations-button,
 #unified-extensions-button,
 #userContext-icons,
+.tab-audio-button,
 .tab-close-button,
 .tab-icon-overlay,
 .titlebar-spacer {
   display: none !important;
-}
-
-/* Hide mute button on tab */
-.tab-icon-image {
-  opacity: 1 !important;
 }
 
 /* One line header */
