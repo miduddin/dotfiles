@@ -10,7 +10,7 @@ k9s:
     defaultsToFullScreen: false
     enableMouse: false
     headless: false
-    logoless: false
+    logoless: true
     noIcons: false
     reactive: false
     skin: kanagawa
