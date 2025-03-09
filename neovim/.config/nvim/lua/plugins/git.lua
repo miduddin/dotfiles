@@ -36,17 +36,4 @@ return {
 			},
 		},
 	},
-	{
-		"echasnovski/mini.diff",
-		event = { "BufReadPre", "BufNewFile" },
-		config = function()
-			require("mini.diff").setup({
-				view = {
-					priority = 1,
-					style = "sign",
-					signs = { add = "┃", change = "┃", delete = "_" },
-				},
-			})
-		end,
-	},
 }
