@@ -84,6 +84,9 @@ local function update_filename()
 	elseif vim.startswith(filename, "term:") then
 		vim.b.st_filename = format_filename(vim.split(filename, ":")[3])
 		return update_statusline()
+	elseif vim.startswith(filename, "[dap-repl") then
+		vim.b.st_filename = format_filename("DAP REPL")
+		return update_statusline()
 	elseif vim.startswith(filename, "oil:") then
 		vim.b.st_filename = format_filename(string.gsub(filename, "oil://", "Files: "))
 		return update_statusline()
