@@ -62,9 +62,7 @@ return {
 
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = { "neotest-summary" },
-				callback = function(ev)
-					vim.keymap.set("n", "q", neotest.summary.close, { buffer = ev.buf })
-				end,
+				callback = function(ev) vim.keymap.set("n", "q", neotest.summary.close, { buffer = ev.buf }) end,
 			})
 		end,
 	},
@@ -76,9 +74,7 @@ return {
 				"<Leader>dB",
 				function()
 					vim.ui.input({ prompt = "Breakpoint condition" }, function(input)
-						if input ~= nil then
-							require("dap").set_breakpoint(input)
-						end
+						if input ~= nil then require("dap").set_breakpoint(input) end
 					end)
 				end,
 				desc = "Breakpoint Condition",
@@ -180,18 +176,10 @@ return {
 			})
 
 			local dap = require("dap")
-			dap.listeners.before.attach.dapui_config = function()
-				dapui.open()
-			end
-			dap.listeners.before.launch.dapui_config = function()
-				dapui.open()
-			end
-			dap.listeners.before.event_terminated.dapui_config = function()
-				dapui.close()
-			end
-			dap.listeners.before.event_exited.dapui_config = function()
-				dapui.close()
-			end
+			dap.listeners.before.attach.dapui_config = function() dapui.open() end
+			dap.listeners.before.launch.dapui_config = function() dapui.open() end
+			dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
+			dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
 		end,
 	},
 }
