@@ -16,7 +16,24 @@
             "id": "noita.exe",
             "kind": "Exe",
             "matching_strategy": "Equals"
-        }
+        },
+        {
+            "id": "GLFW30",
+            "kind": "Class",
+            "matching_strategy": "Equals"
+        },
+        [
+            {
+                "kind": "Exe",
+                "id": "obs64.exe",
+                "matching_strategy": "Equals"
+            },
+            {
+                "kind": "Title",
+                "id": "OBS ",
+                "matching_strategy": "DoesNotStartWith"
+            }
+        ]
     ],
     "monitors": [
         {
