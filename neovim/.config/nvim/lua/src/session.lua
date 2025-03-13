@@ -8,14 +8,10 @@ local function session_file()
 end
 
 local function save_session()
-	if vim.fn.argc() == 0 then
-		vim.cmd("mks! " .. session_file())
-	end
+	if vim.fn.argc() == 0 then vim.cmd("mks! " .. session_file()) end
 end
 vim.api.nvim_create_autocmd("VimLeavePre", { callback = save_session })
 
-local function load_session()
-	vim.cmd("so " .. session_file())
-end
+local function load_session() vim.cmd("so " .. session_file()) end
 
 vim.keymap.set("n", "<Leader>sl", load_session, { desc = "Load last session" })

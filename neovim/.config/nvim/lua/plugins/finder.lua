@@ -42,9 +42,7 @@ return {
 			git = {
 				branches = {
 					actions = {
-						["enter"] = function(selected)
-							vim.cmd("DiffviewOpen " .. selected[1])
-						end,
+						["enter"] = function(selected) vim.cmd("DiffviewOpen " .. selected[1]) end,
 					},
 				},
 				bcommits = {

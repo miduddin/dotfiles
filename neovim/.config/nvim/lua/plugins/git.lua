@@ -7,9 +7,7 @@ return {
 				"<Leader>gd",
 				function()
 					local ref = vim.fn.input({ prompt = "Compare with ref: ", cancelreturn = ".." })
-					if ref ~= ".." then
-						vim.cmd("DiffviewOpen " .. ref)
-					end
+					if ref ~= ".." then vim.cmd("DiffviewOpen " .. ref) end
 				end,
 				desc = "Diff with ref...",
 			},
@@ -24,9 +22,7 @@ return {
 			enhanced_diff_hl = true,
 			hooks = {
 				diff_buf_win_enter = function(_, _, ctx)
-					if ctx.layout_name:match("^diff3") then
-						vim.opt_local.winhl = "DiffDelete:DiffviewDiffDeleteDim"
-					end
+					if ctx.layout_name:match("^diff3") then vim.opt_local.winhl = "DiffDelete:DiffviewDiffDeleteDim" end
 				end,
 			},
 			keymaps = {

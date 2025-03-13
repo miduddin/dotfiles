@@ -4,9 +4,7 @@ vim.opt.fillchars:append({ stl = "─", stlnc = "─" })
 ---@param hl string
 ---@return string
 local function f(content, hl)
-	if content == "" then
-		return ""
-	end
+	if content == "" then return "" end
 	return string.format("%%#%s#%s", hl, content)
 end
 
@@ -23,9 +21,7 @@ vim.api.nvim_set_hl(0, "StatusLineNC", { link = "WinSeparator" })
 local space = "%*  "
 
 ---@return boolean
-local function is_file_buffer()
-	return vim.bo.buftype == ""
-end
+local function is_file_buffer() return vim.bo.buftype == "" end
 
 ---@param bufnr integer
 ---@param statusline string
@@ -48,18 +44,14 @@ local function update_statusline()
 	local branch = vim.b.st_branch or ""
 	local position = vim.b.st_position or ""
 
-	local s = vim.tbl_filter(function(v)
-		return v ~= ""
-	end, { filename, diagnostics, "%=", diff, branch, position })
+	local s = vim.tbl_filter(function(v) return v ~= "" end, { filename, diagnostics, "%=", diff, branch, position })
 
 	update_windows_statusline(vim.fn.bufnr(), table.concat(s, space))
 end
 
 ---@param filename string
 ---@return string
-local function format_filename(filename)
-	return f(" " .. filename .. " %*", "StFilename")
-end
+local function format_filename(filename) return f(" " .. filename .. " %*", "StFilename") end
 
 local function update_filename()
 	local filetype = vim.bo.filetype
@@ -101,9 +93,7 @@ local function update_filename()
 			return update_statusline()
 		end
 		local sha, file = gits[2]:match("^([^/]+)/(.+)")
-		if sha ~= nil then
-			filename = sha:sub(1, 8) .. ": " .. file
-		end
+		if sha ~= nil then filename = sha:sub(1, 8) .. ": " .. file end
 		vim.b.st_filename = format_filename(filename)
 		return update_statusline()
 	end
@@ -114,9 +104,7 @@ end
 vim.api.nvim_create_autocmd({ "BufWinEnter", "TermOpen" }, { callback = update_filename })
 
 local function update_diagnostics()
-	if not is_file_buffer() then
-		return
-	end
+	if not is_file_buffer() then return end
 
 	local diagnostics = vim.diagnostic.get(0)
 	local count = { 0, 0, 0, 0 }
@@ -126,21 +114,13 @@ local function update_diagnostics()
 
 	local strings = {}
 	local n = count[vim.diagnostic.severity.ERROR]
-	if n > 0 then
-		table.insert(strings, f("E:" .. n, "DiagnosticError"))
-	end
+	if n > 0 then table.insert(strings, f("E:" .. n, "DiagnosticError")) end
 	n = count[vim.diagnostic.severity.WARN]
-	if n > 0 then
-		table.insert(strings, f("W:" .. n, "DiagnosticWarn"))
-	end
+	if n > 0 then table.insert(strings, f("W:" .. n, "DiagnosticWarn")) end
 	n = count[vim.diagnostic.severity.INFO]
-	if n > 0 then
-		table.insert(strings, f("I:" .. n, "DiagnosticInfo"))
-	end
+	if n > 0 then table.insert(strings, f("I:" .. n, "DiagnosticInfo")) end
 	n = count[vim.diagnostic.severity.HINT]
-	if n > 0 then
-		table.insert(strings, f("H:" .. n, "DiagnosticHint"))
-	end
+	if n > 0 then table.insert(strings, f("H:" .. n, "DiagnosticHint")) end
 
 	vim.b.st_diagnostics = table.concat(strings, " ")
 	update_statusline()
@@ -149,9 +129,7 @@ vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, { callback = update_diagnos
 
 -- Reference: https://github.com/nvim-lualine/lualine.nvim/blob/6a40b530539d2209f7dc0492f3681c8c126647ad/lua/lualine/components/diff/git_diff.lua#L59
 local function update_git_diff()
-	if not is_file_buffer() then
-		return
-	end
+	if not is_file_buffer() then return end
 
 	local output = vim.system({
 		"git",
@@ -196,15 +174,9 @@ local function update_git_diff()
 	end
 
 	local strings = {}
-	if added > 0 then
-		table.insert(strings, f(" " .. added, "diffAdded"))
-	end
-	if changed > 0 then
-		table.insert(strings, f(" " .. changed, "diffChanged"))
-	end
-	if deleted > 0 then
-		table.insert(strings, f(" " .. deleted, "diffDeleted"))
-	end
+	if added > 0 then table.insert(strings, f(" " .. added, "diffAdded")) end
+	if changed > 0 then table.insert(strings, f(" " .. changed, "diffChanged")) end
+	if deleted > 0 then table.insert(strings, f(" " .. deleted, "diffDeleted")) end
 
 	vim.b.st_diff = table.concat(strings, " ")
 	update_statusline()
@@ -212,9 +184,7 @@ end
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, { callback = update_git_diff })
 
 local function update_git_branch()
-	if not is_file_buffer() then
-		return
-	end
+	if not is_file_buffer() then return end
 
 	local branch = vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, { text = true }):wait().stdout
 	if not branch or branch == "" then
@@ -229,9 +199,7 @@ end
 vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = update_git_branch })
 
 local function update_position()
-	if not is_file_buffer() then
-		return
-	end
+	if not is_file_buffer() then return end
 
 	vim.b.st_position = "%#StPosition# %3l,%-7(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
 	update_statusline()

@@ -1,7 +1,5 @@
 -- reorder arguments just so it looks better when sorted.
-local map = function(rhs, lhs, mode, opts)
-	vim.keymap.set(mode, lhs, rhs, opts)
-end
+local map = function(rhs, lhs, mode, opts) vim.keymap.set(mode, lhs, rhs, opts) end
 
 map("*``", "*", "n", { desc = "Search current word without going next" })
 map("5j", "<C-J>", { "n", "v" }, { desc = "5 line down" })
@@ -88,11 +86,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		map(vim.lsp.buf.rename, "<Leader>cr", "n", { desc = "Rename", buffer = ev.buf })
 		map(vim.lsp.buf.signature_help, "<C-S>", "i", { desc = "LSP signature help", buffer = ev.buf })
 		map(vim.lsp.buf.type_definition, "gD", { "n" }, { desc = "LSP type definition" })
-		map(function()
-			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
-		end, "<Leader>ci", "n", { desc = "Toggle inlay hint", buffer = ev.buf })
-		map(function()
-			vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
-		end, "<Leader>cd", "n", { desc = "Toggle diagnostics", buffer = ev.buf })
+		map(
+			function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
+			end,
+			"<Leader>ci",
+			"n",
+			{ desc = "Toggle inlay hint", buffer = ev.buf }
+		)
+		map(
+			function() vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf }) end,
+			"<Leader>cd",
+			"n",
+			{ desc = "Toggle diagnostics", buffer = ev.buf }
+		)
 	end,
 })
