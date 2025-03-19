@@ -2,8 +2,14 @@ local wezterm = require("wezterm")
 local action = wezterm.action
 
 return {
-	font = wezterm.font("JetBrains Mono"),
-	harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+	font = wezterm.font("Maple Mono"),
+	font_rules = {
+		{
+			intensity = "Bold",
+			font = wezterm.font({ family = "Maple Mono", weight = "Bold" }),
+		},
+	},
+	harfbuzz_features = { "ss01=1", "ss02=1" },
 
 	window_close_confirmation = "NeverPrompt",
 	hide_tab_bar_if_only_one_tab = true,
@@ -65,6 +71,11 @@ return {
 			key = "l",
 			mods = "ALT|SHIFT",
 			action = action.AdjustPaneSize({ "Right", 5 }),
+		},
+		{
+			key = "m",
+			mods = "ALT",
+			action = action.TogglePaneZoomState,
 		},
 	},
 
