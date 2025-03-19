@@ -4,67 +4,63 @@
     "actions": [
         {
             "command": "togglePaneZoom",
-            "keys": "alt+m"
-        },
-        {
-            "command": "unbound",
-            "keys": "f11"
+            "id": "User.togglePaneZoom"
         },
         {
             "command": {
                 "action": "moveFocus",
                 "direction": "down"
             },
-            "keys": "alt+j"
+            "id": "User.moveFocus.down"
         },
         {
             "command": {
                 "action": "moveFocus",
                 "direction": "left"
             },
-            "keys": "alt+h"
+            "id": "User.moveFocus.left"
         },
         {
             "command": {
                 "action": "moveFocus",
                 "direction": "right"
             },
-            "keys": "alt+l"
+            "id": "User.moveFocus.right"
         },
         {
             "command": {
                 "action": "moveFocus",
                 "direction": "up"
             },
-            "keys": "alt+k"
+            "id": "User.moveFocus.up"
         },
         {
             "command": {
                 "action": "resizePane",
                 "direction": "down"
             },
-            "keys": "alt+shift+j"
+            "id": "User.resizePane.down"
         },
         {
             "command": {
                 "action": "resizePane",
                 "direction": "left"
             },
-            "keys": "alt+shift+h"
+            "id": "User.resizePane.left"
         },
         {
             "command": {
                 "action": "resizePane",
                 "direction": "right"
             },
-            "keys": "alt+shift+l"
+            "id": "User.resizePane.right"
         },
         {
             "command": {
                 "action": "resizePane",
                 "direction": "up"
             },
-            "keys": "alt+shift+k"
+            "id": "User.resizePane.up"
         },
         {
             "command": {
@@ -72,7 +68,7 @@
                 "profile": "Windows PowerShell",
                 "split": "down"
             },
-            "keys": "alt+shift+d"
+            "id": "User.splitPane.down.ps"
         },
         {
             "command": {
@@ -80,7 +76,7 @@
                 "profile": "Windows PowerShell",
                 "split": "right"
             },
-            "keys": "alt+shift+n"
+            "id": "User.splitPane.right.ps"
         },
         {
             "command": {
@@ -88,7 +84,7 @@
                 "split": "down",
                 "splitMode": "duplicate"
             },
-            "keys": "alt+d"
+            "id": "User.splitPane.down"
         },
         {
             "command": {
@@ -96,40 +92,114 @@
                 "split": "right",
                 "splitMode": "duplicate"
             },
-            "keys": "alt+n"
+            "id": "User.splitPane.right"
         },
         {
             "command": {
                 "action": "swapPane",
                 "direction": "down"
             },
-            "keys": "ctrl+alt+j"
+            "id": "User.swapPane.down"
         },
         {
             "command": {
                 "action": "swapPane",
                 "direction": "left"
             },
-            "keys": "ctrl+alt+h"
+            "id": "User.swapPane.left"
         },
         {
             "command": {
                 "action": "swapPane",
                 "direction": "right"
             },
-            "keys": "ctrl+alt+l"
+            "id": "User.swapPane.right"
         },
         {
             "command": {
                 "action": "swapPane",
                 "direction": "up"
             },
-            "keys": "ctrl+alt+k"
+            "id": "User.swapPane.up"
         }
     ],
     "copyFormatting": "none",
     "defaultProfile": "arch",
     "disableAnimations": true,
+    "keybindings": [
+        {
+            "id": "",
+            "keys": "f11"
+        },
+        {
+            "id": "User.moveFocus.down",
+            "keys": "alt+j"
+        },
+        {
+            "id": "User.moveFocus.left",
+            "keys": "alt+h"
+        },
+        {
+            "id": "User.moveFocus.right",
+            "keys": "alt+l"
+        },
+        {
+            "id": "User.moveFocus.up",
+            "keys": "alt+k"
+        },
+        {
+            "id": "User.resizePane.down",
+            "keys": "alt+shift+j"
+        },
+        {
+            "id": "User.resizePane.left",
+            "keys": "alt+shift+h"
+        },
+        {
+            "id": "User.resizePane.right",
+            "keys": "alt+shift+l"
+        },
+        {
+            "id": "User.resizePane.up",
+            "keys": "alt+shift+k"
+        },
+        {
+            "id": "User.splitPane.down",
+            "keys": "alt+d"
+        },
+        {
+            "id": "User.splitPane.down.ps",
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": "User.splitPane.right",
+            "keys": "alt+n"
+        },
+        {
+            "id": "User.splitPane.right.ps",
+            "keys": "alt+shift+n"
+        },
+        {
+            "id": "User.swapPane.down",
+            "keys": "ctrl+alt+j"
+        },
+        {
+            "id": "User.swapPane.left",
+            "keys": "ctrl+alt+h"
+        },
+        {
+            "id": "User.swapPane.right",
+            "keys": "ctrl+alt+l"
+        },
+        {
+            "id": "User.swapPane.up",
+            "keys": "ctrl+alt+k"
+        },
+        {
+            "id": "User.togglePaneZoom",
+            "keys": "alt+m"
+        }
+    ],
     "profiles": {
         "defaults": {
             "colorScheme": "KanagawaWave",
@@ -137,13 +207,16 @@
                 "face": "Maple Mono, Symbols Nerd Font",
                 "features": {
                     "ss01": 1,
-                    "ss02": 1
+                    "ss02": 1,
+                    "ss04": 1,
+                    "ss06": 1
                 },
                 "size": 11
             },
             "intenseTextStyle": "bold",
             "padding": "3,3,0,0",
-            "scrollbarState": "hidden"
+            "scrollbarState": "hidden",
+            "suppressApplicationTitle": true
         },
         "list": [
             {
