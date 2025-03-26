@@ -51,7 +51,17 @@ return {
 			},
 			tailwindcss = { filetypes = { "html" } },
 			taplo = {},
-			golangci_lint_ls = {},
+			golangci_lint_ls = {
+				init_options = {
+					command = {
+						"golangci-lint",
+						"run",
+						"--output.json.path=stdout",
+						"--show-stats=false",
+						"--issues-exit-code=1",
+					},
+				},
+			},
 			ts_ls = {},
 			gopls = {
 				settings = {
