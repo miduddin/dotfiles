@@ -7,8 +7,6 @@ map("5k", "<C-K>", { "n", "v" }, { desc = "5 line up " })
 map("<Cmd>Lazy<CR>", "<Leader>l", "n", { desc = "Lazy" })
 map("<Cmd>bn<CR>", "<S-L>", "n", { desc = "Next buffer" })
 map("<Cmd>bp<CR>", "<S-H>", "n", { desc = "Prev buffer" })
-map("<Cmd>cnext<CR>", "]q", "n", { desc = "Next quickfix item" })
-map("<Cmd>cprev<CR>", "[q", "n", { desc = "Previous quickfix item" })
 map("<Cmd>noh<CR><Esc>", "<Esc>", { "n", "t" }, { desc = "Esc + clear search highlight" })
 map("<Cmd>set wrap!<CR>", "<Leader>w", "n", { desc = "Toggle word wrap" })
 map("<Cmd>tabclose<CR>", "<Leader><tab>d", "n", { desc = "Close tab" })
@@ -73,32 +71,26 @@ map(function()
 end, "<Leader>gW", "n", { desc = "Diff visible windows" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
 		map(vim.diagnostic.open_float, "<Leader>ce", "n", { desc = "Diagnostics (floating)", buffer = ev.buf })
-		map(vim.diagnostic.setqflist, "<Leader>x", "n", { desc = "Diagnostics (quickfix list)" })
-		map(vim.lsp.buf.code_action, "<Leader>ca", { "n", "v" }, { desc = "Code action", buffer = ev.buf })
-		map(vim.lsp.buf.definition, "gd", { "n" }, { desc = "LSP definition" })
-		map(vim.lsp.buf.hover, "K", "n", { desc = "Hover", buffer = ev.buf })
-		map(vim.lsp.buf.implementation, "gi", { "n" }, { desc = "LSP implementations" })
-		map(vim.lsp.buf.references, "gr", { "n" }, { desc = "LSP references" })
-		map(vim.lsp.buf.rename, "<F2>", "n", { desc = "Rename", buffer = ev.buf })
-		map(vim.lsp.buf.rename, "<Leader>cr", "n", { desc = "Rename", buffer = ev.buf })
-		map(vim.lsp.buf.signature_help, "<C-S>", "i", { desc = "LSP signature help", buffer = ev.buf })
-		map(vim.lsp.buf.type_definition, "gD", { "n" }, { desc = "LSP type definition" })
-		map(
-			function()
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
-			end,
-			"<Leader>ci",
-			"n",
-			{ desc = "Toggle inlay hint", buffer = ev.buf }
-		)
-		map(
-			function() vim.diagnostic.enable(not vim.diagnostic.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf }) end,
-			"<Leader>cd",
-			"n",
-			{ desc = "Toggle diagnostics", buffer = ev.buf }
-		)
+		map(vim.diagnostic.setqflist, "<Leader>x", "n", { desc = "Diagnostics (quickfix list)", buffer = ev.buf })
+		map(function()
+			local opts = { bufnr = ev.buf }
+			local current_state = vim.diagnostic.is_enabled(opts)
+			vim.diagnostic.enable(not current_state, opts)
+		end, "<Leader>cD", "n", { desc = "Toggle diagnostics", buffer = ev.buf })
+		map(function()
+			local current_state = vim.diagnostic.config().virtual_lines
+			vim.diagnostic.config({ virtual_text = current_state, virtual_lines = not current_state })
+		end, "<Leader>cd", "n", { desc = "Toggle diagnostics virtual lines", buffer = ev.buf })
+
+		map(vim.lsp.buf.definition, "grd", { "n" }, { desc = "LSP definition", buffer = ev.buf })
+		map(vim.lsp.buf.type_definition, "grD", { "n" }, { desc = "LSP type definition", buffer = ev.buf })
+		map(function() vim.lsp.buf.hover({ max_width = 82 }) end, "K", "n", { desc = "LSP Hover", buffer = ev.buf })
+		map(function()
+			local opts = { bufnr = ev.buf }
+			local current_state = vim.lsp.inlay_hint.is_enabled(opts)
+			vim.lsp.inlay_hint.enable(not current_state, opts)
+		end, "grh", "n", { desc = "Toggle inlay hint", buffer = ev.buf })
 	end,
 })
