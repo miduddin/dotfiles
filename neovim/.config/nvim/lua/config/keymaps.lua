@@ -22,8 +22,8 @@ map('"+y', "<Leader>y", { "n", "v" }, { desc = "Yank to clipboard" })
 
 map(function()
 	local topline = vim.fn.winsaveview().topline
-	vim.cmd("norm zcV")
-	vim.cmd("foldc!")
+	vim.cmd("norm zc")
+	vim.api.nvim_cmd({ cmd = "foldc", bang = true, range = { vim.fn.line(".") } }, {})
 	vim.cmd("norm zvzc")
 	vim.fn.winrestview({ topline = topline })
 end, "zC", "n", { desc = "Fold all children" })
