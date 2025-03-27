@@ -1,6 +1,6 @@
 vim.diagnostic.config({
-	float = { border = vim.g.border },
 	jump = { float = true },
+	virtual_text = true,
 })
 vim.lsp.set_log_level(vim.g.log_level)
 
@@ -13,7 +13,6 @@ return {
 		},
 		opts = {
 			log_level = vim.g.log_level,
-			ui = { border = vim.g.border },
 		},
 	},
 	{
@@ -94,26 +93,10 @@ return {
 			},
 		},
 		config = function(_, opts)
-			require("lspconfig.ui.windows").default_options.border = vim.g.border
-
 			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			local handlers = {
-				["textDocument/hover"] = vim.lsp.with(
-					vim.lsp.handlers.hover,
-					{ border = vim.g.border, max_width = 80 }
-				),
-				["textDocument/signatureHelp"] = vim.lsp.with(
-					vim.lsp.handlers.signature_help,
-					{ border = vim.g.border, max_width = 80 }
-				),
-			}
-
 			for k, v in pairs(opts) do
-				lspconfig[k].setup(vim.tbl_deep_extend("force", {
-					capabilities = capabilities,
-					handlers = handlers,
-				}, v))
+				lspconfig[k].setup(vim.tbl_deep_extend("force", { capabilities = capabilities }, v))
 			end
 		end,
 	},
@@ -199,11 +182,9 @@ return {
 				},
 				window = {
 					completion = cmp.config.window.bordered({
-						border = vim.g.border,
 						winhighlight = "FloatBorder:FloatBorder",
 					}),
 					documentation = cmp.config.window.bordered({
-						border = vim.g.border,
 						winhighlight = "FloatBorder:FloatBorder",
 						max_width = 80,
 					}),

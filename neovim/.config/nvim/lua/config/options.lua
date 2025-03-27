@@ -1,4 +1,3 @@
-vim.g.border = "rounded"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.log_level = vim.log.levels.OFF
@@ -33,4 +32,5 @@ vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.tabstop = 4
 vim.opt.termguicolors = true
+vim.opt.winborder = "rounded"
 vim.opt.wrap = false
