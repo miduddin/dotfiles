@@ -1,12 +1,12 @@
 return {
 	{
 		"echasnovski/mini.pairs",
-		event = "InsertEnter",
+		event = "VeryLazy",
 		opts = {},
 	},
 	{
 		"jake-stewart/multicursor.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
 		config = function()
 			local mc = require("multicursor-nvim")
 			mc.setup()
@@ -38,7 +38,7 @@ return {
 	},
 	{
 		"kylechui/nvim-surround",
-		event = { "BufReadPost", "BufNewFile" },
+		event = "VeryLazy",
 		opts = {},
 	},
 }
