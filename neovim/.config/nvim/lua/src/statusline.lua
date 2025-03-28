@@ -9,14 +9,15 @@ local function f(content, hl)
 end
 
 local theme = require("src.highlights")
+local set = vim.api.nvim_set_hl
 
-vim.api.nvim_set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
-vim.api.nvim_set_hl(0, "StBranch", { fg = theme.syn.keyword, bold = true })
-vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
-vim.api.nvim_set_hl(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
+set(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
+set(0, "StBranch", { fg = theme.syn.keyword, bold = true })
+set(0, "StPosition", { link = "CursorLineNr" })
+set(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
 
-vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })
-vim.api.nvim_set_hl(0, "StatusLineNC", { link = "WinSeparator" })
+set(0, "StatusLine", { link = "WinSeparator" })
+set(0, "StatusLineNC", { link = "WinSeparator" })
 
 local space = "%*  "
 
