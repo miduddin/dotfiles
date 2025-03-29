@@ -32,5 +32,21 @@ require("lazy").setup({
 	rocks = { enabled = false },
 })
 
+vim.lsp.enable({
+	"basedpyright",
+	"golangci_lint_ls",
+	"gopls",
+	"html",
+	"intelephense",
+	"jsonls",
+	"lua_ls",
+	"ruff",
+	"rust_analyzer",
+	"spectral",
+	"taplo",
+	"ts_ls",
+	"yamlls",
+})
+
 require("config.keymaps")
 require("config.autocmds")
