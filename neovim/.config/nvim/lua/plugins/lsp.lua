@@ -7,6 +7,7 @@ vim.lsp.set_log_level(vim.g.log_level)
 return {
 	{
 		"williamboman/mason.nvim",
+		lazy = false,
 		cmd = { "Mason" },
 		keys = {
 			{ "<Leader>m", "<Cmd>Mason<CR>", desc = "Mason" },
@@ -14,91 +15,6 @@ return {
 		opts = {
 			log_level = vim.g.log_level,
 		},
-	},
-	{
-		"neovim/nvim-lspconfig",
-		event = "VeryLazy",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"williamboman/mason.nvim",
-		},
-		opts = {
-			basedpyright = {},
-			jsonls = {},
-			yamlls = {
-				settings = {
-					yaml = {
-						validate = true,
-						schemaStore = {
-							enable = false,
-							url = "",
-						},
-					},
-				},
-			},
-			html = {},
-			lua_ls = { settings = { Lua = { semantic = { enable = false } } } },
-			intelephense = {},
-			ruff = {},
-			rust_analyzer = {},
-			spectral = {
-				filetypes = { "yaml.openapi", "json.openapi" },
-				settings = {
-					rulesetFile = ".spectral.yaml",
-					validateLanguages = { "yaml.openapi", "json.openapi" },
-				},
-			},
-			tailwindcss = { filetypes = { "html" } },
-			taplo = {},
-			golangci_lint_ls = {
-				init_options = {
-					command = {
-						"golangci-lint",
-						"run",
-						"--output.json.path=stdout",
-						"--show-stats=false",
-						"--issues-exit-code=1",
-					},
-				},
-			},
-			ts_ls = {},
-			gopls = {
-				settings = {
-					gopls = {
-						gofumpt = true,
-						hints = {
-							assignVariableTypes = true,
-							compositeLiteralFields = true,
-							compositeLiteralTypes = true,
-							constantValues = true,
-							functionTypeParameters = true,
-							parameterNames = true,
-							rangeVariableTypes = true,
-						},
-						analyses = {
-							nilness = true,
-							unusedparams = true,
-							unusedwrite = true,
-							useany = true,
-						},
-						usePlaceholders = true,
-						completeUnimported = true,
-						staticcheck = true,
-						directoryFilters = {
-							"-.git",
-							"-node_modules",
-						},
-					},
-				},
-			},
-		},
-		config = function(_, opts)
-			local lspconfig = require("lspconfig")
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
-			for k, v in pairs(opts) do
-				lspconfig[k].setup(vim.tbl_deep_extend("force", { capabilities = capabilities }, v))
-			end
-		end,
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -141,6 +57,7 @@ return {
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
 			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-nvim-lsp",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -233,6 +150,8 @@ return {
 					{ name = "buffer" },
 				}),
 			})
+
+			vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilities() })
 		end,
 	},
 	{
