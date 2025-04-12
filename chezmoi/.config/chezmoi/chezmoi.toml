@@ -1,6 +1,6 @@
 encryption = "age"
 [age]
-        identity = "~/age_key"
+        identity = "~/.config/chezmoi/age_key"
         recipient = "age1ucwtzuqltptntn2flpc4uygc69ecwdktg20hey5y2ex3cqzs9v9qy5ke5e"
 
 [merge]
