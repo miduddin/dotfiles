@@ -11,9 +11,8 @@ local config = {
 
 local colors = {
 	bg = "#1F1F28",
-	bg_cursorline = "#3A3A4B",
+	bg_cursorline = "#363646",
 	bg_float = "#16161D",
-	bg_gutter = "#2A2A37",
 	bg_visual = "#2D4F67",
 	comment = "#727169",
 	diag_error = "#E82424",
@@ -47,7 +46,7 @@ local M = {
 		bg = colors.bg,
 		bg_cursorline = colors.bg_cursorline,
 		bg_float = colors.bg_float,
-		bg_gutter = colors.bg_gutter,
+		bg_gutter = colors.bg,
 		bg_visual = colors.bg_visual,
 		fg = colors.fg,
 		nontext = colors.fg_border,
@@ -262,7 +261,7 @@ set(0, "NormalFloat", { fg = M.ui.float.fg, bg = M.ui.float.bg })
 set(0, "NormalNC", { link = "Normal" })
 set(0, "Number", { fg = M.syn.number })
 set(0, "Operator", { fg = M.syn.operator })
-set(0, "Pmenu", { fg = M.ui.shade0, bg = M.ui.bg_gutter })
+set(0, "Pmenu", { fg = M.ui.fg, bg = M.ui.bg_float })
 set(0, "PmenuExtra", { fg = M.ui.special, bg = M.ui.pmenu.bg })
 set(0, "PmenuExtraSel", { fg = M.ui.special, bg = M.ui.pmenu.bg_sel })
 set(0, "PmenuKind", { fg = M.ui.fg, bg = M.ui.pmenu.bg })
@@ -272,7 +271,7 @@ set(0, "PmenuSel", { fg = "NONE", bg = M.ui.bg_cursorline })
 set(0, "PmenuThumb", { bg = M.ui.bg_cursorline })
 set(0, "PreProc", { fg = M.syn.preproc })
 set(0, "Question", { link = "MoreMsg" })
-set(0, "QuickFixLine", { bg = M.ui.bg_gutter })
+set(0, "QuickFixLine", { link = "CursorLine" })
 set(0, "Search", { fg = M.ui.fg, bg = M.ui.bg_visual })
 set(0, "SignColumn", { fg = M.ui.special, bg = M.ui.bg_gutter })
 set(0, "Special", { fg = M.syn.special })
@@ -410,8 +409,7 @@ set(0, "OilLinkTargetHidden", { link = "OilLinkTarget" })
 set(0, "OilOrphanLinkHidden", { link = "OilOrphanLink" })
 set(0, "OilOrphanLinkTargetHidden", { link = "OilOrphanLinkTarget" })
 set(0, "OilSocketHidden", { link = "OilSocket" })
-set(0, "TreesitterContext", { link = "Folded" })
-set(0, "TreesitterContextLineNumber", { fg = M.ui.special, bg = M.ui.bg_gutter })
+set(0, "TreesitterContextLineNumber", { fg = M.ui.nontext, bg = M.ui.bg_float })
 set(0, "healthError", { fg = M.diag.error })
 set(0, "healthSuccess", { fg = M.diag.ok })
 set(0, "healthWarning", { fg = M.diag.warning })
