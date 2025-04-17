@@ -11,9 +11,8 @@ local config = {
 
 local colors = {
 	bg = "#1F1F28",
-	bg_cursorline = "#3A3A4B",
+	bg_cursorline = "#363646",
 	bg_float = "#16161D",
-	bg_gutter = "#2A2A37",
 	bg_visual = "#2D4F67",
 	comment = "#727169",
 	diag_error = "#E82424",
@@ -47,7 +46,7 @@ local M = {
 		bg = colors.bg,
 		bg_cursorline = colors.bg_cursorline,
 		bg_float = colors.bg_float,
-		bg_gutter = colors.bg_gutter,
+		bg_gutter = colors.bg,
 		bg_visual = colors.bg_visual,
 		fg = colors.fg,
 		nontext = colors.fg_border,
@@ -272,7 +271,7 @@ set(0, "PmenuSel", { fg = "NONE", bg = M.ui.bg_cursorline })
 set(0, "PmenuThumb", { bg = M.ui.bg_cursorline })
 set(0, "PreProc", { fg = M.syn.preproc })
 set(0, "Question", { link = "MoreMsg" })
-set(0, "QuickFixLine", { bg = M.ui.bg_gutter })
+set(0, "QuickFixLine", { link = "CursorLine" })
 set(0, "Search", { fg = M.ui.fg, bg = M.ui.bg_visual })
 set(0, "SignColumn", { fg = M.ui.special, bg = M.ui.bg_gutter })
 set(0, "Special", { fg = M.syn.special })
