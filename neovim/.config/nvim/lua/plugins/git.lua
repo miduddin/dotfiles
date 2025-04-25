@@ -19,6 +19,12 @@ return {
 			default_args = {
 				DiffviewOpen = { "--imply-local" },
 			},
+			file_panel = {
+				win_config = { win_opts = { cursorlineopt = "both" } },
+			},
+			file_history_panel = {
+				win_config = { win_opts = { cursorlineopt = "both" } },
+			},
 			enhanced_diff_hl = true,
 			hooks = {
 				diff_buf_win_enter = function(_, _, ctx)
