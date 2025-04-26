@@ -9,17 +9,15 @@ local function f(content, hl)
 end
 
 local theme = require("src.highlights")
-local set = vim.api.nvim_set_hl
+local set_hl = vim.api.nvim_set_hl
 
-set(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
-set(0, "StBranch", { fg = theme.syn.keyword, bold = true })
-set(0, "StPosition", { link = "CursorLineNr" })
-set(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
+set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
+set_hl(0, "StBranch", { fg = theme.syn.keyword, bold = true })
+set_hl(0, "StPosition", { link = "CursorLineNr" })
+set_hl(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
 
-set(0, "StatusLine", { link = "WinSeparator" })
-set(0, "StatusLineNC", { link = "WinSeparator" })
-
-local space = "%*  "
+set_hl(0, "StatusLine", { link = "WinSeparator" })
+set_hl(0, "StatusLineNC", { link = "WinSeparator" })
 
 ---@return boolean
 local function is_file_buffer() return vim.bo.buftype == "" end
@@ -47,62 +45,62 @@ local function update_statusline()
 
 	local s = vim.tbl_filter(function(v) return v ~= "" end, { filename, diagnostics, "%=", diff, branch, position })
 
-	update_windows_statusline(vim.fn.bufnr(), table.concat(s, space))
+	update_windows_statusline(vim.fn.bufnr(), table.concat(s, "%*  "))
+end
+
+---@param name string
+---@param value_fn function
+---@return function
+local function set_component_callback(name, value_fn)
+	return function()
+		vim.b["st_" .. name] = value_fn()
+		update_statusline()
+	end
 end
 
 ---@param filename string
 ---@return string
 local function format_filename(filename) return f(" " .. filename .. " %*", "StFilename") end
 
+---@return string
 local function update_filename()
 	local filetype = vim.bo.filetype
 	if filetype == "qf" then
-		vim.b.st_filename = format_filename("Quickfix List")
-		return update_statusline()
+		return format_filename("Quickfix List")
 	elseif filetype == "DiffviewFiles" then
-		vim.b.st_filename = format_filename("Changed Files")
-		return update_statusline()
+		return format_filename("Changed Files")
 	elseif filetype == "DiffviewFileHistory" then
-		vim.b.st_filename = format_filename("Commit History")
-		return update_statusline()
+		return format_filename("Commit History")
 	end
 
 	local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
 	if filename == "" then
-		vim.b.st_filename = format_filename("[No Name]")
-		return update_statusline()
+		return format_filename("[No Name]")
 	elseif filename == "Neotest Summary" then
-		vim.b.st_filename = format_filename("Test Summary")
-		return update_statusline()
+		return format_filename("Test Summary")
 	elseif vim.startswith(filename, "term:") then
-		vim.b.st_filename = format_filename(vim.split(filename, ":")[3])
-		return update_statusline()
+		return format_filename(vim.split(filename, ":")[3])
 	elseif vim.startswith(filename, "[dap-repl") then
-		vim.b.st_filename = format_filename("DAP REPL")
-		return update_statusline()
+		return format_filename("DAP REPL")
 	elseif vim.startswith(filename, "oil:") then
-		vim.b.st_filename = format_filename(string.gsub(filename, "oil://", "Files: "))
-		return update_statusline()
+		return format_filename(string.gsub(filename, "oil://", "Files: "))
 	elseif vim.startswith(filename, "diffview:") then
-		if filename == "diffview://null" then
-			vim.b.st_filename = format_filename("(no file)")
-			return update_statusline()
-		end
+		if filename == "diffview://null" then return format_filename("(no file)") end
+
 		local gits = vim.split(filename, "/.git/", { plain = true })
-		if #gits ~= 2 then
-			vim.b.st_filename = format_filename("(no file)")
-			return update_statusline()
-		end
+		if #gits ~= 2 then return format_filename("(no file)") end
+
 		local sha, file = gits[2]:match("^([^/]+)/(.+)")
 		if sha ~= nil then filename = sha:sub(1, 8) .. ": " .. file end
-		vim.b.st_filename = format_filename(filename)
-		return update_statusline()
+		return format_filename(filename)
 	end
 
-	vim.b.st_filename = format_filename(filename)
-	return update_statusline()
+	return format_filename(filename)
 end
-vim.api.nvim_create_autocmd({ "BufWinEnter", "TermOpen" }, { callback = update_filename })
+vim.api.nvim_create_autocmd(
+	{ "BufWinEnter", "TermOpen" },
+	{ callback = set_component_callback("filename", update_filename) }
+)
 
 local function update_diagnostics()
 	if not is_file_buffer() then return end
@@ -123,14 +121,17 @@ local function update_diagnostics()
 	n = count[vim.diagnostic.severity.HINT]
 	if n > 0 then table.insert(strings, f("H:" .. n, "DiagnosticHint")) end
 
-	vim.b.st_diagnostics = table.concat(strings, " ")
-	update_statusline()
+	return table.concat(strings, " ")
 end
-vim.api.nvim_create_autocmd({ "DiagnosticChanged" }, { callback = update_diagnostics })
+vim.api.nvim_create_autocmd(
+	{ "DiagnosticChanged" },
+	{ callback = set_component_callback("diagnostics", update_diagnostics) }
+)
 
 -- Reference: https://github.com/nvim-lualine/lualine.nvim/blob/6a40b530539d2209f7dc0492f3681c8c126647ad/lua/lualine/components/diff/git_diff.lua#L59
+---@return string
 local function update_git_diff()
-	if not is_file_buffer() then return end
+	if not is_file_buffer() then return "" end
 
 	local output = vim.system({
 		"git",
@@ -145,10 +146,7 @@ local function update_git_diff()
 		vim.fn.expand("%:t"),
 	}, { text = true })
 		:wait().stdout
-	if not output or output == "" then
-		vim.b.st_diff = ""
-		return update_statusline()
-	end
+	if not output or output == "" then return "" end
 
 	local lines = vim.fn.split(output, "\n")
 
@@ -179,13 +177,16 @@ local function update_git_diff()
 	if changed > 0 then table.insert(strings, f(" " .. changed, "diffChanged")) end
 	if deleted > 0 then table.insert(strings, f(" " .. deleted, "diffDeleted")) end
 
-	vim.b.st_diff = table.concat(strings, " ")
-	update_statusline()
+	return table.concat(strings, " ")
 end
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost" }, { callback = update_git_diff })
+vim.api.nvim_create_autocmd(
+	{ "BufEnter", "BufWritePost" },
+	{ callback = set_component_callback("diff", update_git_diff) }
+)
 
+---@return string
 local function update_git_branch()
-	if not is_file_buffer() then return end
+	if not is_file_buffer() then return "" end
 
 	local branch = vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, { text = true }):wait().stdout
 	if not branch or branch == "" then
@@ -194,15 +195,14 @@ local function update_git_branch()
 		branch = "󰘬 " .. branch:gsub("[%c%s]", "")
 	end
 
-	vim.b.st_branch = f(branch, "StBranch")
-	update_statusline()
+	return f(branch, "StBranch")
 end
-vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = update_git_branch })
+vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = set_component_callback("branch", update_git_branch) })
 
+---@return string
 local function update_position()
-	if not is_file_buffer() then return end
+	if not is_file_buffer() then return "" end
 
-	vim.b.st_position = "%#StPosition# %3l,%-7(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
-	update_statusline()
+	return "%#StPosition# %3l,%-7(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
 end
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = update_position })
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = set_component_callback("position", update_position) })
