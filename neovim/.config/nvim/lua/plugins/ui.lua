@@ -17,11 +17,6 @@ return {
 		},
 	},
 	{
-		"echasnovski/mini.tabline",
-		lazy = false,
-		opts = {},
-	},
-	{
 		"stevearc/quicker.nvim",
 		ft = "qf",
 		opts = { opts = { number = true } },
