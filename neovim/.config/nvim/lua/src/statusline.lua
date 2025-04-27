@@ -12,49 +12,50 @@ local theme = require("src.highlights")
 local set_hl = vim.api.nvim_set_hl
 
 set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
-set_hl(0, "StBranch", { fg = theme.syn.keyword, bold = true })
 set_hl(0, "StPosition", { link = "CursorLineNr" })
 set_hl(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
 
 set_hl(0, "StatusLine", { link = "WinSeparator" })
 set_hl(0, "StatusLineNC", { link = "WinSeparator" })
 
+---@param buf integer
 ---@return boolean
-local function is_file_buffer() return vim.bo.buftype == "" end
+local function is_file_buffer(buf) return vim.api.nvim_get_option_value("buftype", { buf = buf }) == "" end
 
----@param bufnr integer
----@param statusline string
-local function update_windows_statusline(bufnr, statusline)
-	local winids = vim.fn.getbufinfo(bufnr)[1].windows
-	for _, winid in pairs(winids) do
-		vim.wo[winid].statusline = statusline
+---@param buf integer
+---@param value string
+local function update_windows_statusline(buf, value)
+	local wins = vim.fn.getbufinfo(buf)[1].windows
+	for _, win in pairs(wins) do
+		vim.api.nvim_set_option_value("statusline", value, { win = win })
 	end
 end
 
-local function update_statusline()
-	local filename = vim.b.st_filename or ""
-
-	if not is_file_buffer() or filename:match("Files:") then
-		return update_windows_statusline(vim.fn.bufnr(), filename .. "  %*")
+---@param buf integer
+local function update_statusline(buf)
+	local filename = vim.fn.getbufvar(buf, "st_filename")
+	if not is_file_buffer(buf) or filename:match("Files:") then
+		return update_windows_statusline(buf, filename .. "  %*")
 	end
 
-	local diagnostics = vim.b.st_diagnostics or ""
-	local diff = vim.b.st_diff or ""
-	local branch = vim.b.st_branch or ""
-	local position = vim.b.st_position or ""
+	local s = vim.tbl_filter(function(v) return v ~= "" end, {
+		filename,
+		vim.fn.getbufvar(buf, "st_diagnostics"),
+		"%=",
+		vim.fn.getbufvar(buf, "st_diff"),
+		vim.fn.getbufvar(buf, "st_position"),
+	})
 
-	local s = vim.tbl_filter(function(v) return v ~= "" end, { filename, diagnostics, "%=", diff, branch, position })
-
-	update_windows_statusline(vim.fn.bufnr(), table.concat(s, "%*  "))
+	update_windows_statusline(buf, table.concat(s, "%*  "))
 end
 
 ---@param name string
 ---@param value_fn function
 ---@return function
 local function set_component_callback(name, value_fn)
-	return function()
-		vim.b["st_" .. name] = value_fn()
-		update_statusline()
+	return function(ev)
+		vim.api.nvim_buf_set_var(ev.buf, name, value_fn(ev.buf))
+		update_statusline(ev.buf)
 	end
 end
 
@@ -62,9 +63,10 @@ end
 ---@return string
 local function format_filename(filename) return f(" " .. filename .. " %*", "StFilename") end
 
+---@param buf integer
 ---@return string
-local function update_filename()
-	local filetype = vim.bo.filetype
+local function update_filename(buf)
+	local filetype = vim.api.nvim_get_option_value("filetype", { buf = buf })
 	if filetype == "qf" then
 		return format_filename("Quickfix List")
 	elseif filetype == "DiffviewFiles" then
@@ -73,7 +75,7 @@ local function update_filename()
 		return format_filename("Commit History")
 	end
 
-	local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+	local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(buf), ":.")
 	if filename == "" then
 		return format_filename("[No Name]")
 	elseif filename == "Neotest Summary" then
@@ -99,13 +101,15 @@ local function update_filename()
 end
 vim.api.nvim_create_autocmd(
 	{ "BufWinEnter", "TermOpen" },
-	{ callback = set_component_callback("filename", update_filename) }
+	{ callback = set_component_callback("st_filename", update_filename) }
 )
 
-local function update_diagnostics()
-	if not is_file_buffer() then return end
+---@param buf integer
+---@return string
+local function update_diagnostics(buf)
+	if not is_file_buffer(buf) then return "" end
 
-	local diagnostics = vim.diagnostic.get(0)
+	local diagnostics = vim.diagnostic.get(buf)
 	local count = { 0, 0, 0, 0 }
 	for _, diagnostic in ipairs(diagnostics) do
 		count[diagnostic.severity] = count[diagnostic.severity] + 1
@@ -125,13 +129,14 @@ local function update_diagnostics()
 end
 vim.api.nvim_create_autocmd(
 	{ "DiagnosticChanged" },
-	{ callback = set_component_callback("diagnostics", update_diagnostics) }
+	{ callback = set_component_callback("st_diagnostics", update_diagnostics) }
 )
 
 -- Reference: https://github.com/nvim-lualine/lualine.nvim/blob/6a40b530539d2209f7dc0492f3681c8c126647ad/lua/lualine/components/diff/git_diff.lua#L59
+---@param buf integer
 ---@return string
-local function update_git_diff()
-	if not is_file_buffer() then return "" end
+local function update_git_diff(buf)
+	if not is_file_buffer(buf) then return "" end
 
 	local output = vim.system({
 		"git",
@@ -181,28 +186,14 @@ local function update_git_diff()
 end
 vim.api.nvim_create_autocmd(
 	{ "BufEnter", "BufWritePost" },
-	{ callback = set_component_callback("diff", update_git_diff) }
+	{ callback = set_component_callback("st_diff", update_git_diff) }
 )
 
+---@param buf integer
 ---@return string
-local function update_git_branch()
-	if not is_file_buffer() then return "" end
+local function update_position(buf)
+	if not is_file_buffer(buf) then return "" end
 
-	local branch = vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, { text = true }):wait().stdout
-	if not branch or branch == "" then
-		branch = ""
-	else
-		branch = "󰘬 " .. branch:gsub("[%c%s]", "")
-	end
-
-	return f(branch, "StBranch")
+	return "%#StPosition# %3l,%-5(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
 end
-vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = set_component_callback("branch", update_git_branch) })
-
----@return string
-local function update_position()
-	if not is_file_buffer() then return "" end
-
-	return "%#StPosition# %3l,%-7(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
-end
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = set_component_callback("position", update_position) })
+vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = set_component_callback("st_position", update_position) })
