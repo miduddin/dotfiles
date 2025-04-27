@@ -64,6 +64,10 @@ return {
 				pattern = { "neotest-summary" },
 				callback = function(ev) vim.keymap.set("n", "q", neotest.summary.close, { buffer = ev.buf }) end,
 			})
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = { "neotest-output" },
+				callback = function(ev) vim.keymap.set("n", "q", "<Cmd>q<CR>", { buffer = ev.buf }) end,
+			})
 		end,
 	},
 	{
