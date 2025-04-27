@@ -12,7 +12,6 @@ local theme = require("src.highlights")
 local set_hl = vim.api.nvim_set_hl
 
 set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
-set_hl(0, "StBranch", { fg = theme.syn.keyword, bold = true })
 set_hl(0, "StPosition", { link = "CursorLineNr" })
 set_hl(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
 
@@ -40,10 +39,9 @@ local function update_statusline()
 
 	local diagnostics = vim.b.st_diagnostics or ""
 	local diff = vim.b.st_diff or ""
-	local branch = vim.b.st_branch or ""
 	local position = vim.b.st_position or ""
 
-	local s = vim.tbl_filter(function(v) return v ~= "" end, { filename, diagnostics, "%=", diff, branch, position })
+	local s = vim.tbl_filter(function(v) return v ~= "" end, { filename, diagnostics, "%=", diff, position })
 
 	update_windows_statusline(vim.fn.bufnr(), table.concat(s, "%*  "))
 end
@@ -185,24 +183,9 @@ vim.api.nvim_create_autocmd(
 )
 
 ---@return string
-local function update_git_branch()
-	if not is_file_buffer() then return "" end
-
-	local branch = vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, { text = true }):wait().stdout
-	if not branch or branch == "" then
-		branch = ""
-	else
-		branch = "󰘬 " .. branch:gsub("[%c%s]", "")
-	end
-
-	return f(branch, "StBranch")
-end
-vim.api.nvim_create_autocmd({ "BufEnter" }, { callback = set_component_callback("branch", update_git_branch) })
-
----@return string
 local function update_position()
 	if not is_file_buffer() then return "" end
 
-	return "%#StPosition# %3l,%-7(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
+	return "%#StPosition# %3l,%-5(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
 end
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = set_component_callback("position", update_position) })
