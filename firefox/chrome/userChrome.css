@@ -32,9 +32,9 @@
   width: calc(2 * var(--toolbarbutton-inner-padding)) !important;
 }
 #navigator-toolbox {
-  background: #1f2122 !important;
   border-bottom: none !important;
 }
 #nav-bar {
-  background: #1f2122 !important;
+  background: none !important;
+  border-top: none !important;
 }
