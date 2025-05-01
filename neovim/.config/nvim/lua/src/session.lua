@@ -1,10 +1,14 @@
-vim.opt.sessionoptions = {}
+vim.opt.sessionoptions = "buffers,folds,help,winsize"
 
 ---@return string
 local function session_file()
-	local dir = vim.fs.joinpath(vim.fn.stdpath("state"), "sessions", vim.fn.getcwd())
+	local dir = vim.fs.joinpath(vim.fn.stdpath("state"), "sessions")
 	vim.fn.mkdir(dir, "p")
-	return vim.fs.joinpath(dir, "session.vim")
+
+	local cwd = vim.fn.getcwd()
+	local sessid = vim.fn.sha256(cwd) .. "_" .. vim.fn.fnamemodify(cwd, ":t")
+
+	return vim.fs.joinpath(dir, sessid .. ".vim")
 end
 
 local function save_session()
