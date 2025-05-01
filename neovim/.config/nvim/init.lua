@@ -32,6 +32,8 @@ require("lazy").setup({
 	rocks = { enabled = false },
 })
 
+vim.diagnostic.config({ jump = { float = true }, virtual_text = true })
+vim.lsp.set_log_level(vim.g.log_level)
 vim.lsp.enable({
 	"basedpyright",
 	"golangci_lint_ls",

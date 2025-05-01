@@ -1,9 +1,3 @@
-vim.diagnostic.config({
-	jump = { float = true },
-	virtual_text = true,
-})
-vim.lsp.set_log_level(vim.g.log_level)
-
 return {
 	{
 		"williamboman/mason.nvim",
