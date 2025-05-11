@@ -5,9 +5,8 @@ return {
 			"nvim-neotest/nvim-nio",
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
-			{ "fredrikaverpil/neotest-golang", dependencies = { "leoluz/nvim-dap-go" } },
+			"fredrikaverpil/neotest-golang",
 			{ "miduddin/neotest-phpunit", branch = "dev" },
-			"rcarriga/nvim-dap-ui",
 		},
 		keys = {
 			-- stylua: ignore start
@@ -72,7 +71,7 @@ return {
 	},
 	{
 		"mfussenegger/nvim-dap",
-		event = "VeryLazy",
+		dependencies = { "leoluz/nvim-dap-go" },
 		keys = {
 			{
 				"<Leader>dB",
@@ -108,6 +107,8 @@ return {
 			-- stylua: ignore end
 		},
 		config = function()
+			require("dap-go").setup()
+
 			local dap = require("dap")
 			dap.set_log_level("ERROR")
 
@@ -131,59 +132,9 @@ return {
 		end,
 	},
 	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"nvim-neotest/nvim-nio",
-		},
+		"miroshQa/debugmaster.nvim",
 		keys = {
-			-- stylua: ignore start
-			{ "<Leader>de", function() require("dapui").eval() end, desc = "Eval", mode = { "n", "v" } },
-			{ "<Leader>du", function() require("dapui").toggle({ reset = true }) end, desc = "Dap UI" },
-			-- stylua: ignore end
+			{ "<Leader>du", function() require("debugmaster").mode.toggle() end, desc = "Debug mode" },
 		},
-		opts = {
-			layouts = {
-				{
-					elements = {
-						{ id = "scopes", size = 0.25 },
-						{ id = "breakpoints", size = 0.25 },
-						{ id = "watches", size = 0.25 },
-						{ id = "stacks", size = 0.25 },
-					},
-					position = "left",
-					size = 40,
-				},
-				{
-					elements = {
-						{ id = "repl", size = 1 },
-					},
-					position = "bottom",
-					size = 10,
-				},
-			},
-		},
-		config = function(_, opts)
-			local dapui = require("dapui")
-			dapui.setup(opts)
-
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = { "dap-float" },
-				callback = function(ev)
-					vim.keymap.set("n", "q", "<Cmd>q<CR>", { buffer = ev.buf })
-
-					vim.api.nvim_create_autocmd({ "WinLeave" }, {
-						buffer = ev.buf,
-						command = "q",
-					})
-				end,
-			})
-
-			local dap = require("dap")
-			dap.listeners.before.attach.dapui_config = function() dapui.open() end
-			dap.listeners.before.launch.dapui_config = function() dapui.open() end
-			dap.listeners.before.event_terminated.dapui_config = function() dapui.close() end
-			dap.listeners.before.event_exited.dapui_config = function() dapui.close() end
-		end,
 	},
 }
