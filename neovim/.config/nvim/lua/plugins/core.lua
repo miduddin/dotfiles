@@ -22,7 +22,6 @@ return {
 					"gomod",
 					"gosum",
 					"html",
-					"http",
 					"javascript",
 					"json",
 					"lua",

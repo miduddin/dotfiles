@@ -1,49 +1,5 @@
 return {
 	{
-		"williamboman/mason.nvim",
-		lazy = false,
-		cmd = { "Mason" },
-		keys = {
-			{ "<Leader>m", "<Cmd>Mason<CR>", desc = "Mason" },
-		},
-		opts = {
-			log_level = vim.g.log_level,
-		},
-	},
-	{
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "williamboman/mason.nvim" },
-		cmd = { "MasonToolsInstall", "MasonToolsUpdate" },
-		opts = {
-			ensure_installed = {
-				"basedpyright",
-				"delve",
-				"gofumpt",
-				"goimports",
-				"golangci-lint",
-				"golangci-lint-langserver",
-				"gopls",
-				"html-lsp",
-				"intelephense",
-				"json-lsp",
-				"lua-language-server",
-				"php-cs-fixer",
-				"php-debug-adapter",
-				"prettier",
-				"ruff",
-				"rust-analyzer",
-				"spectral-language-server",
-				"stylua",
-				"tailwindcss-language-server",
-				"taplo",
-				"typescript-language-server",
-				"yaml-language-server",
-				"yamlfmt",
-			},
-			run_on_start = false,
-		},
-	},
-	{
 		"hrsh7th/nvim-cmp",
 		event = "VeryLazy",
 		dependencies = {
@@ -157,7 +113,7 @@ return {
 		opts = {
 			formatters_by_ft = {
 				css = { "prettier" },
-				go = { "goimports", "gofumpt" },
+				go = { "gofumpt" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
