@@ -22,11 +22,6 @@ return {
 		opts = { opts = { number = true } },
 	},
 	{
-		"kevinhwang91/nvim-bqf",
-		ft = "qf",
-		opts = { preview = { winblend = 0 } },
-	},
-	{
 		"folke/snacks.nvim",
 		event = "VeryLazy",
 		keys = {
