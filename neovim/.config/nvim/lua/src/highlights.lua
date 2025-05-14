@@ -317,8 +317,6 @@ set(0, "qfFileName", { link = "Directory" })
 set(0, "qfLineNr", { link = "lineNr" })
 
 -- Plugins
-set(0, "BqfPreviewFloat", { link = "NormalFloat" })
-set(0, "BqfPreviewTitle", { link = "FloatTitle" })
 set(0, "CmpItemKindClass", { link = "Type" })
 set(0, "CmpItemKindColor", { link = "Special" })
 set(0, "CmpItemKindConstant", { link = "Constant" })
