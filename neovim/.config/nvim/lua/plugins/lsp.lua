@@ -107,9 +107,6 @@ return {
 	{
 		"stevearc/conform.nvim",
 		event = "VeryLazy",
-		keys = {
-			{ "<Leader>cf", [[<Cmd>lua require("conform").format({timeout_ms = 5000})<CR>]], desc = "Format buffer" },
-		},
 		opts = {
 			formatters_by_ft = {
 				css = { "prettier" },
@@ -121,10 +118,9 @@ return {
 				terraform = { "terraform_fmt" },
 				yaml = { "yamlfmt" },
 				["*"] = { "trim_whitespace", "trim_newlines" },
+				["_"] = { lsp_format = "last" },
 			},
-			format_after_save = {
-				lsp_format = "fallback",
-			},
+			format_after_save = true,
 			log_level = vim.g.log_level,
 		},
 	},
