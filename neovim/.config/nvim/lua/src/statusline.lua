@@ -11,9 +11,9 @@ end
 local theme = require("src.highlights")
 local set_hl = vim.api.nvim_set_hl
 
-set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
+set_hl(0, "StFilename", { bg = theme.func, fg = theme.bg, bold = true })
 set_hl(0, "StPosition", { link = "CursorLineNr" })
-set_hl(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
+set_hl(0, "StPositionBg", { bg = theme.bg, fg = theme.bg })
 
 set_hl(0, "StatusLine", { link = "WinSeparator" })
 set_hl(0, "StatusLineNC", { link = "WinSeparator" })
@@ -178,9 +178,9 @@ local function update_git_diff(buf)
 	end
 
 	local strings = {}
-	if added > 0 then table.insert(strings, f(" " .. added, "diffAdded")) end
-	if changed > 0 then table.insert(strings, f(" " .. changed, "diffChanged")) end
-	if deleted > 0 then table.insert(strings, f(" " .. deleted, "diffDeleted")) end
+	if added > 0 then table.insert(strings, f(" " .. added, "@diff.plus")) end
+	if changed > 0 then table.insert(strings, f(" " .. changed, "@diff.delta")) end
+	if deleted > 0 then table.insert(strings, f(" " .. deleted, "@diff.minus")) end
 
 	return table.concat(strings, " ")
 end
