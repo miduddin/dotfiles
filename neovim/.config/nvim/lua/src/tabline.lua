@@ -3,11 +3,11 @@ vim.opt.showtabline = 2
 local theme = require("src.highlights")
 local set_hl = vim.api.nvim_set_hl
 
-set_hl(0, "TabTabs", { bg = theme.syn.identifier, fg = theme.ui.bg, bold = true })
-set_hl(0, "TabBufferActive", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
-set_hl(0, "TabBufferInactive", { bg = theme.ui.bg_float, fg = theme.syn.comment })
-set_hl(0, "TabGitBranch", { bg = theme.ui.bg_float, fg = theme.syn.keyword })
-set_hl(0, "TabGitProject", { bg = theme.syn.keyword, fg = theme.ui.bg, bold = true })
+set_hl(0, "TabTabs", { bg = theme.identifier, fg = theme.bg, bold = true })
+set_hl(0, "TabBufferActive", { bg = theme.func, fg = theme.bg, bold = true })
+set_hl(0, "TabBufferInactive", { bg = theme.bg_float, fg = theme.comment })
+set_hl(0, "TabGitBranch", { bg = theme.bg_float, fg = theme.keyword })
+set_hl(0, "TabGitProject", { bg = theme.keyword, fg = theme.bg, bold = true })
 
 ---@param text string
 ---@param hl string
