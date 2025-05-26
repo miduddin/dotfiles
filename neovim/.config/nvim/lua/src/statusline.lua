@@ -11,9 +11,9 @@ end
 local theme = require("src.highlights")
 local set_hl = vim.api.nvim_set_hl
 
-set_hl(0, "StFilename", { bg = theme.syn.fun, fg = theme.ui.bg, bold = true })
+set_hl(0, "StFilename", { bg = theme.func, fg = theme.bg, bold = true })
 set_hl(0, "StPosition", { link = "CursorLineNr" })
-set_hl(0, "StPositionBg", { bg = theme.ui.bg_gutter, fg = theme.ui.bg_gutter })
+set_hl(0, "StPositionBg", { bg = theme.bg, fg = theme.bg })
 
 set_hl(0, "StatusLine", { link = "WinSeparator" })
 set_hl(0, "StatusLineNC", { link = "WinSeparator" })
