@@ -20,10 +20,10 @@ return {
 				DiffviewOpen = { "--imply-local" },
 			},
 			file_panel = {
-				win_config = { win_opts = { cursorlineopt = "both" } },
+				win_config = { win_opts = { cursorline = true, cursorlineopt = "both" } },
 			},
 			file_history_panel = {
-				win_config = { win_opts = { cursorlineopt = "both" } },
+				win_config = { win_opts = { cursorline = true, cursorlineopt = "both" } },
 			},
 			enhanced_diff_hl = true,
 			hooks = {
