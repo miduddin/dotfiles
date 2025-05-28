@@ -31,6 +31,7 @@ return {
 			enhanced_diff_hl = true,
 			hooks = {
 				diff_buf_win_enter = function(_, _, ctx)
+					vim.opt_local.cursorlineopt = "both"
 					if ctx.layout_name:match("^diff3") then vim.opt_local.winhl = "DiffDelete:DiffviewDiffDeleteDim" end
 				end,
 			},
