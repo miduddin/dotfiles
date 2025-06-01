@@ -19,7 +19,7 @@ return {
 	{
 		"stevearc/quicker.nvim",
 		ft = "qf",
-		opts = {},
+		opts = { opts = { number = true } },
 	},
 	{
 		"folke/snacks.nvim",
