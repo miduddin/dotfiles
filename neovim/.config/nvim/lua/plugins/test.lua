@@ -51,6 +51,7 @@ return {
 				},
 				icons = { unknown = "?" },
 				log_level = vim.g.log_level,
+				quickfix = { enabled = false },
 				summary = {
 					mappings = {
 						jumpto = "o",
