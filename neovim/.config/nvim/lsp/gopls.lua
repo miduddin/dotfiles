@@ -4,8 +4,27 @@ return {
 	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 	root_markers = { "go.mod", ".git" },
 	settings = {
+		-- https://github.com/golang/tools/blob/master/gopls/doc/settings.md
 		gopls = {
+			-- Build
+			directoryFilters = {
+				"-.git",
+				"-**/node_modules",
+			},
+
+			-- Formatting
 			gofumpt = true,
+
+			-- Completion
+			usePlaceholders = true,
+
+			-- Diagnostic
+			analyses = {
+				ST1000 = false, -- Incorrect or missing package comment
+			},
+			staticcheck = true,
+
+			-- Inlayhint
 			hints = {
 				assignVariableTypes = true,
 				compositeLiteralFields = true,
@@ -14,20 +33,6 @@ return {
 				functionTypeParameters = true,
 				parameterNames = true,
 				rangeVariableTypes = true,
-			},
-			analyses = {
-				nilness = true,
-				unusedparams = true,
-				unusedwrite = true,
-				useany = true,
-				ST1000 = false,
-			},
-			usePlaceholders = true,
-			completeUnimported = true,
-			staticcheck = true,
-			directoryFilters = {
-				"-.git",
-				"-node_modules",
 			},
 		},
 	},
