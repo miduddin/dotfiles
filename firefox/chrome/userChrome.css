@@ -13,20 +13,20 @@
 .tab-audio-button,
 .tab-close-button,
 .tab-icon-overlay,
-.titlebar-spacer[type="pre-tabs"] {
+.titlebar-spacer[type="post-tabs"] {
   display: none !important;
 }
 
 /* One line header */
 :root {
-  --nav-bar-width: clamp(0px, 50vw, 450px);
+  --nav-bar-width: clamp(0px, 50vw, 400px);
 }
 #TabsToolbar {
-  margin-left: var(--nav-bar-width) !important;
+  margin-right: var(--nav-bar-width) !important;
 }
 #nav-bar {
   margin-top: calc((var(--urlbar-min-height) * -1) - 10px) !important;
-  margin-right: calc(100vw - var(--nav-bar-width)) !important;
+  margin-left: calc(100vw - var(--nav-bar-width)) !important;
 }
 #urlbar-container {
   width: calc(2 * var(--toolbarbutton-inner-padding)) !important;
