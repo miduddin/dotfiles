@@ -110,7 +110,7 @@ return {
 		opts = {
 			formatters_by_ft = {
 				css = { "prettier" },
-				go = { "gofumpt" },
+				go = { "golangci-lint" },
 				lua = { "stylua" },
 				php = { "php_cs_fixer" },
 				python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
