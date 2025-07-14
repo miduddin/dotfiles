@@ -32,6 +32,8 @@ return {
 			files = {
 				fd_opts = "--color=never --type f --hidden --follow "
 					.. "--exclude .git/ --exclude node_modules/ --exclude vendor/",
+				previewer = false,
+				winopts = { height = 20 },
 			},
 			grep = {
 				rg_opts = "--column --line-number --no-heading --hidden --multiline "
