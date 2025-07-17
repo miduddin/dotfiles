@@ -19,6 +19,7 @@ return {
 		},
 		opts = {
 			winopts = {
+				border = vim.o.winborder,
 				preview = {
 					delay = 0,
 					layout = "vertical",
