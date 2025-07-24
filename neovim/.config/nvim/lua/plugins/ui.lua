@@ -29,6 +29,9 @@ return {
 			{ "<Leader>bd", "<Cmd>lua Snacks.bufdelete.delete()<CR>", desc = "Close current buffer" },
 			{ "<Leader>bo", "<Cmd>lua Snacks.bufdelete.other()<CR>", desc = "Close other buffers" },
 			{ "<Leader>gof", "<Cmd>lua Snacks.gitbrowse.open()<CR>", desc = "Open in git web", mode = { "n", "v" } },
+			{ "<Leader>dpp", "<Cmd>lua Snacks.profiler.toggle()<CR>", desc = "Toggle profiler" },
+			{ "<Leader>dph", "<Cmd>lua Snacks.profiler.highlight()<CR>", desc = "Toggle profiler highlight" },
+			{ "<Leader>dps", "<Cmd>lua Snacks.profiler.highlight()<CR>", desc = "Profiler scratch buffer" },
 		},
 		opts = {
 			gitbrowse = { enabled = true },
