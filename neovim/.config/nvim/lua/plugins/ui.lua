@@ -17,11 +17,6 @@ return {
 		},
 	},
 	{
-		"stevearc/quicker.nvim",
-		ft = "qf",
-		opts = { opts = { number = true } },
-	},
-	{
 		"folke/snacks.nvim",
 		event = "VeryLazy",
 		keys = {
