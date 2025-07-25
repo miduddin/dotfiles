@@ -82,8 +82,6 @@ local function update_filename(buf)
 		return format_filename("Test Summary")
 	elseif vim.startswith(filename, "term:") then
 		return format_filename(vim.split(filename, ":")[3])
-	elseif vim.startswith(filename, "[dap-repl") then
-		return format_filename("DAP REPL")
 	elseif vim.startswith(filename, "oil:") then
 		return format_filename(string.gsub(filename, "oil://", "Files: "))
 	elseif vim.startswith(filename, "diffview:") then
@@ -139,17 +137,17 @@ local function update_git_diff(buf)
 	if not is_file_buffer(buf) then return "" end
 
 	local output = vim.system({
-		"git",
-		"-C",
-		vim.fn.expand("%:h"),
-		"--no-pager",
-		"diff",
-		"--no-color",
-		"--no-ext-diff",
-		"-U0",
-		"--",
-		vim.fn.expand("%:t"),
-	}, { text = true })
+			"git",
+			"-C",
+			vim.fn.expand("%:h"),
+			"--no-pager",
+			"diff",
+			"--no-color",
+			"--no-ext-diff",
+			"-U0",
+			"--",
+			vim.fn.expand("%:t"),
+		}, { text = true })
 		:wait().stdout
 	if not output or output == "" then return "" end
 
