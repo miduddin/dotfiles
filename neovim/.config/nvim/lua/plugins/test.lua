@@ -83,7 +83,6 @@ return {
 				end,
 				desc = "Breakpoint Condition",
 			},
-			-- stylua: ignore start
 			{ "<Leader>dC", function() require("dap").run_to_cursor() end, desc = "Run to Cursor" },
 			{ "<Leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
 			{ "<Leader>dc", function() require("dap").continue() end, desc = "Continue" },
@@ -92,14 +91,12 @@ return {
 			{ "<Leader>dn", function() require("dap").step_over() end, desc = "Step Over" },
 			{ "<Leader>do", function() require("dap").step_out() end, desc = "Step Out" },
 			{ "<Leader>dt", function() require("dap").terminate() end, desc = "Terminate" },
-			{ "<Leader>dw", function() require("dap.ui.widgets").hover() end, desc = "Inspect Value", mode = {"n", "v"} },
 
 			-- Alternative keymaps:
 			{ "<F5>", function() require("dap").continue() end, desc = "Continue" },
 			{ "<F10>", function() require("dap").step_over() end, desc = "Step Over" },
 			{ "<F11>", function() require("dap").step_into() end, desc = "Step Into" },
 			{ "<F12>", function() require("dap").step_out() end, desc = "Step Out" },
-			-- stylua: ignore end
 		},
 		config = function()
 			require("dap-go").setup()
@@ -124,12 +121,11 @@ return {
 					},
 				},
 			}
+
+			local widgets = require("dap.ui.widgets")
+			local scopes = widgets.sidebar(widgets.scopes, nil, "split")
+			vim.keymap.set({ "n", "v" }, "<Leader>dw", widgets.hover)
+			vim.keymap.set("n", "<Leader>ds", scopes.toggle)
 		end,
-	},
-	{
-		"miroshQa/debugmaster.nvim",
-		keys = {
-			{ "<Leader>du", function() require("debugmaster").mode.toggle() end, desc = "Debug mode" },
-		},
 	},
 }
