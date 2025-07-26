@@ -5,6 +5,7 @@ local M = {
 	bg_cursorline = "#363646",
 	bg_float = "#16161D",
 	bg_visual = "#2D4F67",
+	bg_fold = "#263748",
 	comment = "#727169",
 	diag_error = "#E82424",
 	diag_hint = "#6A9589",
@@ -145,7 +146,7 @@ set(0, "FloatBorder", { fg = M.fg_border, bg = M.bg_float })
 set(0, "FloatFooter", { fg = M.fg_border, bg = M.bg_float })
 set(0, "FloatTitle", { fg = M.special, bg = M.bg_float, bold = true })
 set(0, "FoldColumn", { fg = M.fg_border, bg = M.bg })
-set(0, "Folded", { fg = M.special, bg = "NONE" })
+set(0, "Folded", { fg = M.special, bg = M.bg_fold })
 set(0, "Function", { fg = M.func })
 set(0, "Identifier", { fg = M.identifier })
 set(0, "Ignore", { link = "NonText" })
