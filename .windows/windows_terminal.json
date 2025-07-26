@@ -226,10 +226,11 @@
                 "name": "Windows PowerShell"
             },
             {
-                "guid": "{ece9aa19-68f6-5c2f-8d4a-720d0fe69c4a}",
+                "commandline": "wsl",
+                "guid": "{f53143c7-4e33-5172-884e-05fad0462130}",
                 "hidden": false,
                 "name": "arch",
-                "source": "Windows.Terminal.Wsl"
+                "source": "Microsoft.WSL"
             }
         ]
     },
