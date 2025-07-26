@@ -13,7 +13,7 @@ vim.opt.expandtab = false
 vim.opt.fillchars:append({ eob = " ", diff = "╱" })
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
-vim.opt.foldmethod = "indent"
+vim.opt.foldtext = ""
 vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
@@ -33,3 +33,36 @@ vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.winborder = "rounded"
 vim.opt.wrap = false
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function(ev)
+		if vim.wo.diff then return end
+
+		local clients = vim.lsp.get_clients({ bufnr = ev.buf })
+		for _, client in ipairs(clients) do
+			if client:supports_method("textDocument/foldingRange") then
+				vim.wo.foldmethod = "expr"
+				vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
+				return
+			end
+		end
+
+		if vim.treesitter.get_parser(nil, nil, { error = false }) then
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+			return
+		end
+
+		vim.wo.foldmethod = "indent"
+	end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client and client:supports_method("textDocument/foldingRange") then
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
+		end
+	end,
+})
