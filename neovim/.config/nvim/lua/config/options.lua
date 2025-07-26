@@ -13,7 +13,7 @@ vim.opt.expandtab = false
 vim.opt.fillchars:append({ eob = " ", diff = "╱" })
 vim.opt.foldenable = false
 vim.opt.foldlevel = 99
-vim.opt.foldmethod = "indent"
+vim.opt.foldtext = ""
 vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
@@ -33,3 +33,22 @@ vim.opt.tabstop = 4
 vim.opt.termguicolors = true
 vim.opt.winborder = "rounded"
 vim.opt.wrap = false
+
+vim.opt.foldmethod = "indent"
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	callback = function(ev)
+		if require("nvim-treesitter.parsers").has_parser() then
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+		end
+	end,
+})
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		local client = vim.lsp.get_client_by_id(ev.data.client_id)
+		if client:supports_method("textDocument/foldingRange") then
+			vim.wo.foldmethod = "expr"
+			vim.wo.foldexpr = "v:lua.vim.lsp.foldexpr()"
+		end
+	end,
+})
