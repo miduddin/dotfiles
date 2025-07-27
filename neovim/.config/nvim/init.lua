@@ -1,3 +1,5 @@
+vim.cmd("colorscheme kanagawa-custom")
+
 require("config.options")
 require("src")
 

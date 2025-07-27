@@ -1,5 +1,18 @@
 vim.opt.fillchars:append({ stl = "─", stlnc = "─" })
 
+local function init_hl()
+	local hl_func = vim.api.nvim_get_hl(0, { name = "Function" })
+	local hl_norm = vim.api.nvim_get_hl(0, { name = "Normal" })
+
+	vim.api.nvim_set_hl(0, "StFilename", { bg = hl_func.fg, fg = hl_norm.bg, bold = true })
+	vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
+	vim.api.nvim_set_hl(0, "StPositionBg", { bg = hl_norm.bg, fg = hl_norm.bg })
+	vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })
+	vim.api.nvim_set_hl(0, "StatusLineNC", { link = "WinSeparator" })
+end
+init_hl()
+vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })
+
 ---@param content string
 ---@param hl string
 ---@return string
@@ -7,16 +20,6 @@ local function f(content, hl)
 	if content == "" then return "" end
 	return string.format("%%#%s#%s", hl, content)
 end
-
-local theme = require("src.highlights")
-local set_hl = vim.api.nvim_set_hl
-
-set_hl(0, "StFilename", { bg = theme.func, fg = theme.bg, bold = true })
-set_hl(0, "StPosition", { link = "CursorLineNr" })
-set_hl(0, "StPositionBg", { bg = theme.bg, fg = theme.bg })
-
-set_hl(0, "StatusLine", { link = "WinSeparator" })
-set_hl(0, "StatusLineNC", { link = "WinSeparator" })
 
 ---@param buf integer
 ---@return boolean
