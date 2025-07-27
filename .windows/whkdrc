@@ -22,6 +22,7 @@ alt + shift + m        : komorebic cycle-move-to-monitor next
 alt + shift + oem_3    : komorebic cycle-move-to-monitor next
 alt + shift + o        : komorebic reload-configuration
 alt + shift + r        : komorebic stop --whkd; komorebic start --whkd
+alt + shift + s        : komorebic swap-workspaces-with-monitor (1-(komorebic query focused-monitor-index))
 alt + shift + return   : komorebic promote
 alt + shift + t        : komorebic retile
 alt + x                : komorebic flip-layout horizontal
