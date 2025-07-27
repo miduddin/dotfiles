@@ -280,5 +280,3 @@ set(0, "diffDeleted", { fg = M.diff_delete })
 set(0, "diffNewFile", { fg = M.diff_add })
 set(0, "diffOldFile", { fg = M.diff_delete })
 set(0, "diffRemoved", { fg = M.diff_delete })
-
-return M
