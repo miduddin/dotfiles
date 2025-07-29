@@ -12,9 +12,14 @@
 
 [delta]
 	dark = true
+	diff-so-fancy = true
 	line-numbers = true
 	navigate = true
 	tabs = 4
+	file-style = yellow bold
+	file-decoration-style = omit
+	hunk-header-style = line-number blue italic
+	hunk-header-decoration-style = omit
 
 [diff]
 	algorithm = histogram
