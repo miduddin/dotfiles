@@ -15,6 +15,8 @@
 	line-numbers = true
 	navigate = true
 	tabs = 4
+	minus-style = syntax "#3b242a"
+	plus-style = syntax "#293125"
 
 [diff]
 	algorithm = histogram
