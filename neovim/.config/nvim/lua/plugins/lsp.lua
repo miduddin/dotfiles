@@ -49,7 +49,7 @@ return {
 				},
 				window = {
 					completion = cmp.config.window.bordered({
-						winhighlight = "FloatBorder:FloatBorder",
+						winhighlight = "FloatBorder:FloatBorder,CursorLine:Visual",
 					}),
 					documentation = cmp.config.window.bordered({
 						winhighlight = "FloatBorder:FloatBorder",

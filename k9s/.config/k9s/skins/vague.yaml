@@ -1,21 +1,15 @@
-# -----------------------------------------------------------------------------
-# Kanagawa Skin
-# -----------------------------------------------------------------------------
-
-# Styles...
-foreground: &foreground "#dcd7ba"
+foreground: &foreground "#cdcdcd"
 background: &background default
-black: &black "#090618"
-blue: &blue "#7e9cd8"
-green: &green "#76946a"
-grey: &grey "#727169"
-orange: &orange "#ffa066"
-purple: &purple "#957fb8"
-red: &red "#c34043"
-yellow: &yellow "#c0a36e"
-yellow_bright: &yellow_bright "#e6c384"
+black: &black "#252530"
+blue: &blue "#b4d4cf"
+green: &green "#7fa563"
+grey: &grey "#6e94b2"
+orange: &orange "#d8647e"
+purple: &purple "#bb9dbd"
+red: &red "#d8647e"
+yellow: &yellow "#f3be7c"
+yellow_bright: &yellow_bright "#f5cb96"
 
-# Skin...
 k9s:
   body:
     fgColor: *foreground

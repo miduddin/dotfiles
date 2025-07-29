@@ -1,4 +1,4 @@
-vim.cmd("colorscheme kanagawa-custom")
+vim.cmd("colorscheme vague-custom")
 
 require("config.options")
 require("src")

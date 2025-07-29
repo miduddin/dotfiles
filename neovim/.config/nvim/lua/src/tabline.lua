@@ -1,17 +1,17 @@
 vim.opt.showtabline = 2
 
 local function init_hl()
-	local hl_comm = vim.api.nvim_get_hl(0, { name = "Comment" })
-	local hl_floa = vim.api.nvim_get_hl(0, { name = "NormalFloat" })
-	local hl_func = vim.api.nvim_get_hl(0, { name = "Function" })
-	local hl_iden = vim.api.nvim_get_hl(0, { name = "Identifier" })
-	local hl_keyw = vim.api.nvim_get_hl(0, { name = "Keyword" })
+	local hl_comm = vim.api.nvim_get_hl(0, { name = "Comment", link = false })
+	local hl_floa = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false })
+	local hl_func = vim.api.nvim_get_hl(0, { name = "Function", link = false })
+	local hl_iden = vim.api.nvim_get_hl(0, { name = "Identifier", link = false })
+	local hl_keyw = vim.api.nvim_get_hl(0, { name = "Keyword", link = false })
 
 	vim.api.nvim_set_hl(0, "TabTabs", { bg = hl_iden.fg, fg = hl_floa.bg, bold = true })
-	vim.api.nvim_set_hl(0, "TabBufferActive", { bg = hl_func.fg, fg = hl_floa.bg, bold = true })
+	vim.api.nvim_set_hl(0, "TabBufferActive", { bg = hl_keyw.fg, fg = hl_floa.bg, bold = true })
 	vim.api.nvim_set_hl(0, "TabBufferInactive", { bg = hl_floa.bg, fg = hl_comm.fg })
-	vim.api.nvim_set_hl(0, "TabGitBranch", { bg = hl_floa.bg, fg = hl_keyw.fg })
-	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_keyw.fg, fg = hl_floa.bg, bold = true })
+	vim.api.nvim_set_hl(0, "TabGitBranch", { bg = hl_func.fg, fg = hl_floa.bg, bold = true })
+	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_floa.bg, fg = hl_func.fg })
 end
 init_hl()
 vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })

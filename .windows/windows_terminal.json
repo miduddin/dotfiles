@@ -202,7 +202,7 @@
     ],
     "profiles": {
         "defaults": {
-            "colorScheme": "KanagawaWave",
+            "colorScheme": "Vague",
             "font": {
                 "face": "Maple Mono, Symbols Nerd Font",
                 "features": {
@@ -236,27 +236,27 @@
     },
     "schemes": [
         {
-            "background": "#1F1F28",
-            "black": "#090618",
-            "blue": "#7E9CD8",
-            "brightBlack": "#727169",
-            "brightBlue": "#7FB4CA",
-            "brightCyan": "#7AA89F",
-            "brightGreen": "#98BB6C",
-            "brightPurple": "#938AA9",
-            "brightRed": "#E82424",
-            "brightWhite": "#DCD7BA",
-            "brightYellow": "#E6C384",
-            "cursorColor": "#C8C093",
-            "cyan": "#6A9589",
-            "foreground": "#D3CEC0",
-            "green": "#76946A",
-            "name": "KanagawaWave",
-            "purple": "#957FB8",
-            "red": "#C34043",
-            "selectionBackground": "#2D4F67",
-            "white": "#C8C093",
-            "yellow": "#C0A36E"
+            "name": "Vague",
+            "black": "#252530",
+            "red": "#d8647e",
+            "green": "#7fa563",
+            "yellow": "#f3be7c",
+            "blue": "#6e94b2",
+            "purple": "#bb9dbd",
+            "cyan": "#aeaed1",
+            "white": "#cdcdcd",
+            "brightBlack": "#606079",
+            "brightRed": "#e08398",
+            "brightGreen": "#99b782",
+            "brightYellow": "#f5cb96",
+            "brightBlue": "#8ba9c1",
+            "brightPurple": "#c9b1ca",
+            "brightCyan": "#bebeda",
+            "brightWhite": "#d7d7d7",
+            "background": "#141414",
+            "foreground": "#cdcdcd",
+            "selectionBackground": "#333738",
+            "cursorColor": "#cdcdcd"
         }
     ]
 }

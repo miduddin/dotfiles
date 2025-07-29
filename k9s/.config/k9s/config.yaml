@@ -13,7 +13,7 @@ k9s:
     logoless: true
     noIcons: false
     reactive: false
-    skin: kanagawa
+    skin: vague
   skipLatestRevCheck: false
   disablePodCounting: false
   shellPod:
