@@ -5,6 +5,4 @@ gui:
   showBottomLine: false
   theme:
     selectedLineBgColor:
-      - '#393836'
-    selectedRangeBgColor:
-      - '#393836'
+      - "#333738"
