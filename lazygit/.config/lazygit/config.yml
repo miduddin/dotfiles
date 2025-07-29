@@ -12,7 +12,7 @@ gui:
   showBottomLine: false
   theme:
     selectedLineBgColor:
-      - '#393836'
+      - "#333738"
 os:
   editPreset: nvim
 customCommands:
