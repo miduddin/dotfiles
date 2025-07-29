@@ -8,10 +8,10 @@ local function init_hl()
 	local hl_keyw = vim.api.nvim_get_hl(0, { name = "Keyword" })
 
 	vim.api.nvim_set_hl(0, "TabTabs", { bg = hl_iden.fg, fg = hl_floa.bg, bold = true })
-	vim.api.nvim_set_hl(0, "TabBufferActive", { bg = hl_func.fg, fg = hl_floa.bg, bold = true })
+	vim.api.nvim_set_hl(0, "TabBufferActive", { bg = hl_keyw.fg, fg = hl_floa.bg, bold = true })
 	vim.api.nvim_set_hl(0, "TabBufferInactive", { bg = hl_floa.bg, fg = hl_comm.fg })
-	vim.api.nvim_set_hl(0, "TabGitBranch", { bg = hl_floa.bg, fg = hl_keyw.fg })
-	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_keyw.fg, fg = hl_floa.bg, bold = true })
+	vim.api.nvim_set_hl(0, "TabGitBranch", { bg = hl_floa.bg, fg = hl_func.fg })
+	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_func.fg, fg = hl_floa.bg, bold = true })
 end
 init_hl()
 vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })
