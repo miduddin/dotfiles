@@ -1,14 +1,16 @@
 vim.opt.fillchars:append({ stl = "─", stlnc = "─" })
 
 local function init_hl()
-	local hl_func = vim.api.nvim_get_hl(0, { name = "Function" })
-	local hl_norm = vim.api.nvim_get_hl(0, { name = "Normal" })
+	local hl_keyw = vim.api.nvim_get_hl(0, { name = "Keyword", link = false })
+	local hl_norm = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
 
-	vim.api.nvim_set_hl(0, "StFilename", { bg = hl_func.fg, fg = hl_norm.bg, bold = true })
+	vim.api.nvim_set_hl(0, "StFilename", { bg = hl_keyw.fg, fg = hl_norm.bg, bold = true })
 	vim.api.nvim_set_hl(0, "StPosition", { link = "CursorLineNr" })
 	vim.api.nvim_set_hl(0, "StPositionBg", { bg = hl_norm.bg, fg = hl_norm.bg })
 	vim.api.nvim_set_hl(0, "StatusLine", { link = "WinSeparator" })
 	vim.api.nvim_set_hl(0, "StatusLineNC", { link = "WinSeparator" })
+	vim.api.nvim_set_hl(0, "StatusLineTerm", { link = "WinSeparator" })
+	vim.api.nvim_set_hl(0, "StatusLineTermNC", { link = "WinSeparator" })
 end
 init_hl()
 vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })
@@ -140,17 +142,17 @@ local function update_git_diff(buf)
 	if not is_file_buffer(buf) then return "" end
 
 	local output = vim.system({
-			"git",
-			"-C",
-			vim.fn.expand("%:h"),
-			"--no-pager",
-			"diff",
-			"--no-color",
-			"--no-ext-diff",
-			"-U0",
-			"--",
-			vim.fn.expand("%:t"),
-		}, { text = true })
+		"git",
+		"-C",
+		vim.fn.expand("%:h"),
+		"--no-pager",
+		"diff",
+		"--no-color",
+		"--no-ext-diff",
+		"-U0",
+		"--",
+		vim.fn.expand("%:t"),
+	}, { text = true })
 		:wait().stdout
 	if not output or output == "" then return "" end
 

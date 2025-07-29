@@ -12,7 +12,7 @@ gui:
   showBottomLine: false
   theme:
     selectedLineBgColor:
-      - '#393836'
+      - "#333738"
 os:
   editPreset: nvim
 customCommands:
@@ -21,5 +21,5 @@ customCommands:
     command: fish -c gc
     description: Cleanup local git files.
     loadingText: Cleaning up
-    stream: true
+    output: log
 promptToReturnFromSubprocess: false
