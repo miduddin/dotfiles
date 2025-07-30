@@ -1,50 +1,38 @@
-return {
-	{
-		"stevearc/oil.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		keys = {
-			{ "<Leader>e", "<Cmd>Oil<CR>", desc = "File explorer" },
-		},
-		opts = {
-			keymaps = {
-				["q"] = "actions.close",
-				["<C-c>"] = false,
-				["<C-s>"] = false,
-				["`"] = false,
-				["~"] = false,
-			},
-			view_options = { show_hidden = true },
-		},
+local oil = require("oil")
+oil.setup({
+	keymaps = {
+		["q"] = "actions.close",
+		["<C-c>"] = false,
+		["<C-s>"] = false,
+		["`"] = false,
+		["~"] = false,
 	},
-	{
-		"folke/snacks.nvim",
-		event = "VeryLazy",
-		keys = {
-			{ "<Leader>ba", "<Cmd>lua Snacks.bufdelete.all()<CR>", desc = "Close all buffers" },
-			{ "<Leader>bd", "<Cmd>lua Snacks.bufdelete.delete()<CR>", desc = "Close current buffer" },
-			{ "<Leader>bo", "<Cmd>lua Snacks.bufdelete.other()<CR>", desc = "Close other buffers" },
-			{ "<Leader>gof", "<Cmd>lua Snacks.gitbrowse.open()<CR>", desc = "Open in git web", mode = { "n", "v" } },
-			{ "<Leader>dpp", "<Cmd>lua Snacks.profiler.toggle()<CR>", desc = "Toggle profiler" },
-			{ "<Leader>dph", "<Cmd>lua Snacks.profiler.highlight()<CR>", desc = "Toggle profiler highlight" },
-			{ "<Leader>dps", "<Cmd>lua Snacks.profiler.highlight()<CR>", desc = "Profiler scratch buffer" },
-		},
-		opts = {
-			gitbrowse = { enabled = true },
-			input = { enabled = true },
-			notifier = { enabled = true },
-			picker = { enabled = true },
+	view_options = { show_hidden = true },
+})
 
-			styles = {
-				input = {
-					relative = "cursor",
-					row = -3,
-					col = 0,
-					width = 30,
-					keys = {
-						i_esc = false,
-					},
-				},
+vim.keymap.set("n", "<Leader>e", oil.open, { desc = "File explorer" })
+
+local snacks = require("snacks")
+snacks.setup({
+	gitbrowse = { enabled = true },
+	input = { enabled = true },
+	notifier = { enabled = true },
+	picker = { enabled = true },
+
+	styles = {
+		input = {
+			relative = "cursor",
+			row = -3,
+			col = 0,
+			width = 30,
+			keys = {
+				i_esc = false,
 			},
 		},
 	},
-}
+})
+
+vim.keymap.set({ "n", "v" }, "<Leader>gof", snacks.gitbrowse.open, { desc = "Open in git web" })
+vim.keymap.set("n", "<Leader>dpp", snacks.profiler.toggle, { desc = "Toggle profiler" })
+vim.keymap.set("n", "<Leader>dph", snacks.profiler.highlight, { desc = "Toggle profiler highlight" })
+vim.keymap.set("n", "<Leader>dps", snacks.profiler.highlight, { desc = "Profiler scratch buffer" })

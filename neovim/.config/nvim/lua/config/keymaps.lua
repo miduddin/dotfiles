@@ -4,7 +4,6 @@ local map = function(rhs, lhs, mode, opts) vim.keymap.set(mode, lhs, rhs, opts) 
 map("*``", "*", "n", { desc = "Search current word without going next" })
 map("5j", "<C-J>", { "n", "v" }, { desc = "5 line down" })
 map("5k", "<C-K>", { "n", "v" }, { desc = "5 line up " })
-map("<Cmd>Lazy<CR>", "<Leader>l", "n", { desc = "Lazy" })
 map("<Cmd>bn<CR>", "<S-L>", "n", { desc = "Next buffer" })
 map("<Cmd>bp<CR>", "<S-H>", "n", { desc = "Prev buffer" })
 map("<Cmd>noh<CR><Esc>", "<Esc>", { "n", "t" }, { desc = "Esc + clear search highlight" })
@@ -19,6 +18,20 @@ map("ggVG", "<C-A>", "n", { desc = "Select all" })
 map('"+P', "<Leader>P", { "n", "v" }, { desc = "Paste from clipboard" })
 map('"+p', "<Leader>p", { "n", "v" }, { desc = "Paste from clipboard" })
 map('"+y', "<Leader>y", { "n", "v" }, { desc = "Yank to clipboard" })
+
+map(function()
+	local ok, _ = pcall(function() vim.cmd("b# | bw#") end)
+	if not ok then vim.cmd("bw") end
+end, "<Leader>bd", "n", { desc = "Close current buffer" })
+
+map(function()
+	local curbuf = vim.api.nvim_get_current_buf()
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if buf ~= curbuf and vim.fn.buflisted(buf) then vim.cmd("bw " .. buf) end
+	end
+end, "<Leader>bo", "n", { desc = "Close other buffers" })
+
+map("<Cmd>%bw<CR>", "<Leader>ba", "n", { desc = "Close all buffers" })
 
 map(function()
 	local topline = vim.fn.winsaveview().topline
