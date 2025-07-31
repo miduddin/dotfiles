@@ -2,7 +2,11 @@ vim.cmd("colorscheme vague-custom")
 require("config")
 require("src")
 
-vim.diagnostic.config({ jump = { float = true }, virtual_text = true })
+vim.diagnostic.config({
+	jump = { float = true },
+	virtual_text = true,
+	float = { source = true },
+})
 vim.lsp.set_log_level(vim.g.log_level)
 vim.lsp.enable({
 	"golangci_lint_ls",
