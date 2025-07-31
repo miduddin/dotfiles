@@ -32,6 +32,7 @@ snacks.setup({
 	},
 })
 
+vim.keymap.set("n", "<Leader>n", snacks.notifier.show_history, { desc = "Notification history" })
 vim.keymap.set({ "n", "v" }, "<Leader>gof", snacks.gitbrowse.open, { desc = "Open in git web" })
 vim.keymap.set("n", "<Leader>dpp", snacks.profiler.toggle, { desc = "Toggle profiler" })
 vim.keymap.set("n", "<Leader>dph", snacks.profiler.highlight, { desc = "Toggle profiler highlight" })
