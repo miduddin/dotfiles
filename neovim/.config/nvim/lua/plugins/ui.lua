@@ -35,6 +35,7 @@ snacks.setup({
 vim.keymap.set("n", "<Leader>ba", snacks.bufdelete.all, { desc = "Close all buffers" })
 vim.keymap.set("n", "<Leader>bd", snacks.bufdelete.delete, { desc = "Close current buffer" })
 vim.keymap.set("n", "<Leader>bo", snacks.bufdelete.other, { desc = "Close other buffers" })
+vim.keymap.set("n", "<Leader>n", snacks.notifier.show_history, { desc = "Notification history" })
 vim.keymap.set({ "n", "v" }, "<Leader>gof", snacks.gitbrowse.open, { desc = "Open in git web" })
 vim.keymap.set("n", "<Leader>dpp", snacks.profiler.toggle, { desc = "Toggle profiler" })
 vim.keymap.set("n", "<Leader>dph", snacks.profiler.highlight, { desc = "Toggle profiler highlight" })
