@@ -13,7 +13,6 @@
 [delta]
 	dark = true
 	diff-so-fancy = true
-	line-numbers = true
 	navigate = true
 	tabs = 4
 	file-style = yellow bold

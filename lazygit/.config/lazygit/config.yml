@@ -18,7 +18,11 @@ os:
 customCommands:
   - key: X
     context: global
-    command: fish -c gc
+    command: |
+      git remote prune origin
+      git reflog expire --expire=now --all
+      git repack -ad
+      git prune
     description: Cleanup local git files.
     loadingText: Cleaning up
     output: log
