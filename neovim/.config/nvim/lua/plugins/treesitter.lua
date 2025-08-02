@@ -1,9 +1,5 @@
 require("nvim-treesitter.configs").setup({
 	auto_install = true,
-	indent = {
-		enable = true,
-		disable = { "yaml" },
-	},
 	highlight = {
 		enable = true,
 		additional_vim_regex_highlighting = false,
@@ -80,21 +76,5 @@ vim.keymap.set({ "n", "x", "o" }, "f", ts_repeat_move.builtin_f_expr, { expr = t
 vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
-
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.blade = {
-	install_info = {
-		url = "https://github.com/EmranMR/tree-sitter-blade",
-		files = { "src/parser.c" },
-		branch = "main",
-	},
-	filetype = "blade",
-}
-
-vim.filetype.add({
-	pattern = {
-		[".*%.blade%.php"] = "blade",
-	},
-})
 
 require("treesitter-context").setup({ max_lines = 2, multiwindow = true })
