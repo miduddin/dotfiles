@@ -12,7 +12,6 @@
 
 [delta]
 	dark = true
-	line-numbers = true
 	navigate = true
 	tabs = 4
 	minus-style = syntax "#3b242a"
