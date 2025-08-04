@@ -1,3 +1,15 @@
+vim.g.loaded_2html_plugin = true
+vim.g.loaded_fzf = true
+vim.g.loaded_gzip = true
+vim.g.loaded_man = true
+vim.g.loaded_matchit = true
+vim.g.loaded_netrw = true
+vim.g.loaded_remote_plugins = true
+vim.g.loaded_spec = true
+vim.g.loaded_spellfile_plugin = true
+vim.g.loaded_tar = true
+vim.g.loaded_tarPlugin = true
+vim.g.loaded_zipPlugin = true
 vim.g.log_level = vim.log.levels.OFF
 vim.g.mapleader = " "
 
@@ -16,7 +28,6 @@ vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "│  ", trail = "│" })
 vim.opt.number = true
-vim.opt.shada = ""
 vim.opt.shiftwidth = 4
 vim.opt.signcolumn = "yes:1"
 vim.opt.smartcase = true
