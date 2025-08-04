@@ -1,12 +1,14 @@
 function fish_user_key_bindings
-	bind \cr __fzf_history
-	bind \cf __fzf_fd_nvim
-	bind \cl __clear
+	bind ctrl-r __fzf_history
+	bind ctrl-f __fzf_fd_nvim
+	bind ctrl-l __clear
+	bind alt-v __open_buffer
 
 	if bind -M insert > /dev/null 2>&1
-		bind -M insert \cr __fzf_history
-		bind -M insert \cf __fzf_fd_nvim
-		bind -M insert \cl __clear
+		bind -M insert ctrl-r __fzf_history
+		bind -M insert ctrl-f __fzf_fd_nvim
+		bind -M insert ctrl-l __clear
+		bind -M insert alt-v __open_buffer
 	end
 end
 
@@ -31,4 +33,8 @@ end
 function __clear
 	clear
 	commandline -f repaint
+end
+
+function __open_buffer
+	nvim /mnt/d/term_buffer && rm /mnt/d/term_buffer 2> /dev/null
 end
