@@ -8,6 +8,13 @@
         },
         {
             "command": {
+                "action": "exportBuffer",
+                "path": "D:/term_buffer"
+            },
+            "id": "User.exportBuffer"
+        },
+        {
+            "command": {
                 "action": "moveFocus",
                 "direction": "down"
             },
@@ -130,6 +137,10 @@
         {
             "id": "",
             "keys": "f11"
+        },
+        {
+            "id": "User.exportBuffer",
+            "keys": "alt+b"
         },
         {
             "id": "User.moveFocus.down",
