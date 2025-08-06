@@ -9,6 +9,7 @@ vim.diagnostic.config({
 })
 vim.lsp.set_log_level(vim.g.log_level)
 vim.lsp.enable({
+	"cssls",
 	"golangci_lint_ls",
 	"gopls",
 	"html",
