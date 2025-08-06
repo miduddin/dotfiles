@@ -4,7 +4,7 @@ vim.diagnostic.config({
 	float = { source = true },
 	signs = false,
 })
-vim.lsp.set_log_level(vim.g.log_level)
+vim.lsp.log.set_level(vim.g.log_level)
 vim.lsp.enable({
 	"buf",
 	"cssls",
