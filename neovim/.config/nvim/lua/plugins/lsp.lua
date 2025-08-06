@@ -91,7 +91,6 @@ vim.lsp.config("*", { capabilities = require("cmp_nvim_lsp").default_capabilitie
 
 require("conform").setup({
 	formatters_by_ft = {
-		css = { "prettier" },
 		go = { "golangci-lint" },
 		lua = { "stylua" },
 		php = { "php_cs_fixer" },
