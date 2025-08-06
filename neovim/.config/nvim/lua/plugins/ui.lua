@@ -16,7 +16,6 @@ local snacks = require("snacks")
 snacks.setup({
 	bigfile = { enabled = true, notify = false },
 	input = { enabled = true },
-	notifier = { enabled = true },
 	picker = { enabled = true },
 
 	styles = {
@@ -32,7 +31,6 @@ snacks.setup({
 	},
 })
 
-Map("<Leader>sn", snacks.notifier.show_history, "n", { desc = "Notification history" })
 Map("<Leader>sP", snacks.profiler.toggle, "n", { desc = "Toggle profiler" })
 Map("<Leader>sph", snacks.profiler.highlight, "n", { desc = "Toggle profiler highlight" })
 Map("<Leader>sps", snacks.profiler.scratch, "n", { desc = "Profiler scratch buffer" })
