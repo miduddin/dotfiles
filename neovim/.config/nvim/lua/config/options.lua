@@ -27,9 +27,9 @@ vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "│  ", trail = "│" })
-vim.opt.number = true
 vim.opt.scrolloff = 2
 vim.opt.shiftwidth = 4
+vim.opt.showbreak = "󱞩 "
 vim.opt.signcolumn = "yes:1"
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
