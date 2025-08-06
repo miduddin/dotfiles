@@ -1,53 +1,28 @@
-local path_package = vim.fn.stdpath("data") .. "/site/"
-local mini_path = path_package .. "pack/deps/start/mini.deps"
-if not vim.uv.fs_stat(mini_path) then
-	vim.cmd('echo "Installing `mini.nvim`" | redraw')
-	local clone_cmd = {
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"--single-branch",
-		"https://github.com/echasnovski/mini.deps",
-		mini_path,
-	}
-	vim.fn.system(clone_cmd)
-	vim.cmd("packadd mini.deps | helptags ALL")
-	vim.cmd('echo "Installed `mini.deps`" | redraw')
-end
-
-local deps = require("mini.deps")
-deps.setup({ path = { package = path_package } })
-
-deps.add({ source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = function() vim.cmd("TSUpdate") end } })
-deps.add({ source = "nvim-treesitter/nvim-treesitter-textobjects", depends = { "nvim-treesitter/nvim-treesitter" } })
-deps.add({ source = "nvim-treesitter/nvim-treesitter-context", depends = { "nvim-treesitter/nvim-treesitter" } })
-deps.add({ source = "echasnovski/mini.pairs" })
-deps.add({ source = "echasnovski/mini.surround" })
-deps.add({ source = "jake-stewart/multicursor.nvim" })
-deps.add({ source = "ibhagwan/fzf-lua", depends = { "nvim-tree/nvim-web-devicons" } })
-deps.add({ source = "sindrets/diffview.nvim" })
-deps.add({
-	source = "hrsh7th/nvim-cmp",
-	depends = {
-		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-nvim-lsp",
-	},
+vim.pack.add({
+	"https://github.com/nvim-treesitter/nvim-treesitter",
+	"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+	"https://github.com/nvim-treesitter/nvim-treesitter-context",
+	"https://github.com/echasnovski/mini.pairs",
+	"https://github.com/echasnovski/mini.surround",
+	"https://github.com/jake-stewart/multicursor.nvim",
+	"https://github.com/nvim-tree/nvim-web-devicons",
+	"https://github.com/ibhagwan/fzf-lua",
+	"https://github.com/sindrets/diffview.nvim",
+	"https://github.com/hrsh7th/nvim-cmp",
+	"https://github.com/hrsh7th/cmp-buffer",
+	"https://github.com/hrsh7th/cmp-nvim-lsp",
+	"https://github.com/L3MON4D3/LuaSnip",
+	"https://github.com/saadparwaiz1/cmp_luasnip",
+	"https://github.com/stevearc/conform.nvim",
+	"https://github.com/stevearc/oil.nvim",
+	"https://github.com/nvim-neotest/nvim-nio",
+	"https://github.com/nvim-lua/plenary.nvim",
+	"https://github.com/nvim-neotest/neotest",
+	"https://github.com/fredrikaverpil/neotest-golang",
+	"https://github.com/mfussenegger/nvim-dap",
+	"https://github.com/leoluz/nvim-dap-go",
+	"https://github.com/folke/snacks.nvim",
 })
-deps.add({ source = "stevearc/conform.nvim" })
-deps.add({
-	source = "nvim-neotest/neotest",
-	depends = {
-		"nvim-neotest/nvim-nio",
-		"nvim-treesitter/nvim-treesitter",
-		"nvim-lua/plenary.nvim",
-		"fredrikaverpil/neotest-golang",
-	},
-})
-deps.add({ source = "mfussenegger/nvim-dap", depends = { "leoluz/nvim-dap-go" } })
-deps.add({ source = "stevearc/oil.nvim", depends = { "nvim-tree/nvim-web-devicons" } })
-deps.add({ source = "folke/snacks.nvim" })
 
 require("plugins.treesitter")
 require("plugins.editor")

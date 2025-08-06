@@ -26,6 +26,7 @@ set -x XDG_STATE_HOME ~/.local/state
 fish_add_path -P \
 	~/.local/share/go/bin \
 	~/.local/share/cargo/bin \
+	~/.local/nvim/bin \
 	~/.local/bin \
 	/usr/local/go/bin \
 	/opt/google-cloud-cli/bin \
