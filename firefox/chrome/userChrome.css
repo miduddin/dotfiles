@@ -15,7 +15,7 @@
 .tab-audio-button,
 .tab-close-button,
 .tab-icon-overlay,
-.titlebar-spacer[type="pre-tabs"] {
+.titlebar-spacer[type="post-tabs"] {
 	display: none !important;
 }
 
@@ -23,7 +23,7 @@
 
 #navigator-toolbox {
 	border: none !important;
-	flex-flow: row-reverse wrap !important;
+	flex-flow: row wrap !important;
 }
 
 #toolbar-menubar {
