@@ -31,6 +31,7 @@ fish_add_path -P \
 	$XDG_DATA_HOME/go/bin \
 	$XDG_DATA_HOME/cargo/bin \
 	$XDG_DATA_HOME/gem/ruby/3.4.0/bin \
+	~/.local/nvim/bin \
 	~/.local/bin \
 	/usr/local/go/bin \
 	/opt/google-cloud-cli/bin \

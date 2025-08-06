@@ -3,6 +3,7 @@ require("options")
 require("tabline")
 
 vim.schedule(function()
+	require("vim._extui").enable({})
 	require("keymaps")
 	require("autocmds")
 	require("lsp")
