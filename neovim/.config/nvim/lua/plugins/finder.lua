@@ -5,6 +5,7 @@ fzf.setup({
 			delay = 0,
 			layout = "vertical",
 			vertical = "down:75%",
+			winopts = { number = false },
 		},
 	},
 	defaults = {
