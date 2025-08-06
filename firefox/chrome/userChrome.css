@@ -1,9 +1,11 @@
 /* Hide unused elements */
+
 #alltabs-button,
 #forward-button[disabled="true"],
 #identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon-box,
 #identity-box[pageproxystate="valid"].verifiedDomain #identity-icon-box,
 #pageAction-urlbar-_testpilot-containers,
+#picture-in-picture-button,
 #reader-mode-button,
 #star-button-box,
 #tracking-protection-icon-container,
@@ -14,27 +16,31 @@
 .tab-close-button,
 .tab-icon-overlay,
 .titlebar-spacer[type="pre-tabs"] {
-  display: none !important;
+	display: none !important;
 }
 
-/* One line header */
-:root {
-  --nav-bar-width: clamp(0px, 50vw, 450px);
-}
-#TabsToolbar {
-  margin-left: var(--nav-bar-width) !important;
-}
-#nav-bar {
-  margin-top: calc((var(--urlbar-min-height) * -1) - 10px) !important;
-  margin-right: calc(100vw - var(--nav-bar-width)) !important;
-}
-#urlbar-container {
-  width: calc(2 * var(--toolbarbutton-inner-padding)) !important;
-}
+/* One line toolbox */
+
 #navigator-toolbox {
-  border-bottom: none !important;
+	border: none !important;
+	flex-flow: row-reverse wrap !important;
 }
+
+#navigator-toolbox>* {
+	flex: 1 100% !important;
+}
+
 #nav-bar {
-  background: none !important;
-  border-top: none !important;
+	background: none !important;
+	border: none !important;
+	flex: 0.7 !important;
+	max-width: 500px;
+}
+
+#urlbar-container {
+	width: unset !important;
+}
+
+#TabsToolbar {
+	flex: 1 !important;
 }
