@@ -31,3 +31,7 @@ ctrl + alt + h         : komorebic move left
 ctrl + alt + j         : komorebic move down
 ctrl + alt + k         : komorebic move up
 ctrl + alt + l         : komorebic move right
+ctrl + shift + h       : komorebic focus left
+ctrl + shift + j       : komorebic focus down
+ctrl + shift + k       : komorebic focus up
+ctrl + shift + l       : komorebic focus right
