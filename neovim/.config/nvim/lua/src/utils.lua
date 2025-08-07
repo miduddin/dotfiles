@@ -7,7 +7,7 @@ function M.write_cmd_output_to_split(obj, bufname)
 	vim.api.nvim_buf_set_name(buf, bufname)
 	vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
 	vim.api.nvim_set_option_value("bufhidden", "wipe", { buf = buf })
-	vim.keymap.set("n", "q", "<Cmd>bd<CR>", { desc = "Close buffer", buffer = buf })
+	Map("q", "<Cmd>bd<CR>", "n", { desc = "Close buffer", buffer = buf })
 
 	vim.cmd("split")
 	local win = vim.api.nvim_get_current_win()
