@@ -9,7 +9,16 @@ neotest.setup({
 		enabled = false,
 		concurrent = 1,
 	},
-	icons = { unknown = "?" },
+	icons = {
+		unknown = "?",
+		child_indent = "  ",
+		child_prefix = " ",
+		collapsed = "+",
+		expanded = "-",
+		final_child_indent = "  ",
+		final_child_prefix = " ",
+		non_collapsible = " ",
+	},
 	log_level = vim.g.log_level,
 	quickfix = { enabled = false },
 	summary = {

@@ -1,6 +1,7 @@
 local fzf = require("fzf-lua")
 fzf.setup({
 	winopts = {
+		width = 120,
 		preview = {
 			delay = 0,
 			layout = "vertical",
