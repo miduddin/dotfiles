@@ -10,7 +10,7 @@ oil.setup({
 	view_options = { show_hidden = true },
 })
 
-vim.keymap.set("n", "<Leader>e", oil.open, { desc = "File explorer" })
+Map("<Leader>e", oil.open, "n", { desc = "File explorer" })
 
 local snacks = require("snacks")
 snacks.setup({
@@ -31,7 +31,7 @@ snacks.setup({
 	},
 })
 
-vim.keymap.set("n", "<Leader>n", snacks.notifier.show_history, { desc = "Notification history" })
-vim.keymap.set("n", "<Leader>dpp", snacks.profiler.toggle, { desc = "Toggle profiler" })
-vim.keymap.set("n", "<Leader>dph", snacks.profiler.highlight, { desc = "Toggle profiler highlight" })
-vim.keymap.set("n", "<Leader>dps", snacks.profiler.highlight, { desc = "Profiler scratch buffer" })
+Map("<Leader>sn", snacks.notifier.show_history, "n", { desc = "Notification history" })
+Map("<Leader>sP", snacks.profiler.toggle, "n", { desc = "Toggle profiler" })
+Map("<Leader>sph", snacks.profiler.highlight, "n", { desc = "Toggle profiler highlight" })
+Map("<Leader>sps", snacks.profiler.scratch, "n", { desc = "Profiler scratch buffer" })

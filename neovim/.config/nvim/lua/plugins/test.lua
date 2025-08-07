@@ -22,19 +22,22 @@ neotest.setup({
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "neotest-summary" },
-	callback = function(ev) vim.keymap.set("n", "q", neotest.summary.close, { buffer = ev.buf }) end,
+	callback = function(ev) Map("q", neotest.summary.close, "n", { buffer = ev.buf }) end,
 })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "neotest-output" },
-	callback = function(ev) vim.keymap.set("n", "q", "<Cmd>q<CR>", { buffer = ev.buf }) end,
+	callback = function(ev) Map("q", "<Cmd>q<CR>", "n", { buffer = ev.buf }) end,
 })
 
-vim.keymap.set("n", "<Leader>td", function() neotest.run.run({ strategy = "dap", suite = false }) end)
-vim.keymap.set("n", "<Leader>tr", neotest.run.run)
-vim.keymap.set("n", "<Leader>ts", neotest.summary.toggle)
-vim.keymap.set("n", "<Leader>to", function() neotest.output.open({ enter = true, auto_close = true }) end)
-vim.keymap.set("n", "<Leader>tO", neotest.output_panel.toggle)
-vim.keymap.set("n", "<Leader>tS", neotest.run.stop)
+local function debug_nearest_test() neotest.run.run({ strategy = "dap", suite = false }) end
+local function toggle_test_output() neotest.output.open({ enter = true, auto_close = true }) end
+
+Map("<Leader>td", debug_nearest_test, "n", { desc = "Test: debug nearest" })
+Map("<Leader>tO", neotest.output_panel.toggle, "n", { desc = "Test: toggle output panel" })
+Map("<Leader>to", toggle_test_output, "n", { desc = "Test: toggle output" })
+Map("<Leader>tr", neotest.run.run, "n", { desc = "Test: run nearest test" })
+Map("<Leader>ts", neotest.summary.toggle, "n", { desc = "Test: toggle summary view" })
+Map("<Leader>tt", neotest.run.stop, "n", { desc = "Test: stop" })
 
 require("dap-go").setup()
 
@@ -43,25 +46,25 @@ dap.set_log_level("ERROR")
 
 local widgets = require("dap.ui.widgets")
 local scopes = widgets.sidebar(widgets.scopes, nil, "split")
-vim.keymap.set({ "n", "v" }, "<Leader>dw", widgets.hover)
-vim.keymap.set("n", "<Leader>ds", scopes.toggle)
 
-vim.keymap.set("n", "<Leader>dB", function()
+local function breakpoint_condition()
 	vim.ui.input({ prompt = "Breakpoint condition" }, function(input)
 		if input ~= nil then dap.set_breakpoint(input) end
 	end)
-end, { desc = "Breakpoint Condition" })
-vim.keymap.set("n", "<Leader>dC", dap.run_to_cursor, { desc = "Run to Cursor" })
-vim.keymap.set("n", "<Leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
-vim.keymap.set("n", "<Leader>dc", dap.continue, { desc = "Continue" })
-vim.keymap.set("n", "<Leader>di", dap.step_into, { desc = "Step Into" })
-vim.keymap.set("n", "<Leader>dl", dap.run_last, { desc = "Run Last" })
-vim.keymap.set("n", "<Leader>dn", dap.step_over, { desc = "Step Over" })
-vim.keymap.set("n", "<Leader>do", dap.step_out, { desc = "Step Out" })
-vim.keymap.set("n", "<Leader>dt", dap.terminate, { desc = "Terminate" })
+end
 
--- Alternative keymaps:
-vim.keymap.set("n", "<F5>", dap.continue, { desc = "Continue" })
-vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Step Over" })
-vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Step Into" })
-vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Step Out" })
+Map("<F10>", dap.step_over, "n", { desc = "Debug: step over" })
+Map("<F11>", dap.step_into, "n", { desc = "Debug: step into" })
+Map("<F12>", dap.step_out, "n", { desc = "Debug: step out" })
+Map("<F5>", dap.continue, "n", { desc = "Debug: continue" })
+Map("<Leader>dB", breakpoint_condition, "n", { desc = "Debug: add breakpoint with condition" })
+Map("<Leader>db", dap.toggle_breakpoint, "n", { desc = "Debug: toggle breakpoint" })
+Map("<Leader>dc", dap.continue, "n", { desc = "Debug: continue" })
+Map("<Leader>dC", dap.run_to_cursor, "n", { desc = "Debug: run to cursor" })
+Map("<Leader>di", dap.step_into, "n", { desc = "Debug: step into" })
+Map("<Leader>dl", dap.run_last, "n", { desc = "Debug: run last debugging session" })
+Map("<Leader>dn", dap.step_over, "n", { desc = "Debug: step over" })
+Map("<Leader>do", dap.step_out, "n", { desc = "Debug: step out" })
+Map("<Leader>ds", scopes.toggle, "n", { desc = "Debug: toggle scope view" })
+Map("<Leader>dt", dap.terminate, "n", { desc = "Debug: terminate session" })
+Map("<Leader>dw", widgets.hover, { "n", "v" }, { desc = "Debug: hover widget" })

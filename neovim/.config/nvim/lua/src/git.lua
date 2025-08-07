@@ -8,8 +8,6 @@ vim.api.nvim_create_autocmd({ "TermClose" }, {
 	command = [[call feedkeys("k")]],
 })
 
-vim.keymap.set("n", "<Leader>/g", "<Cmd>tabnew | term lazygit<CR>", { desc = "Lazygit" })
-
 ---@param cmd string
 ---@return string?
 local function system(cmd)
@@ -50,4 +48,5 @@ local function open_in_remote()
 	vim.ui.open(url)
 end
 
-vim.keymap.set({ "n", "v" }, "<Leader>go", open_in_remote, { desc = "Open current file in git remote" })
+Map("<Leader>/g", "<Cmd>tabnew | term lazygit<CR>", "n", { desc = "Lazygit" })
+Map("<Leader>gr", open_in_remote, { "n", "v" }, { desc = "Open in git remote" })

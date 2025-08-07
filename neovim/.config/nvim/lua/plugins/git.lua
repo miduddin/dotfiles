@@ -21,10 +21,12 @@ require("diffview").setup({
 	},
 })
 
-vim.keymap.set("n", "<Leader>gl", "<Cmd>DiffviewFileHistory %<CR>", { desc = "Current file history" })
-vim.keymap.set("v", "<Leader>gl", ":DiffviewFileHistory<CR>", { desc = "Selected lines history" })
-vim.keymap.set("n", "<Leader>gL", "<Cmd>DiffviewFileHistory<CR>", { desc = "Project history" })
-vim.keymap.set("n", "<Leader>gd", function()
+local function compare_with_ref()
 	local ref = vim.fn.input({ prompt = "Compare with ref: ", cancelreturn = ".." })
 	if ref ~= ".." then vim.cmd("DiffviewOpen " .. ref) end
-end, { desc = "Diff with ref..." })
+end
+
+Map("<Leader>gc", compare_with_ref, "n", { desc = "Git: compare with ref..." })
+Map("<Leader>gl", ":DiffviewFileHistory<CR>", "v", { desc = "Git: selected lines log" })
+Map("<Leader>gl", "<Cmd>DiffviewFileHistory %<CR>", "n", { desc = "Git: file log" })
+Map("<Leader>gL", "<Cmd>DiffviewFileHistory<CR>", "n", { desc = "Git: project log" })
