@@ -8,4 +8,4 @@ vim.api.nvim_create_autocmd({ "TermClose" }, {
 	command = [[call feedkeys("k")]],
 })
 
-vim.keymap.set("n", "<Leader>/d", "<Cmd>tabnew | term lazydocker<CR>", { desc = "Lazydocker" })
+Map("<Leader>/d", "<Cmd>tabnew | term lazydocker<CR>", "n", { desc = "Lazydocker" })
