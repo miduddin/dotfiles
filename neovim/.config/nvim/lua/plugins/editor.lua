@@ -3,9 +3,9 @@ require("mini.pairs").setup({})
 local mc = require("multicursor-nvim")
 mc.setup()
 
-vim.keymap.set({ "n", "x" }, "<Up>", function() mc.lineAddCursor(-1) end)
-vim.keymap.set({ "n", "x" }, "<Down>", function() mc.lineAddCursor(1) end)
-vim.keymap.set({ "n", "x" }, "<C-x>", function() mc.matchAddCursor(1) end)
+Map("<C-x>", function() mc.matchAddCursor(1) end, { "n", "x" })
+Map("<Down>", function() mc.lineAddCursor(1) end, { "n", "x" })
+Map("<Up>", function() mc.lineAddCursor(-1) end, { "n", "x" })
 
 mc.addKeymapLayer(function(layerSet)
 	layerSet({ "n", "x" }, "<Left>", mc.prevCursor)
