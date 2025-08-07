@@ -213,6 +213,7 @@
     ],
     "profiles": {
         "defaults": {
+            "antialiasingMode": "cleartype",
             "colorScheme": "Vague",
             "font": {
                 "face": "Maple Mono, Symbols Nerd Font",
