@@ -2,6 +2,7 @@ local fzf = require("fzf-lua")
 fzf.setup({
 	winopts = {
 		border = vim.o.winborder,
+		width = 120,
 		preview = {
 			delay = 0,
 			layout = "vertical",
