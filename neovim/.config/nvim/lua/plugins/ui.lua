@@ -14,6 +14,7 @@ Map("<Leader>e", oil.open, "n", { desc = "File explorer" })
 
 local snacks = require("snacks")
 snacks.setup({
+	bigfile = { enabled = true, notify = false },
 	input = { enabled = true },
 	notifier = { enabled = true },
 	picker = { enabled = true },
