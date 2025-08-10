@@ -1,3 +1,7 @@
+require("src.options")
+require("src.keymaps")
+require("src.autocmds")
+require("src.lsp")
 require("src.git")
 require("src.docker")
 require("src.statusline")
