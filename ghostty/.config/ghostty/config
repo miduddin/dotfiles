@@ -1,0 +1,18 @@
+confirm-close-surface = false
+font-family = "Maple Mono"
+font-feature = +ss01, +ss02, +ss04, +ss06
+macos-option-as-alt = true
+theme = vague
+window-padding-x = 5
+
+keybind = alt+d=new_split:down
+keybind = alt+n=new_split:right
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
+keybind = alt+l=goto_split:right
+keybind = alt+m=toggle_split_zoom
+keybind = alt+shift+h=resize_split:left,30
+keybind = alt+shift+j=resize_split:down,30
+keybind = alt+shift+k=resize_split:up,30
+keybind = alt+shift+l=resize_split:right,30
