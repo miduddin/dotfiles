@@ -73,6 +73,8 @@ end
 function Map(lhs, rhs, mode, opts) vim.keymap.set(mode, lhs, rhs, opts) end
 
 Map("*", "*``", "n", { desc = "Search current word without going next" })
+Map("<C-/>", "gc", "v", { desc = "Toggle comment", remap = true })
+Map("<C-/>", "gcc", "n", { desc = "Toggle comment", remap = true })
 Map("<C-_>", "gc", "v", { desc = "Toggle comment", remap = true })
 Map("<C-_>", "gcc", "n", { desc = "Toggle comment", remap = true })
 Map("<C-A>", "ggVG", "n", { desc = "Select all" })

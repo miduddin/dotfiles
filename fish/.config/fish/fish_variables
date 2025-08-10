@@ -1,30 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export BROWSER:/mnt/c/Progra\x7e1/Firefo\x7e1/firefox\x2eexe
-SETUVAR --export CARGO_HOME:/home/miduddin/\x2elocal/share/cargo
-SETUVAR --export CARGO_NET_GIT_FETCH_WITH_CLI:true
-SETUVAR --export DOCKER_CONFIG:/home/miduddin/\x2econfig/docker
-SETUVAR --export EDITOR:nvim
-SETUVAR --export FZF_DEFAULT_OPTS:\x2d\x2dreverse\x20\x2d\x2dheight\x3d10\x20\x2d\x2dno\x2dseparator
-SETUVAR --export GOPATH:/home/miduddin/\x2elocal/share/go
-SETUVAR --export HISTFILE:/home/miduddin/\x2elocal/state/bash/history
-SETUVAR --export NPM_CONFIG_USERCONFIG:/home/miduddin/\x2econfig/npm/npmrc
-SETUVAR --export NVIM_LOG_FILE:/tmp/nvim\x2elog
-SETUVAR --export PGPASSFILE:/home/miduddin/\x2econfig/pg/pgpass
-SETUVAR --export PGSERVICEFILE:/home/miduddin/\x2econfig/pg/pg_service\x2econf
-SETUVAR --export PSQLRC:/home/miduddin/\x2econfig/psqlrc
-SETUVAR --export PSQL_HISTORY:/home/miduddin/\x2elocal/share/psql_history
-SETUVAR --export PYENV_ROOT:/home/miduddin/\x2elocal/share/pyenv
-SETUVAR --export REDISCLI_HISTFILE:/home/miduddin/\x2elocal/share/redis/rediscli_history
-SETUVAR --export RUSTUP_HOME:/home/miduddin/\x2elocal/share/rustup
-SETUVAR --export USQLPASS:/home/miduddin/\x2econfig/usql/pass
-SETUVAR --export USQLRC:/home/miduddin/\x2econfig/usql/rc
-SETUVAR --export USQL_HISTORY:/home/miduddin/\x2econfig/usql/history
-SETUVAR --export USQL_TERM_GRAPHICS:none
-SETUVAR --export XDG_CACHE_HOME:/home/miduddin/\x2ecache
-SETUVAR --export XDG_CONFIG_HOME:/home/miduddin/\x2econfig
-SETUVAR --export XDG_DATA_HOME:/home/miduddin/\x2elocal/share
-SETUVAR --export XDG_STATE_HOME:/home/miduddin/\x2elocal/state
 SETUVAR __fish_initialized:3800
 SETUVAR fish_color_autosuggestion:555
 SETUVAR fish_color_cancel:\x2d\x2dreverse
@@ -68,4 +43,3 @@ SETUVAR fish_pager_color_selected_background:\x2d\x2dreverse
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/opt/google\x2dcloud\x2dcli/bin\x1e/home/miduddin/\x2elocal/share/go/bin\x1e/home/miduddin/\x2elocal/share/cargo/bin\x1e/home/miduddin/\x2elocal/share/pyenv/bin\x1e/home/miduddin/\x2elocal/bin\x1e/opt/mssql\x2dtools18/bin\x1e/home/miduddin/bin\x1e/usr/local/go/bin
