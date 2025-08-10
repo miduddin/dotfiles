@@ -1,4 +1,5 @@
-require("mini.pairs").setup({})
+require("mini.pairs").setup()
+require("mini.surround").setup({ n_lines = 100 })
 
 local mc = require("multicursor-nvim")
 mc.setup()
@@ -24,5 +25,3 @@ mc.addKeymapLayer(function(layerSet)
 		end
 	end)
 end)
-
-require("nvim-surround").setup({})

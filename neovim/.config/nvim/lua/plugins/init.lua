@@ -22,8 +22,8 @@ deps.add({ source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout =
 deps.add({ source = "nvim-treesitter/nvim-treesitter-textobjects", depends = { "nvim-treesitter/nvim-treesitter" } })
 deps.add({ source = "nvim-treesitter/nvim-treesitter-context", depends = { "nvim-treesitter/nvim-treesitter" } })
 deps.add({ source = "echasnovski/mini.pairs" })
+deps.add({ source = "echasnovski/mini.surround" })
 deps.add({ source = "jake-stewart/multicursor.nvim" })
-deps.add({ source = "kylechui/nvim-surround" })
 deps.add({ source = "ibhagwan/fzf-lua", depends = { "nvim-tree/nvim-web-devicons" } })
 deps.add({ source = "sindrets/diffview.nvim" })
 deps.add({
