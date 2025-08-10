@@ -1,5 +1,0 @@
-require("src.git")
-require("src.docker")
-require("src.statusline")
-require("src.tabline")
-require("src.session")

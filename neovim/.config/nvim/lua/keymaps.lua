@@ -6,7 +6,7 @@ end
 local function close_other_buffers()
 	local curbuf = vim.api.nvim_get_current_buf()
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if buf ~= curbuf and vim.fn.buflisted(buf) then vim.cmd("bw " .. buf) end
+		if buf ~= curbuf and vim.api.nvim_get_option_value("buflisted", { buf = buf }) then vim.cmd("bw " .. buf) end
 	end
 end
 
