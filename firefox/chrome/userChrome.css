@@ -1,5 +1,3 @@
-/* Hide unused elements */
-
 #alltabs-button,
 #forward-button[disabled="true"],
 #identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon-box,
@@ -14,16 +12,32 @@
 #userContext-icons,
 .tab-audio-button,
 .tab-close-button,
-.tab-icon-overlay,
-.titlebar-spacer[type="pre-tabs"] {
+.tab-icon-overlay {
 	display: none !important;
 }
 
-/* One line toolbox */
+@media (-moz-platform: windows) {
+	.titlebar-spacer[type="pre-tabs"] {
+		display: none !important;
+	}
+
+	#navigator-toolbox {
+		flex-flow: row-reverse wrap !important;
+	}
+}
+
+@media (-moz-platform: macos) {
+	.titlebar-spacer[type="post-tabs"] {
+		display: none !important;
+	}
+
+	#navigator-toolbox {
+		flex-flow: row wrap !important;
+	}
+}
 
 #navigator-toolbox {
 	border: none !important;
-	flex-flow: row-reverse wrap !important;
 }
 
 #navigator-toolbox>* {
