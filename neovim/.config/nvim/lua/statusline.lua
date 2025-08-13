@@ -47,7 +47,6 @@ local function update_statusline(buf)
 		filename,
 		vim.fn.getbufvar(buf, "st_diagnostics"),
 		"%=",
-		vim.fn.getbufvar(buf, "st_diff"),
 		vim.fn.getbufvar(buf, "st_position"),
 	})
 
@@ -135,68 +134,11 @@ vim.api.nvim_create_autocmd(
 	{ callback = set_component_callback("st_diagnostics", update_diagnostics) }
 )
 
--- Reference: https://github.com/nvim-lualine/lualine.nvim/blob/6a40b530539d2209f7dc0492f3681c8c126647ad/lua/lualine/components/diff/git_diff.lua#L59
----@param buf integer
----@return string
-local function update_git_diff(buf)
-	if not is_file_buffer(buf) then return "" end
-
-	local output = vim.system({
-		"git",
-		"-C",
-		vim.fn.expand("%:h"),
-		"--no-pager",
-		"diff",
-		"--no-color",
-		"--no-ext-diff",
-		"-U0",
-		"--",
-		vim.fn.expand("%:t"),
-	}, { text = true })
-		:wait().stdout
-	if not output or output == "" then return "" end
-
-	local lines = vim.fn.split(output, "\n")
-
-	local added, deleted, changed = 0, 0, 0
-	for _, line in ipairs(lines) do
-		if string.find(line, [[^@@ ]]) then
-			local tokens = vim.fn.matchlist(line, [[^@@ -\v(\d+),?(\d*) \+(\d+),?(\d*)]])
-			local line_stats = {
-				mod_count = tokens[3] == nil and 0 or tokens[3] == "" and 1 or tonumber(tokens[3]),
-				new_count = tokens[5] == nil and 0 or tokens[5] == "" and 1 or tonumber(tokens[5]),
-			}
-
-			if line_stats.mod_count == 0 and line_stats.new_count > 0 then
-				added = added + line_stats.new_count
-			elseif line_stats.mod_count > 0 and line_stats.new_count == 0 then
-				deleted = deleted + line_stats.mod_count
-			else
-				local min = math.min(line_stats.mod_count, line_stats.new_count)
-				changed = changed + min
-				added = added + line_stats.new_count - min
-				deleted = deleted + line_stats.mod_count - min
-			end
-		end
-	end
-
-	local strings = {}
-	if added > 0 then table.insert(strings, f(" " .. added, "@diff.plus")) end
-	if changed > 0 then table.insert(strings, f(" " .. changed, "@diff.delta")) end
-	if deleted > 0 then table.insert(strings, f(" " .. deleted, "@diff.minus")) end
-
-	return table.concat(strings, " ")
-end
-vim.api.nvim_create_autocmd(
-	{ "BufEnter", "BufWritePost" },
-	{ callback = set_component_callback("st_diff", update_git_diff) }
-)
-
 ---@param buf integer
 ---@return string
 local function update_position(buf)
 	if not is_file_buffer(buf) then return "" end
 
-	return "%#StPosition# %3l,%-5(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
+	return "%#StPosition#%l,%-5(%c%V%#StPositionBg#%)%#StPosition# %3p%% "
 end
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, { callback = set_component_callback("st_position", update_position) })
