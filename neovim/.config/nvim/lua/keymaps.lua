@@ -1,12 +1,16 @@
 local function close_current_buffer()
-	local ok, _ = pcall(function() vim.cmd("b# | bw#") end)
-	if not ok then vim.cmd("bw") end
+	local ok, _ = pcall(function() vim.cmd("bn | bd#") end)
+	if not ok then vim.cmd("bd") end
 end
 
-local function close_other_buffers()
-	local curbuf = vim.api.nvim_get_current_buf()
+local function close_inactive_buffers()
+	local visible_bufs = {}
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		table.insert(visible_bufs, vim.api.nvim_win_get_buf(win))
+	end
+
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-		if buf ~= curbuf and vim.api.nvim_get_option_value("buflisted", { buf = buf }) then vim.cmd("bw " .. buf) end
+		if vim.fn.buflisted(buf) == 1 and not vim.list_contains(visible_bufs, buf) then vim.cmd("bd " .. buf) end
 	end
 end
 
@@ -81,9 +85,9 @@ Map("<C-J>", "5j", { "n", "v" }, { desc = "5 line down" })
 Map("<C-K>", "5k", { "n", "v" }, { desc = "5 line up " })
 Map("<C-S>", "<Cmd>w<CR>", "n", { desc = "Save file" })
 Map("<Esc>", "<Cmd>noh<CR><Esc>", { "n", "t" }, { desc = "Esc + clear search highlight" })
-Map("<Leader>ba", "<Cmd>%bw<CR>", "n", { desc = "Close all buffers" })
+Map("<Leader>ba", "<Cmd>%bd<CR>", "n", { desc = "Close all buffers" })
 Map("<Leader>bd", close_current_buffer, "n", { desc = "Close current buffer" })
-Map("<Leader>bo", close_other_buffers, "n", { desc = "Close other buffers" })
+Map("<Leader>bo", close_inactive_buffers, "n", { desc = "Close inactive buffers" })
 Map("<Leader>gd", function() toggle_diffmode() end, "n", { desc = "Diff current window" })
 Map("<Leader>gD", function() toggle_diffmode(1) end, "n", { desc = "Diff visible windows" })
 Map("<Leader>goc", function() toggle_diffopt("icase") end, "n", { desc = "Toggle case-sensitive diff" })
