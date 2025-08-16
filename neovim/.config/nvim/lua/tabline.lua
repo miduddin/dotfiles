@@ -8,7 +8,8 @@ local function init_hl()
 	local hl_keyw = vim.api.nvim_get_hl(0, { name = "Keyword", link = false })
 
 	vim.api.nvim_set_hl(0, "TabTabs", { bg = hl_iden.fg, fg = hl_floa.bg, bold = true })
-	vim.api.nvim_set_hl(0, "TabBufferActive", { bg = hl_keyw.fg, fg = hl_floa.bg, bold = true })
+	vim.api.nvim_set_hl(0, "TabBufferCurrent", { bg = hl_keyw.fg, fg = hl_floa.bg, bold = true })
+	vim.api.nvim_set_hl(0, "TabBufferActive", { bg = hl_floa.bg, fg = hl_keyw.fg, bold = true })
 	vim.api.nvim_set_hl(0, "TabBufferInactive", { bg = hl_floa.bg, fg = hl_comm.fg })
 	vim.api.nvim_set_hl(0, "TabGitBranch", { bg = hl_func.fg, fg = hl_floa.bg, bold = true })
 	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_floa.bg, fg = hl_func.fg })
@@ -58,11 +59,13 @@ local function update_buffers(ev)
 	local space = vim.api.nvim_get_option_value("columns", { scope = "global" })
 		- (vim.g.tab_tabs_len or 0)
 		- (vim.g.tab_git_len or 0)
+		- 1
 
 	local bufname_count = {}
 	local buffers, len = "", 0
-	local active_begin_at = 0
+	local current_begin_at = 0
 	local curbuf = vim.api.nvim_get_current_buf()
+	local tabbufs = vim.fn.tabpagebuflist()
 
 	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
 		if
@@ -76,17 +79,19 @@ local function update_buffers(ev)
 
 			local hl = "TabBufferInactive"
 			if curbuf == buf then
+				hl = "TabBufferCurrent"
+				current_begin_at = len + 1
+			elseif vim.list_contains(tabbufs, buf) then
 				hl = "TabBufferActive"
-				active_begin_at = len + 1
 			end
 
 			local text = " " .. bufname .. " "
-			local extra_len = (len + text:len() - active_begin_at + 1) - space
-			if active_begin_at > 1 then extra_len = extra_len + 1 end
+			local extra_len = (len + text:len() - current_begin_at + 1) - space
+			if current_begin_at > 1 then extra_len = extra_len + 1 end
 
-			if active_begin_at > 0 and extra_len > 0 then
-				text = text:sub(1, text:len() - extra_len - 1) .. ">"
-				buffers = buffers .. f(text, "TabBufferInactive")
+			if current_begin_at > 0 and extra_len > 0 then
+				text = text:sub(1, text:len() - extra_len) .. ">"
+				buffers = buffers .. f(text, hl)
 				break
 			else
 				buffers = buffers .. f(text, hl)
@@ -98,7 +103,7 @@ local function update_buffers(ev)
 	return buffers .. "%*"
 end
 vim.api.nvim_create_autocmd(
-	{ "BufAdd", "BufEnter", "BufDelete", "TermEnter", "VimResized" },
+	{ "BufAdd", "BufEnter", "BufDelete", "BufHidden", "TermEnter", "VimResized", "TabEnter" },
 	{ callback = set_component_callback("tab_buffers", update_buffers) }
 )
 
