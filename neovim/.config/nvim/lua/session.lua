@@ -1,4 +1,4 @@
-vim.opt.sessionoptions = "buffers,folds,help,winsize"
+vim.opt.sessionoptions = "buffers,folds,help,winsize,tabpages"
 
 ---@return string
 local function session_file()
