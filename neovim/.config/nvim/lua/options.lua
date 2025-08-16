@@ -23,11 +23,13 @@ vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "indent"
 vim.opt.foldtext = ""
+vim.opt.history = 100
 vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "│  ", trail = "│" })
 vim.opt.scrolloff = 2
+vim.opt.shada = "'0,<50,s10,h"
 vim.opt.shiftwidth = 4
 vim.opt.showbreak = "󱞩 "
 vim.opt.signcolumn = "yes:1"
