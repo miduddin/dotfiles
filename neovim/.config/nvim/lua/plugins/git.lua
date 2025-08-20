@@ -19,6 +19,11 @@ require("diffview").setup({
 		file_panel = { { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close Diffview" } } },
 		view = { { "n", "q", "<Cmd>DiffviewClose<CR>", { desc = "Close Diffview" } } },
 	},
+	use_icons = false,
+	signs = {
+		fold_closed = "+ ",
+		fold_open = "- ",
+	},
 })
 
 local function compare_with_ref()
