@@ -1,3 +1,17 @@
+local oil = require("oil")
+oil.setup({
+	keymaps = {
+		["q"] = "actions.close",
+		["<C-c>"] = false,
+		["<C-s>"] = false,
+		["`"] = false,
+		["~"] = false,
+	},
+	view_options = { show_hidden = true },
+})
+
+Map("<Leader>e", oil.open, "n", { desc = "File explorer" })
+
 local fzf = require("fzf-lua")
 fzf.setup({
 	winopts = {
@@ -12,7 +26,6 @@ fzf.setup({
 	defaults = {
 		formatter = "path.filename_first",
 	},
-	file_icon_padding = " ",
 	files = {
 		fd_opts = "--color=never --type f --hidden --follow "
 			.. "--exclude .git/ --exclude node_modules/ --exclude vendor/",
@@ -50,6 +63,8 @@ fzf.setup({
 		},
 	},
 })
+
+fzf.register_ui_select()
 
 Map("<Leader><Space>", fzf.files, "n", { desc = "fzf: files" })
 Map("<Leader>f<Tab>", fzf.tabs, "n", { desc = "fzf: tabs" })
