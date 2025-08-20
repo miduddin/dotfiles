@@ -13,7 +13,6 @@ fzf.setup({
 	defaults = {
 		formatter = "path.filename_first",
 	},
-	file_icon_padding = " ",
 	files = {
 		fd_opts = "--color=never --type f --hidden --follow "
 			.. "--exclude .git/ --exclude node_modules/ --exclude vendor/",
