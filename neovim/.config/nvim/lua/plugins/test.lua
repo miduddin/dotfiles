@@ -3,6 +3,13 @@ neotest.setup({
 	adapters = {
 		require("neotest-golang")({
 			go_test_args = { "-count=1", "-timeout=10s" },
+			dap_mode = "manual",
+			dap_manual_config = {
+				name = "Debug go tests",
+				type = "go",
+				request = "launch",
+				mode = "test",
+			},
 		}),
 	},
 	discovery = {
@@ -48,16 +55,26 @@ Map("<Leader>tr", neotest.run.run, "n", { desc = "Test: run nearest test" })
 Map("<Leader>ts", neotest.summary.toggle, "n", { desc = "Test: toggle summary view" })
 Map("<Leader>tt", neotest.run.stop, "n", { desc = "Test: stop" })
 
-require("dap-go").setup()
-
 local dap = require("dap")
 dap.set_log_level("ERROR")
+
+dap.adapters.go = {
+	type = "server",
+	port = "${port}",
+	executable = {
+		command = "dlv",
+		args = { "dap", "-l", "127.0.0.1:" .. "${port}" },
+	},
+	options = {
+		initialize_timeout_sec = 10,
+	},
+}
 
 local widgets = require("dap.ui.widgets")
 local scopes = widgets.sidebar(widgets.scopes, nil, "split")
 
 local function breakpoint_condition()
-	vim.ui.input({ prompt = "Breakpoint condition" }, function(input)
+	vim.ui.input({ prompt = "Breakpoint condition: " }, function(input)
 		if input ~= nil then dap.set_breakpoint(input) end
 	end)
 end

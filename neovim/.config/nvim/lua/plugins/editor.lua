@@ -1,4 +1,3 @@
-require("mini.pairs").setup()
 require("mini.surround").setup({ n_lines = 100 })
 
 local mc = require("multicursor-nvim")

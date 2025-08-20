@@ -21,10 +21,9 @@ deps.setup({ path = { package = path_package } })
 deps.add({ source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = function() vim.cmd("TSUpdate") end } })
 deps.add({ source = "nvim-treesitter/nvim-treesitter-textobjects", depends = { "nvim-treesitter/nvim-treesitter" } })
 deps.add({ source = "nvim-treesitter/nvim-treesitter-context", depends = { "nvim-treesitter/nvim-treesitter" } })
-deps.add({ source = "echasnovski/mini.pairs" })
 deps.add({ source = "echasnovski/mini.surround" })
 deps.add({ source = "jake-stewart/multicursor.nvim" })
-deps.add({ source = "ibhagwan/fzf-lua", depends = { "nvim-tree/nvim-web-devicons" } })
+deps.add({ source = "ibhagwan/fzf-lua" })
 deps.add({ source = "sindrets/diffview.nvim" })
 deps.add({
 	source = "hrsh7th/nvim-cmp",
@@ -45,9 +44,8 @@ deps.add({
 		"fredrikaverpil/neotest-golang",
 	},
 })
-deps.add({ source = "mfussenegger/nvim-dap", depends = { "leoluz/nvim-dap-go" } })
-deps.add({ source = "stevearc/oil.nvim", depends = { "nvim-tree/nvim-web-devicons" } })
-deps.add({ source = "folke/snacks.nvim" })
+deps.add({ source = "mfussenegger/nvim-dap" })
+deps.add({ source = "stevearc/oil.nvim" })
 
 require("plugins.treesitter")
 require("plugins.editor")
@@ -55,4 +53,3 @@ require("plugins.finder")
 require("plugins.git")
 require("plugins.lsp")
 require("plugins.test")
-require("plugins.ui")
