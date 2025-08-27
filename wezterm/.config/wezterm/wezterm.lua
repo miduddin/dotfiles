@@ -2,14 +2,14 @@ local wezterm = require("wezterm")
 local action = wezterm.action
 
 return {
-	font = wezterm.font("Maple Mono"),
+	font = wezterm.font("Maple Mono NL"),
 	font_rules = {
 		{
 			intensity = "Bold",
-			font = wezterm.font({ family = "Maple Mono", weight = "Bold" }),
+			font = wezterm.font({ family = "Maple Mono NL", weight = "Bold" }),
 		},
 	},
-	harfbuzz_features = { "ss01=1", "ss02=1" },
+	harfbuzz_features = { "zero=1" },
 
 	window_close_confirmation = "NeverPrompt",
 	hide_tab_bar_if_only_one_tab = true,
