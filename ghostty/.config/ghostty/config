@@ -1,5 +1,5 @@
-font-family = "Maple Mono"
-font-feature = +ss01, +ss02, +ss04, +ss06
+font-family = "Maple Mono NL"
+font-feature = +zero
 theme = vague
 macos-option-as-alt = true
 
