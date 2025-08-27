@@ -216,12 +216,9 @@
             "antialiasingMode": "cleartype",
             "colorScheme": "Vague",
             "font": {
-                "face": "Maple Mono, Symbols Nerd Font",
+                "face": "Maple Mono NL, Symbols Nerd Font",
                 "features": {
-                    "ss01": 1,
-                    "ss02": 1,
-                    "ss04": 1,
-                    "ss06": 1
+                    "zero": 1
                 },
                 "size": 11
             },
