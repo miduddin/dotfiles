@@ -1,6 +1,12 @@
 user_pref("browser.aboutConfig.showWarning", false);
+user_pref("browser.ml.chat.enabled", false);
+user_pref("browser.ml.enable", false);
+user_pref("browser.promo.focus.enabled", false);
+user_pref("browser.promo.pin.enabled", false);
 user_pref("browser.tabs.groups.smart.enabled", false);
 user_pref("browser.tabs.groups.smart.userEnabled", false);
+user_pref("browser.vpn_promo.enabled", false);
+user_pref("extensions.ml.enabled", false);
 user_pref("extensions.pocket.enabled", false);
 user_pref("full-screen-api.transition-duration.enter", "0 0");
 user_pref("full-screen-api.transition-duration.leave", "0 0");
