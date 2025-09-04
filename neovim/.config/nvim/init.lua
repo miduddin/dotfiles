@@ -1,6 +1,5 @@
 vim.cmd("colorscheme vague-custom")
 require("options")
-require("statusline")
 require("tabline")
 
 vim.schedule(function()
