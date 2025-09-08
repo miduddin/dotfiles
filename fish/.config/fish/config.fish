@@ -3,6 +3,9 @@ set -x XDG_CONFIG_HOME ~/.config
 set -x XDG_DATA_HOME ~/.local/share
 set -x XDG_STATE_HOME ~/.local/state
 
+set -x BUNDLE_USER_CACHE $XDG_CACHE_HOME/bundle
+set -x BUNDLE_USER_CONFIG $XDG_CONFIG_HOME/bundle
+set -x BUNDLE_USER_PLUGIN $XDG_DATA_HOME/bundle
 set -x CARGO_HOME $XDG_DATA_HOME/cargo
 set -x CARGO_NET_GIT_FETCH_WITH_CLI true
 set -x COLORTERM truecolor
@@ -27,6 +30,7 @@ set -x USQL_TERM_GRAPHICS none
 fish_add_path -P \
 	$XDG_DATA_HOME/go/bin \
 	$XDG_DATA_HOME/cargo/bin \
+	$XDG_DATA_HOME/gem/ruby/3.4.0/bin \
 	~/.local/bin \
 	/usr/local/go/bin \
 	/opt/google-cloud-cli/bin \
