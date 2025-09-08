@@ -12,6 +12,7 @@ vim.lsp.enable({
 	"jsonls",
 	"lua_ls",
 	"pyright",
+	"ruby_lsp",
 	"ruff",
 	"rust_analyzer",
 	"taplo",
