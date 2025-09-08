@@ -14,6 +14,7 @@ vim.lsp.enable({
 	"pyright",
 	"ruff",
 	"rust_analyzer",
+	"solargraph",
 	"taplo",
 	"ts_ls",
 	"yamlls",

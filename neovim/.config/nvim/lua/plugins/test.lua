@@ -70,6 +70,24 @@ dap.adapters.go = {
 	},
 }
 
+dap.adapters.ruby = {
+	type = "server",
+	host = vim.env.RUBY_DEBUG_HOST or "127.0.0.1",
+	port = "38698",
+}
+dap.configurations.ruby = {
+	{
+		type = "ruby",
+		name = "Attach to rdbg (port 38698)",
+		request = "attach",
+		options = { source_filetype = "ruby" },
+		error_on_failure = true,
+		localfs = true,
+		port = 38698,
+		waiting = 0,
+	},
+}
+
 local widgets = require("dap.ui.widgets")
 local scopes = widgets.sidebar(widgets.scopes, nil, "split")
 
