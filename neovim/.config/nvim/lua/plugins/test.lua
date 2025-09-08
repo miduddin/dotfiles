@@ -90,6 +90,7 @@ dap.configurations.ruby = {
 
 local widgets = require("dap.ui.widgets")
 local scopes = widgets.sidebar(widgets.scopes, nil, "split")
+local frames = widgets.sidebar(widgets.frames, nil, "split")
 
 local function breakpoint_condition()
 	vim.ui.input({ prompt = "Breakpoint condition: " }, function(input)
@@ -105,6 +106,7 @@ Map("<Leader>dB", breakpoint_condition, "n", { desc = "Debug: add breakpoint wit
 Map("<Leader>db", dap.toggle_breakpoint, "n", { desc = "Debug: toggle breakpoint" })
 Map("<Leader>dc", dap.continue, "n", { desc = "Debug: continue" })
 Map("<Leader>dC", dap.run_to_cursor, "n", { desc = "Debug: run to cursor" })
+Map("<Leader>df", frames.toggle, "n", { desc = "Debug: toggle frames view" })
 Map("<Leader>di", dap.step_into, "n", { desc = "Debug: step into" })
 Map("<Leader>dl", dap.run_last, "n", { desc = "Debug: run last debugging session" })
 Map("<Leader>dn", dap.step_over, "n", { desc = "Debug: step over" })
