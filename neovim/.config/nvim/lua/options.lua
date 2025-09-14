@@ -31,7 +31,7 @@ vim.opt.listchars:append({ tab = "│  ", trail = "│" })
 vim.opt.shada = "'0,<50,s10,h"
 vim.opt.shiftwidth = 4
 vim.opt.showbreak = "󱞩 "
-vim.opt.signcolumn = "yes:1"
+vim.opt.signcolumn = "number"
 vim.opt.smartcase = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
