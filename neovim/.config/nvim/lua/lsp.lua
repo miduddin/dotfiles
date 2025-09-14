@@ -2,6 +2,7 @@ vim.diagnostic.config({
 	jump = { float = true },
 	virtual_text = true,
 	float = { source = true },
+	signs = false,
 })
 vim.lsp.set_log_level(vim.g.log_level)
 vim.lsp.enable({
