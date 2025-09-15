@@ -13,29 +13,23 @@ oil.setup({
 Map("<Leader>e", oil.open, "n", { desc = "File explorer" })
 
 local fzf = require("fzf-lua")
+local fzfd = require("fzf-lua.defaults")
 fzf.setup({
 	winopts = {
 		width = 120,
 		preview = {
-			delay = 0,
 			layout = "vertical",
 			vertical = "down:75%",
 			winopts = { number = false },
 		},
 	},
-	defaults = {
-		formatter = "path.filename_first",
-	},
 	files = {
-		fd_opts = "--color=never --type f --hidden --follow "
-			.. "--exclude .git/ --exclude node_modules/ --exclude vendor/",
+		fd_opts = "--hidden --follow " .. fzfd.defaults.files.fd_opts,
 		previewer = false,
 		winopts = { height = 20 },
 	},
 	grep = {
-		rg_opts = "--column --line-number --no-heading --hidden --multiline "
-			.. "--color=always --smart-case --max-columns=4096 "
-			.. "-g '!.git/' -g '!node_modules/' -g '!vendor/' -e",
+		rg_opts = "--hidden --multiline -g '!.git/' " .. fzfd.defaults.grep.rg_opts,
 	},
 	git = {
 		branches = {
