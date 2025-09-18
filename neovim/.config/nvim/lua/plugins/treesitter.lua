@@ -1,75 +1,60 @@
-require("nvim-treesitter.configs").setup({
-	auto_install = true,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
-	incremental_selection = {
-		enable = true,
-		keymaps = {
-			init_selection = "<C-Space>",
-			node_incremental = "<C-Space>",
-			node_decremental = "<BS>",
+local ts = require("nvim-treesitter")
+local all = ts.get_available()
+
+vim.api.nvim_create_autocmd("FileType", {
+	callback = function(args)
+		local ft = args.match
+		-- html causes neovim to segfault.
+		if ft == "html" or not vim.list_contains(all, ft) then return end
+		ts.install({ ft })
+		vim.treesitter.start()
+	end,
+})
+
+require("nvim-treesitter-textobjects").setup({
+	select = {
+		lookahead = true,
+		selection_modes = {
+			["@parameter.inner"] = "v",
+			["@parameter.outer"] = "v",
+			["@function.inner"] = "V",
+			["@function.outer"] = "V",
+			["@class.inner"] = "V",
+			["@class.outer"] = "V",
+			["@block.inner"] = "v",
+			["@block.outer"] = "V",
 		},
 	},
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,
-			keymaps = {
-				["aa"] = { query = "@parameter.outer", desc = "Select around arg" },
-				["ia"] = { query = "@parameter.inner", desc = "Select within arg" },
-				["af"] = { query = "@function.outer", desc = "Select around function" },
-				["if"] = { query = "@function.inner", desc = "Select within function" },
-				["ac"] = { query = "@class.outer", desc = "Select around class" },
-				["ic"] = { query = "@class.inner", desc = "Select within class" },
-				["ab"] = { query = "@block.outer", desc = "Select around block" },
-				["ib"] = { query = "@block.inner", desc = "Select within block" },
-			},
-			selection_modes = {
-				["@parameter.inner"] = "v",
-				["@parameter.outer"] = "v",
-				["@function.inner"] = "V",
-				["@function.outer"] = "V",
-				["@class.inner"] = "V",
-				["@class.outer"] = "V",
-				["@block.inner"] = "v",
-				["@block.outer"] = "V",
-			},
-		},
-		move = {
-			enable = true,
-			set_jumps = true,
-			goto_next_start = {
-				["]a"] = { query = "@parameter.inner", desc = "Next arg start" },
-				["]f"] = { query = "@function.outer", desc = "Next function start" },
-			},
-			goto_next_end = {
-				["]A"] = { query = "@parameter.inner", desc = "Next arg end" },
-				["]F"] = { query = "@function.outer", desc = "Next function end" },
-			},
-			goto_previous_start = {
-				["[a"] = { query = "@parameter.inner", desc = "Prev arg start" },
-				["[f"] = { query = "@function.outer", desc = "Prev function start" },
-			},
-			goto_previous_end = {
-				["[A"] = { query = "@parameter.inner", desc = "Prev arg end" },
-				["[F"] = { query = "@function.outer", desc = "Prev function end" },
-			},
-		},
-		swap = {
-			enable = true,
-			swap_next = {
-				["<Leader>a"] = "@parameter.inner",
-			},
-			swap_previous = {
-				["<Leader>A"] = "@parameter.inner",
-			},
-		},
+	move = {
+		set_jumps = true,
 	},
 })
 
-local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+local ts_select = require("nvim-treesitter-textobjects.select").select_textobject
+Map("aa", function() ts_select("@parameter.outer", "textobjects") end, { "x", "o" })
+Map("ia", function() ts_select("@parameter.inner", "textobjects") end, { "x", "o" })
+Map("af", function() ts_select("@function.outer", "textobjects") end, { "x", "o" })
+Map("if", function() ts_select("@function.inner", "textobjects") end, { "x", "o" })
+Map("ac", function() ts_select("@class.outer", "textobjects") end, { "x", "o" })
+Map("ic", function() ts_select("@class.inner", "textobjects") end, { "x", "o" })
+Map("ab", function() ts_select("@block.outer", "textobjects") end, { "x", "o" })
+Map("ib", function() ts_select("@block.inner", "textobjects") end, { "x", "o" })
+
+local ts_swap = require("nvim-treesitter-textobjects.swap")
+Map("<Leader>a", function() ts_swap.swap_next("@parameter.inner") end, "n")
+Map("<Leader>A", function() ts_swap.swap_previous("@parameter.inner") end, "n")
+
+local ts_move = require("nvim-treesitter-textobjects.move")
+Map("]a", function() ts_move.goto_next_start("@parameter.outer", "textobjects") end, { "n", "x", "o" })
+Map("]A", function() ts_move.goto_next_end("@parameter.outer", "textobjects") end, { "n", "x", "o" })
+Map("[a", function() ts_move.goto_previous_start("@parameter.outer", "textobjects") end, { "n", "x", "o" })
+Map("[A", function() ts_move.goto_previous_end("@parameter.outer", "textobjects") end, { "n", "x", "o" })
+Map("]f", function() ts_move.goto_next_start("@function.outer", "textobjects") end, { "n", "x", "o" })
+Map("]F", function() ts_move.goto_next_end("@function.outer", "textobjects") end, { "n", "x", "o" })
+Map("[f", function() ts_move.goto_previous_start("@function.outer", "textobjects") end, { "n", "x", "o" })
+Map("[F", function() ts_move.goto_previous_end("@function.outer", "textobjects") end, { "n", "x", "o" })
+
+local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
 Map(",", ts_repeat_move.repeat_last_move_opposite, { "n", "x", "o" })
 Map(";", ts_repeat_move.repeat_last_move, { "n", "x", "o" })
 Map("f", ts_repeat_move.builtin_f_expr, { "n", "x", "o" }, { expr = true })
