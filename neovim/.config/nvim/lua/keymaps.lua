@@ -77,6 +77,7 @@ end
 function Map(lhs, rhs, mode, opts) vim.keymap.set(mode, lhs, rhs, opts) end
 
 Map("*", "*``", "n", { desc = "Search current word without going next" })
+Map("<", "<gv", "v", { desc = "Indent without clearing selection" })
 Map("<C-/>", "gc", "v", { desc = "Toggle comment", remap = true })
 Map("<C-/>", "gcc", "n", { desc = "Toggle comment", remap = true })
 Map("<C-_>", "gc", "v", { desc = "Toggle comment", remap = true })
@@ -99,6 +100,7 @@ Map("<Leader>w", "<Cmd>set wrap!<CR>", { "n", "v" }, { desc = "Toggle word wrap"
 Map("<Leader>y", '"+y', { "n", "v" }, { desc = "Yank to clipboard" })
 Map("<S-H>", "<Cmd>bp<CR>", "n", { desc = "Prev buffer" })
 Map("<S-L>", "<Cmd>bn<CR>", "n", { desc = "Next buffer" })
+Map(">", ">gv", "v", { desc = "Indent without clearing selection" })
 Map("zC", fold_children, "n", { desc = "Fold all children" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
