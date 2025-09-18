@@ -18,8 +18,16 @@ end
 local deps = require("mini.deps")
 deps.setup({ path = { package = path_package } })
 
-deps.add({ source = "nvim-treesitter/nvim-treesitter", hooks = { post_checkout = function() vim.cmd("TSUpdate") end } })
-deps.add({ source = "nvim-treesitter/nvim-treesitter-textobjects", depends = { "nvim-treesitter/nvim-treesitter" } })
+deps.add({
+	source = "nvim-treesitter/nvim-treesitter",
+	checkout = "main",
+	hooks = { post_checkout = function() vim.cmd("TSUpdate") end },
+})
+deps.add({
+	source = "nvim-treesitter/nvim-treesitter-textobjects",
+	checkout = "main",
+	depends = { "nvim-treesitter/nvim-treesitter" },
+})
 deps.add({ source = "nvim-treesitter/nvim-treesitter-context", depends = { "nvim-treesitter/nvim-treesitter" } })
 deps.add({ source = "echasnovski/mini.surround" })
 deps.add({ source = "jake-stewart/multicursor.nvim" })
@@ -41,9 +49,10 @@ deps.add({
 		"nvim-neotest/nvim-nio",
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-lua/plenary.nvim",
-		"fredrikaverpil/neotest-golang",
 	},
 })
+
+deps.add({ source = "fredrikaverpil/neotest-golang", checkout = "feat/treesitter-main" })
 deps.add({ source = "mfussenegger/nvim-dap" })
 deps.add({ source = "stevearc/oil.nvim" })
 
