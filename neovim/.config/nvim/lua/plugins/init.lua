@@ -1,6 +1,6 @@
 vim.pack.add({
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
 	{ src = "https://github.com/nvim-mini/mini.surround" },
 	{ src = "https://github.com/jake-stewart/multicursor.nvim" },
@@ -16,7 +16,7 @@ vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/nvim-neotest/nvim-nio" },
 	{ src = "https://github.com/nvim-neotest/neotest" },
-	{ src = "https://github.com/fredrikaverpil/neotest-golang" },
+	{ src = "https://github.com/fredrikaverpil/neotest-golang", version = "v1.15.1" },
 	{ src = "https://github.com/mfussenegger/nvim-dap" },
 })
 
