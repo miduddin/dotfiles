@@ -1,24 +1,14 @@
 {
-    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.33/schema.json",
+    "$schema": "https://raw.githubusercontent.com/LGUG2Z/komorebi/v0.1.38/schema.json",
     "app_specific_configuration_path": "$Env:USERPROFILE/applications.json",
-    "border": true,
+    "border": false,
     "border_width": 3,
     "cross_monitor_move_behaviour": "Insert",
-    "default_container_padding": 3,
-    "default_workspace_padding": 3,
+    "default_container_padding": 4,
+    "default_workspace_padding": 4,
     "ignore_rules": [
         {
             "id": "MozillaDialogClass",
-            "kind": "Class",
-            "matching_strategy": "Equals"
-        },
-        {
-            "id": "noita.exe",
-            "kind": "Exe",
-            "matching_strategy": "Equals"
-        },
-        {
-            "id": "GLFW30",
             "kind": "Class",
             "matching_strategy": "Equals"
         },
