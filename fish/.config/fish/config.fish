@@ -31,23 +31,8 @@ fish_add_path -P \
 	$XDG_DATA_HOME/go/bin \
 	$XDG_DATA_HOME/cargo/bin \
 	$XDG_DATA_HOME/gem/ruby/3.4.0/bin \
+	~/.local/google-cloud-sdk/bin \
 	~/.local/nvim/bin \
 	~/.local/bin \
-	/usr/local/go/bin \
-	/opt/google-cloud-cli/bin \
 	/opt/homebrew/bin \
 	/opt/homebrew/sbin
-
-if status is-interactive
-	# Commands to run in interactive sessions can go here
-end
-
-if test -n "$WT_SESSION"
-	function storePathForWindowsTerminal --on-variable PWD
-		printf "\e]9;9;%s\e\\" (wslpath -w "$PWD")
-	end
-end
-
-if test -f ~/.phpbrew/phpbrew.fish
-	source ~/.phpbrew/phpbrew.fish
-end
