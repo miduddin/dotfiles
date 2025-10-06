@@ -68,6 +68,8 @@ local function toggle_inlay_hint()
 	vim.lsp.inlay_hint.enable(not current_state, opts)
 end
 
+local function lsp_hover() vim.lsp.buf.hover({ max_width = 82, max_height = 20 }) end
+
 ---Reorder arguments just so it looks better when sorted.
 ---
 ---@param lhs   string
@@ -111,6 +113,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		Map("<Leader>xv", toggle_diag_virt_lines, "n", { desc = "Diag: toggle virtual lines", buffer = ev.buf })
 		Map("grd", vim.lsp.buf.definition, "n", { desc = "LSP definition", buffer = ev.buf })
 		Map("grh", toggle_inlay_hint, "n", { desc = "Toggle inlay hint", buffer = ev.buf })
-		Map("K", function() vim.lsp.buf.hover({ max_width = 82 }) end, "n", { desc = "LSP Hover", buffer = ev.buf })
+		Map("K", lsp_hover, "n", { desc = "LSP Hover", buffer = ev.buf })
 	end,
 })
