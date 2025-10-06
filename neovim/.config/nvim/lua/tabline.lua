@@ -10,8 +10,7 @@ local function init_hl()
 	vim.api.nvim_set_hl(0, "TabBufferCurrent", { link = "StatusLine" })
 	vim.api.nvim_set_hl(0, "TabBufferActive", { link = "StatusLineNC" })
 	vim.api.nvim_set_hl(0, "TabBufferInactive", { bg = hl_floa.bg, fg = hl_comm.fg })
-	vim.api.nvim_set_hl(0, "TabGitBranch", { bg = hl_func.fg, fg = hl_floa.bg, bold = true })
-	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_floa.bg, fg = hl_func.fg })
+	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_func.fg, fg = hl_floa.bg, bold = true })
 end
 init_hl()
 vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })
@@ -122,11 +121,7 @@ local function update_git()
 	local cwd = vim.uv.cwd()
 	if not branch or branch == "" or not cwd then return "" end
 
-	branch = " 󰘬 " .. branch:gsub("[%c%s]", "") .. " "
 	local project = " " .. vim.fn.fnamemodify(cwd, ":t") .. " "
-	return f(branch, "TabGitBranch") .. f(project, "TabGitProject")
+	return f(project, "TabGitProject")
 end
-vim.api.nvim_create_autocmd(
-	{ "VimEnter", "TabEnter", "FocusGained" },
-	{ callback = set_component_callback("tab_git", update_git) }
-)
+vim.api.nvim_create_autocmd("VimEnter", { callback = set_component_callback("tab_git", update_git) })
