@@ -97,6 +97,7 @@ require("conform").setup({
 		python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
 		sql = { "pg_format" },
 		terraform = { "terraform_fmt" },
+		toml = { "taplo" },
 		yaml = { "yamlfmt" },
 		["*"] = { "trim_whitespace", "trim_newlines" },
 		["_"] = { lsp_format = "last" },
