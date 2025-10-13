@@ -1,3 +1,5 @@
 k9s:
   ui:
+    headless: true
+    logoless: true
     skin: vague
