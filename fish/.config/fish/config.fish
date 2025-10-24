@@ -1,3 +1,6 @@
+set -g fish_greeting
+set -g fish_key_bindings fish_vi_key_bindings
+
 set -x XDG_CACHE_HOME ~/.cache
 set -x XDG_CONFIG_HOME ~/.config
 set -x XDG_DATA_HOME ~/.local/share
