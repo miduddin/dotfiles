@@ -12,11 +12,15 @@ set -x BUNDLE_USER_PLUGIN $XDG_DATA_HOME/bundle
 set -x CARGO_HOME $XDG_DATA_HOME/cargo
 set -x CARGO_NET_GIT_FETCH_WITH_CLI true
 set -x COLORTERM truecolor
+set -x CUDA_CACHE_PATH $XDG_CACHE_HOME/nv
 set -x DOCKER_CONFIG $XDG_CONFIG_HOME/docker
 set -x EDITOR nvim
 set -x FZF_DEFAULT_OPTS "--reverse --height=10 --no-separator"
+set -x GNUPGHOME $XDG_DATA_HOME/gnupg
 set -x GOPATH $XDG_DATA_HOME/go
+set -x GTK2_RC_FILES $XDG_CONFIG_HOME/gtk-2.0/gtkrc
 set -x HISTFILE $XDG_STATE_HOME/bash/history
+set -x NETRC $XDG_CONFIG_HOME/netrc
 set -x NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
 set -x NVIM_LOG_FILE /tmp/nvim.log
 set -x PGPASSFILE $XDG_CONFIG_HOME/pg/pgpass
@@ -29,6 +33,8 @@ set -x USQLPASS $XDG_CONFIG_HOME/usql/pass
 set -x USQLRC $XDG_CONFIG_HOME/usql/rc
 set -x USQL_HISTORY $XDG_CONFIG_HOME/usql/history
 set -x USQL_TERM_GRAPHICS none
+set -x WINEPREFIX $XDG_DATA_HOME/wine
+set -x _JAVA_OPTIONS -Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java
 
 fish_add_path -P \
 	$XDG_DATA_HOME/go/bin \
