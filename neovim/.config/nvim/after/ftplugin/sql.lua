@@ -1,4 +1,5 @@
 vim.opt_local.commentstring = "-- %s"
+vim.opt_local.expandtab = true
 
 local psql = require("psql")
 vim.api.nvim_buf_create_user_command(
