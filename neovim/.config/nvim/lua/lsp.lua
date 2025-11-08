@@ -20,6 +20,7 @@ vim.lsp.enable({
 	"taplo",
 	"ts_ls",
 	"yamlls",
+	"zls",
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
