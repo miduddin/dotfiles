@@ -7,19 +7,13 @@ vim.diagnostic.config({
 vim.lsp.log.set_level(vim.g.log_level)
 vim.lsp.enable({
 	"buf",
-	"cssls",
 	"golangci_lint_ls",
 	"gopls",
-	"html",
-	"jsonls",
 	"lua_ls",
-	"pyright",
 	"ruby_lsp",
-	"ruff",
 	"rust_analyzer",
 	"taplo",
-	"ts_ls",
-	"yamlls",
+	"ty",
 	"zls",
 })
 
