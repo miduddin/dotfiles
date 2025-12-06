@@ -28,6 +28,7 @@ vim.opt.ignorecase = true
 vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "│  ", trail = "│" })
+vim.opt.number = true
 vim.opt.scrolloff = 2
 vim.opt.shada = "'0,<50,s10,h"
 vim.opt.shiftwidth = 4
