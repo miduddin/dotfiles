@@ -117,9 +117,8 @@ vim.api.nvim_create_autocmd({ "TabEnter", "TabClosed" }, { callback = set_compon
 
 ---@return string
 local function update_git()
-	local branch = vim.system({ "git", "rev-parse", "--abbrev-ref", "HEAD" }, { text = true }):wait().stdout
 	local cwd = vim.uv.cwd()
-	if not branch or branch == "" or not cwd then return "" end
+	if not (cwd and vim.uv.fs_stat(".git/")) then return "" end
 
 	local project = " " .. vim.fn.fnamemodify(cwd, ":t") .. " "
 	return f(project, "TabGitProject")
