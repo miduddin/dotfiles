@@ -36,13 +36,8 @@ cmp.setup({
 		expand = function(args) require("luasnip").lsp_expand(args.body) end,
 	},
 	window = {
-		completion = cmp.config.window.bordered({
-			winhighlight = "FloatBorder:FloatBorder,CursorLine:Visual",
-		}),
-		documentation = cmp.config.window.bordered({
-			winhighlight = "FloatBorder:FloatBorder",
-			max_width = 80,
-		}),
+		completion = { winhighlight = "CursorLine:Visual" },
+		documentation = { winhighlight = "" },
 	},
 	formatting = {
 		fields = { "kind", "abbr" },
