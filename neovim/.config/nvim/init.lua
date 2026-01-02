@@ -1,4 +1,4 @@
-vim.cmd("colorscheme vague-custom")
+require("colors")
 require("options")
 require("tabline")
 
