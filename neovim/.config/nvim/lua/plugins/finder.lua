@@ -15,6 +15,7 @@ Map("<Leader>e", oil.open, "n", { desc = "File explorer" })
 local fzf = require("fzf-lua")
 local fzfd = require("fzf-lua.defaults")
 fzf.setup({
+	ui_select = true,
 	winopts = {
 		width = 120,
 		preview = {
@@ -57,8 +58,6 @@ fzf.setup({
 		},
 	},
 })
-
-fzf.register_ui_select()
 
 Map("<Leader><Space>", fzf.files, "n", { desc = "fzf: files" })
 Map("<Leader>f<Tab>", fzf.tabs, "n", { desc = "fzf: tabs" })
