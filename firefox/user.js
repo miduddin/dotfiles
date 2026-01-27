@@ -1,7 +1,7 @@
 user_pref("browser.aboutConfig.showWarning", false);
 user_pref("browser.ml.chat.enabled", false);
 user_pref("browser.ml.enable", false);
-user_pref("browser.newtabpage.activity-stream.trendingSearch.defaultSearchEngine", "DuckDuckGo");
+user_pref("browser.ml.linkPreview.enabled", false);
 user_pref("browser.promo.focus.enabled", false);
 user_pref("browser.promo.pin.enabled", false);
 user_pref("browser.search.suggest.enabled", false);
@@ -18,7 +18,9 @@ user_pref("full-screen-api.transition-duration.enter", "0 0");
 user_pref("full-screen-api.transition-duration.leave", "0 0");
 user_pref("full-screen-api.warning.delay", 0);
 user_pref("full-screen-api.warning.timeout", 0);
+user_pref("places.history.enabled", false);
 user_pref("reader.parse-on-load.enabled", false);
+user_pref("signon.firefoxRelay.feature", "disabled");
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("xpinstall.signatures.required", false);
 user_pref("xpinstall.whitelist.required", false);
