@@ -1,7 +1,4 @@
 local cmp = require("cmp")
-local luasnip = require("luasnip")
-luasnip.log.set_loglevel("error")
-require("luasnip.loaders.from_lua").lazy_load()
 
 local kinds = {
 	Text = "󰉿 ",
@@ -33,16 +30,11 @@ local kinds = {
 
 cmp.setup({
 	snippet = {
-		expand = function(args) require("luasnip").lsp_expand(args.body) end,
+		expand = function(args) vim.snippet.expand(args.body) end,
 	},
 	window = {
-		completion = cmp.config.window.bordered({
-			winhighlight = "FloatBorder:FloatBorder,CursorLine:Visual",
-		}),
-		documentation = cmp.config.window.bordered({
-			winhighlight = "FloatBorder:FloatBorder",
-			max_width = 80,
-		}),
+		completion = { winhighlight = "CursorLine:Visual" },
+		documentation = { winhighlight = "" },
 	},
 	formatting = {
 		fields = { "kind", "abbr" },
@@ -63,25 +55,9 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-E>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if luasnip.locally_jumpable(1) then
-				luasnip.jump(1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if luasnip.locally_jumpable(-1) then
-				luasnip.jump(-1)
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
 	}, {
 		{ name = "buffer" },
 	}),
