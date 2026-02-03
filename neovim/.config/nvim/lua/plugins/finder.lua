@@ -57,6 +57,7 @@ fzf.setup({
 			},
 		},
 	},
+	marks = { marks = "%a" },
 })
 
 Map("<Leader><Space>", fzf.files, "n", { desc = "fzf: files" })
@@ -67,6 +68,7 @@ Map("<Leader>fC", fzf.git_commits, "n", { desc = "fzf: git commits (project)" })
 Map("<Leader>fg", fzf.live_grep, "n", { desc = "fzf: grep" })
 Map("<Leader>fh", fzf.help_tags, "n", { desc = "fzf: help files" })
 Map("<Leader>fk", fzf.keymaps, "n", { desc = "fzf: keymaps" })
+Map("<Leader>fm", fzf.marks, "n", { desc = "fzf: marks" })
 Map("<Leader>fq", fzf.quickfix, "n", { desc = "fzf: quickfix" })
 Map("<Leader>fQ", fzf.quickfix_stack, "n", { desc = "fzf: quickfix stack" })
 Map("<Leader>fr", fzf.resume, "n", { desc = "fzf: resume last" })
