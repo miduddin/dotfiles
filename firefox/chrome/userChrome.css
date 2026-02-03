@@ -5,35 +5,17 @@
 #page-action-buttons> :not(#urlbar-zoom-button),
 #pageAction-urlbar-_testpilot-containers,
 #tracking-protection-icon-container,
-#unified-extensions-button,
+#trust-icon-container.secure,
 .tab-audio-button,
 .tab-close-button,
-.tab-icon-overlay {
+.tab-icon-overlay,
+.titlebar-spacer {
 	display: none !important;
-}
-
-@media (-moz-platform: windows) {
-	.titlebar-spacer[type="pre-tabs"] {
-		display: none !important;
-	}
-
-	#navigator-toolbox {
-		flex-flow: row-reverse wrap !important;
-	}
-}
-
-@media (-moz-platform: macos) {
-	.titlebar-spacer[type="post-tabs"] {
-		display: none !important;
-	}
-
-	#navigator-toolbox {
-		flex-flow: row wrap !important;
-	}
 }
 
 #navigator-toolbox {
 	border: none !important;
+	flex-flow: row-reverse wrap !important;
 }
 
 #navigator-toolbox>* {
@@ -44,7 +26,7 @@
 	background: none !important;
 	border: none !important;
 	flex: 0.7 !important;
-	max-width: 500px;
+	max-width: 350px;
 }
 
 #urlbar-container {
