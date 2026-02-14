@@ -23,6 +23,7 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldtext = ""
 vim.opt.history = 100
 vim.opt.ignorecase = true
+vim.opt.isfname:append({ "@-@" })
 vim.opt.list = true
 vim.opt.listchars:append({ tab = "│  ", trail = "│" })
 vim.opt.number = true
