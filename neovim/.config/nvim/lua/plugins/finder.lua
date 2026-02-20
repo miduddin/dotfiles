@@ -15,6 +15,7 @@ Map("<Leader>e", oil.open, "n", { desc = "File explorer" })
 local fzf = require("fzf-lua")
 local fzfd = require("fzf-lua.defaults")
 fzf.setup({
+	"border-fused",
 	ui_select = true,
 	winopts = {
 		width = 120,
@@ -37,6 +38,8 @@ fzf.setup({
 			actions = {
 				["enter"] = function(selected) vim.cmd("DiffviewOpen " .. selected[1]) end,
 			},
+			preview = false,
+			winopts = { height = 20 },
 		},
 		bcommits = {
 			fzf_opts = {
