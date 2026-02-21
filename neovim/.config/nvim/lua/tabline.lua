@@ -20,14 +20,24 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })
 ---@return string
 local function f(text, hl) return string.format("%%#%s#%s", hl, text) end
 
+local tabline = {
+	buffers = "",
+	spacer = "%=",
+	tabs = "",
+	git = "",
+
+	tabs_len = 0,
+	git_len = 0,
+}
+
 local function update_tabline()
-	local tabline = table.concat({
-		vim.g.tab_buffers or "",
-		"%=",
-		vim.g.tab_tabs or "",
-		vim.g.tab_git or "",
+	local value = table.concat({
+		tabline.buffers or "",
+		tabline.spacer,
+		tabline.tabs or "",
+		tabline.git or "",
 	})
-	vim.api.nvim_set_option_value("tabline", tabline, { scope = "global" })
+	vim.api.nvim_set_option_value("tabline", value, { scope = "global" })
 end
 
 ---@param name string
@@ -36,8 +46,8 @@ end
 local function set_component_callback(name, value_fn)
 	return function(ev)
 		local value = value_fn(ev)
-		vim.api.nvim_set_var(name, value)
-		vim.api.nvim_set_var(name .. "_len", vim.api.nvim_eval_statusline(value, {}).width)
+		tabline[name] = value
+		tabline[name .. "_len"] = vim.api.nvim_eval_statusline(value, {}).width
 		update_tabline()
 	end
 end
@@ -55,8 +65,8 @@ end
 ---@return string
 local function update_buffers(ev)
 	local space = vim.api.nvim_get_option_value("columns", { scope = "global" })
-		- (vim.g.tab_tabs_len or 0)
-		- (vim.g.tab_git_len or 0)
+		- (tabline.tabs_len or 0)
+		- (tabline.git_len or 0)
 		- 1
 
 	local bufname_count = {}
@@ -102,7 +112,7 @@ local function update_buffers(ev)
 end
 vim.api.nvim_create_autocmd(
 	{ "BufAdd", "BufEnter", "BufDelete", "BufHidden", "TermEnter", "VimResized", "TabEnter" },
-	{ callback = set_component_callback("tab_buffers", update_buffers) }
+	{ callback = set_component_callback("buffers", update_buffers) }
 )
 
 ---@return string
@@ -113,7 +123,7 @@ local function update_tabs()
 	local text = string.format(" Tab %d/%d ", vim.fn.tabpagenr(), n)
 	return f(text, "TabTabs")
 end
-vim.api.nvim_create_autocmd({ "TabEnter", "TabClosed" }, { callback = set_component_callback("tab_tabs", update_tabs) })
+vim.api.nvim_create_autocmd({ "TabEnter", "TabClosed" }, { callback = set_component_callback("tabs", update_tabs) })
 
 ---@return string
 local function update_git()
@@ -123,4 +133,4 @@ local function update_git()
 	local project = " " .. vim.fn.fnamemodify(cwd, ":t") .. " "
 	return f(project, "TabGitProject")
 end
-vim.api.nvim_create_autocmd("VimEnter", { callback = set_component_callback("tab_git", update_git) })
+vim.api.nvim_create_autocmd("VimEnter", { callback = set_component_callback("git", update_git) })
