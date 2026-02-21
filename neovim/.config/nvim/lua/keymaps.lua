@@ -112,6 +112,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		Map("grd", vim.lsp.buf.definition, "n", { desc = "LSP definition", buffer = ev.buf })
 		Map("grh", toggle_inlay_hint, "n", { desc = "Toggle inlay hint", buffer = ev.buf })
 		Map(
+			"grr",
+			function() vim.lsp.buf.references({ includeDeclaration = false }) end,
+			"n",
+			{ desc = "LSP references", buffer = ev.buf }
+		)
+		Map(
 			"K",
 			function() vim.lsp.buf.hover({ max_width = 82, max_height = 20 }) end,
 			"n",
