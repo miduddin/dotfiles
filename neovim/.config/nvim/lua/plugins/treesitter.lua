@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd("FileType", {
 		local ft = args.match
 		if not vim.tbl_contains(supported_types, ft) then return end
 		ts.install({ ft })
-		vim.treesitter.start()
 	end,
 })
 
