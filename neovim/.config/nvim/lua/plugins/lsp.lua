@@ -28,9 +28,11 @@ local kinds = {
 	TypeParameter = "󰬛 ",
 }
 
+local luasnip = require("luasnip")
+
 cmp.setup({
 	snippet = {
-		expand = function(args) vim.snippet.expand(args.body) end,
+		expand = function(args) luasnip.lsp_expand(args.body) end,
 	},
 	window = {
 		completion = { winhighlight = "CursorLine:Visual" },
@@ -55,6 +57,20 @@ cmp.setup({
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-E>"] = cmp.mapping.abort(),
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if luasnip.locally_jumpable(1) then
+				luasnip.jump(1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if luasnip.locally_jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },

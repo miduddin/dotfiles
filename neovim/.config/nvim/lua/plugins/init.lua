@@ -9,6 +9,7 @@ vim.pack.add({
 	"https://github.com/hrsh7th/nvim-cmp",
 	"https://github.com/hrsh7th/cmp-buffer",
 	"https://github.com/hrsh7th/cmp-nvim-lsp",
+	"https://github.com/L3MON4D3/LuaSnip",
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/nvim-lua/plenary.nvim",
