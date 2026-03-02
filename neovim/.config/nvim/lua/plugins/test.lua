@@ -92,6 +92,15 @@ local widgets = require("dap.ui.widgets")
 local scopes = widgets.sidebar(widgets.scopes, nil, "split")
 local frames = widgets.sidebar(widgets.frames, nil, "split")
 
+local hl_stl = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false })
+local hl_warn = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false })
+dap.listeners.after["event_process"]["my"] = function()
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = hl_warn.fg, fg = hl_stl.fg })
+end
+dap.listeners.after["event_terminated"]["my"] = function()
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = hl_stl.bg, fg = hl_stl.fg })
+end
+
 local function breakpoint_condition()
 	vim.ui.input({ prompt = "Breakpoint condition: " }, function(input)
 		if input ~= nil then dap.set_breakpoint(input) end
