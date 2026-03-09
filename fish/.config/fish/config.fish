@@ -14,6 +14,7 @@ set -x CARGO_NET_GIT_FETCH_WITH_CLI true
 set -x COLORTERM truecolor
 set -x CUDA_CACHE_PATH $XDG_CACHE_HOME/nv
 set -x DOCKER_CONFIG $XDG_CONFIG_HOME/docker
+set -x DOCKER_HOST unix://$XDG_RUNTIME_DIR/podman/podman.sock
 set -x EDITOR nvim
 set -x FZF_DEFAULT_OPTS "--reverse --height=10 --no-separator"
 set -x GNUPGHOME $XDG_DATA_HOME/gnupg
