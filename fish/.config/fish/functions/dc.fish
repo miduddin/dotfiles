@@ -1,3 +1,3 @@
-function dc -w docker
-	docker compose $argv
+function dc -w podman
+	podman compose $argv
 end

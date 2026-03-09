@@ -1,3 +1,3 @@
-function d -w docker
-	docker $argv
+function d -w podman
+	podman $argv
 end

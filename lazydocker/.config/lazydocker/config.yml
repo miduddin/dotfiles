@@ -6,3 +6,5 @@ gui:
   theme:
     selectedLineBgColor:
       - "#333738"
+commandTemplates:
+  dockerCompose: podman compose
