@@ -89,8 +89,6 @@ dap.configurations.ruby = {
 }
 
 local widgets = require("dap.ui.widgets")
-local scopes = widgets.sidebar(widgets.scopes, nil, "split")
-local frames = widgets.sidebar(widgets.frames, nil, "split")
 
 local hl_stl = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false })
 local hl_warn = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false })
@@ -113,13 +111,12 @@ Map("<F12>", dap.step_out, "n", { desc = "Debug: step out" })
 Map("<F5>", dap.continue, "n", { desc = "Debug: continue" })
 Map("<Leader>dB", breakpoint_condition, "n", { desc = "Debug: add breakpoint with condition" })
 Map("<Leader>db", dap.toggle_breakpoint, "n", { desc = "Debug: toggle breakpoint" })
-Map("<Leader>dc", dap.continue, "n", { desc = "Debug: continue" })
 Map("<Leader>dC", dap.run_to_cursor, "n", { desc = "Debug: run to cursor" })
-Map("<Leader>df", frames.toggle, "n", { desc = "Debug: toggle frames view" })
-Map("<Leader>di", dap.step_into, "n", { desc = "Debug: step into" })
 Map("<Leader>dl", dap.run_last, "n", { desc = "Debug: run last debugging session" })
-Map("<Leader>dn", dap.step_over, "n", { desc = "Debug: step over" })
-Map("<Leader>do", dap.step_out, "n", { desc = "Debug: step out" })
-Map("<Leader>ds", scopes.toggle, "n", { desc = "Debug: toggle scope view" })
 Map("<Leader>dt", dap.terminate, "n", { desc = "Debug: terminate session" })
 Map("<Leader>dw", widgets.hover, { "n", "v" }, { desc = "Debug: hover widget" })
+
+local dap_view = require("dap-view")
+dap_view.setup({ auto_toggle = true })
+
+Map("<Leader>dp", dap_view.toggle, "n", { desc = "Debug: toggle debug panel" })
