@@ -17,6 +17,7 @@ vim.pack.add({
 	"https://github.com/nvim-neotest/neotest",
 	"https://github.com/fredrikaverpil/neotest-golang",
 	"https://github.com/mfussenegger/nvim-dap",
+	"https://github.com/igorlfs/nvim-dap-view",
 })
 
 require("plugins.treesitter")
