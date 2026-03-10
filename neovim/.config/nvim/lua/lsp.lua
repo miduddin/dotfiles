@@ -15,13 +15,3 @@ vim.lsp.enable({
 	"ty",
 	"zls",
 })
-
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(ev)
-		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		if client and client:supports_method("textDocument/foldingRange") then
-			vim.opt_local.foldmethod = "expr"
-			vim.opt_local.foldexpr = "v:lua.vim.lsp.foldexpr()"
-		end
-	end,
-})
