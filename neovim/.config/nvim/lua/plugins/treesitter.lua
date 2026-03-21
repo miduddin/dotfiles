@@ -53,4 +53,4 @@ vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = t
 vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
 
-require("treesitter-context").setup({ max_lines = 2, multiwindow = true })
+require("treesitter-context").setup({ max_lines = 2, multiwindow = true, trim_scope = "inner" })
