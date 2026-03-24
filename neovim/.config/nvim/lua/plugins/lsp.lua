@@ -89,7 +89,6 @@ require("conform").setup({
 		lua = { "stylua" },
 		php = { "php_cs_fixer" },
 		python = { "ruff_fix", "ruff_format", "ruff_organize_imports" },
-		sql = { "pg_format" },
 		terraform = { "terraform_fmt" },
 		toml = { "taplo" },
 		yaml = { "yamlfmt" },
