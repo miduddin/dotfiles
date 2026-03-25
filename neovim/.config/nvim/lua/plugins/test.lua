@@ -90,13 +90,13 @@ dap.configurations.ruby = {
 
 local widgets = require("dap.ui.widgets")
 
-local hl_stl = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false })
-local hl_warn = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false })
+local bg_stl = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false }).bg
+local bg_warn = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).fg
 dap.listeners.after["event_process"]["my"] = function()
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = hl_warn.fg, fg = hl_stl.fg })
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = bg_warn, update = true })
 end
 dap.listeners.after["event_terminated"]["my"] = function()
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = hl_stl.bg, fg = hl_stl.fg })
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = bg_stl, update = true })
 end
 
 local function breakpoint_condition()
