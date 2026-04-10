@@ -21,6 +21,12 @@ vim.opt.foldenable = false
 vim.opt.foldlevel = 99
 vim.opt.foldmethod = "indent"
 vim.opt.foldtext = ""
+vim.opt.guicursor = {
+	"n-v-c-sm:block-Cursor",
+	"i-ci-ve:ver25-Cursor",
+	"r-cr-o:hor20-Cursor",
+	"t:block-blinkon500-blinkoff500-TermCursor",
+}
 vim.opt.history = 100
 vim.opt.ignorecase = true
 vim.opt.isfname:append({ "@-@" })
