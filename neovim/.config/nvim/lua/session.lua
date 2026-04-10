@@ -19,3 +19,4 @@ vim.api.nvim_create_autocmd("VimLeavePre", { callback = save_session })
 local function load_session() vim.cmd("so " .. session_file()) end
 
 Map("<Leader>sl", load_session, "n", { desc = "Load last session" })
+Map("<Leader>R", "<Cmd>restart so " .. session_file() .. "<CR>", "n", { desc = "Restart and load last session" })
