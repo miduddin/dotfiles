@@ -38,11 +38,11 @@ neotest.setup({
 
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "neotest-summary" },
-	callback = function(ev) Map("q", neotest.summary.close, "n", { buffer = ev.buf }) end,
+	callback = function(ev) Map("q", neotest.summary.close, "n", { buf = ev.buf }) end,
 })
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "neotest-output" },
-	callback = function(ev) Map("q", "<Cmd>q<CR>", "n", { buffer = ev.buf }) end,
+	callback = function(ev) Map("q", "<Cmd>q<CR>", "n", { buf = ev.buf }) end,
 })
 
 local function debug_nearest_test() neotest.run.run({ strategy = "dap", suite = false }) end
