@@ -14,6 +14,7 @@ vim.schedule(function()
 	require("git")
 	require("docker")
 	require("session")
+	require("dev")
 
 	require("plugins")
 end)
