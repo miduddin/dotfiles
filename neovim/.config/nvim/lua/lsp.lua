@@ -9,7 +9,11 @@ vim.diagnostic.config({
 		end,
 	},
 	virtual_text = true,
-	float = { source = true },
+	float = {
+		max_height = 10,
+		max_width = 80,
+		source = true,
+	},
 })
 
 vim.lsp.log.set_level(vim.g.log_level)
