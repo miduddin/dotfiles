@@ -1,0 +1,22 @@
+<gui name="konsole" version="1">
+  <ActionProperties>
+    <Action name="edit_copy" shortcut="Ctrl+Shift+C"/>
+    <Action name="edit_find" shortcut="Ctrl+Shift+F"/>
+    <Action name="edit_paste" shortcut="Ctrl+Shift+V"/>
+    <Action name="enlarge-font" shortcut="Ctrl+="/>
+    <Action name="focus-view-above" shortcut="Alt+K; "/>
+    <Action name="focus-view-below" shortcut="Alt+J; "/>
+    <Action name="focus-view-left" shortcut="Alt+H"/>
+    <Action name="focus-view-right" shortcut="Alt+L"/>
+    <Action name="new-tab" shortcut="Ctrl+Shift+T"/>
+    <Action name="next-tab" shortcut="Ctrl+Tab"/>
+    <Action name="options_configure" shortcut="Ctrl+&lt;"/>
+    <Action name="options_configure_keybinding" shortcut="Ctrl+Alt+,"/>
+    <Action name="previous-tab" shortcut="Ctrl+Shift+Tab"/>
+    <Action name="reset-font-size" shortcut="Ctrl+0"/>
+    <Action name="shrink-font" shortcut="Ctrl+-"/>
+    <Action name="split-view-left-right" shortcut="Alt+N"/>
+    <Action name="split-view-top-bottom" shortcut="Alt+D"/>
+    <Action name="toggle-maximize-current-view" shortcut="Alt+F"/>
+  </ActionProperties>
+</gui>

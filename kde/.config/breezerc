@@ -1,0 +1,15 @@
+[Windeco Exception 0]
+BorderSize=0
+Enabled=true
+ExceptionPattern=^(.+— )?Firefox Developer Edition
+ExceptionType=1
+HideTitleBar=true
+Mask=0
+
+[Windeco Exception 1]
+BorderSize=0
+Enabled=true
+ExceptionPattern=^(.+— )?Mozilla Firefox
+ExceptionType=1
+HideTitleBar=true
+Mask=0
