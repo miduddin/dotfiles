@@ -1,6 +1,31 @@
-local function close_current_buffer()
-	local ok, _ = pcall(function() vim.cmd("bn | bd#") end)
-	if not ok then vim.cmd("bd") end
+---@param wipe boolean
+local function close_current_buffer(wipe)
+	local cmd = wipe and "bw" or "bd"
+
+	local bufnr_alt = vim.fn.bufnr("#")
+	if bufnr_alt > -1 and vim.bo[bufnr_alt].buflisted then
+		vim.cmd("b# | " .. cmd .. "#")
+		return
+	end
+
+	local jumplist = vim.fn.getjumplist()
+	if jumplist[2] == 0 then
+		vim.cmd(cmd)
+		return
+	end
+
+	local bufnr = vim.fn.bufnr()
+	local i = jumplist[2]
+	local bufnr_i = jumplist[1][i].bufnr
+	while i > 1 and (bufnr_i == bufnr or not vim.bo[bufnr_i].buflisted) do
+		i = i - 1
+		bufnr_i = jumplist[1][i].bufnr
+	end
+	while i < #jumplist[1] and (bufnr_i == bufnr or not vim.bo[bufnr_i].buflisted) do
+		i = i + 1
+		bufnr_i = jumplist[1][i].bufnr
+	end
+	vim.cmd(bufnr_i .. "b | " .. bufnr .. cmd)
 end
 
 local function close_inactive_buffers()
@@ -90,7 +115,8 @@ Map("<C-K>", "5k", { "n", "v" }, { desc = "5 line up " })
 Map("<C-S>", "<Cmd>w<CR>", "n", { desc = "Save file" })
 Map("<Esc>", "<Cmd>noh<CR><Esc>", { "n", "t" }, { desc = "Esc + clear search highlight" })
 Map("<Leader>ba", "<Cmd>%bd<CR>", "n", { desc = "Close all buffers" })
-Map("<Leader>bd", close_current_buffer, "n", { desc = "Close current buffer" })
+Map("<Leader>bd", function() close_current_buffer(false) end, "n", { desc = "Close current buffer" })
+Map("<Leader>bw", function() close_current_buffer(true) end, "n", { desc = "Wipe current buffer" })
 Map("<Leader>bo", close_inactive_buffers, "n", { desc = "Close inactive buffers" })
 Map("<Leader>gd", function() toggle_diffmode() end, "n", { desc = "Diff current window" })
 Map("<Leader>gD", function() toggle_diffmode(1) end, "n", { desc = "Diff visible windows" })
