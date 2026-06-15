@@ -5,7 +5,7 @@ vim.pack.add({
 	"https://github.com/nvim-mini/mini.surround",
 	"https://github.com/jake-stewart/multicursor.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
-	"https://github.com/sindrets/diffview.nvim",
+	"https://github.com/dlyongemallo/diffview-plus.nvim",
 	"https://github.com/hrsh7th/nvim-cmp",
 	"https://github.com/hrsh7th/cmp-buffer",
 	"https://github.com/hrsh7th/cmp-nvim-lsp",
