@@ -20,6 +20,11 @@ vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })
 ---@return string
 local function f(text, hl) return string.format("%%#%s#%s", hl, text) end
 
+---@param text string
+---@param minwid integer
+---@param callback string
+local function fc(text, minwid, callback) return string.format("%%%d@v:lua.%s@%s%%X", minwid, callback, text) end
+
 local tabline = {
 	buffers = "",
 	spacer = "%=",
@@ -62,6 +67,14 @@ local function buffer_name(buf)
 	return bufname
 end
 
+---@param minwid integer
+---@param clicks integer
+---@param button string
+---@param mods string
+function TablineClickBuffer(minwid, clicks, button, mods)
+	if button == "l" then vim.api.nvim_win_set_buf(0, minwid) end
+end
+
 ---@return string
 local function update_buffers(ev)
 	local space = vim.api.nvim_get_option_value("columns", { scope = "global" })
@@ -99,10 +112,10 @@ local function update_buffers(ev)
 
 			if current_begin_at > 0 and extra_len > 0 then
 				text = text:sub(1, text:len() - extra_len) .. ">"
-				buffers = buffers .. f(text, hl)
+				buffers = buffers .. f(fc(text, buf, "TablineClickBuffer"), hl)
 				break
 			else
-				buffers = buffers .. f(text, hl)
+				buffers = buffers .. f(fc(text, buf, "TablineClickBuffer"), hl)
 			end
 			len = len + text:len()
 		end
