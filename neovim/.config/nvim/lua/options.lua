@@ -4,6 +4,7 @@ vim.g.loaded_gzip = true
 vim.g.loaded_man = true
 vim.g.loaded_matchit = true
 vim.g.loaded_netrw = true
+vim.g.loaded_nvim_dir_plugin = true
 vim.g.loaded_remote_plugins = true
 vim.g.loaded_spec = true
 vim.g.loaded_spellfile_plugin = true
