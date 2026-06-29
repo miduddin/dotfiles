@@ -125,6 +125,7 @@ Map("<Leader>gow", function() toggle_diffopt("iwhiteall") end, "n", { desc = "To
 Map("<Leader>P", '"+P', { "n", "v" }, { desc = "Paste from clipboard" })
 Map("<Leader>p", '"+p', { "n", "v" }, { desc = "Paste from clipboard" })
 Map("<Leader>q", toggle_quickfix, "n", { desc = "Toggle quickfix list" })
+Map("<Leader>R", "<Cmd>restart<CR>", "n", { desc = "Restart and load last session" })
 Map("<Leader>w", "<Cmd>set wrap!<CR>", { "n", "v" }, { desc = "Toggle word wrap" })
 Map("<Leader>y", '"+y', { "n", "v" }, { desc = "Yank to clipboard" })
 Map("<S-H>", "<Cmd>bp<CR>", "n", { desc = "Prev buffer" })
