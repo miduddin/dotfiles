@@ -16,7 +16,7 @@ local fzf = require("fzf-lua")
 local fzfd = require("fzf-lua.defaults")
 fzf.setup({
 	"border-fused",
-	ui_select = true,
+	ui_select = {},
 	winopts = {
 		width = 120,
 		preview = {
