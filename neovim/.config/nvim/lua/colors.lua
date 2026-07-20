@@ -1,46 +1,53 @@
--- Based on https://github.com/vague2k/vague.nvim
+-- Based on https://github.com/vague-theme/vague.nvim
 
-local c = {
-	bg = "#141415",
-	fg = "#cdcdcd",
-	line = "#252530",
-	comment = "#606079",
-	special = "#b4d4cf",
-	func = "#c48282",
-	call = "#bb9dbd",
-	string = "#e8b589",
-	constant = "#aeaed1",
-	visual = "#333738",
-	error = "#d8647e",
-	warning = "#f3be7c",
-	keyword = "#6e94b2",
-	type = "#9bb4bc",
-	search = "#405065",
-	plus = "#7fa563",
+local pallete = {
+	background = "#141415",
+	selection = "#333738",
+
+	black = "#252530",
+	red = "#d8647e",
+	green = "#7fa563",
+	yellow = "#e8b589",
+	blue = "#6e94b2",
+	magenta = "#bb9dbd",
+	cyan = "#9bb4bc",
+	white = "#cdcdcd",
+
+	bright_black = "#606079",
+	bright_red = "#c48282",
+	bright_yellow = "#f3be7c",
+	bright_blue = "#8ba9c1",
+	bright_magenta = "#c9b1ca",
+	bright_cyan = "#b4d4cf",
+
+	dim_red = "#3b242a",
+	dim_green = "#293125",
+	dim_yellow = "#41362a",
+	dim_yellow2 = "#6d583e",
 }
 
-local function color_to_rgb(color)
-	local function byte(value, offset) return bit.band(bit.rshift(value, offset), 0xFF) end
-
-	local new_color = vim.api.nvim_get_color_by_name(color)
-	if new_color == -1 then new_color = 000 end
-
-	return { byte(new_color, 16), byte(new_color, 8), byte(new_color, 0) }
-end
-
-local function blend(color, base_color, alpha)
-	local fg_rgb = color_to_rgb(color)
-	local bg_rgb = color_to_rgb(base_color)
-
-	local function blend_channel(i)
-		local ret = (alpha * fg_rgb[i] + ((1 - alpha) * bg_rgb[i]))
-		return math.floor(math.min(math.max(0, ret), 255) + 0.5)
-	end
-
-	local result = string.format("#%02X%02X%02X", blend_channel(1), blend_channel(2), blend_channel(3))
-
-	return result
-end
+local c = {
+	bg = pallete.background,
+	fg = pallete.white,
+	line = pallete.black,
+	comment = pallete.bright_black,
+	special = pallete.bright_cyan,
+	func = pallete.bright_red,
+	call = pallete.magenta,
+	string = pallete.yellow,
+	constant = pallete.bright_magenta,
+	visual = pallete.selection,
+	error = pallete.red,
+	warning = pallete.bright_yellow,
+	keyword = pallete.blue,
+	type = pallete.cyan,
+	search = pallete.bright_blue,
+	plus = pallete.green,
+	diff_add = pallete.dim_green,
+	diff_delete = pallete.dim_red,
+	diff_change = pallete.dim_yellow,
+	diff_text = pallete.dim_yellow2,
+}
 
 local set = vim.api.nvim_set_hl
 
@@ -99,7 +106,7 @@ set(0, "Comment", { fg = c.comment, italic = true })
 set(0, "Conceal", { fg = c.func, bg = c.bg })
 set(0, "Conditional", { link = "Statement" })
 set(0, "Constant", { fg = c.constant })
-set(0, "CurSearch", { link = "Search" })
+set(0, "CurSearch", { link = "IncSearch" })
 set(0, "CursorColumn", { link = "CursorLine" })
 set(0, "CursorLine", { bg = c.line })
 set(0, "CursorLineNr", { link = "@variable" })
@@ -122,27 +129,27 @@ set(0, "DiagnosticVirtualTextInfo", { link = "Constant" })
 set(0, "DiagnosticVirtualTextOk", { link = "Added" })
 set(0, "DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
 set(0, "DiagnosticWarn", { fg = c.warning })
-set(0, "DiffAdd", { bg = blend(c.plus, c.bg, 0.2) })
-set(0, "DiffChange", { bg = blend(c.warning, c.bg, 0.1) })
-set(0, "DiffDelete", { bg = blend(c.error, c.bg, 0.2) })
+set(0, "DiffAdd", { bg = c.diff_add })
+set(0, "DiffChange", { bg = c.diff_change })
+set(0, "DiffDelete", { bg = c.diff_delete })
 set(0, "DiffFile", { link = "Statement" })
 set(0, "DiffIndexLine", { link = "NonText" })
-set(0, "DiffText", { bg = blend(c.warning, c.bg, 0.3) })
+set(0, "DiffText", { bg = c.diff_text })
 set(0, "Directory", { link = "Statement" })
 set(0, "EndOfBuffer", { link = "NonText" })
 set(0, "Error", { fg = c.error, bold = true })
 set(0, "ErrorMsg", { link = "Error" })
 set(0, "Exception", { link = "Statement" })
-set(0, "FloatBorder", { fg = c.comment, bg = blend(c.visual, c.bg, 0.5) })
+set(0, "FloatBorder", { fg = c.comment, bg = c.line })
 set(0, "FloatFooter", { link = "FloatBorder" })
 set(0, "FloatTitle", { link = "FloatBorder" })
 set(0, "FoldColumn", { fg = c.comment, bg = c.bg })
 set(0, "Folded", { fg = c.comment, bg = c.line })
 set(0, "Function", { fg = c.func })
 set(0, "Identifier", { link = "Constant" })
-set(0, "IncSearch", { fg = c.bg, bg = c.warning })
+set(0, "IncSearch", { fg = c.bg, bg = c.search })
 set(0, "Include", { link = "Statement" })
-set(0, "Keyword", { fg = c.keyword, italic = true })
+set(0, "Keyword", { fg = c.keyword, bold = true })
 set(0, "Label", { link = "Statement" })
 set(0, "LineNr", { link = "NonText" })
 set(0, "LspCodeLens", { fg = c.comment, italic = true })
@@ -157,14 +164,14 @@ set(0, "MoreMsg", { fg = c.func, bold = true })
 set(0, "MsgSeparator", { fg = c.string, bg = c.line, bold = true })
 set(0, "NonText", { fg = c.comment })
 set(0, "Normal", { fg = c.fg, bg = c.bg })
-set(0, "NormalFloat", { fg = c.fg, bg = blend(c.visual, c.bg, 0.5) })
+set(0, "NormalFloat", { fg = c.fg, bg = c.line })
 set(0, "Number", { fg = c.string })
 set(0, "OkMsg", { link = "Added" })
 set(0, "Operator", { fg = c.type })
-set(0, "Pmenu", { link = "Normal" })
+set(0, "Pmenu", { link = "NormalFloat" })
 set(0, "PmenuBorder", { link = "FloatBorder" })
 set(0, "PmenuSbar", { fg = c.visual, bg = c.comment })
-set(0, "PmenuSel", { fg = c.constant, bg = c.line })
+set(0, "PmenuSel", { bg = c.visual })
 set(0, "PmenuThumb", { fg = c.comment, bg = c.visual })
 set(0, "PreCondit", { link = "NonText" })
 set(0, "PreProc", { link = "Function" })
@@ -172,7 +179,7 @@ set(0, "Question", { link = "Constant" })
 set(0, "QuickFixLine", { link = "CursorLine" })
 set(0, "Removed", { fg = c.error })
 set(0, "Repeat", { link = "Statement" })
-set(0, "Search", { fg = c.fg, bg = c.search })
+set(0, "Search", { fg = c.bg, bg = c.warning })
 set(0, "SignColumn", { link = "@variable" })
 set(0, "Special", { fg = c.special })
 set(0, "SpecialChar", { link = "Statement" })
@@ -199,7 +206,7 @@ set(0, "Typedef", { link = "Constant" })
 set(0, "Visual", { bg = c.visual })
 set(0, "VisualNOS", { bg = c.comment, underline = true })
 set(0, "WarningMsg", { fg = c.warning, bold = true })
-set(0, "Whitespace", { fg = blend(c.comment, c.bg, 0.3) })
+set(0, "Whitespace", { fg = c.visual })
 set(0, "WinBar", { link = "StatusLine" })
 set(0, "WinBarNC", { link = "StatusLineNC" })
 set(0, "WinSeparator", { link = "FloatBorder" })
@@ -233,5 +240,5 @@ set(0, "NeotestUnknown", { link = "NonText" })
 set(0, "NeotestWatching", { link = "DiagnosticWarn" })
 set(0, "TreesitterContext", { link = "CursorLine" })
 set(0, "TreesitterContextLineNumber", { link = "Folded" })
-set(0, "diffAdded", { link = "@diff.plus" })
-set(0, "diffRemoved", { link = "@diff.minus" })
+set(0, "diffAdded", { link = "Added" })
+set(0, "diffRemoved", { link = "Removed" })
