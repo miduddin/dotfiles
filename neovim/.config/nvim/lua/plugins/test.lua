@@ -44,6 +44,10 @@ vim.api.nvim_create_autocmd("FileType", {
 	pattern = { "neotest-output" },
 	callback = function(ev) Map("q", "<Cmd>q<CR>", "n", { buf = ev.buf }) end,
 })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "neotest-output-panel" },
+	callback = function(ev) Map("q", neotest.output_panel.close, "n", { buf = ev.buf }) end,
+})
 
 local function debug_nearest_test() neotest.run.run({ strategy = "dap", suite = false }) end
 local function toggle_test_output() neotest.output.open({ enter = true, auto_close = true }) end
