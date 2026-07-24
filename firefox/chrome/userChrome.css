@@ -15,7 +15,7 @@
 
 #navigator-toolbox {
 	border: none !important;
-	flex-flow: row-reverse wrap !important;
+	flex-flow: row wrap !important;
 }
 
 #navigator-toolbox>* {
@@ -26,6 +26,7 @@
 	background: none !important;
 	border: none !important;
 	flex: 0.7 !important;
+	order: 1 !important;
 	max-width: 350px;
 }
 
@@ -35,4 +36,5 @@
 
 #TabsToolbar {
 	flex: 1 !important;
+	order: 2 !important;
 }
