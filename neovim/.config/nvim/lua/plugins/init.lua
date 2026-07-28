@@ -11,10 +11,9 @@ vim.pack.add({
 	"https://github.com/hrsh7th/cmp-nvim-lsp",
 	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/stevearc/oil.nvim",
-	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/nvim-neotest/nvim-nio",
 	"https://github.com/nvim-neotest/neotest",
-	"https://github.com/fredrikaverpil/neotest-golang",
+	"https://github.com/miduddin/neotest-golang",
 	"https://github.com/mfussenegger/nvim-dap",
 	"https://github.com/igorlfs/nvim-dap-view",
 })
