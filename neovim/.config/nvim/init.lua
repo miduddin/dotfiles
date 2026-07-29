@@ -1,5 +1,5 @@
-require("colors")
 require("options")
+require("colors")
 require("tabline")
 
 vim.api.nvim_create_autocmd("FileType", {

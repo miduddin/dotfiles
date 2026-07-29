@@ -1,18 +1,24 @@
 vim.g.loaded_2html_plugin = true
+vim.g.loaded_autoread = 1
 vim.g.loaded_fzf = true
 vim.g.loaded_gzip = true
 vim.g.loaded_man = true
 vim.g.loaded_matchit = true
 vim.g.loaded_netrw = true
 vim.g.loaded_nvim_dir_plugin = true
+vim.g.loaded_nvim_net_plugin = true
+vim.g.loaded_nvim_zip_plugin = true
 vim.g.loaded_remote_plugins = true
 vim.g.loaded_spec = true
 vim.g.loaded_spellfile_plugin = true
 vim.g.loaded_tar = true
 vim.g.loaded_tarPlugin = true
-vim.g.loaded_zipPlugin = true
 vim.g.log_level = vim.log.levels.OFF
 vim.g.mapleader = " "
+
+local termfeatures = vim.g.termfeatures or {}
+termfeatures.osc52 = false
+vim.g.termfeatures = termfeatures
 
 vim.opt.breakindent = true
 vim.opt.confirm = true
