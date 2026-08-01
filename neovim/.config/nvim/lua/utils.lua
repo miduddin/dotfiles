@@ -64,8 +64,7 @@ end
 
 function M.dot_repeat(callback)
 	return function()
-		_G.dot_repeat_callback = callback
-		vim.go.operatorfunc = "v:lua.dot_repeat_callback"
+		vim.go.operatorfunc = callback
 		return "g@l"
 	end
 end
