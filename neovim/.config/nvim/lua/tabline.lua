@@ -61,6 +61,9 @@ end
 ---@return string
 local function buffer_name(buf)
 	local bufname = vim.api.nvim_buf_get_name(buf)
+	if vim.api.nvim_get_option_value("buftype", { buf = buf }) == "terminal" then
+		_, _, bufname = bufname:find("(%d+:%S+)")
+	end
 	bufname = vim.fn.fnamemodify(bufname, ":t")
 
 	if bufname == "" then return "[No Name]" end
