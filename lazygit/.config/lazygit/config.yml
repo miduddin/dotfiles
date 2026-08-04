@@ -4,9 +4,9 @@ git:
   autoFetch: false
   autoRefresh: false
   overrideGpg: true
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --paging=never
+      command: delta --paging=never
 gui:
   border: single
   nerdFontsVersion: 3
