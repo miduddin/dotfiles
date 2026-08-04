@@ -1,10 +1,8 @@
 local M = {}
 
 ---@param connection_name string
----@param timeout_s integer?
-function M.query_paragraph(connection_name, timeout_s)
+function M.query_paragraph(connection_name)
 	local utils = require("utils")
-	local timeout_ms = (timeout_s or 3) * 1000
 
 	local input = {
 		"\\set QUIET 1",
@@ -16,13 +14,11 @@ function M.query_paragraph(connection_name, timeout_s)
 		table.insert(input, v)
 	end
 
-	local obj = vim.system({ "usql", connection_name }, {
-		stdin = table.concat(input, "\n"),
-		text = true,
-		timeout = timeout_ms,
-	})
-
-	utils.write_cmd_output_to_split(obj, string.format("[%s] Query result - %s", connection_name, os.date("%T")))
+	utils.write_cmd_output_to_split(
+		string.format("[%s] Query result - %s", connection_name, os.date("%T")),
+		{ "usql", connection_name },
+		input
+	)
 end
 
 return M

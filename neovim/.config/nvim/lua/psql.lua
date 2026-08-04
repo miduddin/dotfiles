@@ -1,10 +1,8 @@
 local M = {}
 
 ---@param pg_service string
----@param timeout_s integer?
-function M.query_paragraph(pg_service, timeout_s)
+function M.query_paragraph(pg_service)
 	local utils = require("utils")
-	local timeout_ms = (timeout_s or 3) * 1000
 
 	local input = {
 		"\\set QUIET 1",
@@ -16,13 +14,11 @@ function M.query_paragraph(pg_service, timeout_s)
 		table.insert(input, v)
 	end
 
-	local obj = vim.system({ "psql", "service=" .. pg_service }, {
-		stdin = table.concat(input, "\n"),
-		text = true,
-		timeout = timeout_ms,
-	})
-
-	utils.write_cmd_output_to_split(obj, string.format("[%s] Query result - %s", pg_service, os.date("%T")))
+	utils.write_cmd_output_to_split(
+		string.format("Query result", pg_service),
+		{ "psql", "service=" .. pg_service },
+		input
+	)
 end
 
 return M
