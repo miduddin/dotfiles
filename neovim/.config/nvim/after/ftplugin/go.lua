@@ -1,0 +1,7 @@
+M = require("go")
+vim.keymap.set("n", "<Leader>ta", M.test_all)
+vim.keymap.set("n", "<Leader>tA", M.test_all_nocache)
+vim.keymap.set("n", "<Leader>tr", M.test_nearest)
+vim.keymap.set("n", "<Leader>tR", M.test_nearest_nocache)
+vim.keymap.set("n", "<Leader>tl", M.test_last)
+vim.keymap.set("n", "<Leader>td", M.debug_nearest_test)
