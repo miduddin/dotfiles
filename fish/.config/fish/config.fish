@@ -1,5 +1,6 @@
 set -g fish_greeting
 set -g fish_key_bindings fish_vi_key_bindings
+set -g fish_autosuggestion_enabled 0
 
 set -x XDG_CACHE_HOME ~/.cache
 set -x XDG_CONFIG_HOME ~/.config
