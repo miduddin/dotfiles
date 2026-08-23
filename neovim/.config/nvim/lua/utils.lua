@@ -37,29 +37,29 @@ function M.write_cmd_output_to_split(obj, bufname)
 	vim.api.nvim_buf_set_lines(buf, 0, -1, true, text)
 end
 
----@param linenr integer 1-based line number.
-function M.get_line_text(linenr) return vim.api.nvim_buf_get_lines(0, linenr - 1, linenr, false)[1] end
+---@param linenr integer 0-based line number.
+function M.get_line(linenr) return vim.api.nvim_buf_get_lines(0, linenr, linenr + 1, false)[1] end
 
 ---@return string[]
 function M.get_current_paragraph()
-	local current_line = vim.api.nvim_win_get_cursor(0)[1]
-	assert(vim.trim(M.get_line_text(current_line)) ~= "", "Current line is empty!")
+	local current_linenr = vim.pos.cursor().row
+	assert(vim.trim(M.get_line(current_linenr)) ~= "", "Current line is empty!")
 
 	local line_count = vim.api.nvim_buf_line_count(0)
 
-	local start_line = current_line
-	while start_line > 1 do
-		if vim.trim(M.get_line_text(start_line - 1)) == "" then break end
-		start_line = start_line - 1
+	local start_linenr = current_linenr
+	while start_linenr > 1 do
+		if vim.trim(M.get_line(start_linenr - 1)) == "" then break end
+		start_linenr = start_linenr - 1
 	end
 
-	local end_line = current_line
-	while end_line < line_count do
-		if vim.trim(M.get_line_text(end_line + 1)) == "" then break end
-		end_line = end_line + 1
+	local end_linenr = current_linenr
+	while end_linenr < line_count do
+		if vim.trim(M.get_line(end_linenr + 1)) == "" then break end
+		end_linenr = end_linenr + 1
 	end
 
-	return vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+	return vim.api.nvim_buf_get_lines(0, start_linenr, end_linenr + 1, false)
 end
 
 function M.dot_repeat(callback)

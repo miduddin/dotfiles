@@ -1,10 +1,10 @@
 local function add_row_below()
-	local line_current = vim.api.nvim_win_get_cursor(0)[1]
-	local text_next = require("utils").get_line_text(line_current)
+	local line_current = vim.pos.cursor().row
+	local text_next = require("utils").get_line(line_current)
 	local text_current = text_next:gsub("%);", "),", 1)
 	local row_id = string.match(text_current, "%d+")
 	text_next = text_next:gsub(row_id, row_id + 1)
-	vim.api.nvim_buf_set_lines(0, line_current - 1, line_current, true, { text_current, text_next })
+	vim.api.nvim_buf_set_lines(0, line_current, line_current + 1, true, { text_current, text_next })
 	vim.fn.feedkeys("j")
 end
 Map("<Leader>.r", require("utils").dot_repeat(add_row_below), "n", { expr = true })
@@ -12,10 +12,10 @@ Map("<Leader>.r", require("utils").dot_repeat(add_row_below), "n", { expr = true
 ---@param line integer?
 ---@param next_down boolean?
 local function align_columns(line, next_down)
-	if type(line) ~= "number" then line = vim.api.nvim_win_get_cursor(0)[1] end
+	if type(line) ~= "number" then line = vim.pos.cursor().row end
 
 	local utils = require("utils")
-	local text = utils.get_line_text(line)
+	local text = utils.get_line(line)
 	if vim.startswith(vim.trim(text), "insert into") then
 		align_columns(line - 1, false)
 		align_columns(line + 1, true)
@@ -24,22 +24,22 @@ local function align_columns(line, next_down)
 
 	if not vim.startswith(vim.trim(text), "(") then return end
 
-	local indent = vim.fn.indent(line)
+	local indent = vim.fn.indent(line + 1)
 	local rows = { text }
 
 	local line_start = line
 	while true do
-		if vim.fn.indent(line_start - 1) ~= indent then break end
+		if vim.fn.indent(line_start) ~= indent then break end
 		line_start = line_start - 1
-		text = utils.get_line_text(line_start)
+		text = utils.get_line(line_start)
 		table.insert(rows, 1, text)
 	end
 
 	local line_end = line
 	while true do
-		if vim.fn.indent(line_end + 1) ~= indent then break end
+		if vim.fn.indent(line_end + 2) ~= indent then break end
 		line_end = line_end + 1
-		text = utils.get_line_text(line_end)
+		text = utils.get_line(line_end)
 		table.insert(rows, text)
 	end
 
@@ -92,7 +92,7 @@ local function align_columns(line, next_down)
 		start = max_comma + 2
 	end
 
-	vim.api.nvim_buf_set_lines(0, line_start - 1, line_end, true, rows)
+	vim.api.nvim_buf_set_lines(0, line_start, line_end + 1, true, rows)
 
 	if next_down == nil then
 		align_columns(line_start - 2, false)
