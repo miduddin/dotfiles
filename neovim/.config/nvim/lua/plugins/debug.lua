@@ -1,5 +1,9 @@
 local dap = require("dap")
 dap.set_log_level("ERROR")
+vim.fn.sign_define("DapBreakpoint", { text = "B", texthl = "Removed" })
+vim.fn.sign_define("DapBreakpointCondition", { text = "C", texthl = "Removed" })
+vim.fn.sign_define("DapBreakpointRejected", { text = "R", texthl = "Removed" })
+vim.fn.sign_define("DapStopped", { text = "→", texthl = "Removed", linehl = "DiffDelete" })
 
 dap.adapters.go = {
 	type = "server",
@@ -33,13 +37,14 @@ dap.configurations.ruby = {
 
 local widgets = require("dap.ui.widgets")
 
-local bg_stl = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false }).bg
-local bg_warn = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false }).fg
+local hl_stl = vim.api.nvim_get_hl(0, { name = "StatusLine", link = false })
+local hl_norm = vim.api.nvim_get_hl(0, { name = "Normal", link = false })
+local hl_warn = vim.api.nvim_get_hl(0, { name = "DiagnosticWarn", link = false })
 dap.listeners.after["event_process"]["my"] = function()
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = bg_warn, update = true })
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = hl_warn.fg, fg = hl_norm.bg, update = true })
 end
 dap.listeners.after["event_terminated"]["my"] = function()
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = bg_stl, update = true })
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = hl_stl.bg, fg = hl_stl.fg, update = true })
 end
 
 local function breakpoint_condition()
