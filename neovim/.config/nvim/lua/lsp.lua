@@ -25,6 +25,7 @@ vim.lsp.enable({
 	"ruby_lsp",
 	"rust_analyzer",
 	"taplo",
+	"tsc",
 	"ty",
 	"zls",
 })
