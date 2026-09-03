@@ -3,7 +3,6 @@ vim.pack.add({
 	"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
 	"https://github.com/nvim-treesitter/nvim-treesitter-context",
 	"https://github.com/nvim-mini/mini.surround",
-	"https://github.com/jake-stewart/multicursor.nvim",
 	"https://github.com/ibhagwan/fzf-lua",
 	"https://github.com/sindrets/diffview.nvim",
 	"https://github.com/hrsh7th/nvim-cmp",
