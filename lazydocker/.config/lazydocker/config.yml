@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
+
+gui:
+  returnImmediately: true
+  showBottomLine: false
+  theme:
+    selectedLineBgColor:
+      - "#333738"
+commandTemplates:
+  dockerCompose: podman compose

@@ -1,0 +1,6 @@
+chezmoi/.config/chezmoi/chezmoistate.boltdb
+fish/.config/fish/fish_variables
+git/.config/git/config_work
+k9s/.config/k9s/config.yml
+lazygit/.config/lazygit/state.yml
+neovim/.config/nvim/nvim-pack-lock.json

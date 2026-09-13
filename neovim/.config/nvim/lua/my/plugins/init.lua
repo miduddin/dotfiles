@@ -1,0 +1,23 @@
+vim.pack.add({
+	"https://github.com/nvim-treesitter/nvim-treesitter",
+	"https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+	"https://github.com/nvim-treesitter/nvim-treesitter-context",
+	"https://github.com/nvim-mini/mini.surround",
+	"https://github.com/Wansmer/treesj",
+	"https://github.com/ibhagwan/fzf-lua",
+	"https://github.com/sindrets/diffview.nvim",
+	"https://github.com/hrsh7th/nvim-cmp",
+	"https://github.com/hrsh7th/cmp-buffer",
+	"https://github.com/hrsh7th/cmp-nvim-lsp",
+	"https://github.com/stevearc/conform.nvim",
+	"https://github.com/stevearc/oil.nvim",
+	"https://github.com/mfussenegger/nvim-dap",
+	"https://github.com/igorlfs/nvim-dap-view",
+})
+
+require("my.plugins.treesitter")
+require("my.plugins.editor")
+require("my.plugins.finder")
+require("my.plugins.git")
+require("my.plugins.lsp")
+require("my.plugins.debug")

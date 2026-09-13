@@ -1,0 +1,152 @@
+vim.opt.showtabline = 2
+
+local function init_hl()
+	local hl_comm = vim.api.nvim_get_hl(0, { name = "Comment", link = false })
+	local hl_floa = vim.api.nvim_get_hl(0, { name = "NormalFloat", link = false })
+	local hl_func = vim.api.nvim_get_hl(0, { name = "Function", link = false })
+	local hl_iden = vim.api.nvim_get_hl(0, { name = "Identifier", link = false })
+
+	vim.api.nvim_set_hl(0, "TabTabs", { bg = hl_iden.fg, fg = hl_floa.bg })
+	vim.api.nvim_set_hl(0, "TabBufferCurrent", { link = "StatusLine" })
+	vim.api.nvim_set_hl(0, "TabBufferActive", { link = "StatusLineNC" })
+	vim.api.nvim_set_hl(0, "TabBufferInactive", { bg = hl_floa.bg, fg = hl_comm.fg })
+	vim.api.nvim_set_hl(0, "TabGitProject", { bg = hl_func.fg, fg = hl_floa.bg })
+end
+init_hl()
+vim.api.nvim_create_autocmd({ "ColorScheme" }, { callback = init_hl })
+
+---@param text string
+---@param hl string
+---@return string
+local function f(text, hl) return string.format("%%#%s#%s", hl, text) end
+
+---@param text string
+---@param minwid integer
+---@param callback string
+local function fc(text, minwid, callback) return string.format("%%%d@v:lua.%s@%s%%X", minwid, callback, text) end
+
+local tabline = {
+	buffers = "",
+	spacer = "%=",
+	tabs = "",
+	git = "",
+
+	tabs_len = 0,
+	git_len = 0,
+}
+
+local function update_tabline()
+	local value = table.concat({
+		tabline.buffers or "",
+		tabline.spacer,
+		tabline.tabs or "",
+		tabline.git or "",
+	})
+	vim.api.nvim_set_option_value("tabline", value, { scope = "global" })
+end
+
+---@param name string
+---@param value_fn function
+---@return function
+local function set_component_callback(name, value_fn)
+	return function(ev)
+		local value = value_fn(ev)
+		tabline[name] = value
+		tabline[name .. "_len"] = vim.api.nvim_eval_statusline(value, {}).width
+		update_tabline()
+	end
+end
+
+---@param buf integer
+---@return string
+local function buffer_name(buf)
+	local bufname = vim.api.nvim_buf_get_name(buf)
+	if vim.api.nvim_get_option_value("buftype", { buf = buf }) == "terminal" then
+		_, _, bufname = bufname:find("(%d+:%S+)")
+	end
+	bufname = vim.fn.fnamemodify(bufname, ":t")
+
+	if bufname == "" then return "[No Name]" end
+	return bufname
+end
+
+---@param minwid integer
+---@param clicks integer
+---@param button string
+---@param mods string
+function TablineClickBuffer(minwid, clicks, button, mods)
+	if button == "l" then vim.api.nvim_win_set_buf(0, minwid) end
+end
+
+---@return string
+local function update_buffers(ev)
+	local space = vim.api.nvim_get_option_value("columns", { scope = "global" })
+		- (tabline.tabs_len or 0)
+		- (tabline.git_len or 0)
+		- 1
+
+	local bufname_count = {}
+	local buffers, len = "", 0
+	local current_begin_at = 0
+	local curbuf = vim.api.nvim_get_current_buf()
+	local tabbufs = vim.fn.tabpagebuflist()
+
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if
+			vim.api.nvim_get_option_value("buflisted", { buf = buf })
+			and not (ev.event == "BufDelete" and ev.buf == buf)
+		then
+			local bufname = buffer_name(buf)
+			local count = bufname_count[bufname] or 0
+			bufname_count[bufname] = count + 1
+			if count > 0 then bufname = bufname .. "(" .. count .. ")" end
+
+			local hl = "TabBufferInactive"
+			if curbuf == buf then
+				hl = "TabBufferCurrent"
+				current_begin_at = len + 1
+			elseif vim.list_contains(tabbufs, buf) then
+				hl = "TabBufferActive"
+			end
+
+			local text = " " .. bufname .. " "
+			local extra_len = (len + text:len() - current_begin_at + 1) - space
+			if current_begin_at > 1 then extra_len = extra_len + 1 end
+
+			if current_begin_at > 0 and extra_len > 0 then
+				text = text:sub(1, text:len() - extra_len) .. ">"
+				buffers = buffers .. f(fc(text, buf, "TablineClickBuffer"), hl)
+				break
+			else
+				buffers = buffers .. f(fc(text, buf, "TablineClickBuffer"), hl)
+			end
+			len = len + text:len()
+		end
+	end
+
+	return buffers .. "%*"
+end
+vim.api.nvim_create_autocmd(
+	{ "BufAdd", "BufEnter", "BufDelete", "BufHidden", "TermEnter", "VimResized", "TabEnter" },
+	{ callback = set_component_callback("buffers", update_buffers) }
+)
+
+---@return string
+local function update_tabs()
+	local n = vim.fn.tabpagenr("$")
+	if n == 1 then return "" end
+
+	local text = string.format(" Tab %d/%d ", vim.fn.tabpagenr(), n)
+	return f(text, "TabTabs")
+end
+vim.api.nvim_create_autocmd({ "TabEnter", "TabClosed" }, { callback = set_component_callback("tabs", update_tabs) })
+
+---@return string
+local function update_git()
+	local cwd = vim.uv.cwd()
+	if not (cwd and vim.uv.fs_stat(".git/")) then return "" end
+
+	local project = " " .. vim.fn.fnamemodify(cwd, ":t") .. " "
+	return f(project, "TabGitProject")
+end
+vim.api.nvim_create_autocmd("VimEnter", { callback = set_component_callback("git", update_git) })

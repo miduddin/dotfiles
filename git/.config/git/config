@@ -1,0 +1,82 @@
+[branch]
+	sort = -committerdate
+
+[commit]
+	gpgsign = true
+
+[core]
+	pager = delta
+
+[credential]
+	helper = store
+
+[delta]
+	dark = true
+	diff-so-fancy = true
+	navigate = true
+	tabs = 4
+	file-style = yellow bold
+	file-decoration-style = omit
+	hunk-header-style = line-number blue italic
+	hunk-header-decoration-style = omit
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[gpg]
+	format = ssh
+
+[interactive]
+	diffFilter = delta --color-only
+
+[maintenance.gc]
+	enabled = true
+[maintenance.commit-graph]
+	enabled = true
+[maintenance.loose-object]
+	enabled = true
+[maintenance.incremental-repack]
+	enabled = true
+[maintenance.pack-refs]
+	enabled = true
+
+[merge]
+	conflictstyle = zdiff3
+
+[pull]
+	rebase = true
+
+[push]
+	default = simple
+	autoSetupRemote = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[user]
+	email = miduddin@gmail.com
+	name = Muhammad Imaduddin
+	signingkey = ~/.ssh/id_ed25519.pub
+
+[includeIf "gitdir:~/code/work/"]
+	path = config_work

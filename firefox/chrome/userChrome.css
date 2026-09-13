@@ -1,0 +1,40 @@
+#alltabs-button,
+#forward-button[disabled="true"],
+#identity-box[pageproxystate="valid"].mixedActiveBlocked #identity-icon-box,
+#identity-box[pageproxystate="valid"].verifiedDomain #identity-icon-box,
+#page-action-buttons> :not(#urlbar-zoom-button),
+#pageAction-urlbar-_testpilot-containers,
+#tracking-protection-icon-container,
+#trust-icon-container.secure,
+.tab-audio-button,
+.tab-close-button,
+.tab-icon-overlay,
+.titlebar-spacer {
+	display: none !important;
+}
+
+#navigator-toolbox {
+	border: none !important;
+	flex-flow: row wrap !important;
+}
+
+#navigator-toolbox>* {
+	flex: 1 100% !important;
+}
+
+#nav-bar {
+	background: none !important;
+	border: none !important;
+	flex: 0.7 !important;
+	order: 1 !important;
+	max-width: 350px;
+}
+
+#urlbar-container {
+	width: unset !important;
+}
+
+#TabsToolbar {
+	flex: 1 !important;
+	order: 2 !important;
+}
