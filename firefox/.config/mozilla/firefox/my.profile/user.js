@@ -1,0 +1,17 @@
+user_pref("browser.aboutConfig.showWarning", false);
+user_pref("browser.ai.control.default", "blocked");
+user_pref("browser.ai.control.translations", "available");
+user_pref("browser.search.suggest.enabled", false);
+user_pref("browser.tabs.dragDrop.createGroup.enabled", false);
+user_pref("browser.tabs.hoverPreview.showThumbnails", false);
+user_pref("browser.urlbar.showSearchSuggestionsFirst", false);
+user_pref("browser.urlbar.suggest.bookmark", false);
+user_pref("browser.urlbar.suggest.engines", false);
+user_pref("browser.urlbar.suggest.history", false);
+user_pref("browser.urlbar.suggest.openpage", false);
+user_pref("browser.urlbar.suggest.recentsearches", false);
+user_pref("browser.urlbar.suggest.searches", false);
+user_pref("browser.urlbar.suggest.topsites", false);
+user_pref("full-screen-api.warning.delay", 0);
+user_pref("full-screen-api.warning.timeout", 0);
+user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);

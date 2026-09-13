@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
+
+git:
+  autoFetch: false
+  autoRefresh: false
+  overrideGpg: true
+  diffRenderers:
+    - colorArg: always
+      command: delta --paging=never
+gui:
+  border: single
+  nerdFontsVersion: 3
+  showBottomLine: false
+  theme:
+    selectedLineBgColor:
+      - "#333738"
+os:
+  editPreset: nvim
+customCommands:
+  - key: X
+    context: global
+    command: |
+      git remote prune origin
+      git reflog expire --expire=now --all
+      git repack -ad
+      git prune
+    description: Cleanup local git files.
+    loadingText: Cleaning up
+    output: log
+promptToReturnFromSubprocess: false

@@ -1,0 +1,28 @@
+[Desktop Entry]
+DefaultProfile=my.profile
+
+[General]
+ConfigVersion=1
+
+[MainWindow]
+ToolBarsMovable=Enabled
+
+[Notification Messages]
+CloseAllTabs=true
+ShowPasteHugeTextWarning=false
+
+[Shortcut Schemes]
+Current Scheme=my
+
+[SplitView]
+SplitViewVisibility=AlwaysHideSplitHeader
+
+[TabBar]
+CloseTabButton=None
+SearchTabsButton=HideSearchTabsButton
+
+[ThumbnailsSettings]
+EnableThumbnails=false
+
+[UiSettings]
+ColorScheme=
