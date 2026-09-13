@@ -1,0 +1,5 @@
+vim.api.nvim_set_hl(0, "DiffAdd", { bg = "NvimDarkGreen" })
+vim.api.nvim_set_hl(0, "DiffChange", { bg = "NvimDarkGrey4" })
+vim.api.nvim_set_hl(0, "DiffDelete", { bg = "NvimDarkRed" })
+vim.api.nvim_set_hl(0, "DiffText", { bg = "NvimDarkCyan" })
+vim.api.nvim_set_hl(0, "Whitespace", { fg = "NvimDarkGrey3" })

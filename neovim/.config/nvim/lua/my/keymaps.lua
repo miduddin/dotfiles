@@ -1,0 +1,150 @@
+---@param wipe boolean
+local function close_current_buffer(wipe)
+	local cmd = wipe and "bw" or "bd"
+
+	local bufnr_alt = vim.fn.bufnr("#")
+	if bufnr_alt > -1 and vim.bo[bufnr_alt].buflisted then
+		vim.cmd("b# | " .. cmd .. "#")
+		return
+	end
+
+	local jumplist = vim.fn.getjumplist()
+	if jumplist[2] == 0 then
+		vim.cmd(cmd)
+		return
+	end
+
+	local bufnr = vim.fn.bufnr()
+	local i = jumplist[2]
+	local bufnr_i = jumplist[1][i].bufnr
+	while i > 1 and (bufnr_i == bufnr or not vim.bo[bufnr_i].buflisted) do
+		i = i - 1
+		bufnr_i = jumplist[1][i].bufnr
+	end
+	while i < #jumplist[1] and (bufnr_i == bufnr or not vim.bo[bufnr_i].buflisted) do
+		i = i + 1
+		bufnr_i = jumplist[1][i].bufnr
+	end
+	vim.cmd(bufnr_i .. "b | " .. bufnr .. cmd)
+end
+
+local function close_inactive_buffers()
+	local visible_bufs = {}
+	for _, win in ipairs(vim.api.nvim_list_wins()) do
+		table.insert(visible_bufs, vim.api.nvim_win_get_buf(win))
+	end
+
+	for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+		if vim.fn.buflisted(buf) == 1 and not vim.list_contains(visible_bufs, buf) then vim.cmd("bd " .. buf) end
+	end
+end
+
+local function fold_children()
+	local topline = vim.fn.winsaveview().topline
+	vim.cmd("norm zc")
+	vim.api.nvim_cmd({ cmd = "foldc", bang = true, range = { vim.fn.line(".") } }, {})
+	vim.cmd("norm zvzc")
+	vim.fn.winrestview({ topline = topline })
+end
+
+local function toggle_quickfix()
+	for _, win in pairs(vim.fn.getwininfo()) do
+		if win["quickfix"] == 1 then
+			vim.cmd("cclose")
+			return
+		end
+	end
+	vim.cmd("copen")
+end
+
+---@param opt string
+local function toggle_diffopt(opt)
+	if vim.o.diffopt:find(opt) then
+		vim.opt.diffopt:remove(opt)
+	else
+		vim.opt.diffopt:append(opt)
+	end
+end
+
+local function toggle_diffmode(all)
+	local prefix = ""
+	if all then prefix = "windo " end
+	if vim.api.nvim_get_option_value("diff", { scope = "local" }) then
+		vim.cmd(prefix .. "diffo")
+	else
+		vim.cmd(prefix .. "difft")
+	end
+end
+
+local function toggle_diag()
+	local opts = { bufnr = 0 }
+	local current_state = vim.diagnostic.is_enabled(opts)
+	vim.diagnostic.enable(not current_state, opts)
+end
+
+local function toggle_diag_virt_lines()
+	local current_state = vim.diagnostic.config().virtual_lines
+	vim.diagnostic.config({ virtual_text = not not current_state, virtual_lines = not current_state })
+end
+
+local function toggle_inlay_hint()
+	local opts = { bufnr = 0 }
+	local current_state = vim.lsp.inlay_hint.is_enabled(opts)
+	vim.lsp.inlay_hint.enable(not current_state, opts)
+end
+
+local function lsp_references() vim.lsp.buf.references({ includeDeclaration = false }) end
+local function lsp_hover() vim.lsp.buf.hover({ max_width = 82, max_height = 20 }) end
+
+---Reorder arguments just so it looks better when sorted.
+---
+---@param lhs   string|string[]
+---@param rhs   string|function
+---@param mode  string|string[]
+---@param opts? vim.keymap.set.Opts
+function Map(lhs, rhs, mode, opts) vim.keymap.set(mode, lhs, rhs, opts) end
+
+Map("*", "*``", "n", { desc = "Search current word without going next" })
+Map("<", "<gv", "v", { desc = "Indent without clearing selection" })
+Map("<C-/>", "gc", "v", { desc = "Toggle comment", remap = true })
+Map("<C-/>", "gcc", "n", { desc = "Toggle comment", remap = true })
+Map("<C-_>", "gc", "v", { desc = "Toggle comment", remap = true })
+Map("<C-_>", "gcc", "n", { desc = "Toggle comment", remap = true })
+Map("<C-J>", "5j", { "n", "v" }, { desc = "5 line down" })
+Map("<C-K>", "5k", { "n", "v" }, { desc = "5 line up " })
+Map("<C-S>", "<Cmd>w<CR>", "n", { desc = "Save file" })
+Map("<Esc>", "<Cmd>noh<CR><Esc>", { "n", "t" }, { desc = "Esc + clear search highlight" })
+Map("<Leader>ba", "<Cmd>%bd<CR>", "n", { desc = "Close all buffers" })
+Map("<Leader>bd", function() close_current_buffer(false) end, "n", { desc = "Close current buffer" })
+Map("<Leader>bw", function() close_current_buffer(true) end, "n", { desc = "Wipe current buffer" })
+Map("<Leader>bo", close_inactive_buffers, "n", { desc = "Close inactive buffers" })
+Map("<Leader>gd", function() toggle_diffmode() end, "n", { desc = "Diff current window" })
+Map("<Leader>gD", function() toggle_diffmode(1) end, "n", { desc = "Diff visible windows" })
+Map("<Leader>goc", function() toggle_diffopt("icase") end, "n", { desc = "Toggle case-sensitive diff" })
+Map("<Leader>gow", function() toggle_diffopt("iwhiteall") end, "n", { desc = "Toggle whitespace diff" })
+Map("<Leader>P", '"+P', { "n", "v" }, { desc = "Paste from clipboard" })
+Map("<Leader>p", '"+p', { "n", "v" }, { desc = "Paste from clipboard" })
+Map("<Leader>q", toggle_quickfix, "n", { desc = "Toggle quickfix list" })
+Map("<Leader>w", "<Cmd>set wrap!<CR>", { "n", "v" }, { desc = "Toggle word wrap" })
+Map("<Leader>y", '"+y', { "n", "v" }, { desc = "Yank to clipboard" })
+Map("<S-H>", "<Cmd>bp<CR>", "n", { desc = "Prev buffer" })
+Map("<S-L>", "<Cmd>bn<CR>", "n", { desc = "Next buffer" })
+Map(">", ">gv", "v", { desc = "Indent without clearing selection" })
+Map("zC", fold_children, "n", { desc = "Fold all children" })
+Map({ "<X1Mouse>", "<2-X1Mouse>", "<3-X1Mouse>", "<4-X1Mouse>" }, "<C-O>", { "n", "v", "o" })
+Map({ "<X2Mouse>", "<2-X2Mouse>", "<3-X2Mouse>", "<4-X2Mouse>" }, "<C-I>", { "n", "v", "o" })
+Map({ "<MiddleMouse>", "<2-MiddleMouse>", "<3-MiddleMouse>", "<4-MiddleMouse>" }, "<Nop>", { "n", "v", "o" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(ev)
+		Map("<Leader>X", toggle_diag, "n", { desc = "Diag: toggle", buf = ev.buf })
+		Map("<Leader>xf", vim.diagnostic.open_float, "n", { desc = "Diag: open in floating window", buf = ev.buf })
+		Map("<Leader>xq", vim.diagnostic.setqflist, "n", { desc = "Diag: open in quickfix", buf = ev.buf })
+		Map("<Leader>xv", toggle_diag_virt_lines, "n", { desc = "Diag: toggle virtual lines", buf = ev.buf })
+		Map("grd", vim.lsp.buf.definition, "n", { desc = "LSP definition", buf = ev.buf })
+		Map("<C-LeftMouse>", "<LeftMouse>grd", "n", { desc = "LSP definition", buf = ev.buf, remap = true })
+		Map("grh", toggle_inlay_hint, "n", { desc = "Toggle inlay hint", buf = ev.buf })
+		Map("grr", lsp_references, "n", { desc = "LSP references", buf = ev.buf })
+		Map("K", lsp_hover, "n", { desc = "LSP Hover", buf = ev.buf })
+	end,
+})

@@ -1,0 +1,8 @@
+vim.opt_local.commentstring = "-- %s"
+vim.opt_local.expandtab = true
+
+local psql = require("my.psql")
+vim.api.nvim_buf_create_user_command(0, "Psql", function(opts) psql.query_paragraph(opts.fargs[1]) end, { nargs = "*" })
+
+local usql = require("my.usql")
+vim.api.nvim_buf_create_user_command(0, "Usql", function(opts) usql.query_paragraph(opts.fargs[1]) end, { nargs = "*" })
