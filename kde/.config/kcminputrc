@@ -1,0 +1,7 @@
+[Keyboard]
+RepeatDelay=250
+RepeatRate=50
+
+[Mouse]
+cursorSize=36
+cursorTheme=Breeze_Light
