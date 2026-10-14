@@ -1,0 +1,39 @@
+[016fe9de-7789-4d56-9772-9348a377a568]
+Description=Steam updater
+fsplevel=4
+fsplevelrule=2
+title=Steam
+titlematch=1
+
+[2a373c48-e5ec-4ac3-a90b-7819b04c1662]
+Description=handbrake
+minsize=100,100
+minsizerule=2
+wmclass=fr.handbrake.ghb
+wmclassmatch=1
+
+[5d411f2b-44bd-418c-aa28-80ea2eb1d3ef]
+Description=Settings for steam
+decorationpolicy=shadow
+decorationpolicyrule=2
+wmclass=steam
+wmclassmatch=1
+
+[6e86d3c4-f99b-4e62-b40a-6d4c9f2821d3]
+Description=firefox
+decorationpolicy=shadow
+decorationpolicyrule=2
+title=^(.+— )?Mozilla Firefox|Picture-in-Picture
+titlematch=3
+wmclass=firefox
+wmclassmatch=1
+
+[General]
+Order=2a373c48-e5ec-4ac3-a90b-7819b04c1662,6e86d3c4-f99b-4e62-b40a-6d4c9f2821d3,016fe9de-7789-4d56-9772-9348a377a568,c5db855a-3cf0-40dc-b46f-5684f90d7bab,5d411f2b-44bd-418c-aa28-80ea2eb1d3ef
+
+[c5db855a-3cf0-40dc-b46f-5684f90d7bab]
+Description=Settings for chromium
+decorationpolicy=shadow
+decorationpolicyrule=2
+wmclass=chromium
+wmclassmatch=1
